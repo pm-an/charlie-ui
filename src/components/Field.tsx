@@ -54,7 +54,7 @@ const FieldDescription = forwardRef<HTMLParagraphElement, FieldDescriptionProps>
         ref={ref}
         id={resolvedId}
         data-slot="field-description"
-        className={cn("text-xs text-white/40", className)}
+        className={cn("text-xs text-white/60", className)}
         {...props}
       >
         {children}
@@ -208,7 +208,7 @@ const FieldRoot = forwardRef<HTMLDivElement, FieldProps>(
               {resolvedDescription && (
                 <p
                   id={descriptionId}
-                  className="text-xs text-white/40 -mt-0.5"
+                  className="text-xs text-white/60 -mt-0.5"
                 >
                   {resolvedDescription}
                 </p>

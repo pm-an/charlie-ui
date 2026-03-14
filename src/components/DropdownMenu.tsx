@@ -314,7 +314,7 @@ const DropdownMenuItem = ({
       onClick={handleClick}
       {...props}
     >
-      {icon && <span className="h-4 w-4 shrink-0 text-white/40 flex items-center justify-center [&>svg]:h-4 [&>svg]:w-4">{icon}</span>}
+      {icon && <span className="h-4 w-4 shrink-0 text-white/60 flex items-center justify-center [&>svg]:h-4 [&>svg]:w-4">{icon}</span>}
       <span className="flex-1">{children}</span>
       {shortcut && <DropdownMenuShortcut>{shortcut}</DropdownMenuShortcut>}
     </div>
@@ -458,7 +458,7 @@ export type DropdownMenuLabelProps = HTMLAttributes<HTMLDivElement> & {
 const DropdownMenuLabel = ({ children, className, ...props }: DropdownMenuLabelProps) => {
   return (
     <div
-      className={cn("select-none px-2 py-1.5 text-xs font-medium text-white/30", className)}
+      className={cn("select-none px-2 py-1.5 text-xs font-medium text-white/60", className)}
       {...props}
     >
       {children}
@@ -490,7 +490,7 @@ export type DropdownMenuShortcutProps = HTMLAttributes<HTMLSpanElement> & {
 
 const DropdownMenuShortcut = ({ children, className, ...props }: DropdownMenuShortcutProps) => {
   return (
-    <span className={cn("ml-auto text-xs text-white/30", className)} {...props}>
+    <span className={cn("ml-auto text-xs text-white/60", className)} {...props}>
       {children}
     </span>
   );

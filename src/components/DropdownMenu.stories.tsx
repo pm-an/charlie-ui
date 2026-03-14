@@ -38,7 +38,7 @@ export const Default: Story = {
   render: function DefaultStory() {
     return (
       <DropdownMenu>
-        <DropdownMenu.Trigger>
+        <DropdownMenu.Trigger asChild>
           <Button variant="secondary">Open Menu</Button>
         </DropdownMenu.Trigger>
         <DropdownMenu.Content>
@@ -57,7 +57,7 @@ export const WithIcons: Story = {
   render: function WithIconsStory() {
     return (
       <DropdownMenu>
-        <DropdownMenu.Trigger>
+        <DropdownMenu.Trigger asChild>
           <Button variant="secondary">Actions</Button>
         </DropdownMenu.Trigger>
         <DropdownMenu.Content>
@@ -78,7 +78,7 @@ export const WithShortcuts: Story = {
   render: function WithShortcutsStory() {
     return (
       <DropdownMenu>
-        <DropdownMenu.Trigger>
+        <DropdownMenu.Trigger asChild>
           <Button variant="secondary">Edit</Button>
         </DropdownMenu.Trigger>
         <DropdownMenu.Content>
@@ -102,7 +102,7 @@ export const WithCheckboxItems: Story = {
 
     return (
       <DropdownMenu>
-        <DropdownMenu.Trigger>
+        <DropdownMenu.Trigger asChild>
           <Button variant="secondary">View Options</Button>
         </DropdownMenu.Trigger>
         <DropdownMenu.Content>
@@ -128,7 +128,7 @@ export const WithRadioItems: Story = {
 
     return (
       <DropdownMenu>
-        <DropdownMenu.Trigger>
+        <DropdownMenu.Trigger asChild>
           <Button variant="secondary">Theme</Button>
         </DropdownMenu.Trigger>
         <DropdownMenu.Content>
@@ -148,7 +148,7 @@ export const WithLabels: Story = {
   render: function WithLabelsStory() {
     return (
       <DropdownMenu>
-        <DropdownMenu.Trigger>
+        <DropdownMenu.Trigger asChild>
           <Button variant="secondary">Organize</Button>
         </DropdownMenu.Trigger>
         <DropdownMenu.Content>
@@ -169,7 +169,7 @@ export const Destructive: Story = {
   render: function DestructiveStory() {
     return (
       <DropdownMenu>
-        <DropdownMenu.Trigger>
+        <DropdownMenu.Trigger asChild>
           <Button variant="secondary">Manage</Button>
         </DropdownMenu.Trigger>
         <DropdownMenu.Content>
@@ -189,7 +189,7 @@ export const DisabledItems: Story = {
   render: function DisabledItemsStory() {
     return (
       <DropdownMenu>
-        <DropdownMenu.Trigger>
+        <DropdownMenu.Trigger asChild>
           <Button variant="secondary">Options</Button>
         </DropdownMenu.Trigger>
         <DropdownMenu.Content>
@@ -215,7 +215,7 @@ export const Complex: Story = {
 
     return (
       <DropdownMenu>
-        <DropdownMenu.Trigger>
+        <DropdownMenu.Trigger asChild>
           <Button variant="secondary">Account</Button>
         </DropdownMenu.Trigger>
         <DropdownMenu.Content>

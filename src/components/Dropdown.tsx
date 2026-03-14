@@ -166,7 +166,7 @@ function DropdownLabel({ children, className }: DropdownLabelProps) {
   return (
     <DropdownMenuLabel
       className={cn(
-        "px-3 py-2 text-xs font-medium uppercase tracking-wider text-white/40",
+        "px-3 py-2 text-xs font-medium uppercase tracking-wider text-white/60",
         className
       )}
     >

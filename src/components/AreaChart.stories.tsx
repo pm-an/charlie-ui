@@ -24,6 +24,7 @@ export const Default: Story = {
     data: sampleData,
     areas: [{ dataKey: "users", color: "accent" }],
     xAxisKey: "month",
+    "aria-label": "Monthly active users",
   },
 };
 
@@ -36,6 +37,7 @@ export const MultiArea: Story = {
     ],
     xAxisKey: "month",
     showLegend: true,
+    "aria-label": "Users vs sessions over time",
   },
 };
 

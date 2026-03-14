@@ -59,7 +59,7 @@ const HeaderContent = ({ onMenuClick }: { onMenuClick?: () => void }) => (
           <Menu className="h-5 w-5" />
         </button>
       )}
-      <div className="flex items-center gap-2 text-white/40 text-sm">
+      <div className="flex items-center gap-2 text-white/60 text-sm">
         <Search className="h-4 w-4" />
         <span>Search...</span>
       </div>
@@ -95,7 +95,7 @@ export const Default: Story = {
               </div>
               <div className="min-w-0">
                 <div className="text-sm text-white truncate">Jane Doe</div>
-                <div className="text-xs text-white/40 truncate">jane@acme.co</div>
+                <div className="text-xs text-white/60 truncate">jane@acme.co</div>
               </div>
             </div>
           }
@@ -229,7 +229,7 @@ export const WithContent: Story = {
                   key={stat.label}
                   className="bg-card-gradient rounded-xl border border-white/[0.06] p-5"
                 >
-                  <p className="text-xs text-white/40 font-medium uppercase tracking-wider">
+                  <p className="text-xs text-white/60 font-medium uppercase tracking-wider">
                     {stat.label}
                   </p>
                   <div className="flex items-baseline gap-2 mt-2">
@@ -266,10 +266,10 @@ export const WithContent: Story = {
                       </div>
                       <div>
                         <span className="text-sm text-white">{activity.user}</span>{" "}
-                        <span className="text-sm text-white/40">{activity.action}</span>
+                        <span className="text-sm text-white/60">{activity.action}</span>
                       </div>
                     </div>
-                    <span className="text-xs text-white/40">{activity.time}</span>
+                    <span className="text-xs text-white/60">{activity.time}</span>
                   </div>
                 ))}
               </div>

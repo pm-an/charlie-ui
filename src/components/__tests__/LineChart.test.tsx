@@ -1,6 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { describe, it, expect, vi, beforeAll } from "vitest";
 import { LineChart } from "../LineChart";
+import { expectNoA11yViolations } from "../../test/a11y";
 
 const sampleData = [
   { name: "Jan", value: 100, other: 50 },
@@ -102,5 +103,74 @@ describe("LineChart", () => {
       <LineChart data={[]} lines={[{ dataKey: "value" }]} />
     );
     expect(container.querySelector('[data-slot="line-chart"]')).toBeInTheDocument();
+  });
+
+  // Accessibility tests
+  it("has role='img' on the wrapper", () => {
+    render(
+      <LineChart data={sampleData} lines={[{ dataKey: "value" }]} />
+    );
+    expect(screen.getByRole("img")).toBeInTheDocument();
+  });
+
+  it("uses default aria-label when none provided", () => {
+    render(
+      <LineChart data={sampleData} lines={[{ dataKey: "value" }]} />
+    );
+    expect(screen.getByLabelText("Line chart")).toBeInTheDocument();
+  });
+
+  it("uses custom aria-label when provided", () => {
+    render(
+      <LineChart
+        data={sampleData}
+        lines={[{ dataKey: "value" }]}
+        aria-label="Monthly revenue trend"
+      />
+    );
+    expect(screen.getByLabelText("Monthly revenue trend")).toBeInTheDocument();
+  });
+
+  it("renders sr-only description with auto-generated summary", () => {
+    const { container } = render(
+      <LineChart data={sampleData} lines={[{ dataKey: "value" }]} />
+    );
+    const srOnly = container.querySelector(".sr-only");
+    expect(srOnly).toBeInTheDocument();
+    expect(srOnly!.textContent).toContain("3 data points");
+    expect(srOnly!.textContent).toContain("value:");
+  });
+
+  it("renders sr-only description with custom description", () => {
+    const { container } = render(
+      <LineChart
+        data={sampleData}
+        lines={[{ dataKey: "value" }]}
+        description="Revenue increased steadily from January to March"
+      />
+    );
+    const srOnly = container.querySelector(".sr-only");
+    expect(srOnly!.textContent).toBe("Revenue increased steadily from January to March");
+  });
+
+  it("has aria-describedby pointing to the description", () => {
+    const { container } = render(
+      <LineChart data={sampleData} lines={[{ dataKey: "value" }]} />
+    );
+    const wrapper = container.querySelector('[data-slot="line-chart"]')!;
+    const descId = wrapper.getAttribute("aria-describedby");
+    expect(descId).toBeTruthy();
+    expect(container.querySelector(`#${CSS.escape(descId!)}`)?.className).toContain("sr-only");
+  });
+
+  it("passes axe accessibility checks", async () => {
+    const { container } = render(
+      <LineChart
+        data={sampleData}
+        lines={[{ dataKey: "value" }]}
+        aria-label="Test chart"
+      />
+    );
+    await expectNoA11yViolations(container);
   });
 });

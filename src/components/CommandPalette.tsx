@@ -178,7 +178,7 @@ function CommandPalette({
                 {loading ? (
                   <Spinner size="sm" color="rgba(255,255,255,0.4)" />
                 ) : (
-                  <Search className="h-5 w-5 shrink-0 text-white/40" />
+                  <Search className="h-5 w-5 shrink-0 text-white/60" />
                 )}
                 <input
                   ref={inputRef}
@@ -186,7 +186,7 @@ function CommandPalette({
                   placeholder={placeholder}
                   value={search}
                   onChange={(e) => handleSearchChange(e.target.value)}
-                  className="h-full flex-1 bg-transparent text-base text-white placeholder:text-white/40 outline-none"
+                  className="h-full flex-1 bg-transparent text-base text-white placeholder:text-white/60 outline-none"
                   autoFocus
                   role="combobox"
                   aria-expanded={true}
@@ -198,7 +198,7 @@ function CommandPalette({
               <div className="max-h-[360px] overflow-y-auto py-2" role="listbox">
                 {children}
                 {filter && search && !hasVisibleChildren(children, search) && (
-                  <div className="px-4 py-8 text-center text-sm text-white/40">
+                  <div className="px-4 py-8 text-center text-sm text-white/60">
                     {emptyMessage}
                   </div>
                 )}
@@ -265,7 +265,7 @@ function CommandGroup({ className, label, children, ...props }: CommandGroupProp
   return (
     <div className={cn("", className)} {...props}>
       {label && (
-        <div className="px-4 py-2 text-xs font-medium uppercase tracking-wider text-white/40">
+        <div className="px-4 py-2 text-xs font-medium uppercase tracking-wider text-white/60">
           {label}
         </div>
       )}
@@ -332,10 +332,10 @@ function CommandItem({
       aria-disabled={disabled || undefined}
       {...props}
     >
-      {Icon && <Icon className="h-4 w-4 shrink-0 text-white/40" />}
+      {Icon && <Icon className="h-4 w-4 shrink-0 text-white/60" />}
       <span className="flex-1 truncate">{children}</span>
       {shortcut && (
-        <span className="ml-auto text-xs text-white/30 shrink-0">{shortcut}</span>
+        <span className="ml-auto text-xs text-white/60 shrink-0">{shortcut}</span>
       )}
     </div>
   );

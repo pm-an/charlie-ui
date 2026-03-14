@@ -174,7 +174,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
               </span>
             )}
             {description && (
-              <span className="text-xs text-white/40">{description}</span>
+              <span className="text-xs text-white/60">{description}</span>
             )}
           </span>
         )}

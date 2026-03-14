@@ -129,7 +129,7 @@ function Kbd({
         {keys.map((key, i) => (
           <span key={i} className="inline-flex items-center gap-1">
             {i > 0 && separator && (
-              <span className="text-[10px] text-white/30">{separator}</span>
+              <span className="text-[10px] text-white/60">{separator}</span>
             )}
             <kbd
               data-slot="kbd"

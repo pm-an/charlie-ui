@@ -2,7 +2,7 @@
   "name": "@charlietogolden/charlie-ui",
   "version": "0.1.0",
   "type": "module",
-  "description": "Charlie UI — A dark-themed React component library inspired by Raycast",
+  "description": "Charlie UI — A dark-first React component library with 110+ components, built on Tailwind CSS v4",
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",

@@ -2,6 +2,7 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, it, expect, vi } from "vitest";
 import { PricingCard } from "./PricingCard";
+import { expectNoA11yViolations } from "../test/a11y";
 
 describe("PricingCard", () => {
   const defaultProps = {
@@ -67,5 +68,18 @@ describe("PricingCard", () => {
   it("merges custom className", () => {
     const { container } = render(<PricingCard {...defaultProps} className="custom" />);
     expect(container.firstChild).toHaveClass("custom");
+  });
+
+  it("marks feature check icons as aria-hidden", () => {
+    const { container } = render(<PricingCard {...defaultProps} />);
+    const checkIcons = container.querySelectorAll("svg");
+    checkIcons.forEach((icon) => {
+      expect(icon).toHaveAttribute("aria-hidden", "true");
+    });
+  });
+
+  it("passes axe accessibility checks", async () => {
+    const { container } = render(<PricingCard {...defaultProps} badge="Popular" highlighted />);
+    await expectNoA11yViolations(container);
   });
 });

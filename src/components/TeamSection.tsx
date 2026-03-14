@@ -106,7 +106,7 @@ const TeamSection = forwardRef<HTMLElement, TeamSectionProps>(
                   />
                 ) : (
                   <div className="h-16 w-16 rounded-full bg-white/10 flex items-center justify-center">
-                    <span className="text-white/40 text-lg font-semibold">
+                    <span className="text-white/60 text-lg font-semibold">
                       {member.name
                         .split(" ")
                         .map((n) => n[0])
@@ -119,7 +119,7 @@ const TeamSection = forwardRef<HTMLElement, TeamSectionProps>(
                 <p className="text-white/60 text-sm">{member.role}</p>
 
                 {member.bio && (
-                  <p className="mt-2 text-white/40 text-sm line-clamp-2">
+                  <p className="mt-2 text-white/60 text-sm line-clamp-2">
                     {member.bio}
                   </p>
                 )}
@@ -132,7 +132,7 @@ const TeamSection = forwardRef<HTMLElement, TeamSectionProps>(
                         href={social.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-white/40 hover:text-white transition-colors duration-200"
+                        className="text-white/60 hover:text-white transition-colors duration-200"
                         aria-label={`${member.name} on ${social.platform}`}
                       >
                         {socialIcons[social.platform.toLowerCase()] ?? (

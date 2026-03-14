@@ -52,7 +52,7 @@ export const Default: Story = {
                   <p className="text-sm font-medium text-white">
                     {notification.title}
                   </p>
-                  <p className="text-xs text-white/40">{notification.time}</p>
+                  <p className="text-xs text-white/60">{notification.time}</p>
                 </div>
               </div>
             ))}
@@ -119,7 +119,7 @@ export const TopSide: Story = {
               placeholder="Type to search..."
               className="w-full rounded-md border border-white/10 bg-white/5 px-3 py-2 text-sm text-white outline-none focus:border-white/20"
             />
-            <div className="text-xs text-white/40">
+            <div className="text-xs text-white/60">
               Recent: Dashboard, API Keys, Team Settings
             </div>
           </div>
@@ -260,11 +260,11 @@ export const LargeSize: Story = {
               <div className="space-y-2 text-sm text-white/60">
                 <div className="flex justify-between">
                   <code>DATABASE_URL</code>
-                  <span className="text-white/40">Set</span>
+                  <span className="text-white/60">Set</span>
                 </div>
                 <div className="flex justify-between">
                   <code>API_KEY</code>
-                  <span className="text-white/40">Set</span>
+                  <span className="text-white/60">Set</span>
                 </div>
               </div>
             </div>
@@ -298,15 +298,15 @@ export const WithoutOverlay: Story = {
         <Drawer {...args} open={open} onClose={() => setOpen(false)}>
           <div className="space-y-3">
             <div className="rounded-md border border-white/10 p-3">
-              <p className="text-xs text-white/40">Element</p>
+              <p className="text-xs text-white/60">Element</p>
               <p className="text-sm text-white">Button.primary</p>
             </div>
             <div className="rounded-md border border-white/10 p-3">
-              <p className="text-xs text-white/40">Width</p>
+              <p className="text-xs text-white/60">Width</p>
               <p className="text-sm text-white">120px</p>
             </div>
             <div className="rounded-md border border-white/10 p-3">
-              <p className="text-xs text-white/40">Height</p>
+              <p className="text-xs text-white/60">Height</p>
               <p className="text-sm text-white">40px</p>
             </div>
           </div>

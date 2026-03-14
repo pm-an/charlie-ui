@@ -96,7 +96,7 @@ function VirtualList<T>({
           className
         )}
         style={{ height, ...style }}
-        role="list"
+        role="status"
         {...props}
       >
         {emptyContent ?? "No items"}
@@ -109,7 +109,13 @@ function VirtualList<T>({
       ref={containerRef}
       data-slot="virtual-list"
       onScroll={handleScroll}
-      className={cn("overflow-auto", scrollbarClasses, className)}
+      tabIndex={0}
+      className={cn(
+        "overflow-auto",
+        "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/20 focus-visible:ring-offset-1 focus-visible:ring-offset-transparent",
+        scrollbarClasses,
+        className,
+      )}
       style={{ height, ...style }}
       role="list"
       {...props}

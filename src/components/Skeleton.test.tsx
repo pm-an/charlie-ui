@@ -1,6 +1,7 @@
-import { render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { describe, it, expect } from "vitest";
 import { Skeleton } from "./Skeleton";
+import { expectNoA11yViolations } from "../test/a11y";
 
 describe("Skeleton", () => {
   it("renders a div element", () => {
@@ -44,5 +45,22 @@ describe("Skeleton", () => {
   it("merges custom style with width/height", () => {
     const { container } = render(<Skeleton width={100} style={{ opacity: 0.5 }} />);
     expect(container.firstChild).toHaveStyle({ width: "100px", opacity: "0.5" });
+  });
+
+  it("has role status and default loading label", () => {
+    render(<Skeleton />);
+    const el = screen.getByRole("status");
+    expect(el).toHaveAttribute("aria-label", "Loading");
+  });
+
+  it("accepts custom loadingLabel", () => {
+    render(<Skeleton loadingLabel="Loading content" />);
+    const el = screen.getByRole("status");
+    expect(el).toHaveAttribute("aria-label", "Loading content");
+  });
+
+  it("passes axe accessibility checks", async () => {
+    const { container } = render(<Skeleton />);
+    await expectNoA11yViolations(container);
   });
 });

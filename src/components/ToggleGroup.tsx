@@ -1,10 +1,11 @@
 "use client";
 
-import { type HTMLAttributes, type ReactNode, useId } from "react";
-import { LayoutGroup, motion } from "framer-motion";
+import { type HTMLAttributes, type ReactNode, useId, useRef } from "react";
+import { LayoutGroup, motion, useReducedMotion } from "framer-motion";
 import { cn } from "../utils/cn";
 import { useControllableState } from "../hooks/useControllableState";
 import { useFieldAware } from "../hooks/useFieldAware";
+import { useRovingTabIndex } from "../hooks/useRovingTabIndex";
 
 export interface ToggleGroupOption {
   /** Text label for the option */
@@ -38,20 +39,47 @@ function ToggleGroup({
     onChange
   );
   const id = useId();
+  const containerRef = useRef<HTMLDivElement>(null);
+  const prefersReducedMotion = useReducedMotion();
+
   const { ariaDescribedBy, ariaInvalid } = useFieldAware({
     id: undefined,
     error: undefined,
     disabled: undefined,
     required: undefined,
   });
+
+  const { onKeyDown } = useRovingTabIndex(containerRef, {
+    direction: "horizontal",
+    loop: true,
+    itemSelector: '[role="radio"]:not([disabled])',
+  });
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    // Let the roving hook handle focus movement
+    onKeyDown(e);
+
+    // After roving hook moved focus, read the new focused element's value
+    const newFocused = document.activeElement as HTMLElement;
+    const newValue = newFocused?.getAttribute("data-value");
+    if (newValue && newValue !== value) {
+      setValue(newValue);
+    }
+  };
+
   return (
     <LayoutGroup id={id}>
       <div
+        ref={containerRef}
         className={cn("inline-flex rounded-full bg-white/5 p-1", className)}
         role="radiogroup"
         data-slot="toggle-group"
         aria-describedby={ariaDescribedBy}
         aria-invalid={ariaInvalid}
+        onKeyDown={handleKeyDown}
         {...props}
       >
         {options.map((option) => {
@@ -65,7 +93,9 @@ function ToggleGroup({
               aria-checked={isActive}
               aria-disabled={isDisabled || undefined}
               disabled={isDisabled}
+              tabIndex={isActive ? 0 : -1}
               data-state={isActive ? "active" : "inactive"}
+              data-value={option.value}
               className={cn(
                 "relative z-10 inline-flex items-center gap-1.5 rounded-full px-4 py-1.5 text-sm font-medium transition-colors",
                 isDisabled
@@ -83,7 +113,11 @@ function ToggleGroup({
                   layoutId="toggle-group-active"
                   className="absolute inset-0 rounded-full bg-white shadow-sm"
                   style={{ zIndex: -1 }}
-                  transition={{ type: "spring", stiffness: 500, damping: 35 }}
+                  transition={
+                    prefersReducedMotion
+                      ? { duration: 0 }
+                      : { type: "spring", stiffness: 500, damping: 35 }
+                  }
                 />
               )}
               {option.icon && (

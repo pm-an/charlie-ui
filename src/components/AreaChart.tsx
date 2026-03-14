@@ -1,4 +1,4 @@
-import { forwardRef, type HTMLAttributes } from "react";
+import { forwardRef, useId, type HTMLAttributes } from "react";
 import {
   ResponsiveContainer,
   AreaChart as RechartsAreaChart,
@@ -15,6 +15,7 @@ import {
   getAxisTickStyle,
   getLegendStyle,
   gridStroke,
+  createChartSummary,
 } from "../utils/chart-helpers";
 import { cn } from "../utils/cn";
 
@@ -37,6 +38,8 @@ export type AreaChartProps = Omit<HTMLAttributes<HTMLDivElement>, "data"> & {
   showXAxis?: boolean;
   showYAxis?: boolean;
   curveType?: "monotone" | "linear" | "step" | "natural";
+  /** Accessible description for screen readers */
+  description?: string;
 };
 
 const AreaChart = forwardRef<HTMLDivElement, AreaChartProps>(
@@ -52,16 +55,37 @@ const AreaChart = forwardRef<HTMLDivElement, AreaChartProps>(
       showXAxis = true,
       showYAxis = true,
       curveType = "monotone",
+      description,
       className,
+      "aria-label": ariaLabel,
       ...props
     },
     ref,
   ) => {
     const tooltip = getTooltipStyles();
     const tickStyle = getAxisTickStyle();
+    const descId = useId();
+    const summaryText =
+      description ??
+      createChartSummary(
+        data,
+        areas.map((a) => a.dataKey),
+        xAxisKey,
+      );
 
     return (
-      <div ref={ref} data-slot="area-chart" className={cn("w-full", className)} {...props}>
+      <div
+        ref={ref}
+        data-slot="area-chart"
+        role="img"
+        aria-label={ariaLabel ?? "Area chart"}
+        aria-describedby={descId}
+        className={cn("w-full", className)}
+        {...props}
+      >
+        <div id={descId} className="sr-only">
+          {summaryText}
+        </div>
         <ResponsiveContainer width="100%" height={height}>
           <RechartsAreaChart data={data}>
             <defs>

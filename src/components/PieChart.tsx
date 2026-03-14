@@ -1,4 +1,4 @@
-import { forwardRef, type HTMLAttributes } from "react";
+import { forwardRef, useId, type HTMLAttributes } from "react";
 import {
   ResponsiveContainer,
   PieChart as RechartsPieChart,
@@ -11,6 +11,7 @@ import {
   resolveChartColor,
   getTooltipStyles,
   getLegendStyle,
+  createChartSummary,
 } from "../utils/chart-helpers";
 import { cn } from "../utils/cn";
 
@@ -32,6 +33,8 @@ export type PieChartProps = Omit<HTMLAttributes<HTMLDivElement>, "data"> & {
   paddingAngle?: number;
   label?: string;
   labelValue?: string;
+  /** Accessible description for screen readers */
+  description?: string;
 };
 
 const PieChart = forwardRef<HTMLDivElement, PieChartProps>(
@@ -48,7 +51,9 @@ const PieChart = forwardRef<HTMLDivElement, PieChartProps>(
       paddingAngle = 2,
       label,
       labelValue,
+      description,
       className,
+      "aria-label": ariaLabel,
       ...rest
     },
     ref,
@@ -61,14 +66,24 @@ const PieChart = forwardRef<HTMLDivElement, PieChartProps>(
           : 0;
 
     const tooltip = getTooltipStyles();
+    const descId = useId();
+    const summaryText =
+      description ??
+      createChartSummary(data, ["value"], "name");
 
     return (
       <div
         ref={ref}
         data-slot="pie-chart"
+        role="img"
+        aria-label={ariaLabel ?? "Pie chart"}
+        aria-describedby={descId}
         className={cn("relative w-full", className)}
         {...rest}
       >
+        <div id={descId} className="sr-only">
+          {summaryText}
+        </div>
         <ResponsiveContainer width="100%" height={height}>
           <RechartsPieChart>
             <Pie
@@ -112,7 +127,7 @@ const PieChart = forwardRef<HTMLDivElement, PieChartProps>(
               </span>
             )}
             {label && (
-              <span className="text-sm text-white/40">{label}</span>
+              <span className="text-sm text-white/60">{label}</span>
             )}
           </div>
         )}

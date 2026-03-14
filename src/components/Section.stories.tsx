@@ -18,7 +18,7 @@ const placeholderContent = (
         className="rounded-xl border border-white/[0.06] bg-white/[0.03] p-6"
       >
         <h4 className="text-white font-semibold mb-2">{label}</h4>
-        <p className="text-white/40 text-sm">
+        <p className="text-white/60 text-sm">
           A brief description of the {label.toLowerCase()} feature and why it
           matters for your workflow.
         </p>

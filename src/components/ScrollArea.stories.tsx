@@ -57,7 +57,7 @@ export const Default: Story = {
             key={item.id}
             className="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-white/5 transition-colors"
           >
-            <span className="text-xs text-white/30 font-mono w-6 text-right">
+            <span className="text-xs text-white/60 font-mono w-6 text-right">
               {item.id}
             </span>
             <span className="text-sm text-white/70">{item.label}</span>
@@ -132,7 +132,7 @@ export const DefaultScrollbar: Story = {
             key={item.id}
             className="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-white/5 transition-colors"
           >
-            <span className="text-xs text-white/30 font-mono w-6 text-right">
+            <span className="text-xs text-white/60 font-mono w-6 text-right">
               {item.id}
             </span>
             <span className="text-sm text-white/70">{item.label}</span>
@@ -155,7 +155,30 @@ export const HiddenScrollbar: Story = {
             key={item.id}
             className="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-white/5 transition-colors"
           >
-            <span className="text-xs text-white/30 font-mono w-6 text-right">
+            <span className="text-xs text-white/60 font-mono w-6 text-right">
+              {item.id}
+            </span>
+            <span className="text-sm text-white/70">{item.label}</span>
+          </div>
+        ))}
+      </div>
+    ),
+  },
+};
+
+export const WithLabel: Story = {
+  args: {
+    label: "Service list",
+    maxHeight: 300,
+    className: "w-80 rounded-lg border border-white/10 bg-white/5",
+    children: (
+      <div className="p-2">
+        {listItems.slice(0, 15).map((item) => (
+          <div
+            key={item.id}
+            className="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-white/5 transition-colors"
+          >
+            <span className="text-xs text-white/60 font-mono w-6 text-right">
               {item.id}
             </span>
             <span className="text-sm text-white/70">{item.label}</span>
@@ -177,7 +200,7 @@ export const MaxHeight: Story = {
             key={item.id}
             className="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-white/5 transition-colors"
           >
-            <span className="text-xs text-white/30 font-mono w-6 text-right">
+            <span className="text-xs text-white/60 font-mono w-6 text-right">
               {item.id}
             </span>
             <span className="text-sm text-white/70">{item.label}</span>

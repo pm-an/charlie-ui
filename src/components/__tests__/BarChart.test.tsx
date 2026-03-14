@@ -1,6 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { describe, it, expect, beforeAll } from "vitest";
 import { BarChart } from "../BarChart";
+import { expectNoA11yViolations } from "../../test/a11y";
 
 const sampleData = [
   { name: "Mon", visits: 100, unique: 50 },
@@ -97,5 +98,74 @@ describe("BarChart", () => {
       <BarChart data={sampleData} bars={[{ dataKey: "visits" }]} height={200} />
     );
     expect(container.querySelector('[data-slot="bar-chart"]')).toBeInTheDocument();
+  });
+
+  // Accessibility tests
+  it("has role='img' on the wrapper", () => {
+    render(
+      <BarChart data={sampleData} bars={[{ dataKey: "visits" }]} />
+    );
+    expect(screen.getByRole("img")).toBeInTheDocument();
+  });
+
+  it("uses default aria-label when none provided", () => {
+    render(
+      <BarChart data={sampleData} bars={[{ dataKey: "visits" }]} />
+    );
+    expect(screen.getByLabelText("Bar chart")).toBeInTheDocument();
+  });
+
+  it("uses custom aria-label when provided", () => {
+    render(
+      <BarChart
+        data={sampleData}
+        bars={[{ dataKey: "visits" }]}
+        aria-label="Daily site visits"
+      />
+    );
+    expect(screen.getByLabelText("Daily site visits")).toBeInTheDocument();
+  });
+
+  it("renders sr-only description with auto-generated summary", () => {
+    const { container } = render(
+      <BarChart data={sampleData} bars={[{ dataKey: "visits" }]} />
+    );
+    const srOnly = container.querySelector(".sr-only");
+    expect(srOnly).toBeInTheDocument();
+    expect(srOnly!.textContent).toContain("3 data points");
+    expect(srOnly!.textContent).toContain("visits:");
+  });
+
+  it("renders sr-only description with custom description", () => {
+    const { container } = render(
+      <BarChart
+        data={sampleData}
+        bars={[{ dataKey: "visits" }]}
+        description="Visits peaked on Tuesday"
+      />
+    );
+    const srOnly = container.querySelector(".sr-only");
+    expect(srOnly!.textContent).toBe("Visits peaked on Tuesday");
+  });
+
+  it("has aria-describedby pointing to the description", () => {
+    const { container } = render(
+      <BarChart data={sampleData} bars={[{ dataKey: "visits" }]} />
+    );
+    const wrapper = container.querySelector('[data-slot="bar-chart"]')!;
+    const descId = wrapper.getAttribute("aria-describedby");
+    expect(descId).toBeTruthy();
+    expect(container.querySelector(`#${CSS.escape(descId!)}`)?.className).toContain("sr-only");
+  });
+
+  it("passes axe accessibility checks", async () => {
+    const { container } = render(
+      <BarChart
+        data={sampleData}
+        bars={[{ dataKey: "visits" }]}
+        aria-label="Test chart"
+      />
+    );
+    await expectNoA11yViolations(container);
   });
 });

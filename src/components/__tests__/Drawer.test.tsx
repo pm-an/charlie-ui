@@ -1,6 +1,8 @@
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import { Drawer } from "../Drawer";
+import { expectNoA11yViolations } from "../../test/a11y";
 
 // Mock framer-motion to avoid animation timing issues in tests
 vi.mock("framer-motion", () => {
@@ -317,6 +319,84 @@ describe("Drawer", () => {
       render(<Drawer {...defaultProps} title="Heading Test" />);
       const heading = screen.getByText("Heading Test");
       expect(heading.tagName).toBe("H2");
+    });
+  });
+
+  describe("focus management", () => {
+    it("traps focus within the drawer (Tab cycles)", async () => {
+      const user = userEvent.setup();
+      const onClose = vi.fn();
+      render(
+        <Drawer open onClose={onClose} title="Focus test">
+          <button>First</button>
+          <button>Second</button>
+        </Drawer>
+      );
+
+      const closeBtn = screen.getByLabelText("Close");
+      const firstBtn = screen.getByRole("button", { name: "First" });
+      const secondBtn = screen.getByRole("button", { name: "Second" });
+
+      closeBtn.focus();
+      expect(document.activeElement).toBe(closeBtn);
+
+      await user.tab();
+      expect(document.activeElement).toBe(firstBtn);
+
+      await user.tab();
+      expect(document.activeElement).toBe(secondBtn);
+
+      // Tab wraps back to Close
+      await user.tab();
+      expect(document.activeElement).toBe(closeBtn);
+
+      // Shift+Tab wraps to Second
+      await user.tab({ shift: true });
+      expect(document.activeElement).toBe(secondBtn);
+    });
+
+    it("returns focus to previously focused element on close", async () => {
+      const triggerBtn = document.createElement("button");
+      triggerBtn.textContent = "Trigger";
+      document.body.appendChild(triggerBtn);
+      triggerBtn.focus();
+      expect(document.activeElement).toBe(triggerBtn);
+
+      const onClose = vi.fn();
+      const { rerender } = render(
+        <Drawer open onClose={onClose} title="Return focus">
+          <p>Content</p>
+        </Drawer>
+      );
+
+      rerender(
+        <Drawer open={false} onClose={onClose} title="Return focus">
+          <p>Content</p>
+        </Drawer>
+      );
+
+      await vi.waitFor(() => {
+        expect(document.activeElement).toBe(triggerBtn);
+      });
+
+      document.body.removeChild(triggerBtn);
+    });
+  });
+
+  describe("axe accessibility", () => {
+    it("passes axe accessibility checks", async () => {
+      const { baseElement } = render(
+        <Drawer
+          open
+          onClose={() => {}}
+          title="Accessible Drawer"
+          description="A helpful description"
+        >
+          <p>Content</p>
+          <button>Action</button>
+        </Drawer>
+      );
+      await expectNoA11yViolations(baseElement);
     });
   });
 });

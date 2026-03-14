@@ -121,6 +121,7 @@ const SignupForm = forwardRef<HTMLDivElement, SignupFormProps>(
                 onChange={(e) => setTermsAccepted(e.target.checked)}
                 required
                 className="mt-0.5"
+                aria-label="I agree to the Terms of Service and Privacy Policy"
               />
               <span className="text-sm text-white/60">
                 I agree to the{" "}
@@ -150,7 +151,7 @@ const SignupForm = forwardRef<HTMLDivElement, SignupFormProps>(
           <>
             <div className="flex items-center gap-3 w-full my-6">
               <div className="flex-1 h-px bg-white/6" />
-              <span className="text-xs text-white/40 shrink-0">or</span>
+              <span className="text-xs text-white/60 shrink-0">or</span>
               <div className="flex-1 h-px bg-white/6" />
             </div>
 
@@ -172,7 +173,7 @@ const SignupForm = forwardRef<HTMLDivElement, SignupFormProps>(
         )}
 
         {loginHref && (
-          <p className="mt-6 text-center text-sm text-white/40">
+          <p className="mt-6 text-center text-sm text-white/60">
             {loginLabel}{" "}
             <a
               href={loginHref}

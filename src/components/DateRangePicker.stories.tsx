@@ -214,7 +214,7 @@ export const Controlled: Story = {
             Clear
           </button>
         </div>
-        <p className="text-xs text-white/40">
+        <p className="text-xs text-white/60">
           From: {range.from ? range.from.toLocaleDateString() : "none"} | To:{" "}
           {range.to ? range.to.toLocaleDateString() : "none"}
         </p>

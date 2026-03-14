@@ -51,7 +51,7 @@ const PricingSection = forwardRef<HTMLElement, PricingSectionProps>(
             <span
               className={cn(
                 "text-sm font-medium transition-colors",
-                billing === "monthly" ? "text-white" : "text-white/40"
+                billing === "monthly" ? "text-white" : "text-white/60"
               )}
             >
               {billingLabel.monthly}
@@ -79,7 +79,7 @@ const PricingSection = forwardRef<HTMLElement, PricingSectionProps>(
             <span
               className={cn(
                 "text-sm font-medium transition-colors",
-                billing === "annual" ? "text-white" : "text-white/40"
+                billing === "annual" ? "text-white" : "text-white/60"
               )}
             >
               {billingLabel.annual}

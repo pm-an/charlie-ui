@@ -3,6 +3,7 @@ import userEvent from "@testing-library/user-event";
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { TimePicker, type TimeValue } from "../TimePicker";
 import { Field } from "../Field";
+import { expectNoA11yViolations } from "../../test/a11y";
 
 describe("TimePicker", () => {
   describe("rendering", () => {
@@ -729,5 +730,12 @@ describe("TimePicker", () => {
       expect(screen.getByText("Standalone Label")).toBeInTheDocument();
       expect(screen.getByText("Standalone help")).toBeInTheDocument();
     });
+  });
+
+  it("passes axe accessibility checks", async () => {
+    const { container } = render(
+      <TimePicker label="Start time" />
+    );
+    await expectNoA11yViolations(container);
   });
 });

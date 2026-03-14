@@ -99,10 +99,10 @@ const OrderSummary = forwardRef<HTMLDivElement, OrderSummaryProps>(
             <StatusIcon className={cn("h-5 w-5", colorClass)} />
             <h2 className="text-lg font-semibold text-white">{statusLabel}</h2>
           </div>
-          <p className="mt-1 text-sm text-white/40">
+          <p className="mt-1 text-sm text-white/60">
             Order #{orderNumber}
           </p>
-          <p className="text-sm text-white/40">{date}</p>
+          <p className="text-sm text-white/60">{date}</p>
         </div>
 
         {/* Items */}
@@ -125,7 +125,7 @@ const OrderSummary = forwardRef<HTMLDivElement, OrderSummaryProps>(
                 <p className="text-sm font-medium text-white truncate">
                   {item.name}
                 </p>
-                <p className="text-xs text-white/40">Qty: {item.quantity}</p>
+                <p className="text-xs text-white/60">Qty: {item.quantity}</p>
               </div>
               <span className="shrink-0 text-sm font-medium text-white">
                 {formatPrice(item.price * item.quantity)}

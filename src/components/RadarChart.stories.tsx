@@ -23,6 +23,7 @@ export const Default: Story = {
   args: {
     data: skillData,
     radars: [{ dataKey: "A", color: "accent" }],
+    "aria-label": "Team skill assessment",
   },
 };
 
@@ -34,6 +35,7 @@ export const Comparison: Story = {
       { dataKey: "B", color: "blue", label: "Team Beta" },
     ],
     showLegend: true,
+    "aria-label": "Team Alpha vs Team Beta skills comparison",
   },
 };
 

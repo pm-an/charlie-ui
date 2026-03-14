@@ -32,7 +32,7 @@ const FormRow = ({
     <div className="md:w-48 shrink-0">
       <label className="text-sm font-medium text-white">{label}</label>
       {description && (
-        <p className="text-xs text-white/40 mt-0.5">{description}</p>
+        <p className="text-xs text-white/60 mt-0.5">{description}</p>
       )}
     </div>
     <div className="flex-1">{children}</div>
@@ -50,7 +50,7 @@ const TextInput = ({
     type="text"
     defaultValue={defaultValue}
     placeholder={placeholder}
-    className="w-full max-w-sm bg-white/5 border border-white/10 rounded-md px-3 py-2 text-sm text-white placeholder:text-white/30 focus:outline-none focus:ring-1 focus:ring-white/20"
+    className="w-full max-w-sm bg-white/5 border border-white/10 rounded-md px-3 py-2 text-sm text-white placeholder:text-white/60 focus:outline-none focus:ring-1 focus:ring-white/20"
   />
 );
 
@@ -66,7 +66,7 @@ const ToggleRow = ({
   <div className="flex items-center justify-between py-3 border-b border-white/[0.06] last:border-b-0">
     <div>
       <p className="text-sm text-white">{label}</p>
-      <p className="text-xs text-white/40">{description}</p>
+      <p className="text-xs text-white/60">{description}</p>
     </div>
     <button
       type="button"
@@ -109,7 +109,7 @@ export const Default: Story = {
             <FormRow label="Bio" description="Brief description for your profile">
               <textarea
                 defaultValue="Product designer based in San Francisco."
-                className="w-full max-w-sm bg-white/5 border border-white/10 rounded-md px-3 py-2 text-sm text-white placeholder:text-white/30 focus:outline-none focus:ring-1 focus:ring-white/20 resize-none h-20"
+                className="w-full max-w-sm bg-white/5 border border-white/10 rounded-md px-3 py-2 text-sm text-white placeholder:text-white/60 focus:outline-none focus:ring-1 focus:ring-white/20 resize-none h-20"
               />
             </FormRow>
           </div>
@@ -146,7 +146,7 @@ export const Default: Story = {
           <div className="bg-white/[0.02] rounded-lg border border-white/[0.06] p-4 flex items-center justify-between">
             <div>
               <p className="text-sm font-medium text-white">Pro Plan</p>
-              <p className="text-xs text-white/40">$29/month, renews March 15</p>
+              <p className="text-xs text-white/60">$29/month, renews March 15</p>
             </div>
             <button
               type="button"

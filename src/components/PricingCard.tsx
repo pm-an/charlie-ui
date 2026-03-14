@@ -61,11 +61,11 @@ const PricingCard = forwardRef<HTMLDivElement, PricingCardProps>(
       {/* Price */}
       <div className="mt-4 flex items-baseline gap-1">
         <span className="text-3xl md:text-4xl font-bold text-white">{price}</span>
-        <span className="text-sm text-white/40">/ {period}</span>
+        <span className="text-sm text-white/60">/ {period}</span>
       </div>
 
       {annualPrice && (
-        <p className="mt-1 text-sm text-white/40 line-through">
+        <p className="mt-1 text-sm text-white/60 line-through">
           {annualPrice}
         </p>
       )}
@@ -74,7 +74,7 @@ const PricingCard = forwardRef<HTMLDivElement, PricingCardProps>(
       <ul className="mt-6 flex-1 space-y-3">
         {features.map((feature) => (
           <li key={feature} className="flex items-start gap-2 text-sm text-white/80">
-            <Check className="mt-0.5 h-4 w-4 shrink-0 text-green" />
+            <Check className="mt-0.5 h-4 w-4 shrink-0 text-green" aria-hidden="true" />
             <span>{feature}</span>
           </li>
         ))}

@@ -118,7 +118,7 @@ export const Controlled: Story = {
       <div className="space-y-4">
         <RichTextEditor content={html} onChange={setHtml} />
         <div className="rounded-lg border border-white/[0.06] bg-surface-elevated p-4">
-          <p className="text-xs text-white/40 mb-2">Raw HTML output:</p>
+          <p className="text-xs text-white/60 mb-2">Raw HTML output:</p>
           <pre className="text-xs text-white/60 whitespace-pre-wrap break-all">
             {html}
           </pre>

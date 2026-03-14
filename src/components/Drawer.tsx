@@ -3,8 +3,6 @@
 import {
   type ReactNode,
   type HTMLAttributes,
-  useEffect,
-  useCallback,
   useRef,
   useId,
 } from "react";
@@ -13,6 +11,10 @@ import { AnimatePresence, motion } from "framer-motion";
 import { X } from "lucide-react";
 import { cva } from "class-variance-authority";
 import { cn } from "../utils/cn";
+import { useFocusTrap } from "../hooks/useFocusTrap";
+import { useFocusReturn } from "../hooks/useFocusReturn";
+import { useEscapeKey } from "../hooks/useEscapeKey";
+import { useScrollLock } from "../hooks/useScrollLock";
 
 /* ─── Slide animation variants ────────────── */
 
@@ -101,75 +103,11 @@ function Drawer({
   const descriptionId = useId();
   const panelRef = useRef<HTMLDivElement>(null);
 
-  const handleKeyDown = useCallback(
-    (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
-    },
-    [onClose]
-  );
-
-  /* Escape key listener */
-  useEffect(() => {
-    if (open) {
-      document.addEventListener("keydown", handleKeyDown);
-      return () => document.removeEventListener("keydown", handleKeyDown);
-    }
-  }, [open, handleKeyDown]);
-
-  /* Body scroll lock */
-  useEffect(() => {
-    if (open) {
-      const prev = document.body.style.overflow;
-      document.body.style.overflow = "hidden";
-      return () => {
-        document.body.style.overflow = prev;
-      };
-    }
-  }, [open]);
-
-  /* Focus trap */
-  useEffect(() => {
-    if (!open) return;
-
-    const panel = panelRef.current;
-    if (!panel) return;
-
-    const handleTab = (e: KeyboardEvent) => {
-      if (e.key !== "Tab") return;
-
-      const focusable = panel.querySelectorAll<HTMLElement>(
-        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-      );
-      if (focusable.length === 0) return;
-
-      const first = focusable[0];
-      const last = focusable[focusable.length - 1];
-
-      if (e.shiftKey) {
-        if (document.activeElement === first) {
-          e.preventDefault();
-          last.focus();
-        }
-      } else {
-        if (document.activeElement === last) {
-          e.preventDefault();
-          first.focus();
-        }
-      }
-    };
-
-    document.addEventListener("keydown", handleTab);
-
-    // Focus the panel itself on open
-    const timer = requestAnimationFrame(() => {
-      panel.focus();
-    });
-
-    return () => {
-      document.removeEventListener("keydown", handleTab);
-      cancelAnimationFrame(timer);
-    };
-  }, [open]);
+  /* Shared hooks */
+  useEscapeKey(onClose, open);
+  useScrollLock(open);
+  useFocusTrap(panelRef, open);
+  useFocusReturn(open);
 
   const content = (
     <AnimatePresence>
@@ -231,7 +169,7 @@ function Drawer({
                 {showClose && (
                   <button
                     type="button"
-                    className="shrink-0 rounded-md p-1 text-white/40 transition-colors hover:bg-white/5 hover:text-white"
+                    className="shrink-0 rounded-md p-1 text-white/60 transition-colors hover:bg-white/5 hover:text-white"
                     onClick={onClose}
                     aria-label="Close"
                   >

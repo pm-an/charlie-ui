@@ -2,6 +2,7 @@ import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, it, expect, vi } from "vitest";
 import { ContextMenu } from "../ContextMenu";
+import { expectNoA11yViolations } from "../../test/a11y";
 
 describe("ContextMenu", () => {
   it("renders trigger content", () => {
@@ -343,5 +344,58 @@ describe("ContextMenu", () => {
     );
     const trigger = screen.getByText("Content").parentElement;
     expect(trigger).toHaveClass("custom-trigger");
+  });
+
+  it("opens on Shift+F10 keyboard shortcut", async () => {
+    const user = userEvent.setup();
+    render(
+      <ContextMenu>
+        <ContextMenu.Trigger>
+          <div>Right-click or keyboard</div>
+        </ContextMenu.Trigger>
+        <ContextMenu.Content>
+          <ContextMenu.Item>Action</ContextMenu.Item>
+        </ContextMenu.Content>
+      </ContextMenu>
+    );
+    const trigger = screen.getByText("Right-click or keyboard").parentElement!;
+    // Focus the trigger
+    trigger.focus();
+    // Press Shift+F10
+    fireEvent.keyDown(trigger, { key: "F10", shiftKey: true });
+    expect(screen.getByRole("menu")).toBeInTheDocument();
+    expect(screen.getByText("Action")).toBeInTheDocument();
+  });
+
+  it("trigger has tabIndex for keyboard accessibility", () => {
+    render(
+      <ContextMenu>
+        <ContextMenu.Trigger>
+          <div>Content</div>
+        </ContextMenu.Trigger>
+        <ContextMenu.Content>
+          <ContextMenu.Item>Item</ContextMenu.Item>
+        </ContextMenu.Content>
+      </ContextMenu>
+    );
+    const trigger = screen.getByText("Content").parentElement;
+    expect(trigger).toHaveAttribute("tabindex", "0");
+  });
+
+  it("passes axe accessibility checks when open", async () => {
+    const { container } = render(
+      <ContextMenu>
+        <ContextMenu.Trigger>
+          <div>Right-click here</div>
+        </ContextMenu.Trigger>
+        <ContextMenu.Content>
+          <ContextMenu.Item>Copy</ContextMenu.Item>
+          <ContextMenu.Item>Paste</ContextMenu.Item>
+        </ContextMenu.Content>
+      </ContextMenu>
+    );
+    const trigger = screen.getByText("Right-click here");
+    fireEvent.contextMenu(trigger, { clientX: 100, clientY: 100 });
+    await expectNoA11yViolations(container);
   });
 });

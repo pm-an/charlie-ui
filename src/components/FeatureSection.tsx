@@ -85,7 +85,7 @@ const FeatureSection = forwardRef<HTMLElement, FeatureSectionProps>(
                       />
                     ) : (
                       <div className="flex h-full w-full items-center justify-center">
-                        <span className="text-white/20 text-sm">
+                        <span className="text-white/60 text-sm">
                           Feature image
                         </span>
                       </div>

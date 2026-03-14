@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useRef, type RefObject, type KeyboardEvent } from "react";
+import { useCallback, type RefObject, type KeyboardEvent } from "react";
 
 export type RovingDirection = "horizontal" | "vertical" | "both";
 
@@ -37,11 +37,6 @@ export function useRovingTabIndex(
       const container = containerRef.current;
       if (!container) return;
 
-      const items = Array.from(
-        container.querySelectorAll<HTMLElement>(itemSelector)
-      ).filter((el) => !el.hasAttribute("disabled") && el.tabIndex !== -1 || el.getAttribute("tabindex") === "-1");
-
-      // Get all items including tabindex=-1
       const allItems = Array.from(
         container.querySelectorAll<HTMLElement>(itemSelector)
       ).filter((el) => !el.hasAttribute("disabled"));

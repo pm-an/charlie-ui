@@ -1,5 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { describe, it, expect } from "vitest";
+import { axe } from "vitest-axe";
 import { ResizablePanels } from "../ResizablePanels";
 
 describe("ResizablePanels", () => {
@@ -158,5 +159,108 @@ describe("ResizablePanels", () => {
     expect(ResizablePanels.Handle).toBeDefined();
     expect(typeof ResizablePanels.Panel).toBe("function");
     expect(typeof ResizablePanels.Handle).toBe("function");
+  });
+
+  // --- ARIA attributes ---
+
+  it("handle has default aria-label", () => {
+    const { container } = render(
+      <ResizablePanels direction="horizontal">
+        <ResizablePanels.Panel defaultSize={50}>
+          <div>Left</div>
+        </ResizablePanels.Panel>
+        <ResizablePanels.Handle />
+        <ResizablePanels.Panel defaultSize={50}>
+          <div>Right</div>
+        </ResizablePanels.Panel>
+      </ResizablePanels>
+    );
+    const handle = container.querySelector("[data-panel-resize-handle-id]");
+    expect(handle).toHaveAttribute("aria-label", "Resize panel");
+  });
+
+  it("handle accepts custom handleAriaLabel", () => {
+    const { container } = render(
+      <ResizablePanels direction="horizontal">
+        <ResizablePanels.Panel defaultSize={50}>
+          <div>Left</div>
+        </ResizablePanels.Panel>
+        <ResizablePanels.Handle handleAriaLabel="Resize sidebar" />
+        <ResizablePanels.Panel defaultSize={50}>
+          <div>Right</div>
+        </ResizablePanels.Panel>
+      </ResizablePanels>
+    );
+    const handle = container.querySelector("[data-panel-resize-handle-id]");
+    expect(handle).toHaveAttribute("aria-label", "Resize sidebar");
+  });
+
+  it("grip icons have aria-hidden on SVGs", () => {
+    const { container } = render(
+      <ResizablePanels direction="horizontal">
+        <ResizablePanels.Panel defaultSize={50}>
+          <div>Left</div>
+        </ResizablePanels.Panel>
+        <ResizablePanels.Handle withHandle />
+        <ResizablePanels.Panel defaultSize={50}>
+          <div>Right</div>
+        </ResizablePanels.Panel>
+      </ResizablePanels>
+    );
+    const svgs = container.querySelectorAll("svg");
+    svgs.forEach((svg) => {
+      expect(svg).toHaveAttribute("aria-hidden", "true");
+    });
+  });
+
+  // --- Accessibility (axe) ---
+  // Note: react-resizable-panels sets aria-valuenow/min/max via useEffect after
+  // layout, which doesn't fire fully in JSDOM. We disable `aria-required-attr`
+  // to account for this testing limitation (the attributes ARE set at runtime).
+
+  it("has no accessibility violations", async () => {
+    const { container } = render(
+      <ResizablePanels direction="horizontal">
+        <ResizablePanels.Panel defaultSize={50}>
+          <div>Left panel</div>
+        </ResizablePanels.Panel>
+        <ResizablePanels.Handle />
+        <ResizablePanels.Panel defaultSize={50}>
+          <div>Right panel</div>
+        </ResizablePanels.Panel>
+      </ResizablePanels>
+    );
+    const results = await axe(container, {
+      rules: {
+        region: { enabled: false },
+        "color-contrast": { enabled: false },
+        "page-has-heading-one": { enabled: false },
+        "aria-required-attr": { enabled: false },
+      },
+    });
+    expect(results).toHaveNoViolations();
+  });
+
+  it("has no accessibility violations with withHandle", async () => {
+    const { container } = render(
+      <ResizablePanels direction="horizontal">
+        <ResizablePanels.Panel defaultSize={50}>
+          <div>Left panel</div>
+        </ResizablePanels.Panel>
+        <ResizablePanels.Handle withHandle handleAriaLabel="Resize sidebar" />
+        <ResizablePanels.Panel defaultSize={50}>
+          <div>Right panel</div>
+        </ResizablePanels.Panel>
+      </ResizablePanels>
+    );
+    const results = await axe(container, {
+      rules: {
+        region: { enabled: false },
+        "color-contrast": { enabled: false },
+        "page-has-heading-one": { enabled: false },
+        "aria-required-attr": { enabled: false },
+      },
+    });
+    expect(results).toHaveNoViolations();
   });
 });

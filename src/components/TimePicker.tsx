@@ -12,6 +12,8 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { AnimatePresence, motion } from "framer-motion";
 import { Clock } from "lucide-react";
 import { useFieldAware } from "../hooks/useFieldAware";
+import { useFocusTrap } from "../hooks/useFocusTrap";
+import { useFocusReturn } from "../hooks/useFocusReturn";
 
 // ---------------------------------------------------------------------------
 // Types
@@ -227,7 +229,7 @@ function TimeColumn({
 
   return (
     <div className="flex flex-col w-16" role="listbox" aria-label={label}>
-      <div className="text-xs text-white/30 font-medium text-center pb-1 sticky top-0 bg-bg-200 z-10">
+      <div className="text-xs text-white/60 font-medium text-center pb-1 sticky top-0 bg-bg-200 z-10">
         {label}
       </div>
       <div
@@ -282,7 +284,7 @@ type PeriodColumnProps = {
 function PeriodColumn({ value, onChange }: PeriodColumnProps) {
   return (
     <div className="flex flex-col w-16" role="listbox" aria-label="Period">
-      <div className="text-xs text-white/30 font-medium text-center pb-1 sticky top-0 bg-bg-200 z-10">
+      <div className="text-xs text-white/60 font-medium text-center pb-1 sticky top-0 bg-bg-200 z-10">
         &nbsp;
       </div>
       <div className="flex flex-col gap-1 pt-1">
@@ -387,6 +389,11 @@ function TimePicker({
   const [open, setOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  // Focus trap and return for dropdown
+  useFocusTrap(dropdownRef, open, true);
+  useFocusReturn(open);
 
   // Close on outside click
   useEffect(() => {
@@ -509,6 +516,7 @@ function TimePicker({
       aria-expanded={open}
       aria-haspopup="listbox"
       aria-labelledby={!insideField && label ? labelId : undefined}
+      aria-label={!label && !insideField ? "Select time" : undefined}
       aria-describedby={ariaDescribedBy}
       aria-invalid={ariaInvalid}
       aria-required={required || undefined}
@@ -519,14 +527,14 @@ function TimePicker({
     >
       <Clock
         className={cn(
-          "shrink-0 text-white/40",
+          "shrink-0 text-white/60",
           size === "sm" ? "h-3.5 w-3.5" : size === "lg" ? "h-5 w-5" : "h-4 w-4"
         )}
       />
       <span
         className={cn(
           "flex-1 text-left",
-          !hasValue && "text-white/40"
+          !hasValue && "text-white/60"
         )}
       >
         {displayText ?? placeholder ?? "Select time"}
@@ -548,6 +556,7 @@ function TimePicker({
     <AnimatePresence>
       {open && (
         <motion.div
+          ref={dropdownRef}
           initial={{ opacity: 0, scale: 0.95, y: -4 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: -4 }}
@@ -689,7 +698,7 @@ function TimePicker({
 
       {/* Helper / Error text */}
       {resolvedDescription && !error && (
-        <p id={`${controlId}-description`} className="text-xs text-white/40">
+        <p id={`${controlId}-description`} className="text-xs text-white/60">
           {resolvedDescription}
         </p>
       )}

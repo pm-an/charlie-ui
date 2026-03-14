@@ -447,7 +447,7 @@ function Select({
       <span
         className={cn(
           "truncate text-left flex-1",
-          !selectedOption && "text-white/40"
+          !selectedOption && "text-white/60"
         )}
       >
         {selectedOption ? selectedOption.label : placeholder}
@@ -457,7 +457,7 @@ function Select({
       ) : (
         <ChevronDown
           className={cn(
-            "h-4 w-4 shrink-0 text-white/40 transition-transform duration-200",
+            "h-4 w-4 shrink-0 text-white/60 transition-transform duration-200",
             open && "rotate-180"
           )}
         />
@@ -483,11 +483,11 @@ function Select({
           {/* Search input */}
           {searchable && (
             <div className="flex items-center gap-2 border-b border-white/[0.06] px-3 py-2">
-              <Search className="h-4 w-4 shrink-0 text-white/40" />
+              <Search className="h-4 w-4 shrink-0 text-white/60" />
               <input
                 ref={searchInputRef}
                 type="text"
-                className="flex-1 bg-transparent text-sm text-white placeholder:text-white/40 outline-none"
+                className="flex-1 bg-transparent text-sm text-white placeholder:text-white/60 outline-none"
                 placeholder={searchPlaceholder}
                 value={searchQuery}
                 onChange={handleSearchChange}
@@ -504,7 +504,7 @@ function Select({
             className="max-h-[240px] overflow-y-auto py-1"
           >
             {filteredOptions.length === 0 ? (
-              <div className="px-3 py-6 text-center text-sm text-white/40">
+              <div className="px-3 py-6 text-center text-sm text-white/60">
                 {emptyMessage}
               </div>
             ) : (
@@ -567,7 +567,7 @@ function Select({
                         {option.label}
                       </span>
                       {option.description && (
-                        <span className="block text-xs text-white/40 truncate">
+                        <span className="block text-xs text-white/60 truncate">
                           {option.description}
                         </span>
                       )}
@@ -641,7 +641,7 @@ function Select({
 
       {/* Helper text */}
       {resolvedDescription && !error && (
-        <p id={`${controlId}-description`} className="text-xs text-white/40">{resolvedDescription}</p>
+        <p id={`${controlId}-description`} className="text-xs text-white/60">{resolvedDescription}</p>
       )}
 
       {/* Error message */}

@@ -111,3 +111,50 @@ export function getLegendStyle(): React.CSSProperties {
 
 /** Grid stroke for CartesianGrid / PolarGrid — matches --color-border. */
 export const gridStroke = "rgba(255,255,255,0.06)";
+
+/* ─── Accessible Chart Summary ────────────────────── */
+
+/**
+ * Generate a textual summary of chart data for screen readers.
+ *
+ * @param data - Array of data records
+ * @param seriesKeys - Data keys to summarise (e.g. ["revenue", "expenses"])
+ * @param categoryKey - Key used for the category axis (e.g. "month", "name")
+ * @returns A human-readable text summary of the data
+ */
+export function createChartSummary(
+  data: Record<string, unknown>[],
+  seriesKeys: string[],
+  categoryKey?: string,
+): string {
+  if (data.length === 0) return "Chart with no data.";
+
+  const parts: string[] = [];
+  parts.push(`Chart with ${data.length} data point${data.length === 1 ? "" : "s"}.`);
+
+  for (const key of seriesKeys) {
+    const values = data
+      .map((d) => Number(d[key]))
+      .filter((v) => !Number.isNaN(v));
+    if (values.length === 0) continue;
+
+    const min = Math.min(...values);
+    const max = Math.max(...values);
+    const sum = values.reduce((a, b) => a + b, 0);
+    const avg = Math.round(sum / values.length);
+
+    parts.push(
+      `${key}: min ${min}, max ${max}, average ${avg}.`,
+    );
+  }
+
+  if (categoryKey && data.length > 0) {
+    const first = data[0][categoryKey];
+    const last = data[data.length - 1][categoryKey];
+    if (first !== undefined && last !== undefined) {
+      parts.push(`Range: ${String(first)} to ${String(last)}.`);
+    }
+  }
+
+  return parts.join(" ");
+}

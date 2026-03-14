@@ -1,6 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { describe, it, expect } from "vitest";
 import { StatCard } from "../StatCard";
+import { expectNoA11yViolations } from "../../test/a11y";
 
 describe("StatCard", () => {
   it("renders label and value", () => {
@@ -73,7 +74,7 @@ describe("StatCard", () => {
     const { container } = render(
       <StatCard label="Users" value={100} change={0} />
     );
-    const changeEl = container.querySelector(".text-white\\/40");
+    const changeEl = container.querySelector(".text-white\\/60");
     expect(changeEl).toBeInTheDocument();
   });
 
@@ -144,5 +145,22 @@ describe("StatCard", () => {
     const ref = { current: null } as React.RefObject<HTMLDivElement | null>;
     render(<StatCard ref={ref} label="Revenue" value="100" />);
     expect(ref.current).toBeInstanceOf(HTMLDivElement);
+  });
+
+  it("marks trend icons as aria-hidden", () => {
+    const { container } = render(
+      <StatCard label="Revenue" value="100" change={5} />
+    );
+    const svgs = container.querySelectorAll("svg");
+    svgs.forEach((svg) => {
+      expect(svg).toHaveAttribute("aria-hidden", "true");
+    });
+  });
+
+  it("passes axe accessibility checks", async () => {
+    const { container } = render(
+      <StatCard label="Revenue" value="$45,231" change={12.5} changeLabel="vs last month" />
+    );
+    await expectNoA11yViolations(container);
   });
 });

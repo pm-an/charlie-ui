@@ -42,6 +42,27 @@ export const Default: Story = {
   },
 };
 
+export const WithCurrentPath: Story = {
+  args: {
+    logo: (
+      <span className="text-white font-bold text-lg tracking-tight">
+        Charlie UI
+      </span>
+    ),
+    links: [
+      { label: "Features", href: "/features" },
+      { label: "Pricing", href: "/pricing" },
+      { label: "Documentation", href: "/docs" },
+    ],
+    currentPath: "/features",
+    actions: (
+      <Button variant="primary" size="sm">
+        Get Started
+      </Button>
+    ),
+  },
+};
+
 export const WithBadge: Story = {
   args: {
     logo: (

@@ -108,7 +108,7 @@ const AnnouncementBar = forwardRef<HTMLDivElement, AnnouncementBarProps>(
           <button
             type="button"
             onClick={handleDismiss}
-            className="absolute right-3 p-1 text-white/40 hover:text-white transition-colors duration-200 rounded-md hover:bg-white/5"
+            className="absolute right-3 p-1 text-white/60 hover:text-white transition-colors duration-200 rounded-md hover:bg-white/5"
             aria-label="Dismiss announcement"
           >
             <X className="h-4 w-4" />

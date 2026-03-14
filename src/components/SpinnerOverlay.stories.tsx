@@ -24,7 +24,7 @@ const SampleTable = () => (
     <h3 className="text-sm font-medium text-white/80 mb-3">Recent Orders</h3>
     <table className="w-full text-sm">
       <thead>
-        <tr className="text-left text-white/40 border-b border-white/10">
+        <tr className="text-left text-white/60 border-b border-white/10">
           <th className="pb-2">Order</th>
           <th className="pb-2">Status</th>
           <th className="pb-2 text-right">Amount</th>

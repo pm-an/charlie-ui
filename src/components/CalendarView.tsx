@@ -160,7 +160,7 @@ const CalendarView = forwardRef<HTMLDivElement, CalendarViewProps>(
             <button
               type="button"
               onClick={handlePrevMonth}
-              className="p-1.5 text-white/40 hover:text-white hover:bg-white/5 rounded transition-colors"
+              className="p-1.5 text-white/60 hover:text-white hover:bg-white/5 rounded transition-colors"
               aria-label="Previous month"
             >
               <ChevronLeft className="h-4 w-4" />
@@ -168,7 +168,7 @@ const CalendarView = forwardRef<HTMLDivElement, CalendarViewProps>(
             <button
               type="button"
               onClick={handleNextMonth}
-              className="p-1.5 text-white/40 hover:text-white hover:bg-white/5 rounded transition-colors"
+              className="p-1.5 text-white/60 hover:text-white hover:bg-white/5 rounded transition-colors"
               aria-label="Next month"
             >
               <ChevronRight className="h-4 w-4" />
@@ -179,7 +179,7 @@ const CalendarView = forwardRef<HTMLDivElement, CalendarViewProps>(
         {/* Day headers */}
         <div className="grid grid-cols-7 text-center border-b border-white/[0.06]">
           {DAYS_OF_WEEK.map((day) => (
-            <div key={day} className="text-xs text-white/40 py-2 font-medium">
+            <div key={day} className="text-xs text-white/60 py-2 font-medium">
               {day}
             </div>
           ))}
@@ -280,7 +280,7 @@ const CalendarView = forwardRef<HTMLDivElement, CalendarViewProps>(
                     </div>
                   ))}
                   {dayEvents.length > 3 && (
-                    <div className="text-[10px] text-white/30 px-1">
+                    <div className="text-[10px] text-white/60 px-1">
                       +{dayEvents.length - 3} more
                     </div>
                   )}

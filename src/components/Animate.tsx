@@ -14,6 +14,7 @@ import {
 import { presets, type PresetName } from "../animation/presets";
 import type { Duration, Easing } from "../animation/tokens";
 import { useAnimationConfig } from "../animation/AnimationProvider";
+import { useReducedMotion } from "../animation/useReducedMotion";
 import { resolveDuration, resolveEasing } from "../animation/utils";
 
 /* ─── Static "no motion" values ────────────── */
@@ -55,6 +56,9 @@ export interface AnimateProps {
  * Wraps Framer Motion with preset support, AnimatePresence,
  * viewport triggering, and reduced-motion awareness.
  *
+ * When no `AnimationProvider` ancestor is present, falls back to
+ * checking `prefers-reduced-motion` directly via `useReducedMotion()`.
+ *
  * ```tsx
  * <Animate preset="fadeUp" show={visible}>
  *   <Card>Hello</Card>
@@ -80,7 +84,11 @@ export const Animate = forwardRef<HTMLElement, AnimateProps>(function Animate(
   ref
 ) {
   const ctx = useAnimationConfig();
-  const disabled = !ctx.enabled;
+  const osReducedMotion = useReducedMotion();
+
+  // If a provider is present, ctx.enabled already accounts for reduced motion.
+  // If no provider (default context), fall back to the OS preference.
+  const disabled = !ctx.enabled || (ctx.prefersReducedMotion === false && osReducedMotion);
 
   /* Resolve preset */
   const p = preset ? presets[preset] : undefined;

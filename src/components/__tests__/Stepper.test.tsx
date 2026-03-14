@@ -1,6 +1,7 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import { describe, it, expect, vi } from "vitest";
 import { Stepper } from "../Stepper";
+import { expectNoA11yViolations } from "../../test/a11y";
 
 const basicSteps = [
   { label: "Account" },
@@ -75,7 +76,7 @@ describe("Stepper", () => {
       render(<Stepper steps={basicSteps} activeStep={1} />);
       const upcomingCircle = screen.getByTestId("step-circle-2");
       expect(upcomingCircle).toHaveClass("bg-white/5");
-      expect(upcomingCircle).toHaveClass("text-white/40");
+      expect(upcomingCircle).toHaveClass("text-white/60");
     });
   });
 
@@ -443,6 +444,23 @@ describe("Stepper", () => {
       const circleRow = lastStepCol.firstElementChild!;
       const rightSpacer = circleRow.lastElementChild!;
       expect(rightSpacer.children).toHaveLength(0);
+    });
+  });
+
+  describe("accessibility", () => {
+    it("has aria-current=step on active step", () => {
+      const { container } = render(
+        <Stepper steps={basicSteps} activeStep={1} />
+      );
+      const currentStep = container.querySelector('[aria-current="step"]');
+      expect(currentStep).toBeInTheDocument();
+    });
+
+    it("passes axe accessibility checks", async () => {
+      const { container } = render(
+        <Stepper steps={basicSteps} activeStep={1} />
+      );
+      await expectNoA11yViolations(container);
     });
   });
 });

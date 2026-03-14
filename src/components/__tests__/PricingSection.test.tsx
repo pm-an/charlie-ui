@@ -1,6 +1,7 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import { describe, it, expect } from "vitest";
 import { PricingSection } from "../PricingSection";
+import { expectNoA11yViolations } from "../../test/a11y";
 
 const mockPlans = [
   {
@@ -245,6 +246,15 @@ describe("PricingSection", () => {
     it("renders plans without toggle prices using static price", () => {
       render(<PricingSection plans={plansWithoutToggle} />);
       expect(screen.getByText("$10")).toBeInTheDocument();
+    });
+  });
+
+  describe("accessibility", () => {
+    it("passes axe accessibility checks", async () => {
+      const { container } = render(
+        <PricingSection plans={mockPlans} title="Our plans" />
+      );
+      await expectNoA11yViolations(container);
     });
   });
 });

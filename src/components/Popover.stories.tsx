@@ -161,7 +161,7 @@ export const NonDismissible: Story = {
       <Popover.Trigger asChild>
         <Button variant="secondary">Open sticky popover</Button>
       </Popover.Trigger>
-      <Popover.Content dismissible={false}>
+      <Popover.Content dismissible={false} aria-label="Confirm action">
         <div className="space-y-3">
           <p className="text-sm font-medium text-white">Confirm action</p>
           <p className="text-sm text-white/60">
@@ -171,6 +171,30 @@ export const NonDismissible: Story = {
           <Popover.Close asChild>
             <Button variant="primary" size="sm" className="w-full">
               Confirm
+            </Button>
+          </Popover.Close>
+        </div>
+      </Popover.Content>
+    </Popover>
+  ),
+};
+
+export const WithFocusTrap: Story = {
+  render: () => (
+    <Popover>
+      <Popover.Trigger asChild>
+        <Button variant="secondary">Open with focus trap</Button>
+      </Popover.Trigger>
+      <Popover.Content trapFocus aria-label="Focus trapped popover">
+        <div className="space-y-3">
+          <p className="text-sm font-medium text-white">Trapped focus</p>
+          <p className="text-sm text-white/60">
+            Tab focus is trapped within this popover. Press Escape or click
+            the button below to close.
+          </p>
+          <Popover.Close asChild>
+            <Button variant="primary" size="sm" className="w-full">
+              Done
             </Button>
           </Popover.Close>
         </div>

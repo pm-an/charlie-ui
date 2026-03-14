@@ -76,22 +76,29 @@ function Avatar({
   status,
   ...props
 }: AvatarProps) {
+  const ariaLabel = status ? `${alt}, ${status}` : undefined;
+
   return (
-    <span data-slot="avatar" className={cn(avatarVariants({ size }), className)}>
+    <span
+      data-slot="avatar"
+      className={cn(avatarVariants({ size }), className)}
+      role="img"
+      aria-label={ariaLabel ?? alt}
+    >
       {src ? (
         <img
           src={src}
-          alt={alt}
+          alt=""
           className="h-full w-full object-cover"
           {...props}
         />
       ) : (
-        <span className={cn(fallbackTextVariants({ size }))}>
+        <span className={cn(fallbackTextVariants({ size }))} aria-hidden="true">
           {fallback ?? alt.charAt(0).toUpperCase()}
         </span>
       )}
       {status && (
-        <span className={cn(statusDotVariants({ status, size }))} />
+        <span className={cn(statusDotVariants({ status, size }))} aria-hidden="true" />
       )}
     </span>
   );

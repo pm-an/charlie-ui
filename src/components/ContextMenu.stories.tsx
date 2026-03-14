@@ -35,7 +35,7 @@ export const Default: Story = {
     return (
       <ContextMenu>
         <ContextMenu.Trigger>
-          <div className="flex h-48 w-80 items-center justify-center rounded-lg border border-dashed border-white/20 text-sm text-white/40">
+          <div className="flex h-48 w-80 items-center justify-center rounded-lg border border-dashed border-white/20 text-sm text-white/60">
             Right-click here
           </div>
         </ContextMenu.Trigger>
@@ -57,7 +57,7 @@ export const WithIcons: Story = {
     return (
       <ContextMenu>
         <ContextMenu.Trigger>
-          <div className="flex h-48 w-80 items-center justify-center rounded-lg border border-dashed border-white/20 text-sm text-white/40">
+          <div className="flex h-48 w-80 items-center justify-center rounded-lg border border-dashed border-white/20 text-sm text-white/60">
             Right-click for file actions
           </div>
         </ContextMenu.Trigger>
@@ -98,9 +98,9 @@ export const Complex: Story = {
     return (
       <ContextMenu>
         <ContextMenu.Trigger>
-          <div className="flex h-48 w-80 flex-col items-center justify-center gap-2 rounded-lg border border-dashed border-white/20 text-sm text-white/40">
+          <div className="flex h-48 w-80 flex-col items-center justify-center gap-2 rounded-lg border border-dashed border-white/20 text-sm text-white/60">
             <span>Desktop workspace area</span>
-            <span className="text-xs text-white/20">Right-click to manage</span>
+            <span className="text-xs text-white/60">Right-click to manage</span>
           </div>
         </ContextMenu.Trigger>
         <ContextMenu.Content>

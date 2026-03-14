@@ -3,6 +3,7 @@ import userEvent from "@testing-library/user-event";
 import { describe, it, expect, vi } from "vitest";
 import { ToggleGroup } from "../ToggleGroup";
 import { Field } from "../Field";
+import { expectNoA11yViolations } from "../../test/a11y";
 
 // Simple SVG icon stub for testing
 const TestIcon = () => <svg data-testid="test-icon" />;
@@ -108,6 +109,77 @@ describe("ToggleGroup", () => {
       <ToggleGroup options={options} value="monthly" onChange={() => {}} aria-label="Billing period" />
     );
     expect(screen.getByRole("radiogroup")).toHaveAttribute("aria-label", "Billing period");
+  });
+
+  // --- Roving tabindex ---
+
+  it("only selected radio has tabIndex 0, others have -1", () => {
+    render(<ToggleGroup options={options} value="yearly" onChange={() => {}} />);
+    expect(screen.getByRole("radio", { name: /Monthly/i })).toHaveAttribute("tabindex", "-1");
+    expect(screen.getByRole("radio", { name: /Yearly/i })).toHaveAttribute("tabindex", "0");
+    expect(screen.getByRole("radio", { name: /Lifetime/i })).toHaveAttribute("tabindex", "-1");
+  });
+
+  // --- Keyboard navigation ---
+
+  it("navigates to next option with ArrowRight", async () => {
+    const user = userEvent.setup();
+    const onChange = vi.fn();
+    render(<ToggleGroup options={options} value="monthly" onChange={onChange} aria-label="Billing" />);
+    const firstRadio = screen.getByRole("radio", { name: /Monthly/i });
+    firstRadio.focus();
+    await user.keyboard("{ArrowRight}");
+    expect(onChange).toHaveBeenCalledWith("yearly");
+  });
+
+  it("navigates to previous option with ArrowLeft", async () => {
+    const user = userEvent.setup();
+    const onChange = vi.fn();
+    render(<ToggleGroup options={options} value="yearly" onChange={onChange} aria-label="Billing" />);
+    const radio = screen.getByRole("radio", { name: /Yearly/i });
+    radio.focus();
+    await user.keyboard("{ArrowLeft}");
+    expect(onChange).toHaveBeenCalledWith("monthly");
+  });
+
+  it("wraps around with ArrowRight on last option", async () => {
+    const user = userEvent.setup();
+    const onChange = vi.fn();
+    render(<ToggleGroup options={options} value="lifetime" onChange={onChange} aria-label="Billing" />);
+    const radio = screen.getByRole("radio", { name: /Lifetime/i });
+    radio.focus();
+    await user.keyboard("{ArrowRight}");
+    expect(onChange).toHaveBeenCalledWith("monthly");
+  });
+
+  it("wraps around with ArrowLeft on first option", async () => {
+    const user = userEvent.setup();
+    const onChange = vi.fn();
+    render(<ToggleGroup options={options} value="monthly" onChange={onChange} aria-label="Billing" />);
+    const radio = screen.getByRole("radio", { name: /Monthly/i });
+    radio.focus();
+    await user.keyboard("{ArrowLeft}");
+    expect(onChange).toHaveBeenCalledWith("lifetime");
+  });
+
+  it("navigates to first option with Home", async () => {
+    const user = userEvent.setup();
+    const onChange = vi.fn();
+    render(<ToggleGroup options={options} value="lifetime" onChange={onChange} aria-label="Billing" />);
+    const radio = screen.getByRole("radio", { name: /Lifetime/i });
+    radio.focus();
+    await user.keyboard("{Home}");
+    expect(onChange).toHaveBeenCalledWith("monthly");
+  });
+
+  it("navigates to last option with End", async () => {
+    const user = userEvent.setup();
+    const onChange = vi.fn();
+    render(<ToggleGroup options={options} value="monthly" onChange={onChange} aria-label="Billing" />);
+    const radio = screen.getByRole("radio", { name: /Monthly/i });
+    radio.focus();
+    await user.keyboard("{End}");
+    expect(onChange).toHaveBeenCalledWith("lifetime");
   });
 
   // --- Icons ---
@@ -253,5 +325,36 @@ describe("ToggleGroup", () => {
       expect(screen.getByRole("radiogroup")).toBeInTheDocument();
       expect(screen.getByText("Monthly")).toBeInTheDocument();
     });
+  });
+
+  // --- Accessibility (axe) ---
+
+  it("has no accessibility violations", async () => {
+    const { container } = render(
+      <ToggleGroup
+        options={options}
+        value="monthly"
+        onChange={() => {}}
+        aria-label="Billing period"
+      />
+    );
+    await expectNoA11yViolations(container);
+  });
+
+  it("has no accessibility violations with disabled options", async () => {
+    const withDisabled = [
+      { label: "A", value: "a" },
+      { label: "B", value: "b", disabled: true },
+      { label: "C", value: "c" },
+    ];
+    const { container } = render(
+      <ToggleGroup
+        options={withDisabled}
+        value="a"
+        onChange={() => {}}
+        aria-label="Options"
+      />
+    );
+    await expectNoA11yViolations(container);
   });
 });

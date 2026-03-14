@@ -32,13 +32,15 @@ function Newsletter({ title, description, onSubmit, className }: NewsletterProps
       <h3 className="text-white font-semibold text-xl mb-2">{title}</h3>
       <p className="text-white/60 text-sm mb-6">{description}</p>
       <form onSubmit={handleSubmit} className="flex flex-col md:flex-row gap-3">
+        <label htmlFor="newsletter-email" className="sr-only">Email address</label>
         <input
+          id="newsletter-email"
           type="email"
           required
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="Enter your email"
-          className="w-full md:flex-1 bg-white/5 border border-white/[0.06] rounded-md h-11 px-3 text-sm text-white placeholder-white/40 outline-none focus:border-white/15 transition-colors"
+          className="w-full md:flex-1 bg-white/5 border border-white/[0.06] rounded-md h-11 px-3 text-sm text-white placeholder-white/60 outline-none focus:border-white/15 transition-colors"
         />
         <button
           type="submit"

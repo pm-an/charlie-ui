@@ -1,13 +1,15 @@
 import { render, screen, waitFor } from "@testing-library/react";
-import { describe, it, expect, vi, beforeAll } from "vitest";
+import { describe, it, expect, vi, beforeAll, afterEach } from "vitest";
 import { StaggerGroup } from "../StaggerGroup";
 import { AnimationProvider } from "../../animation/AnimationProvider";
+import { expectNoA11yViolations } from "../../test/a11y";
 
-beforeAll(() => {
+// Helper to set up matchMedia mock
+function mockMatchMedia(prefersReducedMotion: boolean) {
   Object.defineProperty(window, "matchMedia", {
     writable: true,
     value: vi.fn().mockImplementation((query: string) => ({
-      matches: false,
+      matches: query === "(prefers-reduced-motion: reduce)" ? prefersReducedMotion : false,
       media: query,
       onchange: null,
       addEventListener: vi.fn(),
@@ -17,6 +19,10 @@ beforeAll(() => {
       dispatchEvent: vi.fn(),
     })),
   });
+}
+
+beforeAll(() => {
+  mockMatchMedia(false);
 
   global.IntersectionObserver = class IntersectionObserver {
     readonly root = null;
@@ -28,6 +34,11 @@ beforeAll(() => {
     takeRecords = vi.fn().mockReturnValue([]);
     constructor(_cb: IntersectionObserverCallback, _opts?: IntersectionObserverInit) {}
   } as unknown as typeof globalThis.IntersectionObserver;
+});
+
+afterEach(() => {
+  // Reset matchMedia to default (no reduced motion)
+  mockMatchMedia(false);
 });
 
 describe("StaggerGroup", () => {
@@ -178,6 +189,18 @@ describe("StaggerGroup", () => {
     );
     expect(screen.getByText("VP obj")).toBeInTheDocument();
   });
+
+  // --- Accessibility (axe) ---
+
+  it("has no accessibility violations", async () => {
+    const { container } = render(
+      <StaggerGroup preset="fadeUp">
+        <p>Child 1</p>
+        <p>Child 2</p>
+      </StaggerGroup>
+    );
+    await expectNoA11yViolations(container);
+  });
 });
 
 describe("StaggerGroup with disabled provider", () => {
@@ -203,5 +226,41 @@ describe("StaggerGroup with disabled provider", () => {
       </AnimationProvider>
     );
     expect(screen.queryByText("Hidden disabled")).not.toBeInTheDocument();
+  });
+});
+
+/* ─── Reduced motion fallback (no provider) ── */
+
+describe("StaggerGroup with reduced motion (no provider)", () => {
+  it("renders children with reduced motion", () => {
+    mockMatchMedia(true);
+    render(
+      <StaggerGroup preset="fadeUp">
+        <div>Reduced 1</div>
+        <div>Reduced 2</div>
+      </StaggerGroup>
+    );
+    expect(screen.getByText("Reduced 1")).toBeInTheDocument();
+    expect(screen.getByText("Reduced 2")).toBeInTheDocument();
+  });
+
+  it("still shows content when show=true with reduced motion", () => {
+    mockMatchMedia(true);
+    render(
+      <StaggerGroup preset="fadeUp" show={true}>
+        <div>Visible reduced</div>
+      </StaggerGroup>
+    );
+    expect(screen.getByText("Visible reduced")).toBeInTheDocument();
+  });
+
+  it("still hides content when show=false with reduced motion", () => {
+    mockMatchMedia(true);
+    render(
+      <StaggerGroup preset="fadeUp" show={false}>
+        <div>Hidden reduced</div>
+      </StaggerGroup>
+    );
+    expect(screen.queryByText("Hidden reduced")).not.toBeInTheDocument();
   });
 });

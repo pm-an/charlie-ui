@@ -3,7 +3,7 @@
  * build-registry.ts
  *
  * Reads source files, parses imports, rewrites paths, and generates
- * shadcn-compatible registry JSON files under `registry/`.
+ * Charlie UI registry JSON files under `registry/`.
  *
  * Usage: npx tsx scripts/build-registry.ts
  */
@@ -302,7 +302,7 @@ function buildItem(name: string, meta: ItemMeta): RegistryItem {
   }
 
   return {
-    $schema: "https://ui.shadcn.com/schema/registry-item.json",
+    $schema: "https://charlietogolden.github.io/charlie-ui/schema/registry-item.json",
     name,
     type: meta.type,
     title: meta.title,
@@ -352,7 +352,7 @@ function buildIndex(
   indexItems.sort((a, b) => a.name.localeCompare(b.name));
 
   return {
-    $schema: "https://ui.shadcn.com/schema/registry.json",
+    $schema: "https://charlietogolden.github.io/charlie-ui/schema/registry.json",
     items: indexItems,
   };
 }

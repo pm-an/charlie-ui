@@ -116,7 +116,7 @@ const StatsSection = forwardRef<HTMLElement, StatsSectionProps>(
                     {stat.value}
                     {stat.suffix ?? ""}
                   </p>
-                  <p className="mt-2 text-sm text-white/40">{stat.label}</p>
+                  <p className="mt-2 text-sm text-white/60">{stat.label}</p>
                 </div>
               )
             )}

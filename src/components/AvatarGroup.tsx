@@ -14,6 +14,8 @@ function AvatarGroup({ className, children, max, ...props }: AvatarGroupProps) {
   return (
     <div
       data-slot="avatar-group"
+      role="group"
+      aria-label={`Group of ${childArray.length} avatars`}
       className={cn("flex -space-x-2", className)}
       {...props}
     >

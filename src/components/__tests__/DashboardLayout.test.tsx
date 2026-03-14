@@ -1,6 +1,7 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import { describe, it, expect, vi } from "vitest";
 import { DashboardLayout } from "../DashboardLayout";
+import { expectNoA11yViolations } from "../../test/a11y";
 
 describe("DashboardLayout", () => {
   describe("rendering", () => {
@@ -253,6 +254,50 @@ describe("DashboardLayout", () => {
       expect(DashboardLayout.Sidebar.displayName).toBe("DashboardLayout.Sidebar");
       expect(DashboardLayout.Header.displayName).toBe("DashboardLayout.Header");
       expect(DashboardLayout.Content.displayName).toBe("DashboardLayout.Content");
+    });
+  });
+
+  describe("accessibility", () => {
+    it("Sidebar has aria-label for navigation", () => {
+      const { container } = render(
+        <DashboardLayout>
+          <DashboardLayout.Sidebar>
+            <div>Nav</div>
+          </DashboardLayout.Sidebar>
+          <div className="flex-1 flex flex-col">
+            <DashboardLayout.Header>Header</DashboardLayout.Header>
+            <DashboardLayout.Content>Content</DashboardLayout.Content>
+          </div>
+        </DashboardLayout>
+      );
+      const aside = container.querySelector('[aria-label="Sidebar navigation"]');
+      expect(aside).toBeInTheDocument();
+    });
+
+    it("Content renders as main element", () => {
+      render(
+        <DashboardLayout>
+          <DashboardLayout.Content>Content</DashboardLayout.Content>
+        </DashboardLayout>
+      );
+      expect(screen.getByRole("main")).toBeInTheDocument();
+    });
+
+    it("passes axe accessibility checks", async () => {
+      const { container } = render(
+        <DashboardLayout sidebarCollapsed>
+          <DashboardLayout.Sidebar>
+            <div>Nav</div>
+          </DashboardLayout.Sidebar>
+          <div className="flex-1 flex flex-col">
+            <DashboardLayout.Header>Header</DashboardLayout.Header>
+            <DashboardLayout.Content>
+              <h1>Dashboard</h1>
+            </DashboardLayout.Content>
+          </div>
+        </DashboardLayout>
+      );
+      await expectNoA11yViolations(container);
     });
   });
 });

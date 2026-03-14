@@ -2,6 +2,7 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, it, expect, vi } from "vitest";
 import { Accordion } from "./Accordion";
+import { expectNoA11yViolations } from "../test/a11y";
 
 describe("Accordion", () => {
   it("renders item titles", () => {
@@ -134,5 +135,73 @@ describe("Accordion", () => {
     expect(container.querySelector("[data-slot='accordion']")).toBeInTheDocument();
     expect(container.querySelector("[data-slot='accordion-item']")).toBeInTheDocument();
     expect(container.querySelector("[data-slot='accordion-trigger']")).toBeInTheDocument();
+  });
+
+  describe("ARIA attributes", () => {
+    it("trigger has aria-controls pointing to content panel id", async () => {
+      const user = userEvent.setup();
+      render(
+        <Accordion>
+          <Accordion.Item value="1" title="First">Content 1</Accordion.Item>
+        </Accordion>
+      );
+      const trigger = screen.getByRole("button", { name: /first/i });
+      const contentId = trigger.getAttribute("aria-controls");
+      expect(contentId).toBeTruthy();
+
+      // Open the item so the content panel renders
+      await user.click(trigger);
+      const content = document.getElementById(contentId!);
+      expect(content).toBeInTheDocument();
+    });
+
+    it("content panel has role=region and aria-labelledby pointing to trigger", async () => {
+      const user = userEvent.setup();
+      render(
+        <Accordion>
+          <Accordion.Item value="1" title="First">Content 1</Accordion.Item>
+        </Accordion>
+      );
+      const trigger = screen.getByRole("button", { name: /first/i });
+      await user.click(trigger);
+
+      const region = screen.getByRole("region");
+      expect(region).toBeInTheDocument();
+      expect(region.getAttribute("aria-labelledby")).toBe(trigger.id);
+    });
+
+    it("content panel id matches trigger aria-controls", async () => {
+      const user = userEvent.setup();
+      render(
+        <Accordion>
+          <Accordion.Item value="1" title="First">Content 1</Accordion.Item>
+        </Accordion>
+      );
+      const trigger = screen.getByRole("button", { name: /first/i });
+      await user.click(trigger);
+
+      const region = screen.getByRole("region");
+      expect(region.id).toBe(trigger.getAttribute("aria-controls"));
+    });
+  });
+
+  it("passes axe accessibility checks (closed)", async () => {
+    const { container } = render(
+      <Accordion>
+        <Accordion.Item value="1" title="First">Content 1</Accordion.Item>
+        <Accordion.Item value="2" title="Second">Content 2</Accordion.Item>
+      </Accordion>
+    );
+    await expectNoA11yViolations(container);
+  });
+
+  it("passes axe accessibility checks (open)", async () => {
+    const { container } = render(
+      <Accordion defaultOpen={["1"]}>
+        <Accordion.Item value="1" title="First">Content 1</Accordion.Item>
+        <Accordion.Item value="2" title="Second">Content 2</Accordion.Item>
+      </Accordion>
+    );
+    await expectNoA11yViolations(container);
   });
 });

@@ -9,6 +9,7 @@ import { describe, it, expect, vi } from "vitest";
 import { DatePicker } from "../DatePicker";
 import { Field } from "../Field";
 import { format, addDays } from "date-fns";
+import { expectNoA11yViolations } from "../../test/a11y";
 
 describe("DatePicker", () => {
   describe("rendering", () => {
@@ -588,5 +589,12 @@ describe("DatePicker", () => {
       expect(screen.getByText("Standalone Label")).toBeInTheDocument();
       expect(screen.getByText("Standalone help")).toBeInTheDocument();
     });
+  });
+
+  it("passes axe accessibility checks", async () => {
+    const { container } = render(
+      <DatePicker label="Start date" placeholder="Pick a date" />
+    );
+    await expectNoA11yViolations(container);
   });
 });

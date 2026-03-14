@@ -69,7 +69,7 @@ const TestimonialSection = forwardRef<HTMLElement, TestimonialSectionProps>(
               <div className="bg-card-gradient rounded-xl border border-white/[0.06] p-8 flex flex-col justify-center">
                 <span
                   aria-hidden="true"
-                  className="mb-4 block select-none text-4xl leading-none text-white/20"
+                  className="mb-4 block select-none text-4xl leading-none text-white/60"
                 >
                   &ldquo;
                 </span>
@@ -90,7 +90,7 @@ const TestimonialSection = forwardRef<HTMLElement, TestimonialSectionProps>(
                     <p className="text-base font-medium text-white">
                       {testimonials[0].author}
                     </p>
-                    <p className="text-sm text-white/40">
+                    <p className="text-sm text-white/60">
                       {testimonials[0].role}
                       {testimonials[0].company && (
                         <>, {testimonials[0].company}</>

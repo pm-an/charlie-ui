@@ -1,6 +1,7 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { Pagination } from "../Pagination";
+import { expectNoA11yViolations } from "../../test/a11y";
 
 describe("Pagination", () => {
   const defaultProps = {
@@ -258,6 +259,25 @@ describe("Pagination", () => {
       render(<Pagination {...defaultProps} ref={ref} />);
       expect(ref.current).toBeInstanceOf(HTMLElement);
       expect(ref.current?.tagName).toBe("NAV");
+    });
+  });
+
+  describe("accessibility", () => {
+    it("renders as nav with aria-label", () => {
+      render(<Pagination {...defaultProps} />);
+      const nav = screen.getByRole("navigation", { name: "Pagination" });
+      expect(nav).toBeInTheDocument();
+    });
+
+    it("has aria-current=page on current page", () => {
+      render(<Pagination {...defaultProps} />);
+      const currentButton = screen.getByRole("button", { name: "Go to page 5" });
+      expect(currentButton).toHaveAttribute("aria-current", "page");
+    });
+
+    it("passes axe accessibility checks", async () => {
+      const { container } = render(<Pagination {...defaultProps} />);
+      await expectNoA11yViolations(container);
     });
   });
 });

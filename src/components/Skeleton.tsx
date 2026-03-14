@@ -19,6 +19,8 @@ export type SkeletonProps = HTMLAttributes<HTMLDivElement> &
   VariantProps<typeof skeletonVariants> & {
     width?: string | number;
     height?: string | number;
+    /** Accessible label for the loading state. Defaults to "Loading". */
+    loadingLabel?: string;
   };
 
 function Skeleton({
@@ -27,11 +29,14 @@ function Skeleton({
   width,
   height,
   style,
+  loadingLabel = "Loading",
   ...props
 }: SkeletonProps) {
   return (
     <div
       data-slot="skeleton"
+      role="status"
+      aria-label={loadingLabel}
       className={cn(skeletonVariants({ variant }), className)}
       style={{
         width: width !== undefined ? (typeof width === "number" ? `${width}px` : width) : undefined,

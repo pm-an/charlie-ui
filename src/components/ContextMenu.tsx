@@ -107,10 +107,30 @@ export type ContextMenuTriggerProps = HTMLAttributes<HTMLDivElement> & {
 const ContextMenuTrigger = ({ children, className, ...props }: ContextMenuTriggerProps) => {
   const { handleContextMenu } = useContextMenu();
 
+  const handleKeyDown = useCallback(
+    (e: React.KeyboardEvent) => {
+      // Shift+F10 opens context menu (standard Windows/Linux keyboard shortcut)
+      if (e.key === "F10" && e.shiftKey) {
+        e.preventDefault();
+        // Synthesize a context menu event at the element's position
+        const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
+        const syntheticEvent = {
+          preventDefault: () => {},
+          clientX: rect.left + rect.width / 2,
+          clientY: rect.top + rect.height / 2,
+        } as React.MouseEvent;
+        handleContextMenu(syntheticEvent);
+      }
+    },
+    [handleContextMenu]
+  );
+
   return (
     <div
       className={className}
       onContextMenu={handleContextMenu}
+      onKeyDown={handleKeyDown}
+      tabIndex={props.tabIndex ?? 0}
       {...props}
     >
       {children}

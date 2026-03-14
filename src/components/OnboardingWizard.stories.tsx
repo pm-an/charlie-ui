@@ -26,7 +26,7 @@ const TextInput = ({
     <input
       type={type}
       placeholder={placeholder}
-      className="w-full bg-white/5 border border-white/10 rounded-md px-3 py-2 text-sm text-white placeholder:text-white/30 focus:outline-none focus:ring-1 focus:ring-white/20"
+      className="w-full bg-white/5 border border-white/10 rounded-md px-3 py-2 text-sm text-white placeholder:text-white/60 focus:outline-none focus:ring-1 focus:ring-white/20"
     />
   </div>
 );
@@ -61,7 +61,7 @@ const defaultSteps = [
           >
             <div>
               <p className="text-sm font-medium text-white">{pref.label}</p>
-              <p className="text-xs text-white/40">{pref.description}</p>
+              <p className="text-xs text-white/60">{pref.description}</p>
             </div>
             <input
               type="checkbox"
@@ -180,7 +180,7 @@ export const Controlled: Story = {
           onStepChange={setStep}
           onComplete={() => alert("Onboarding complete!")}
         />
-        <p className="text-center text-sm text-white/40">
+        <p className="text-center text-sm text-white/60">
           Current step: {step + 1} of {defaultSteps.length}
         </p>
       </div>

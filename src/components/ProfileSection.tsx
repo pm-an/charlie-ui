@@ -81,7 +81,7 @@ const ProfileSection = forwardRef<HTMLDivElement, ProfileSectionProps>(
                   className="h-full w-full object-cover"
                 />
               ) : (
-                <span className="text-2xl font-bold text-white/40">
+                <span className="text-2xl font-bold text-white/60">
                   {name
                     .split(" ")
                     .map((n) => n[0])
@@ -112,7 +112,7 @@ const ProfileSection = forwardRef<HTMLDivElement, ProfileSectionProps>(
           {bio && (
             <p
               data-slot="profile-bio"
-              className="text-sm text-white/40 mt-2 max-w-xl"
+              className="text-sm text-white/60 mt-2 max-w-xl"
             >
               {bio}
             </p>
@@ -136,7 +136,7 @@ const ProfileSection = forwardRef<HTMLDivElement, ProfileSectionProps>(
                   <span className="text-lg font-semibold text-white">
                     {stat.value}
                   </span>
-                  <span className="text-xs text-white/40">{stat.label}</span>
+                  <span className="text-xs text-white/60">{stat.label}</span>
                 </div>
               ))}
             </div>

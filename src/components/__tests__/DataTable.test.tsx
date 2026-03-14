@@ -2,6 +2,7 @@ import { render, screen, fireEvent, within } from "@testing-library/react";
 import { describe, it, expect, vi } from "vitest";
 import { DataTable } from "../DataTable";
 import type { ColumnDef } from "@tanstack/react-table";
+import { expectNoA11yViolations } from "../../test/a11y";
 
 // ---------------------------------------------------------------------------
 // Test data
@@ -553,6 +554,117 @@ describe("DataTable", () => {
       fireEvent.change(select, { target: { value: "20" } });
 
       expect(screen.getByText("Showing 1 to 20 of 30 results")).toBeInTheDocument();
+    });
+  });
+
+  describe("accessibility", () => {
+    it("renders caption as sr-only when provided", () => {
+      const { container } = render(
+        <DataTable
+          data={data}
+          columns={columns}
+          caption="User directory"
+          enablePagination={false}
+        />
+      );
+      const caption = container.querySelector("caption");
+      expect(caption).toBeInTheDocument();
+      expect(caption!.textContent).toBe("User directory");
+      expect(caption).toHaveClass("sr-only");
+    });
+
+    it("does not render caption when not provided", () => {
+      const { container } = render(
+        <DataTable data={data} columns={columns} enablePagination={false} />
+      );
+      expect(container.querySelector("caption")).not.toBeInTheDocument();
+    });
+
+    it("adds scope='col' to header th elements", () => {
+      const { container } = render(
+        <DataTable data={data} columns={columns} enablePagination={false} />
+      );
+      const headers = container.querySelectorAll("th");
+      headers.forEach((th) => {
+        expect(th).toHaveAttribute("scope", "col");
+      });
+    });
+
+    it("has aria-sort='none' on sortable headers by default", () => {
+      const { container } = render(
+        <DataTable
+          data={data}
+          columns={columns}
+          enableSorting
+          enablePagination={false}
+        />
+      );
+      const headers = container.querySelectorAll("th");
+      headers.forEach((th) => {
+        expect(th).toHaveAttribute("aria-sort", "none");
+      });
+    });
+
+    it("updates aria-sort to ascending on sorted column", () => {
+      render(
+        <DataTable
+          data={data}
+          columns={columns}
+          enableSorting
+          enablePagination={false}
+        />
+      );
+      // Click Name header to sort ascending
+      fireEvent.click(screen.getByText("Name"));
+
+      // Find the Name header <th>
+      const nameHeader = screen.getByText("Name").closest("th");
+      expect(nameHeader).toHaveAttribute("aria-sort", "ascending");
+
+      // Other headers should remain "none"
+      const emailHeader = screen.getByText("Email").closest("th");
+      expect(emailHeader).toHaveAttribute("aria-sort", "none");
+    });
+
+    it("updates aria-sort to descending on second click", () => {
+      render(
+        <DataTable
+          data={data}
+          columns={columns}
+          enableSorting
+          enablePagination={false}
+        />
+      );
+      fireEvent.click(screen.getByText("Name")); // asc
+      fireEvent.click(screen.getByText("Name")); // desc
+
+      const nameHeader = screen.getByText("Name").closest("th");
+      expect(nameHeader).toHaveAttribute("aria-sort", "descending");
+    });
+
+    it("keeps aria-hidden on sort icons", () => {
+      const { container } = render(
+        <DataTable
+          data={data}
+          columns={columns}
+          enableSorting
+          enablePagination={false}
+        />
+      );
+      const iconSpans = container.querySelectorAll('[aria-hidden="true"]');
+      expect(iconSpans.length).toBeGreaterThan(0);
+    });
+
+    it("passes axe accessibility checks", async () => {
+      const { container } = render(
+        <DataTable
+          data={data}
+          columns={columns}
+          caption="Test table"
+          enablePagination={false}
+        />
+      );
+      await expectNoA11yViolations(container);
     });
   });
 });

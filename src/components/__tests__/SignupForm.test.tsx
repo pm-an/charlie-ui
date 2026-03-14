@@ -1,6 +1,7 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import { describe, it, expect, vi } from "vitest";
 import { SignupForm } from "../SignupForm";
+import { expectNoA11yViolations } from "../../test/a11y";
 
 describe("SignupForm", () => {
   describe("rendering", () => {
@@ -227,6 +228,13 @@ describe("SignupForm", () => {
     it("password input is required", () => {
       render(<SignupForm />);
       expect(screen.getByLabelText("Password")).toBeRequired();
+    });
+  });
+
+  describe("accessibility", () => {
+    it("passes axe accessibility checks", async () => {
+      const { container } = render(<SignupForm />);
+      await expectNoA11yViolations(container);
     });
   });
 });

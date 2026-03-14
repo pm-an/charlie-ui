@@ -7,7 +7,7 @@ A dark-first React component library with 110+ components, built on Tailwind CSS
 - **110+ components** — from primitives (Button, Badge, Input) to full application blocks (DashboardLayout, KanbanBoard, CheckoutForm)
 - **Dark-first design** — every component is crafted for dark UIs out of the box
 - **7 theme presets** — Default, Indigo, Ocean, Emerald, Amber, Rose, Violet — or create your own with CSS custom properties
-- **Component registry** — install only what you need with `npx shadcn add`
+- **Component registry** — install only what you need via the CLI registry
 - **Tailwind CSS v4** — built on `@theme` tokens and `--charlie-*` CSS custom properties
 - **Fully typed** — written in TypeScript with exported types for every component
 - **Accessible** — keyboard navigation, ARIA attributes, and screen reader support
@@ -21,7 +21,7 @@ A dark-first React component library with 110+ components, built on Tailwind CSS
 Install individual components directly into your project:
 
 ```bash
-npx shadcn add button --registry https://piotrmichalik.github.io/component-library/registry
+npx charlietogolden add button
 ```
 
 ### Option 2: Package install
@@ -89,6 +89,44 @@ npm run dev          # dev server
 npm run storybook    # component docs on port 6006
 npm run test         # run all tests
 npm run build        # production build
+```
+
+## MCP Server (AI Integration)
+
+Charlie UI ships with a built-in MCP (Model Context Protocol) server that gives AI assistants full access to component documentation, props, usage examples, design tokens, and theming guides.
+
+### Available tools
+
+| Tool | Description |
+|---|---|
+| `list_components` | List all components, optionally filtered by category |
+| `get_component` | Get full docs for a specific component — props, variants, usage examples |
+| `search_components` | Search components by keyword across names, descriptions, and docs |
+| `get_design_tokens` | Get the design token reference — colors, typography, spacing, radii, shadows, animations |
+| `get_theme_info` | Get the theming guide — customizing colors, tokens, fonts, and styles |
+| `get_setup_guide` | Get installation and setup instructions |
+
+### Setup
+
+Add the Charlie UI MCP server to your AI tool's configuration:
+
+```json
+{
+  "mcpServers": {
+    "charlie-ui": {
+      "command": "node",
+      "args": ["path/to/charlie-ui/mcp/dist/index.js"]
+    }
+  }
+}
+```
+
+Build the MCP server:
+
+```bash
+cd mcp
+npm install
+npm run build
 ```
 
 ## Tech Stack

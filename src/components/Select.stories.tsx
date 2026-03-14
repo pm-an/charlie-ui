@@ -59,11 +59,11 @@ const countryOptions: SelectOption[] = [
 ];
 
 const iconOptions: SelectOption[] = [
-  { value: "global", label: "Global CDN", icon: <Globe className="h-4 w-4 text-white/40" /> },
-  { value: "theme", label: "Custom Theme", icon: <Palette className="h-4 w-4 text-white/40" /> },
-  { value: "perf", label: "Performance Mode", icon: <Zap className="h-4 w-4 text-white/40" /> },
-  { value: "security", label: "Enhanced Security", icon: <Shield className="h-4 w-4 text-white/40" /> },
-  { value: "deploy", label: "Auto Deploy", icon: <Rocket className="h-4 w-4 text-white/40" /> },
+  { value: "global", label: "Global CDN", icon: <Globe className="h-4 w-4 text-white/60" /> },
+  { value: "theme", label: "Custom Theme", icon: <Palette className="h-4 w-4 text-white/60" /> },
+  { value: "perf", label: "Performance Mode", icon: <Zap className="h-4 w-4 text-white/60" /> },
+  { value: "security", label: "Enhanced Security", icon: <Shield className="h-4 w-4 text-white/60" /> },
+  { value: "deploy", label: "Auto Deploy", icon: <Rocket className="h-4 w-4 text-white/60" /> },
 ];
 
 const descriptionOptions: SelectOption[] = [

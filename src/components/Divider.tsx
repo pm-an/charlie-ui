@@ -29,7 +29,7 @@ function Divider({ className, variant, label, ...props }: DividerProps) {
         {...props}
       >
         <div className={cn(dividerVariants({ variant }), "flex-1")} />
-        <span className="text-xs text-white/40 shrink-0">{label}</span>
+        <span className="text-xs text-white/60 shrink-0">{label}</span>
         <div className={cn(dividerVariants({ variant }), "flex-1")} />
       </div>
     );

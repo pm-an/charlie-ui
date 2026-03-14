@@ -1,4 +1,4 @@
-import { forwardRef, type HTMLAttributes } from "react";
+import { forwardRef, useId, type HTMLAttributes } from "react";
 import {
   ResponsiveContainer,
   BarChart as RechartsBarChart,
@@ -15,6 +15,7 @@ import {
   getAxisTickStyle,
   getLegendStyle,
   gridStroke,
+  createChartSummary,
 } from "../utils/chart-helpers";
 import { cn } from "../utils/cn";
 
@@ -38,6 +39,8 @@ export type BarChartProps = Omit<HTMLAttributes<HTMLDivElement>, "data"> & {
   showYAxis?: boolean;
   layout?: "horizontal" | "vertical";
   barGap?: number;
+  /** Accessible description for screen readers */
+  description?: string;
 };
 
 const BarChart = forwardRef<HTMLDivElement, BarChartProps>(
@@ -54,16 +57,37 @@ const BarChart = forwardRef<HTMLDivElement, BarChartProps>(
       showYAxis = true,
       layout = "horizontal",
       barGap = 4,
+      description,
       className,
+      "aria-label": ariaLabel,
       ...rest
     },
     ref,
   ) => {
     const tooltip = getTooltipStyles();
     const tickStyle = getAxisTickStyle();
+    const descId = useId();
+    const summaryText =
+      description ??
+      createChartSummary(
+        data,
+        bars.map((b) => b.dataKey),
+        xAxisKey,
+      );
 
     return (
-      <div ref={ref} data-slot="bar-chart" className={cn("w-full", className)} {...rest}>
+      <div
+        ref={ref}
+        data-slot="bar-chart"
+        role="img"
+        aria-label={ariaLabel ?? "Bar chart"}
+        aria-describedby={descId}
+        className={cn("w-full", className)}
+        {...rest}
+      >
+        <div id={descId} className="sr-only">
+          {summaryText}
+        </div>
         <ResponsiveContainer width="100%" height={height}>
           <RechartsBarChart data={data} layout={layout} barGap={barGap}>
             {showGrid && (

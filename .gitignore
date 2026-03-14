@@ -35,5 +35,8 @@ _site/
 # Planning / internal docs
 .planning/
 
+# Docs (will be rebuilt)
+docs/
+
 # Reference files
 https_

@@ -110,7 +110,7 @@ function OTPInput({
     disabled: resolvedDisabled,
     ariaDescribedBy,
     ariaInvalid,
-  } = useFieldAware({ id: undefined, error, disabled, required: undefined });
+  } = useFieldAware({ id: undefined, error, disabled, required: undefined, errorMessage });
 
   const [internalValue, setInternalValue] = useControllableState(
     controlledValue,
@@ -184,7 +184,7 @@ function OTPInput({
         <span
           key={`sep-${i}`}
           data-testid={`otp-separator-${i}`}
-          className="px-1 text-lg text-white/20"
+          className="px-1 text-lg text-white/60"
         >
           -
         </span>,
@@ -200,6 +200,8 @@ function OTPInput({
         </label>
       )}
       <div
+        role="group"
+        aria-label={label || "One-time password"}
         className={cn(containerVariants({ size }))}
         onClick={handleSlotClick}
         data-testid="otp-container"
@@ -227,7 +229,7 @@ function OTPInput({
         {elements}
       </div>
       {!insideField && resolvedError && errorMessage && (
-        <p className="mt-1.5 text-xs text-red">{errorMessage}</p>
+        <p id={`${controlId}-error`} role="alert" className="mt-1.5 text-xs text-red">{errorMessage}</p>
       )}
     </div>
   );

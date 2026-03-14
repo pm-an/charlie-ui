@@ -160,7 +160,7 @@ const Pagination = forwardRef<HTMLElement, PaginationProps>(
                 key={`ellipsis-${index}`}
                 className={cn(
                   paginationButtonVariants({ size }),
-                  "text-white/40 cursor-default hover:bg-transparent hover:text-white/40"
+                  "text-white/60 cursor-default hover:bg-transparent hover:text-white/60"
                 )}
                 role="presentation"
               >

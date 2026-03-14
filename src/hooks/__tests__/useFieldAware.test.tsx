@@ -24,6 +24,7 @@ const mockContext: FieldContextValue = {
   error: false,
   disabled: false,
   required: false,
+  hasDescription: true,
   descriptionId: "field-123-description",
   errorId: "field-123-error",
   labelId: "field-123-label",
@@ -161,6 +162,18 @@ describe("useFieldAware", () => {
       const describedBy = screen.getByTestId("ariaDescribedBy").textContent;
       expect(describedBy).toContain("field-123-description");
       expect(describedBy).toContain("field-123-error");
+    });
+
+    it("excludes descriptionId when hasDescription is false", () => {
+      renderWithContext({ ...mockContext, hasDescription: false });
+      const describedBy = screen.getByTestId("ariaDescribedBy").textContent;
+      expect(describedBy).toBe("undefined");
+    });
+
+    it("includes only errorId when hasDescription is false and error is true", () => {
+      renderWithContext({ ...mockContext, hasDescription: false, error: true });
+      const describedBy = screen.getByTestId("ariaDescribedBy").textContent;
+      expect(describedBy).toBe("field-123-error");
     });
   });
 });

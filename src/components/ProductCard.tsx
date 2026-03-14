@@ -50,7 +50,7 @@ const ProductCard = forwardRef<HTMLDivElement, ProductCardProps>(
             "h-3 w-3",
             i < Math.round(value)
               ? "fill-yellow text-yellow"
-              : "fill-transparent text-white/20"
+              : "fill-transparent text-white/60"
           )}
         />
       ));
@@ -112,7 +112,7 @@ const ProductCard = forwardRef<HTMLDivElement, ProductCardProps>(
                 {renderStars(rating)}
               </div>
               {reviewCount !== undefined && (
-                <span className="text-xs text-white/40">({reviewCount})</span>
+                <span className="text-xs text-white/60">({reviewCount})</span>
               )}
             </div>
           )}
@@ -122,7 +122,7 @@ const ProductCard = forwardRef<HTMLDivElement, ProductCardProps>(
               {formattedPrice}
             </span>
             {formattedOriginalPrice && (
-              <span className="text-sm text-white/40 line-through">
+              <span className="text-sm text-white/60 line-through">
                 {formattedOriginalPrice}
               </span>
             )}
@@ -141,7 +141,7 @@ const ProductCard = forwardRef<HTMLDivElement, ProductCardProps>(
                 "mt-3 flex w-full items-center justify-center gap-2 rounded-md px-4 py-2 text-sm font-medium transition-all duration-200 active:scale-[0.98]",
                 inStock
                   ? "bg-white/80 hover:bg-white text-[#18191a]"
-                  : "bg-white/5 text-white/30 cursor-not-allowed active:scale-100"
+                  : "bg-white/5 text-white/60 cursor-not-allowed active:scale-100"
               )}
             >
               <ShoppingCart className="h-4 w-4" />

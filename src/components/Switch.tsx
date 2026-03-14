@@ -165,7 +165,7 @@ const Switch = forwardRef<HTMLInputElement, SwitchProps>(
             {description && (
               <span
                 id={descriptionId}
-                className="text-xs text-white/40 select-none"
+                className="text-xs text-white/60 select-none"
               >
                 {description}
               </span>

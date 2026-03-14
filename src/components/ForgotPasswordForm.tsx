@@ -80,7 +80,7 @@ const ForgotPasswordForm = forwardRef<HTMLDivElement, ForgotPasswordFormProps>(
         </form>
 
         {loginHref && (
-          <p className="mt-6 text-center text-sm text-white/40">
+          <p className="mt-6 text-center text-sm text-white/60">
             <a
               href={loginHref}
               className="text-white/60 hover:text-white transition-colors duration-200"

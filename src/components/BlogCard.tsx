@@ -41,7 +41,7 @@ const BlogCard = forwardRef<HTMLDivElement, BlogCardProps>(
             {title}
           </h3>
           <p className="line-clamp-2 text-sm text-white/60">{excerpt}</p>
-          <time className="mt-3 block text-xs text-white/40">{date}</time>
+          <time className="mt-3 block text-xs text-white/60">{date}</time>
         </div>
       </>
     );

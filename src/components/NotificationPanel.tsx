@@ -62,7 +62,7 @@ const NotificationPanel = forwardRef<HTMLDivElement, NotificationPanelProps>(
             <button
               type="button"
               onClick={onMarkAllRead}
-              className="text-xs text-white/40 hover:text-white transition-colors"
+              className="text-xs text-white/60 hover:text-white transition-colors"
             >
               Mark all read
             </button>
@@ -73,7 +73,7 @@ const NotificationPanel = forwardRef<HTMLDivElement, NotificationPanelProps>(
         <div className="overflow-y-auto flex-1">
           {notifications.length === 0 ? (
             <div className="flex items-center justify-center py-12">
-              <p className="text-sm text-white/30">{emptyMessage}</p>
+              <p className="text-sm text-white/60">{emptyMessage}</p>
             </div>
           ) : (
             notifications.map((notification) => (
@@ -121,11 +121,11 @@ const NotificationPanel = forwardRef<HTMLDivElement, NotificationPanelProps>(
                     {notification.title}
                   </p>
                   {notification.description && (
-                    <p className="text-xs text-white/40 mt-0.5 line-clamp-2">
+                    <p className="text-xs text-white/60 mt-0.5 line-clamp-2">
                       {notification.description}
                     </p>
                   )}
-                  <p className="text-xs text-white/30 mt-1">{notification.timestamp}</p>
+                  <p className="text-xs text-white/60 mt-1">{notification.timestamp}</p>
                 </div>
 
                 {/* Dismiss button */}
@@ -137,7 +137,7 @@ const NotificationPanel = forwardRef<HTMLDivElement, NotificationPanelProps>(
                       e.stopPropagation();
                       onDismiss(notification.id);
                     }}
-                    className="opacity-0 group-hover:opacity-100 transition-opacity shrink-0 p-1 text-white/30 hover:text-white/60 self-start"
+                    className="opacity-0 group-hover:opacity-100 transition-opacity shrink-0 p-1 text-white/60 hover:text-white/60 self-start"
                   >
                     <X className="h-3.5 w-3.5" />
                   </button>

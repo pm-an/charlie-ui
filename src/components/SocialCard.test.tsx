@@ -1,6 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { describe, it, expect } from "vitest";
 import { SocialCard } from "./SocialCard";
+import { expectNoA11yViolations } from "../test/a11y";
 
 describe("SocialCard", () => {
   const defaultProps = {
@@ -49,5 +50,10 @@ describe("SocialCard", () => {
   it("merges custom className", () => {
     const { container } = render(<SocialCard {...defaultProps} className="custom" />);
     expect(container.firstChild).toHaveClass("custom");
+  });
+
+  it("passes axe accessibility checks", async () => {
+    const { container } = render(<SocialCard {...defaultProps} />);
+    await expectNoA11yViolations(container);
   });
 });

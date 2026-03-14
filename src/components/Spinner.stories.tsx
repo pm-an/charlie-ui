@@ -39,7 +39,7 @@ export const AllTypes: Story = {
         (type) => (
           <div key={type} className="flex flex-col items-center gap-3">
             <Spinner type={type} size="lg" />
-            <span className="text-xs text-white/40">{type}</span>
+            <span className="text-xs text-white/60">{type}</span>
           </div>
         )
       )}
@@ -53,7 +53,7 @@ export const Sizes: Story = {
       {(["xs", "sm", "md", "lg", "xl"] as const).map((size) => (
         <div key={size} className="flex flex-col items-center gap-3">
           <Spinner size={size} />
-          <span className="text-xs text-white/40">{size}</span>
+          <span className="text-xs text-white/60">{size}</span>
         </div>
       ))}
     </div>
@@ -65,23 +65,23 @@ export const Colors: Story = {
     <div className="flex items-center gap-6">
       <div className="flex flex-col items-center gap-2">
         <Spinner size="lg" color="var(--color-accent)" />
-        <span className="text-xs text-white/40">accent</span>
+        <span className="text-xs text-white/60">accent</span>
       </div>
       <div className="flex flex-col items-center gap-2">
         <Spinner size="lg" color="#59d499" />
-        <span className="text-xs text-white/40">green</span>
+        <span className="text-xs text-white/60">green</span>
       </div>
       <div className="flex flex-col items-center gap-2">
         <Spinner size="lg" color="#56c2ff" />
-        <span className="text-xs text-white/40">blue</span>
+        <span className="text-xs text-white/60">blue</span>
       </div>
       <div className="flex flex-col items-center gap-2">
         <Spinner size="lg" color="#9b4dff" />
-        <span className="text-xs text-white/40">purple</span>
+        <span className="text-xs text-white/60">purple</span>
       </div>
       <div className="flex flex-col items-center gap-2">
         <Spinner size="lg" color="#ffa500" />
-        <span className="text-xs text-white/40">orange</span>
+        <span className="text-xs text-white/60">orange</span>
       </div>
     </div>
   ),
@@ -106,7 +106,7 @@ export const Speed: Story = {
       ].map(({ speed, label }) => (
         <div key={speed} className="flex flex-col items-center gap-3">
           <Spinner size="lg" speed={speed} />
-          <span className="text-xs text-white/40">{label}</span>
+          <span className="text-xs text-white/60">{label}</span>
         </div>
       ))}
     </div>
@@ -119,7 +119,7 @@ export const Thickness: Story = {
       {[1, 2, 3, 4, 6].map((thickness) => (
         <div key={thickness} className="flex flex-col items-center gap-3">
           <Spinner size="xl" thickness={thickness} />
-          <span className="text-xs text-white/40">{thickness}px</span>
+          <span className="text-xs text-white/60">{thickness}px</span>
         </div>
       ))}
     </div>
@@ -147,7 +147,7 @@ export const RingFill: Story = {
       {(["sm", "md", "lg", "xl"] as const).map((size) => (
         <div key={size} className="flex flex-col items-center gap-3">
           <Spinner type="ring-fill" size={size} />
-          <span className="text-xs text-white/40">{size}</span>
+          <span className="text-xs text-white/60">{size}</span>
         </div>
       ))}
     </div>

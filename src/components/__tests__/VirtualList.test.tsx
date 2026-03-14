@@ -1,6 +1,7 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import { describe, it, expect, vi } from "vitest";
 import { VirtualList } from "../VirtualList";
+import { expectNoA11yViolations } from "../../test/a11y";
 
 const makeItems = (count: number) =>
   Array.from({ length: count }, (_, i) => ({ id: i, label: `Item ${i}` }));
@@ -179,7 +180,7 @@ describe("VirtualList", () => {
     expect(listItems.length).toBe(5);
   });
 
-  it("has role='list' on empty state container", () => {
+  it("has role='status' on empty state container", () => {
     render(
       <VirtualList
         items={[]}
@@ -188,7 +189,7 @@ describe("VirtualList", () => {
         renderItem={defaultRender}
       />
     );
-    expect(screen.getByRole("list")).toBeInTheDocument();
+    expect(screen.getByRole("status")).toBeInTheDocument();
   });
 
   it("merges custom className", () => {
@@ -357,5 +358,69 @@ describe("VirtualList", () => {
       height: "400px",
       padding: "8px",
     });
+  });
+
+  // Accessibility tests
+  it("scrollable container has tabIndex=0 for keyboard focusability", () => {
+    const { container } = render(
+      <VirtualList
+        items={makeItems(5)}
+        height={400}
+        itemHeight={40}
+        renderItem={defaultRender}
+      />
+    );
+    expect(container.firstChild).toHaveAttribute("tabindex", "0");
+  });
+
+  it("supports aria-label on the list container", () => {
+    render(
+      <VirtualList
+        items={makeItems(5)}
+        height={400}
+        itemHeight={40}
+        renderItem={defaultRender}
+        aria-label="Task list"
+      />
+    );
+    expect(screen.getByLabelText("Task list")).toBeInTheDocument();
+  });
+
+  it("applies focus-visible styles class", () => {
+    const { container } = render(
+      <VirtualList
+        items={makeItems(5)}
+        height={400}
+        itemHeight={40}
+        renderItem={defaultRender}
+      />
+    );
+    expect(container.firstChild).toHaveClass("focus-visible:ring-1");
+  });
+
+  it("passes axe accessibility checks with items", async () => {
+    const { container } = render(
+      <VirtualList
+        items={makeItems(5)}
+        height={400}
+        itemHeight={40}
+        renderItem={defaultRender}
+        aria-label="Test list"
+      />
+    );
+    await expectNoA11yViolations(container);
+  });
+
+  it("passes axe accessibility checks when empty", async () => {
+    const { container } = render(
+      <VirtualList
+        items={[]}
+        height={300}
+        itemHeight={40}
+        renderItem={defaultRender}
+        aria-label="Empty list"
+      />
+    );
+    await expectNoA11yViolations(container);
   });
 });

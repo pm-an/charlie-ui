@@ -193,7 +193,7 @@ export const ExtraLarge: Story = {
                 >
                   <div>
                     <p className="text-sm font-medium text-white">{m.name}</p>
-                    <p className="text-xs text-white/40">{m.email}</p>
+                    <p className="text-xs text-white/60">{m.email}</p>
                   </div>
                   <span className="rounded-md border border-white/10 px-2 py-0.5 text-xs text-white/60">
                     {m.role}

@@ -126,7 +126,7 @@ const OnboardingWizard = forwardRef<HTMLDivElement, OnboardingWizardProps>(
                     <span
                       className={cn(
                         "text-xs font-medium",
-                        isActive ? "text-white" : "text-white/40"
+                        isActive ? "text-white" : "text-white/60"
                       )}
                     >
                       {index + 1}

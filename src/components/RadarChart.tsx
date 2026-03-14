@@ -1,4 +1,4 @@
-import { forwardRef, type HTMLAttributes } from "react";
+import { forwardRef, useId, type HTMLAttributes } from "react";
 import {
   ResponsiveContainer,
   RadarChart as RechartsRadarChart,
@@ -15,6 +15,7 @@ import {
   getAxisTickStyle,
   getLegendStyle,
   gridStroke,
+  createChartSummary,
 } from "../utils/chart-helpers";
 import { cn } from "../utils/cn";
 
@@ -33,6 +34,8 @@ export type RadarChartProps = Omit<HTMLAttributes<HTMLDivElement>, "data"> & {
   showTooltip?: boolean;
   showLegend?: boolean;
   showGrid?: boolean;
+  /** Accessible description for screen readers */
+  description?: string;
 };
 
 const RadarChart = forwardRef<HTMLDivElement, RadarChartProps>(
@@ -45,21 +48,37 @@ const RadarChart = forwardRef<HTMLDivElement, RadarChartProps>(
       showTooltip = true,
       showLegend = false,
       showGrid = true,
+      description,
       className,
+      "aria-label": ariaLabel,
       ...rest
     },
     ref,
   ) => {
     const tooltip = getTooltipStyles();
     const tickStyle = getAxisTickStyle();
+    const descId = useId();
+    const summaryText =
+      description ??
+      createChartSummary(
+        data,
+        radars.map((r) => r.dataKey),
+        subjectKey,
+      );
 
     return (
       <div
         ref={ref}
         data-slot="radar-chart"
+        role="img"
+        aria-label={ariaLabel ?? "Radar chart"}
+        aria-describedby={descId}
         className={cn("w-full", className)}
         {...rest}
       >
+        <div id={descId} className="sr-only">
+          {summaryText}
+        </div>
         <ResponsiveContainer width="100%" height={height}>
           <RechartsRadarChart cx="50%" cy="50%" outerRadius="80%" data={data}>
             {showGrid && <PolarGrid stroke={gridStroke} />}

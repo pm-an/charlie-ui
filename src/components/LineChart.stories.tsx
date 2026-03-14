@@ -24,6 +24,7 @@ export const Default: Story = {
     data: sampleData,
     lines: [{ dataKey: "revenue", color: "accent" }],
     xAxisKey: "month",
+    "aria-label": "Monthly revenue trend",
   },
 };
 
@@ -36,6 +37,7 @@ export const MultiLine: Story = {
     ],
     xAxisKey: "month",
     showLegend: true,
+    "aria-label": "Revenue vs expenses over time",
   },
 };
 

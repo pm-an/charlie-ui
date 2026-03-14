@@ -127,6 +127,8 @@ type RichTextEditorContentProps = HTMLAttributes<HTMLDivElement> & {
   minHeight?: string;
   /** Max height for the editor */
   maxHeight?: string;
+  /** Accessible label for the editor content area */
+  "aria-label"?: string;
 };
 
 type RichTextEditorBubbleMenuProps = HTMLAttributes<HTMLDivElement> & {
@@ -207,13 +209,16 @@ RichTextEditorToolbar.displayName = "RichTextEditor.Toolbar";
 /* ─── Content ──────────────────────────────── */
 
 const RichTextEditorContent = forwardRef<HTMLDivElement, RichTextEditorContentProps>(
-  ({ className, minHeight, maxHeight, style, ...props }, ref) => {
+  ({ className, minHeight, maxHeight, style, "aria-label": ariaLabelProp, ...props }, ref) => {
     const { editor, ariaDescribedBy, ariaInvalid } = useRichTextEditor();
     if (!editor) return null;
 
     return (
       <div
         ref={ref}
+        role="textbox"
+        aria-label={ariaLabelProp ?? "Rich text editor"}
+        aria-multiline="true"
         className={cn("charlie-rte-content", className)}
         style={{ minHeight, maxHeight, ...style }}
         aria-describedby={ariaDescribedBy}
@@ -311,7 +316,13 @@ const RichTextEditorRoot = forwardRef<HTMLDivElement, RichTextEditorProps>(
       content: content ?? defaultContent ?? "",
       editable,
       autofocus: autofocus as EditorOptions["autofocus"],
-      editorProps: editorProps ?? {},
+      editorProps: {
+        ...editorProps,
+        attributes: {
+          ...(editorProps?.attributes as Record<string, string>),
+          "aria-label": ((editorProps?.attributes as Record<string, string>)?.["aria-label"]) ?? "Rich text editor",
+        },
+      },
       onUpdate: ({ editor: e }) => {
         onChange?.(e.getHTML());
         onJsonChange?.(e.getJSON());

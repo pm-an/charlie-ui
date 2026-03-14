@@ -1,6 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { describe, it, expect } from "vitest";
 import { Timeline } from "../Timeline";
+import { expectNoA11yViolations } from "../../test/a11y";
 
 describe("Timeline", () => {
   it("renders item titles", () => {
@@ -243,5 +244,26 @@ describe("Timeline", () => {
       </Timeline>
     );
     expect(ref.current).toBeInstanceOf(HTMLDivElement);
+  });
+
+  it("wraps timestamps in time elements", () => {
+    const { container } = render(
+      <Timeline>
+        <Timeline.Item title="Event" timestamp="2026-03-01" />
+      </Timeline>
+    );
+    const timeEl = container.querySelector("time");
+    expect(timeEl).toBeInTheDocument();
+    expect(timeEl).toHaveAttribute("dateTime", "2026-03-01");
+  });
+
+  it("passes axe accessibility checks", async () => {
+    const { container } = render(
+      <Timeline>
+        <Timeline.Item title="Event 1" description="Description" timestamp="2026-03-01" />
+        <Timeline.Item title="Event 2" description="Description 2" />
+      </Timeline>
+    );
+    await expectNoA11yViolations(container);
   });
 });

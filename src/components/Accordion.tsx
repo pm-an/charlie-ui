@@ -4,6 +4,7 @@ import {
   createContext,
   useCallback,
   useContext,
+  useId,
   useMemo,
   forwardRef,
   type HTMLAttributes,
@@ -92,6 +93,9 @@ const AccordionItem = forwardRef<HTMLDivElement, AccordionItemProps>(
   ({ className, value, title, children, ...props }, ref) => {
     const { openItems, toggle } = useAccordion();
     const isOpen = openItems.includes(value);
+    const generatedId = useId();
+    const triggerId = `accordion-trigger-${generatedId}`;
+    const contentId = `accordion-content-${generatedId}`;
 
     return (
       <div
@@ -106,15 +110,17 @@ const AccordionItem = forwardRef<HTMLDivElement, AccordionItemProps>(
       >
         <button
           type="button"
+          id={triggerId}
           onClick={() => toggle(value)}
           aria-expanded={isOpen}
+          aria-controls={contentId}
           data-slot="accordion-trigger"
           className="flex w-full cursor-pointer items-center justify-between py-4 md:py-5 min-h-[44px] text-left"
         >
           <span className="text-sm md:text-base font-medium text-white">{title}</span>
           <ChevronDown
             className={cn(
-              "h-4 w-4 shrink-0 text-white/40 transition-transform duration-200",
+              "h-4 w-4 shrink-0 text-white/60 transition-transform duration-200",
               isOpen && "rotate-180"
             )}
           />
@@ -124,6 +130,9 @@ const AccordionItem = forwardRef<HTMLDivElement, AccordionItemProps>(
           {isOpen && (
             <motion.div
               key="content"
+              id={contentId}
+              role="region"
+              aria-labelledby={triggerId}
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: "auto", opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}

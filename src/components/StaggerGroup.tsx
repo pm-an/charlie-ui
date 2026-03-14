@@ -10,6 +10,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { presets, type PresetName } from "../animation/presets";
 import type { Duration, Easing } from "../animation/tokens";
 import { useAnimationConfig } from "../animation/AnimationProvider";
+import { useReducedMotion } from "../animation/useReducedMotion";
 import { resolveDuration, resolveEasing } from "../animation/utils";
 
 /* ─── Props ────────────────────────────────── */
@@ -38,6 +39,9 @@ export interface StaggerGroupProps {
 /**
  * Orchestrates staggered animations across children.
  *
+ * When no `AnimationProvider` ancestor is present, falls back to
+ * checking `prefers-reduced-motion` directly via `useReducedMotion()`.
+ *
  * ```tsx
  * <StaggerGroup preset="fadeUp" stagger={0.1} viewport>
  *   <Card>One</Card>
@@ -63,7 +67,11 @@ export const StaggerGroup = forwardRef<HTMLElement, StaggerGroupProps>(
     ref
   ) {
     const ctx = useAnimationConfig();
-    const disabled = !ctx.enabled;
+    const osReducedMotion = useReducedMotion();
+
+    // If a provider is present, ctx.enabled already accounts for reduced motion.
+    // If no provider (default context), fall back to the OS preference.
+    const disabled = !ctx.enabled || (ctx.prefersReducedMotion === false && osReducedMotion);
 
     const p = presets[preset];
 

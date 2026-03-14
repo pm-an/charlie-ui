@@ -1,8 +1,9 @@
 "use client";
 
-import { type ReactNode, type CSSProperties, useState, useRef, useCallback, useEffect } from "react";
+import { type ReactNode, type CSSProperties, useState, useRef, useCallback, useEffect, useId } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { cn } from "../utils/cn";
+import { useEscapeKey } from "../hooks/useEscapeKey";
 
 export interface TooltipProps {
   content: ReactNode;
@@ -48,6 +49,7 @@ function Tooltip({
 }: TooltipProps) {
   const [visible, setVisible] = useState(false);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const tooltipId = useId();
 
   const show = useCallback(() => {
     timerRef.current = setTimeout(() => setVisible(true), delayMs);
@@ -67,6 +69,9 @@ function Tooltip({
     };
   }, []);
 
+  /* Escape key dismisses the tooltip (WCAG 1.4.13) */
+  useEscapeKey(hide, visible);
+
   const config = sideConfig[side];
 
   return (
@@ -78,14 +83,16 @@ function Tooltip({
       onMouseLeave={hide}
       onFocus={show}
       onBlur={hide}
+      aria-describedby={visible ? tooltipId : undefined}
     >
       {children}
       <AnimatePresence>
         {visible && (
           <motion.span
+            id={tooltipId}
             role="tooltip"
             className={cn(
-              "pointer-events-none absolute z-50 whitespace-nowrap",
+              "absolute z-50 whitespace-nowrap",
               "bg-grey-700 border border-white/10 rounded-md px-3 py-1.5",
               "text-xs text-white/80 shadow-lg",
               className
@@ -95,6 +102,8 @@ function Tooltip({
             animate={config.animate}
             exit={config.exit}
             transition={{ duration: 0.2, ease: "easeOut" }}
+            onMouseEnter={show}
+            onMouseLeave={hide}
           >
             {content}
           </motion.span>

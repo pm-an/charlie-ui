@@ -1,6 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { describe, it, expect } from "vitest";
 import { FeatureCard } from "./FeatureCard";
+import { expectNoA11yViolations } from "../test/a11y";
 
 describe("FeatureCard", () => {
   const defaultProps = {
@@ -103,5 +104,10 @@ describe("FeatureCard", () => {
     expect(iconBox).toHaveClass("mx-auto");
     const contentDiv = container.querySelector("h3")?.parentElement;
     expect(contentDiv).not.toHaveClass("text-center");
+  });
+
+  it("passes axe accessibility checks", async () => {
+    const { container } = render(<FeatureCard {...defaultProps} />);
+    await expectNoA11yViolations(container);
   });
 });

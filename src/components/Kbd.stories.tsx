@@ -35,19 +35,19 @@ export const KeysCombo: Story = {
     <div className="flex flex-col gap-3">
       <div className="flex items-center gap-3">
         <Kbd keys={["cmd", "K"]} />
-        <span className="text-sm text-white/40">Command palette</span>
+        <span className="text-sm text-white/60">Command palette</span>
       </div>
       <div className="flex items-center gap-3">
         <Kbd keys={["cmd", "shift", "P"]} />
-        <span className="text-sm text-white/40">Quick actions</span>
+        <span className="text-sm text-white/60">Quick actions</span>
       </div>
       <div className="flex items-center gap-3">
         <Kbd keys={["ctrl", "alt", "delete"]} />
-        <span className="text-sm text-white/40">Task manager</span>
+        <span className="text-sm text-white/60">Task manager</span>
       </div>
       <div className="flex items-center gap-3">
         <Kbd keys={["cmd", "enter"]} />
-        <span className="text-sm text-white/40">Submit</span>
+        <span className="text-sm text-white/60">Submit</span>
       </div>
     </div>
   ),
@@ -120,15 +120,15 @@ export const Sizes: Story = {
   render: () => (
     <div className="flex items-center gap-4">
       <div className="flex items-center gap-1">
-        <span className="text-xs text-white/40 w-8">sm</span>
+        <span className="text-xs text-white/60 w-8">sm</span>
         <Kbd size="sm" keys={["cmd", "K"]} />
       </div>
       <div className="flex items-center gap-1">
-        <span className="text-xs text-white/40 w-8">md</span>
+        <span className="text-xs text-white/60 w-8">md</span>
         <Kbd keys={["cmd", "K"]} />
       </div>
       <div className="flex items-center gap-1">
-        <span className="text-xs text-white/40 w-8">lg</span>
+        <span className="text-xs text-white/60 w-8">lg</span>
         <Kbd size="lg" keys={["cmd", "K"]} />
       </div>
     </div>

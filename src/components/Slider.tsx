@@ -255,7 +255,7 @@ const Slider = forwardRef<HTMLDivElement, SliderProps>(
               return (
                 <span
                   key={mark.value}
-                  className="absolute -translate-x-1/2 text-xs text-white/40"
+                  className="absolute -translate-x-1/2 text-xs text-white/60"
                   style={{ left: `${markPercent}%` }}
                 >
                   {mark.label}

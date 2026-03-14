@@ -127,7 +127,7 @@ function Toast({
           animate={{ opacity: 1, x: 0, y: 0, scale: 1 }}
           exit={anim.exit}
           transition={{ duration: 0.26, ease: "easeOut" }}
-          role="alert"
+          role={resolvedVariant === "error" ? "alert" : "status"}
         >
           <div className="flex gap-3">
             <Icon className={cn("mt-0.5 h-5 w-5 shrink-0", iconColor)} />
@@ -142,7 +142,7 @@ function Toast({
           {onClose && (
             <button
               type="button"
-              className="absolute right-2 top-2 min-h-[44px] min-w-[44px] flex items-center justify-center text-white/40 transition-colors hover:text-white"
+              className="absolute right-2 top-2 min-h-[44px] min-w-[44px] flex items-center justify-center text-white/60 transition-colors hover:text-white"
               onClick={onClose}
               aria-label="Close"
             >

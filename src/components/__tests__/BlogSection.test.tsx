@@ -1,6 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { describe, it, expect } from "vitest";
 import { BlogSection } from "../BlogSection";
+import { expectNoA11yViolations } from "../../test/a11y";
 
 const mockPosts = [
   {
@@ -204,6 +205,15 @@ describe("BlogSection", () => {
       render(<BlogSection posts={[mockPosts[2]]} />);
       expect(screen.getByText("Third Post Title")).toBeInTheDocument();
       expect(screen.queryByText("Engineering")).not.toBeInTheDocument();
+    });
+  });
+
+  describe("accessibility", () => {
+    it("passes axe accessibility checks", async () => {
+      const { container } = render(
+        <BlogSection posts={mockPosts} title="Latest articles" />
+      );
+      await expectNoA11yViolations(container);
     });
   });
 });

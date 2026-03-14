@@ -53,6 +53,7 @@ export { Select, selectTriggerVariants, type SelectProps, type SelectOption } fr
 export { Field, type FieldProps, type FieldLabelProps, type FieldDescriptionProps, type FieldErrorProps } from "./components/Field";
 export { useFieldContext } from "./components/field-context";
 export type { FieldContextValue } from "./components/field-context";
+export { Form, type FormProps, type FormFieldProps as FormFieldAdapterProps } from "./components/Form";
 /** @deprecated Use Field instead */
 export { FormField, useFormField, type FormFieldProps } from "./components/FormField";
 
@@ -80,7 +81,7 @@ export { Sidebar, type SidebarProps, type SidebarItemProps, type SidebarGroupPro
 export { ResizablePanels, type ResizablePanelsProps, type ResizablePanelProps, type ResizableHandleProps } from "./components/ResizablePanels";
 
 // === Interactive ===
-export { Tabs, type TabsProps } from "./components/Tabs";
+export { Tabs, type TabsProps, type TabPanelProps } from "./components/Tabs";
 export { Tooltip, type TooltipProps } from "./components/Tooltip";
 export { Avatar, type AvatarProps } from "./components/Avatar";
 export { AvatarGroup, type AvatarGroupProps } from "./components/AvatarGroup";

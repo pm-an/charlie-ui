@@ -1,10 +1,11 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import { describe, it, expect, vi } from "vitest";
 import { Sidebar } from "../Sidebar";
+import { expectNoA11yViolations } from "../../test/a11y";
 
 describe("Sidebar", () => {
   describe("rendering", () => {
-    it("renders as an aside element", () => {
+    it("renders as a nav element", () => {
       render(
         <Sidebar>
           <Sidebar.Content>
@@ -12,7 +13,7 @@ describe("Sidebar", () => {
           </Sidebar.Content>
         </Sidebar>
       );
-      expect(screen.getByRole("complementary")).toBeInTheDocument();
+      expect(screen.getByRole("navigation")).toBeInTheDocument();
     });
 
     it("renders with aria-label for accessibility", () => {
@@ -68,7 +69,7 @@ describe("Sidebar", () => {
       expect(screen.getByTestId("home-icon")).toBeInTheDocument();
     });
 
-    it("renders item as button with menuitem role by default", () => {
+    it("renders item as a button by default (no menu role)", () => {
       render(
         <Sidebar>
           <Sidebar.Content>
@@ -76,7 +77,10 @@ describe("Sidebar", () => {
           </Sidebar.Content>
         </Sidebar>
       );
-      expect(screen.getByRole("menuitem")).toBeInTheDocument();
+      const btn = screen.getByRole("button", { name: "Home" });
+      expect(btn).toBeInTheDocument();
+      // Should NOT have role="menuitem" — sidebar items are navigation, not menu items
+      expect(btn).not.toHaveAttribute("role", "menuitem");
     });
 
     it("calls onClick when item is clicked", () => {
@@ -102,7 +106,7 @@ describe("Sidebar", () => {
           </Sidebar.Content>
         </Sidebar>
       );
-      const item = screen.getByRole("menuitem");
+      const item = screen.getByRole("button", { name: "Home" });
       expect(item).toHaveClass("bg-white/5");
       expect(item).toHaveClass("text-white");
       expect(item).toHaveClass("font-medium");
@@ -116,7 +120,7 @@ describe("Sidebar", () => {
           </Sidebar.Content>
         </Sidebar>
       );
-      expect(screen.getByRole("menuitem")).toHaveAttribute(
+      expect(screen.getByRole("button", { name: "Home" })).toHaveAttribute(
         "aria-current",
         "page"
       );
@@ -130,7 +134,7 @@ describe("Sidebar", () => {
           </Sidebar.Content>
         </Sidebar>
       );
-      expect(screen.getByRole("menuitem")).not.toHaveAttribute("aria-current");
+      expect(screen.getByRole("button", { name: "Home" })).not.toHaveAttribute("aria-current");
     });
   });
 
@@ -171,7 +175,7 @@ describe("Sidebar", () => {
           </Sidebar.Content>
         </Sidebar>
       );
-      expect(screen.getByRole("menuitem")).toHaveAttribute(
+      expect(screen.getByRole("button")).toHaveAttribute(
         "title",
         "Dashboard"
       );
@@ -370,7 +374,7 @@ describe("Sidebar", () => {
           </Sidebar.Content>
         </Sidebar>
       );
-      expect(screen.getByRole("menuitem")).toBeDisabled();
+      expect(screen.getByRole("button", { name: "Locked" })).toBeDisabled();
     });
 
     it("applies disabled styling classes", () => {
@@ -381,8 +385,8 @@ describe("Sidebar", () => {
           </Sidebar.Content>
         </Sidebar>
       );
-      expect(screen.getByRole("menuitem")).toHaveClass("opacity-40");
-      expect(screen.getByRole("menuitem")).toHaveClass("cursor-not-allowed");
+      expect(screen.getByRole("button", { name: "Locked" })).toHaveClass("opacity-40");
+      expect(screen.getByRole("button", { name: "Locked" })).toHaveClass("cursor-not-allowed");
     });
 
     it("does not call onClick when disabled", () => {
@@ -394,7 +398,7 @@ describe("Sidebar", () => {
           </Sidebar.Content>
         </Sidebar>
       );
-      fireEvent.click(screen.getByRole("menuitem"));
+      fireEvent.click(screen.getByRole("button", { name: "Locked" }));
       expect(onClick).not.toHaveBeenCalled();
     });
   });
@@ -421,8 +425,9 @@ describe("Sidebar", () => {
           </Sidebar.Content>
         </Sidebar>
       );
-      expect(screen.getByRole("menuitem")).toBeInTheDocument();
-      expect(screen.getByRole("menuitem").tagName).toBe("BUTTON");
+      const btn = screen.getByRole("button", { name: "Home" });
+      expect(btn).toBeInTheDocument();
+      expect(btn.tagName).toBe("BUTTON");
     });
 
     it("sets aria-current on active link", () => {
@@ -449,9 +454,9 @@ describe("Sidebar", () => {
           </Sidebar.Content>
         </Sidebar>
       );
-      const aside = screen.getByLabelText("Sidebar navigation");
-      expect(aside).toHaveClass("left-0");
-      expect(aside).toHaveClass("border-r");
+      const nav = screen.getByLabelText("Sidebar navigation");
+      expect(nav).toHaveClass("left-0");
+      expect(nav).toHaveClass("border-r");
     });
 
     it("applies right-0 and border-l for right side", () => {
@@ -462,9 +467,9 @@ describe("Sidebar", () => {
           </Sidebar.Content>
         </Sidebar>
       );
-      const aside = screen.getByLabelText("Sidebar navigation");
-      expect(aside).toHaveClass("right-0");
-      expect(aside).toHaveClass("border-l");
+      const nav = screen.getByLabelText("Sidebar navigation");
+      expect(nav).toHaveClass("right-0");
+      expect(nav).toHaveClass("border-l");
     });
   });
 
@@ -503,7 +508,7 @@ describe("Sidebar", () => {
           </Sidebar.Content>
         </Sidebar>
       );
-      expect(screen.getByRole("menuitem")).toHaveClass("my-custom-item");
+      expect(screen.getByRole("button", { name: "Home" })).toHaveClass("my-custom-item");
     });
   });
 
@@ -538,5 +543,20 @@ describe("Sidebar", () => {
       expect(screen.getByText("Settings")).toBeInTheDocument();
       expect(screen.getByText("v1.0")).toBeInTheDocument();
     });
+  });
+
+  it("passes axe accessibility checks", async () => {
+    const { container } = render(
+      <Sidebar>
+        <Sidebar.Header>
+          <span>App</span>
+        </Sidebar.Header>
+        <Sidebar.Content>
+          <Sidebar.Item label="Home" href="/" active />
+          <Sidebar.Item label="Settings" href="/settings" />
+        </Sidebar.Content>
+      </Sidebar>
+    );
+    await expectNoA11yViolations(container);
   });
 });

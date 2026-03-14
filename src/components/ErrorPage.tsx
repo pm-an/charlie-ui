@@ -74,7 +74,7 @@ const ErrorPage = forwardRef<HTMLDivElement, ErrorPageProps>(
             {isNumericCode ? (
               <span className="text-7xl font-bold text-white/10">{code}</span>
             ) : (
-              <div className="flex h-16 w-16 items-center justify-center rounded-full bg-white/5 text-white/30">
+              <div className="flex h-16 w-16 items-center justify-center rounded-full bg-white/5 text-white/60">
                 {displayIcon}
               </div>
             )}

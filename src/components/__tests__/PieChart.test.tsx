@@ -1,6 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { describe, it, expect, vi, beforeAll } from "vitest";
 import { PieChart } from "../PieChart";
+import { expectNoA11yViolations } from "../../test/a11y";
 
 const sampleData = [
   { name: "Desktop", value: 400 },
@@ -84,5 +85,54 @@ describe("PieChart", () => {
       <PieChart data={sampleData} variant="donut" label="X" />,
     );
     expect(container.querySelector('[data-slot="pie-chart"]')).toHaveClass("relative");
+  });
+
+  // Accessibility tests
+  it("has role='img' on the wrapper", () => {
+    render(<PieChart data={sampleData} />);
+    expect(screen.getByRole("img")).toBeInTheDocument();
+  });
+
+  it("uses default aria-label when none provided", () => {
+    render(<PieChart data={sampleData} />);
+    expect(screen.getByLabelText("Pie chart")).toBeInTheDocument();
+  });
+
+  it("uses custom aria-label when provided", () => {
+    render(
+      <PieChart data={sampleData} aria-label="Device type distribution" />
+    );
+    expect(screen.getByLabelText("Device type distribution")).toBeInTheDocument();
+  });
+
+  it("renders sr-only description with auto-generated summary", () => {
+    const { container } = render(<PieChart data={sampleData} />);
+    const srOnly = container.querySelector(".sr-only");
+    expect(srOnly).toBeInTheDocument();
+    expect(srOnly!.textContent).toContain("3 data points");
+    expect(srOnly!.textContent).toContain("value:");
+  });
+
+  it("renders sr-only description with custom description", () => {
+    const { container } = render(
+      <PieChart data={sampleData} description="Desktop leads with 44% share" />
+    );
+    const srOnly = container.querySelector(".sr-only");
+    expect(srOnly!.textContent).toBe("Desktop leads with 44% share");
+  });
+
+  it("has aria-describedby pointing to the description", () => {
+    const { container } = render(<PieChart data={sampleData} />);
+    const wrapper = container.querySelector('[data-slot="pie-chart"]')!;
+    const descId = wrapper.getAttribute("aria-describedby");
+    expect(descId).toBeTruthy();
+    expect(container.querySelector(`#${CSS.escape(descId!)}`)?.className).toContain("sr-only");
+  });
+
+  it("passes axe accessibility checks", async () => {
+    const { container } = render(
+      <PieChart data={sampleData} aria-label="Test chart" />
+    );
+    await expectNoA11yViolations(container);
   });
 });

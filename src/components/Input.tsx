@@ -57,7 +57,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
     const inputElement = (
       <div className="relative flex items-center">
         {leftIcon && (
-          <span className="absolute left-3 text-white/40 pointer-events-none">
+          <span className="absolute left-3 text-white/60 pointer-events-none">
             {leftIcon}
           </span>
         )}
@@ -71,7 +71,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           required={required}
           className={cn(
             "w-full bg-white/5 border border-white/6 rounded-md h-10 px-3 text-sm text-white",
-            "placeholder:text-white/40",
+            "placeholder:text-white/60",
             "outline-none transition-all duration-200",
             "focus:ring-1 focus:ring-white/15 focus:border-white/15",
             error && "border-red/50 focus:ring-red/30 focus:border-red/50",
@@ -82,7 +82,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           {...props}
         />
         {rightIcon && (
-          <span className="absolute right-3 text-white/40 pointer-events-none">
+          <span className="absolute right-3 text-white/60 pointer-events-none">
             {rightIcon}
           </span>
         )}
@@ -107,7 +107,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         )}
         {inputElement}
         {resolvedDescription && !error && (
-          <p id={`${controlId}-description`} className="text-xs text-white/40">{resolvedDescription}</p>
+          <p id={`${controlId}-description`} className="text-xs text-white/60">{resolvedDescription}</p>
         )}
         {error && errorMessage && (
           <p id={`${controlId}-error`} className="text-xs text-red">{errorMessage}</p>

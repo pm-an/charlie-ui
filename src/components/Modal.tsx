@@ -4,7 +4,7 @@ import {
   forwardRef,
   type ReactNode,
   type HTMLAttributes,
-  useEffect,
+  useRef,
   useCallback,
   useId,
 } from "react";
@@ -12,6 +12,10 @@ import { AnimatePresence, motion } from "framer-motion";
 import { X } from "lucide-react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "../utils/cn";
+import { useFocusTrap } from "../hooks/useFocusTrap";
+import { useFocusReturn } from "../hooks/useFocusReturn";
+import { useEscapeKey } from "../hooks/useEscapeKey";
+import { useScrollLock } from "../hooks/useScrollLock";
 
 /* ─── Size variants (standard mode only) ──── */
 
@@ -71,36 +75,22 @@ function ModalRoot({
   ...props
 }: ModalProps) {
   const titleId = useId();
+  const descriptionId = useId();
+  const panelRef = useRef<HTMLDivElement>(null);
 
   const canCloseOnEscape = closeOnEscape ?? dismissable;
   const canCloseOnBackdrop = closeOnBackdropClick ?? dismissable;
   const canShowClose = showClose && dismissable;
 
-  const handleKeyDown = useCallback(
-    (e: KeyboardEvent) => {
-      if (e.key === "Escape" && canCloseOnEscape) onOpenChange(false);
-    },
-    [onOpenChange, canCloseOnEscape]
-  );
+  const handleEscape = useCallback(() => {
+    onOpenChange(false);
+  }, [onOpenChange]);
 
-  /* Escape key listener */
-  useEffect(() => {
-    if (open) {
-      document.addEventListener("keydown", handleKeyDown);
-      return () => document.removeEventListener("keydown", handleKeyDown);
-    }
-  }, [open, handleKeyDown]);
-
-  /* Body scroll lock */
-  useEffect(() => {
-    if (open) {
-      const prev = document.body.style.overflow;
-      document.body.style.overflow = "hidden";
-      return () => {
-        document.body.style.overflow = prev;
-      };
-    }
-  }, [open]);
+  /* Shared hooks */
+  useEscapeKey(handleEscape, open && canCloseOnEscape);
+  useScrollLock(open);
+  useFocusTrap(panelRef, open);
+  useFocusReturn(open);
 
   return (
     <AnimatePresence>
@@ -129,6 +119,7 @@ function ModalRoot({
 
           {/* Dialog panel */}
           <motion.div
+            ref={panelRef}
             data-slot={fullscreen ? "fullscreen-modal" : "modal"}
             className={
               fullscreen
@@ -141,6 +132,8 @@ function ModalRoot({
             role="dialog"
             aria-modal="true"
             aria-labelledby={title ? titleId : undefined}
+            aria-describedby={description ? descriptionId : undefined}
+            tabIndex={-1}
             data-state={open ? "open" : "closed"}
             initial={
               fullscreen
@@ -182,7 +175,7 @@ function ModalRoot({
                     </h2>
                   )}
                   {description && (
-                    <p className="mt-1 text-sm text-white/60">{description}</p>
+                    <p id={descriptionId} className="mt-1 text-sm text-white/60">{description}</p>
                   )}
                 </div>
 
@@ -193,7 +186,7 @@ function ModalRoot({
                       "shrink-0 rounded-md transition-colors",
                       fullscreen
                         ? "flex h-8 w-8 items-center justify-center text-white/60 hover:bg-white/5 hover:text-white"
-                        : "p-1 text-white/40 hover:bg-white/5 hover:text-white"
+                        : "p-1 text-white/60 hover:bg-white/5 hover:text-white"
                     )}
                     onClick={() => onOpenChange(false)}
                     aria-label="Close"

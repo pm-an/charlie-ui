@@ -82,7 +82,7 @@ export const registryMetadata: Record<string, ItemMeta> = {
   },
   "chart-helpers": {
     title: "Chart Helpers",
-    description: "Shared utilities for chart components (tooltips, legends, formatting)",
+    description: "Shared utilities for chart components (tooltips, legends, formatting, accessible summaries)",
     type: "registry:lib",
     category: "lib",
     source: "src/utils/chart-helpers.ts",
@@ -492,7 +492,7 @@ export const registryMetadata: Record<string, ItemMeta> = {
   },
   tabs: {
     title: "Tabs",
-    description: "Tabbed interface with animated indicator and variants",
+    description: "Accessible tabbed interface with animated indicator, roving tabindex, keyboard navigation, and Tabs.Panel compound component",
     type: "registry:component",
     category: "navigation",
     source: "src/components/Tabs.tsx",

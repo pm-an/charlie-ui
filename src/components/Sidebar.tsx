@@ -53,7 +53,7 @@ const SidebarRoot = forwardRef<HTMLElement, SidebarProps>(
 
     return (
       <SidebarContext.Provider value={{ collapsed, onCollapsedChange }}>
-        <motion.aside
+        <motion.nav
           ref={ref}
           data-slot="sidebar"
           aria-label="Sidebar navigation"
@@ -69,7 +69,7 @@ const SidebarRoot = forwardRef<HTMLElement, SidebarProps>(
           {...(props as Record<string, unknown>)}
         >
           {children}
-        </motion.aside>
+        </motion.nav>
       </SidebarContext.Provider>
     );
   }
@@ -159,7 +159,7 @@ const SidebarGroup = forwardRef<HTMLDivElement, SidebarGroupProps>(
     return (
       <div ref={ref} className={cn("px-3 py-2", className)} {...props}>
         {label && !collapsed && (
-          <div className="text-xs font-medium text-white/30 uppercase tracking-wider px-3 mb-1">
+          <div className="text-xs font-medium text-white/60 uppercase tracking-wider px-3 mb-1">
             {label}
           </div>
         )}
@@ -244,7 +244,6 @@ const SidebarItem = forwardRef<HTMLButtonElement, SidebarItemProps>(
         ref={ref}
         type="button"
         className={itemClasses}
-        role="menuitem"
         aria-current={active ? "page" : undefined}
         disabled={disabled}
         title={collapsed ? label : undefined}

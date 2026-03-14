@@ -7,6 +7,8 @@ export type ScrollAreaProps = HTMLAttributes<HTMLDivElement> & {
   maxWidth?: string | number;
   scrollbarSize?: "thin" | "default";
   hideScrollbar?: boolean;
+  /** Optional label for accessibility — when set, applies `role="region"` + `aria-label` */
+  label?: string;
 };
 
 const firefoxScrollbarStyles = {
@@ -32,6 +34,7 @@ const ScrollArea = forwardRef<HTMLDivElement, ScrollAreaProps>(
       maxWidth,
       scrollbarSize = "thin",
       hideScrollbar = false,
+      label,
       style,
       children,
       ...props
@@ -46,8 +49,12 @@ const ScrollArea = forwardRef<HTMLDivElement, ScrollAreaProps>(
       <div
         ref={ref}
         data-slot="scroll-area"
+        tabIndex={0}
+        role={label ? "region" : undefined}
+        aria-label={label}
         className={cn(
           "relative",
+          "outline-none focus-visible:ring-2 focus-visible:ring-white/20 focus-visible:ring-offset-1 focus-visible:ring-offset-transparent rounded-sm",
           orientation === "vertical" && "overflow-y-auto overflow-x-hidden",
           orientation === "horizontal" && "overflow-x-auto overflow-y-hidden",
           orientation === "both" && "overflow-auto",

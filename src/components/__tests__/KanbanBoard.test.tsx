@@ -1,6 +1,7 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import { describe, it, expect, vi } from "vitest";
 import { KanbanBoard, type KanbanColumn } from "../KanbanBoard";
+import { expectNoA11yViolations } from "../../test/a11y";
 
 const sampleColumns: KanbanColumn[] = [
   {
@@ -204,6 +205,26 @@ describe("KanbanBoard", () => {
       const { container } = render(<KanbanBoard columns={sampleColumns} />);
       const assigneeEls = container.querySelectorAll("[title='Alice']");
       expect(assigneeEls.length).toBeGreaterThanOrEqual(1);
+    });
+  });
+
+  describe("accessibility", () => {
+    it("board has role region with aria-label", () => {
+      render(<KanbanBoard columns={sampleColumns} />);
+      const board = screen.getByRole("region", { name: "Kanban board" });
+      expect(board).toBeInTheDocument();
+    });
+
+    it("columns have role group with aria-label", () => {
+      render(<KanbanBoard columns={sampleColumns} />);
+      const groups = screen.getAllByRole("group");
+      expect(groups.length).toBe(sampleColumns.length);
+      expect(groups[0]).toHaveAttribute("aria-label", expect.stringContaining("To Do column"));
+    });
+
+    it("passes axe accessibility checks", async () => {
+      const { container } = render(<KanbanBoard columns={sampleColumns} />);
+      await expectNoA11yViolations(container);
     });
   });
 });

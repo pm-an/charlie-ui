@@ -1,6 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { describe, it, expect } from "vitest";
 import { ChangelogEntry } from "./ChangelogEntry";
+import { expectNoA11yViolations } from "../test/a11y";
 
 describe("ChangelogEntry", () => {
   const defaultProps = {
@@ -60,5 +61,20 @@ describe("ChangelogEntry", () => {
     expect(container.firstChild).toHaveClass("flex");
     expect(container.firstChild).toHaveClass("flex-col");
     expect(container.firstChild).toHaveClass("md:flex-row");
+  });
+
+  it("wraps date in a time element", () => {
+    const { container } = render(<ChangelogEntry {...defaultProps} />);
+    const timeEl = container.querySelector("time");
+    expect(timeEl).toBeInTheDocument();
+    expect(timeEl).toHaveTextContent("March 1, 2026");
+    expect(timeEl).toHaveAttribute("dateTime", "March 1, 2026");
+  });
+
+  it("passes axe accessibility checks", async () => {
+    const { container } = render(
+      <ChangelogEntry {...defaultProps} description="A great update" tags={["Feature"]} />
+    );
+    await expectNoA11yViolations(container);
   });
 });

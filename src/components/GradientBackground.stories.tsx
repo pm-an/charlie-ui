@@ -20,7 +20,7 @@ const meta: Meta<typeof GradientBackground> = {
             height: "100%",
           }}
         >
-          <p className="text-white/40 text-sm">Content over gradient</p>
+          <p className="text-white/60 text-sm">Content over gradient</p>
         </div>
       </div>
     ),

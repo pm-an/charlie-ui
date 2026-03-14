@@ -61,7 +61,7 @@ const ShoppingCart = forwardRef<HTMLDivElement, ShoppingCartProps>(
         {/* Header */}
         <div className="flex items-center justify-between border-b border-white/[0.06] px-6 py-4">
           <h2 className="text-lg font-semibold text-white">Shopping Cart</h2>
-          <span className="text-sm text-white/40">
+          <span className="text-sm text-white/60">
             {itemCount} {itemCount === 1 ? "item" : "items"}
           </span>
         </div>
@@ -69,8 +69,8 @@ const ShoppingCart = forwardRef<HTMLDivElement, ShoppingCartProps>(
         {items.length === 0 ? (
           /* Empty state */
           <div className="flex flex-col items-center justify-center px-6 py-12">
-            <ShoppingBag className="h-10 w-10 text-white/20" />
-            <p className="mt-3 text-sm text-white/40">Your cart is empty</p>
+            <ShoppingBag className="h-10 w-10 text-white/60" />
+            <p className="mt-3 text-sm text-white/60">Your cart is empty</p>
           </div>
         ) : (
           <>
@@ -98,7 +98,7 @@ const ShoppingCart = forwardRef<HTMLDivElement, ShoppingCartProps>(
                       {item.name}
                     </p>
                     {item.variant && (
-                      <p className="text-xs text-white/40">{item.variant}</p>
+                      <p className="text-xs text-white/60">{item.variant}</p>
                     )}
                   </div>
 
@@ -142,7 +142,7 @@ const ShoppingCart = forwardRef<HTMLDivElement, ShoppingCartProps>(
                     <button
                       type="button"
                       onClick={() => onRemoveItem(item.id)}
-                      className="shrink-0 text-white/30 transition-colors hover:text-white"
+                      className="shrink-0 text-white/60 transition-colors hover:text-white"
                       aria-label={`Remove ${item.name}`}
                     >
                       <X className="h-4 w-4" />

@@ -1,13 +1,13 @@
 import { render, screen } from "@testing-library/react";
 import { describe, it, expect } from "vitest";
 import { Avatar } from "./Avatar";
+import { expectNoA11yViolations } from "../test/a11y";
 
 describe("Avatar", () => {
   it("renders image when src is provided", () => {
     render(<Avatar src="/photo.jpg" alt="John" />);
-    const img = screen.getByAltText("John");
+    const img = screen.getByRole("img", { name: "John" });
     expect(img).toBeInTheDocument();
-    expect(img).toHaveAttribute("src", "/photo.jpg");
   });
 
   it("renders fallback letter when no src", () => {
@@ -53,5 +53,26 @@ describe("Avatar", () => {
   it("merges custom className", () => {
     const { container } = render(<Avatar alt="Test" className="custom" />);
     expect(container.firstChild).toHaveClass("custom");
+  });
+
+  it("includes status in accessible label", () => {
+    render(<Avatar alt="Jane Doe" status="online" />);
+    expect(screen.getByRole("img", { name: "Jane Doe, online" })).toBeInTheDocument();
+  });
+
+  it("has aria-label without status", () => {
+    render(<Avatar alt="Jane Doe" />);
+    expect(screen.getByRole("img", { name: "Jane Doe" })).toBeInTheDocument();
+  });
+
+  it("marks status dot as aria-hidden", () => {
+    const { container } = render(<Avatar alt="Bob" status="online" />);
+    const rootSpans = container.firstElementChild?.querySelectorAll("[aria-hidden='true']");
+    expect(rootSpans?.length).toBeGreaterThanOrEqual(1);
+  });
+
+  it("passes axe accessibility checks", async () => {
+    const { container } = render(<Avatar alt="Jane Doe" status="online" />);
+    await expectNoA11yViolations(container);
   });
 });

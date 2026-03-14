@@ -18,9 +18,9 @@ describe("Navbar", () => {
     expect(screen.getByText("Logo")).toBeInTheDocument();
   });
 
-  it("renders as a nav element", () => {
+  it("renders as a nav element with aria-label", () => {
     render(<Navbar {...defaultProps} />);
-    expect(screen.getByRole("navigation")).toBeInTheDocument();
+    expect(screen.getByRole("navigation", { name: "Main navigation" })).toBeInTheDocument();
   });
 
   it("renders desktop links", () => {
@@ -42,8 +42,9 @@ describe("Navbar", () => {
   it("toggles mobile menu on click", async () => {
     const user = userEvent.setup();
     render(<Navbar {...defaultProps} />);
-    await user.click(screen.getByLabelText("Open menu"));
-    expect(screen.getByLabelText("Close menu")).toBeInTheDocument();
+    const hamburger = screen.getByLabelText("Open menu");
+    await user.click(hamburger);
+    expect(hamburger).toHaveAttribute("aria-expanded", "true");
   });
 
   it("renders link badges", () => {

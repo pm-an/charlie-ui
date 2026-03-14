@@ -50,7 +50,7 @@ export const WithFooter: Story = {
       </Card.Body>
       <Card.Footer>
         <div className="flex items-center justify-between">
-          <span className="text-xs text-white/40">Last updated 2 hours ago</span>
+          <span className="text-xs text-white/60">Last updated 2 hours ago</span>
           <button
             type="button"
             className="text-sm font-medium text-white/80 hover:text-white"
@@ -111,7 +111,7 @@ export const FullCard: Story = {
       </Card.Body>
       <Card.Footer>
         <div className="flex items-center justify-between">
-          <span className="text-xs text-white/40">Sprint ends in 4 days</span>
+          <span className="text-xs text-white/60">Sprint ends in 4 days</span>
           <button
             type="button"
             className="text-sm font-medium text-white/80 hover:text-white"

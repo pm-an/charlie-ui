@@ -15,9 +15,9 @@ export const Default: Story = {
   render: (args) => (
     <Accordion {...args}>
       <Accordion.Item value="q1" title="What is Charlie UI?">
-        Charlie UI is a dark-themed React component library inspired by Raycast.
+        Charlie UI is a dark-first React component library with 110+ components.
         It provides a set of accessible, composable components built with
-        Tailwind CSS and CVA for variant management.
+        Tailwind CSS and TypeScript.
       </Accordion.Item>
       <Accordion.Item value="q2" title="How do I install it?">
         Install via npm with <code>npm install @charlietogolden/charlie-ui</code>. Then

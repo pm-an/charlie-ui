@@ -162,11 +162,11 @@ const TimelineItem = forwardRef<HTMLDivElement, TimelineItemProps>(
             {title}
           </h4>
           {timestamp && (
-            <span className="shrink-0 text-xs text-white/30">{timestamp}</span>
+            <time className="shrink-0 text-xs text-white/60" dateTime={timestamp}>{timestamp}</time>
           )}
         </div>
         {description && (
-          <p className="mt-0.5 text-sm text-white/40">{description}</p>
+          <p className="mt-0.5 text-sm text-white/60">{description}</p>
         )}
         {children && <div className="mt-2">{children}</div>}
       </div>

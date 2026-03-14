@@ -62,10 +62,13 @@ const ComparisonTable = forwardRef<HTMLDivElement, ComparisonTableProps>(
           <table className="w-full min-w-[600px] border-collapse">
             <thead>
               <tr className="sticky top-0 z-10">
-                <th className="p-4 text-left" />
+                <th className="p-4 text-left" scope="col">
+                    <span className="sr-only">Feature</span>
+                  </th>
                 {plans.map((plan) => (
                   <th
                     key={plan.name}
+                    scope="col"
                     className={cn(
                       "p-4 text-center",
                       plan.highlighted &&
@@ -81,7 +84,7 @@ const ComparisonTable = forwardRef<HTMLDivElement, ComparisonTableProps>(
                           {plan.price}
                         </span>
                         {plan.period && (
-                          <span className="text-sm text-white/40">
+                          <span className="text-sm text-white/60">
                             / {plan.period}
                           </span>
                         )}
@@ -146,7 +149,7 @@ function FeatureGroup({
         <tr>
           <td
             colSpan={plans.length + 1}
-            className="px-4 pb-2 pt-6 text-sm font-medium uppercase tracking-wider text-white/40"
+            className="px-4 pb-2 pt-6 text-sm font-medium uppercase tracking-wider text-white/60"
           >
             {group.category}
           </td>
@@ -157,7 +160,7 @@ function FeatureGroup({
           key={feature.name}
           className="border-b border-white/[0.06]"
         >
-          <td className="p-4 text-sm text-white">{feature.name}</td>
+          <th scope="row" className="p-4 text-sm text-white text-left font-normal">{feature.name}</th>
           {feature.values.map((value, vi) => (
             <td
               key={vi}
@@ -175,7 +178,7 @@ function FeatureGroup({
                   />
                 ) : (
                   <X
-                    className="mx-auto h-5 w-5 text-white/20"
+                    className="mx-auto h-5 w-5 text-white/60"
                     aria-label="Not included"
                   />
                 )

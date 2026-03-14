@@ -3,6 +3,7 @@ import { describe, it, expect } from "vitest";
 import { Field } from "../Field";
 import { useFieldContext } from "../field-context";
 import { Input } from "../Input";
+import { expectNoA11yViolations } from "../../test/a11y";
 
 describe("Field", () => {
   it("renders without crashing", () => {
@@ -255,5 +256,45 @@ describe("Field context propagation", () => {
     }
     render(<TestConsumer />);
     expect(screen.getByTestId("ctx")).toHaveTextContent("null");
+  });
+});
+
+describe("Field accessibility", () => {
+  it("error message has role=alert in simple mode", () => {
+    render(
+      <Field label="Email" error errorMessage="Required">
+        <Input />
+      </Field>
+    );
+    expect(screen.getByRole("alert")).toHaveTextContent("Required");
+  });
+
+  it("Field.Error compound component has role=alert", () => {
+    render(
+      <Field error>
+        <Field.Label>Name</Field.Label>
+        <Input />
+        <Field.Error>Name is required</Field.Error>
+      </Field>
+    );
+    expect(screen.getByRole("alert")).toHaveTextContent("Name is required");
+  });
+
+  it("passes axe checks with label and description", async () => {
+    const { container } = render(
+      <Field label="Email" description="Your work email">
+        <Input placeholder="email@example.com" />
+      </Field>
+    );
+    await expectNoA11yViolations(container);
+  });
+
+  it("passes axe checks with error state", async () => {
+    const { container } = render(
+      <Field label="Email" error errorMessage="Required">
+        <Input placeholder="email@example.com" />
+      </Field>
+    );
+    await expectNoA11yViolations(container);
   });
 });

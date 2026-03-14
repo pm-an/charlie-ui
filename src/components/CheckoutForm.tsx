@@ -33,7 +33,7 @@ export type CheckoutFormProps = Omit<
 };
 
 const inputClasses =
-  "w-full bg-white/5 border border-white/[0.06] rounded-lg px-3 py-2 text-sm text-white placeholder:text-white/30 focus:border-white/15 focus:outline-none focus:ring-1 focus:ring-white/15 transition-colors";
+  "w-full bg-white/5 border border-white/[0.06] rounded-lg px-3 py-2 text-sm text-white placeholder:text-white/60 focus:border-white/15 focus:outline-none focus:ring-1 focus:ring-white/15 transition-colors";
 
 const labelClasses = "block text-sm font-medium text-white/80 mb-1.5";
 
@@ -109,7 +109,7 @@ const CheckoutForm = forwardRef<HTMLDivElement, CheckoutFormProps>(
                       ? "bg-green text-white"
                       : index === currentStep
                         ? "bg-white/20 text-white ring-2 ring-white/30"
-                        : "bg-white/5 text-white/40"
+                        : "bg-white/5 text-white/60"
                   )}
                   aria-current={index === currentStep ? "step" : undefined}
                 >
@@ -122,7 +122,7 @@ const CheckoutForm = forwardRef<HTMLDivElement, CheckoutFormProps>(
                 <span
                   className={cn(
                     "mt-1.5 text-xs",
-                    index <= currentStep ? "text-white/80" : "text-white/40"
+                    index <= currentStep ? "text-white/80" : "text-white/60"
                   )}
                 >
                   {step}

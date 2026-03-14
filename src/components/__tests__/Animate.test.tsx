@@ -1,14 +1,15 @@
 import { render, screen, waitFor } from "@testing-library/react";
-import { describe, it, expect, vi, beforeAll } from "vitest";
+import { describe, it, expect, vi, beforeAll, afterEach } from "vitest";
 import { Animate, Fade, Slide, Scale, ScaleFade, Collapse, Pop } from "../Animate";
 import { AnimationProvider } from "../../animation/AnimationProvider";
+import { expectNoA11yViolations } from "../../test/a11y";
 
-// Mock matchMedia for useReducedMotion
-beforeAll(() => {
+// Helper to set up matchMedia mock
+function mockMatchMedia(prefersReducedMotion: boolean) {
   Object.defineProperty(window, "matchMedia", {
     writable: true,
     value: vi.fn().mockImplementation((query: string) => ({
-      matches: false,
+      matches: query === "(prefers-reduced-motion: reduce)" ? prefersReducedMotion : false,
       media: query,
       onchange: null,
       addEventListener: vi.fn(),
@@ -18,6 +19,11 @@ beforeAll(() => {
       dispatchEvent: vi.fn(),
     })),
   });
+}
+
+// Mock matchMedia for useReducedMotion
+beforeAll(() => {
+  mockMatchMedia(false);
 
   // Mock IntersectionObserver for viewport tests
   global.IntersectionObserver = class IntersectionObserver {
@@ -30,6 +36,11 @@ beforeAll(() => {
     takeRecords = vi.fn().mockReturnValue([]);
     constructor(_cb: IntersectionObserverCallback, _opts?: IntersectionObserverInit) {}
   } as unknown as typeof globalThis.IntersectionObserver;
+});
+
+afterEach(() => {
+  // Reset matchMedia to default (no reduced motion)
+  mockMatchMedia(false);
 });
 
 describe("Animate", () => {
@@ -150,6 +161,17 @@ describe("Animate", () => {
     );
     expect(screen.getByText("Viewport obj")).toBeInTheDocument();
   });
+
+  // --- Accessibility (axe) ---
+
+  it("has no accessibility violations", async () => {
+    const { container } = render(
+      <Animate preset="fadeUp">
+        <p>Content for a11y check</p>
+      </Animate>
+    );
+    await expectNoA11yViolations(container);
+  });
 });
 
 /* ─── Disabled via provider ────────────────── */
@@ -184,6 +206,28 @@ describe("Animate with disabled provider", () => {
       </AnimationProvider>
     );
     expect(screen.queryByText("Hidden")).not.toBeInTheDocument();
+  });
+});
+
+/* ─── Reduced motion fallback (no provider) ── */
+
+describe("Animate with reduced motion (no provider)", () => {
+  it("renders children with reduced motion", () => {
+    mockMatchMedia(true);
+    render(<Animate preset="fadeUp">Reduced motion</Animate>);
+    expect(screen.getByText("Reduced motion")).toBeInTheDocument();
+  });
+
+  it("still shows content when show=true with reduced motion", () => {
+    mockMatchMedia(true);
+    render(<Animate preset="fadeUp" show={true}>Visible reduced</Animate>);
+    expect(screen.getByText("Visible reduced")).toBeInTheDocument();
+  });
+
+  it("still hides content when show=false with reduced motion", () => {
+    mockMatchMedia(true);
+    render(<Animate preset="fadeUp" show={false}>Hidden reduced</Animate>);
+    expect(screen.queryByText("Hidden reduced")).not.toBeInTheDocument();
   });
 });
 

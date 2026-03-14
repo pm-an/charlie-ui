@@ -1,6 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { describe, it, expect } from "vitest";
 import { Testimonial } from "./Testimonial";
+import { expectNoA11yViolations } from "../test/a11y";
 
 describe("Testimonial", () => {
   const defaultProps = {
@@ -55,5 +56,10 @@ describe("Testimonial", () => {
   it("merges custom className", () => {
     const { container } = render(<Testimonial {...defaultProps} className="custom" />);
     expect(container.firstChild).toHaveClass("custom");
+  });
+
+  it("passes axe accessibility checks", async () => {
+    const { container } = render(<Testimonial {...defaultProps} company="Acme Inc" />);
+    await expectNoA11yViolations(container);
   });
 });

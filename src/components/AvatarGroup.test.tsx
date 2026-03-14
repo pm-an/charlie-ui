@@ -2,6 +2,7 @@ import { render, screen } from "@testing-library/react";
 import { describe, it, expect } from "vitest";
 import { AvatarGroup } from "./AvatarGroup";
 import { Avatar } from "./Avatar";
+import { expectNoA11yViolations } from "../test/a11y";
 
 describe("AvatarGroup", () => {
   it("renders all children when no max", () => {
@@ -61,5 +62,27 @@ describe("AvatarGroup", () => {
       </AvatarGroup>
     );
     expect(container.firstChild).toHaveClass("custom");
+  });
+
+  it("has role group with aria-label", () => {
+    render(
+      <AvatarGroup>
+        <Avatar alt="A" />
+        <Avatar alt="B" />
+        <Avatar alt="C" />
+      </AvatarGroup>
+    );
+    const group = screen.getByRole("group");
+    expect(group).toHaveAttribute("aria-label", "Group of 3 avatars");
+  });
+
+  it("passes axe accessibility checks", async () => {
+    const { container } = render(
+      <AvatarGroup>
+        <Avatar alt="A" />
+        <Avatar alt="B" />
+      </AvatarGroup>
+    );
+    await expectNoA11yViolations(container);
   });
 });

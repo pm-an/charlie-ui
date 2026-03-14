@@ -1,6 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { describe, it, expect } from "vitest";
 import { ScrollArea } from "../ScrollArea";
+import { expectNoA11yViolations } from "../../test/a11y";
 
 describe("ScrollArea", () => {
   it("renders children", () => {
@@ -133,5 +134,39 @@ describe("ScrollArea", () => {
       maxHeight: "200px",
       padding: "8px",
     });
+  });
+
+  describe("keyboard focus", () => {
+    it("has tabIndex=0 for keyboard scrolling", () => {
+      const { container } = render(<ScrollArea>Content</ScrollArea>);
+      expect(container.firstChild).toHaveAttribute("tabindex", "0");
+    });
+
+    it("has focus-visible ring styles", () => {
+      const { container } = render(<ScrollArea>Content</ScrollArea>);
+      expect(container.firstChild).toHaveClass("focus-visible:ring-2");
+    });
+  });
+
+  describe("label prop", () => {
+    it("applies role=region and aria-label when label is provided", () => {
+      render(<ScrollArea label="Chat messages">Content</ScrollArea>);
+      const region = screen.getByRole("region", { name: "Chat messages" });
+      expect(region).toBeInTheDocument();
+    });
+
+    it("does not apply role=region when label is not set", () => {
+      const { container } = render(<ScrollArea>Content</ScrollArea>);
+      expect(container.firstChild).not.toHaveAttribute("role");
+    });
+  });
+
+  it("passes axe accessibility checks", async () => {
+    const { container } = render(
+      <ScrollArea label="Scrollable content" maxHeight={200}>
+        <p>Some scrollable text content here</p>
+      </ScrollArea>
+    );
+    await expectNoA11yViolations(container);
   });
 });

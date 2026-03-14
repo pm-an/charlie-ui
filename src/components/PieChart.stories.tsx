@@ -20,6 +20,7 @@ const sampleData = [
 export const Default: Story = {
   args: {
     data: sampleData,
+    "aria-label": "Device type distribution",
   },
 };
 
@@ -27,6 +28,7 @@ export const Donut: Story = {
   args: {
     data: sampleData,
     variant: "donut",
+    "aria-label": "Device type distribution (donut)",
   },
 };
 

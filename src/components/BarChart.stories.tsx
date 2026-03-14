@@ -24,6 +24,7 @@ export const Default: Story = {
   args: {
     data: sampleData,
     bars: [{ dataKey: "visits", color: "accent" }],
+    "aria-label": "Daily site visits",
   },
 };
 
@@ -35,6 +36,7 @@ export const Grouped: Story = {
       { dataKey: "unique", color: "blue", label: "Unique Visitors" },
     ],
     showLegend: true,
+    "aria-label": "Total vs unique visitors by day",
   },
 };
 

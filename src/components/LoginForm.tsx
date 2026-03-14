@@ -133,7 +133,7 @@ const LoginForm = forwardRef<HTMLDivElement, LoginFormProps>(
           <>
             <div className="flex items-center gap-3 w-full my-6">
               <div className="flex-1 h-px bg-white/6" />
-              <span className="text-xs text-white/40 shrink-0">or</span>
+              <span className="text-xs text-white/60 shrink-0">or</span>
               <div className="flex-1 h-px bg-white/6" />
             </div>
 
@@ -155,7 +155,7 @@ const LoginForm = forwardRef<HTMLDivElement, LoginFormProps>(
         )}
 
         {signupHref && (
-          <p className="mt-6 text-center text-sm text-white/40">
+          <p className="mt-6 text-center text-sm text-white/60">
             {signupLabel}{" "}
             <a
               href={signupHref}

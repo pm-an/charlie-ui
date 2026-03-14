@@ -28,9 +28,10 @@ export const Default: Story = {
     height: 400,
     itemHeight: 40,
     overscan: 5,
+    "aria-label": "Numbered items list",
     renderItem: (item: (typeof simpleItems)[number], index: number) => (
       <div className="flex items-center px-4 text-sm text-white/80 border-b border-white/5 h-full">
-        <span className="text-white/30 w-16 tabular-nums">{index + 1}.</span>
+        <span className="text-white/60 w-16 tabular-nums">{index + 1}.</span>
         <span>{item.label}</span>
       </div>
     ),
@@ -107,9 +108,9 @@ export const CustomRender: Story = {
           <span className="text-sm font-medium text-white/90 truncate">
             {item.name}
           </span>
-          <span className="text-xs text-white/40 truncate">{item.email}</span>
+          <span className="text-xs text-white/60 truncate">{item.email}</span>
         </div>
-        <span className="ml-auto text-xs text-white/30 shrink-0">
+        <span className="ml-auto text-xs text-white/60 shrink-0">
           {item.role}
         </span>
       </div>
@@ -159,7 +160,7 @@ export const InfiniteScroll: Story = {
           getItemKey={(item) => item.id}
           renderItem={(item, index) => (
             <div className="flex items-center px-4 text-sm text-white/80 border-b border-white/5 h-full">
-              <span className="text-white/30 w-16 tabular-nums">
+              <span className="text-white/60 w-16 tabular-nums">
                 {index + 1}.
               </span>
               <span>{item.label}</span>
@@ -180,7 +181,7 @@ export const Loading: Story = {
     loading: true,
     renderItem: (item: (typeof simpleItems)[number], index: number) => (
       <div className="flex items-center px-4 text-sm text-white/80 border-b border-white/5 h-full">
-        <span className="text-white/30 w-16 tabular-nums">{index + 1}.</span>
+        <span className="text-white/60 w-16 tabular-nums">{index + 1}.</span>
         <span>{item.label}</span>
       </div>
     ),
@@ -194,8 +195,8 @@ export const Empty: Story = {
     itemHeight: 40,
     emptyContent: (
       <div className="flex flex-col items-center gap-2">
-        <span className="text-lg text-white/30">No results found</span>
-        <span className="text-sm text-white/20">
+        <span className="text-lg text-white/60">No results found</span>
+        <span className="text-sm text-white/60">
           Try adjusting your search or filters
         </span>
       </div>
@@ -217,7 +218,7 @@ export const WithCustomKeys: Story = {
     renderItem: (item: { uuid: string; name: string }, index: number) => (
       <div className="flex items-center justify-between px-4 text-sm border-b border-white/5 h-full">
         <span className="text-white/80">{item.name}</span>
-        <span className="text-xs text-white/20 font-mono">
+        <span className="text-xs text-white/60 font-mono">
           {item.uuid.slice(0, 8)}...
         </span>
       </div>

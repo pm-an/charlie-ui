@@ -64,7 +64,7 @@ export const Controlled: Story = {
     return (
       <div className="space-y-3">
         <button
-          className="text-xs text-white/40 hover:text-white/60 transition-colors"
+          className="text-xs text-white/60 hover:text-white/60 transition-colors"
           onClick={() => setOpen((prev) => !prev)}
         >
           External toggle ({open ? "open" : "closed"})
@@ -102,7 +102,7 @@ export const Controlled: Story = {
 export const Disabled: Story = {
   render: () => (
     <Collapsible disabled>
-      <Collapsible.Trigger className="text-sm font-medium text-white/30 cursor-not-allowed">
+      <Collapsible.Trigger className="text-sm font-medium text-white/60 cursor-not-allowed">
         Locked section
       </Collapsible.Trigger>
       <Collapsible.Content>
@@ -129,7 +129,7 @@ export const CustomTrigger: Story = {
         <Collapsible.Trigger asChild className="cursor-pointer">
           <div className="flex items-center gap-2 rounded-md bg-white/5 border border-white/10 px-3 py-2 text-sm text-white/80 hover:bg-white/10 transition-colors">
             <span>{open ? "Hide" : "Show"} release notes</span>
-            <span className="text-xs text-white/40">{open ? "v" : ">"}</span>
+            <span className="text-xs text-white/60">{open ? "v" : ">"}</span>
           </div>
         </Collapsible.Trigger>
         <Collapsible.Content>

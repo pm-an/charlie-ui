@@ -13,6 +13,9 @@ import {
 import { AnimatePresence, motion } from "framer-motion";
 import { cn } from "../utils/cn";
 import { Slot } from "../utils/Slot";
+import { useEscapeKey } from "../hooks/useEscapeKey";
+import { useFocusReturn } from "../hooks/useFocusReturn";
+import { useFocusTrap } from "../hooks/useFocusTrap";
 
 /* ─── Context ───────────────────────────────── */
 
@@ -97,6 +100,8 @@ function PopoverTrigger({ children, className, asChild = false }: PopoverTrigger
         ref={triggerRef as React.Ref<HTMLElement>}
         className={className}
         onClick={handleClick}
+        aria-expanded={open}
+        aria-haspopup="dialog"
       >
         {children as React.ReactElement}
       </Slot>
@@ -109,6 +114,8 @@ function PopoverTrigger({ children, className, asChild = false }: PopoverTrigger
       type="button"
       className={className}
       onClick={handleClick}
+      aria-expanded={open}
+      aria-haspopup="dialog"
     >
       {children}
     </button>
@@ -127,6 +134,12 @@ export type PopoverContentProps = {
   sideOffset?: number;
   /** Whether clicking outside the popover dismisses it. Defaults to `true`. */
   dismissible?: boolean;
+  /** Whether to trap focus within the popover. Defaults to `false`. */
+  trapFocus?: boolean;
+  /** Accessible label for the popover dialog. */
+  "aria-label"?: string;
+  /** ID of element that labels the popover dialog. */
+  "aria-labelledby"?: string;
 };
 
 function PopoverContent({
@@ -136,23 +149,41 @@ function PopoverContent({
   side = "bottom",
   sideOffset = 8,
   dismissible = true,
+  trapFocus = false,
+  "aria-label": ariaLabel,
+  "aria-labelledby": ariaLabelledBy,
 }: PopoverContentProps) {
-  const { open, setOpen } = usePopoverContext();
+  const { open, setOpen, triggerRef } = usePopoverContext();
   const contentRef = useRef<HTMLDivElement | null>(null);
 
-  // Close on Escape key
+  const handleEscape = useCallback(() => {
+    setOpen(false);
+  }, [setOpen]);
+
+  // Close on Escape key via shared hook
+  useEscapeKey(handleEscape, open && dismissible);
+
+  // Focus return to trigger on close
+  useFocusReturn(open);
+
+  // Optional focus trap
+  useFocusTrap(contentRef, open && trapFocus, trapFocus);
+
+  // Move focus into popover on open (when not trapping, which auto-focuses)
   useEffect(() => {
-    if (!open || !dismissible) return;
-
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
-        setOpen(false);
+    if (!open || trapFocus) return;
+    const timer = requestAnimationFrame(() => {
+      const content = contentRef.current;
+      if (!content) return;
+      const focusable = content.querySelectorAll<HTMLElement>(
+        'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+      );
+      if (focusable.length > 0) {
+        focusable[0].focus();
       }
-    };
-
-    document.addEventListener("keydown", handleKeyDown);
-    return () => document.removeEventListener("keydown", handleKeyDown);
-  }, [open, setOpen, dismissible]);
+    });
+    return () => cancelAnimationFrame(timer);
+  }, [open, trapFocus]);
 
   // Close on click outside
   useEffect(() => {
@@ -216,6 +247,8 @@ function PopoverContent({
           exit={motionConfig.exit}
           transition={{ duration: 0.2, ease: "easeOut" }}
           role="dialog"
+          aria-label={ariaLabel}
+          aria-labelledby={ariaLabelledBy}
         >
           {children}
         </motion.div>

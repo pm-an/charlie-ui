@@ -213,7 +213,7 @@ export const Controlled: Story = {
             Clear
           </button>
         </div>
-        <p className="text-xs text-white/40">
+        <p className="text-xs text-white/60">
           Value: {date ? date.toISOString() : "none"}
         </p>
       </div>

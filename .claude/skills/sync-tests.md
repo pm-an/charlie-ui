@@ -76,7 +76,6 @@ describe("ComponentName", () => {
   describe("accessibility", () => {
     it("has correct role", () => { });
     it("has correct aria attributes", () => { });
-    // ... a11y tests
   });
 
   // === Edge cases ===
@@ -87,95 +86,60 @@ describe("ComponentName", () => {
 });
 ```
 
-5. **What to test for each component type**:
+5. **What to test** (aim for full coverage):
+   - **Rendering** — renders without crashing for each variant/size
+   - **Props** — all props applied correctly (className, custom props, forwarded HTML attrs)
+   - **Variants** — each CVA variant renders the correct CSS classes
+   - **Sizes** — each size variant renders correctly
+   - **Interactions** — click handlers, onChange, toggle states, keyboard events
+   - **Conditional rendering** — elements that show/hide based on props
+   - **Accessibility** — proper ARIA attributes, roles, labels
+   - **Refs** — forwardRef components pass refs correctly
+   - **Composition** — compound components work together
+   - **Edge cases** — empty children, missing optional props, disabled states
 
-### Atoms (Button, Badge, Input, Toggle, Kbd, Divider, CodeBlock, Skeleton)
-- All variants render correct visual classes
-- All sizes render correctly
-- forwardRef passes ref to DOM element
-- className is merged (not replaced)
-- HTML attributes are forwarded (data-testid, aria-label, etc.)
-- Button: onClick, disabled, loading (spinner visible, button disabled), leftIcon/rightIcon render
-- Input: onChange, value, label renders, helperText renders, error state (error message, red border class), disabled, leftIcon/rightIcon
-- Toggle: checked/onChange, aria-checked, role="switch"
-- CodeBlock: code content renders, copy button onClick copies to clipboard, language label
-- Skeleton: width/height props applied
-
-### Cards (Card, FeatureCard, PricingCard, Accordion, Testimonial, BlogCard)
-- Card: compound components render (Header, Body, Footer), variants
-- FeatureCard: icon/title/description render, sizes, glow class, href renders as anchor
-- PricingCard: tier/price/period/features render, highlighted state adds classes, badge renders, annualPrice strikethrough
-- Accordion: items expand/collapse on click, single mode (only one open), multiple mode, defaultOpen, aria-expanded
-- Testimonial: quote/author/role render, avatar renders when provided
-- BlogCard: title/excerpt/date render, image renders, tag renders, href renders as anchor, hover class on group
-
-### Layout (Navbar, Hero, Section, Container, Footer, Newsletter, GradientBackground, SocialCard)
-- Navbar: logo/links/actions render, mobile menu toggles, badge on link
-- Hero: variants (centered/split), eyebrow/title/description render, gradient adds class
-- Section: sizes, alignment, eyebrow/title/description
-- Container: sizes apply correct max-width class
-- Footer: logo/columns/links render, external links show icon, bottom section
-- Newsletter: title/description render, form submit calls onSubmit with email value, email validation
-- GradientBackground: variants apply correct gradient, animate prop
-- SocialCard: color variants, href renders as anchor
-
-### Interactive (Tabs, Tooltip, Avatar, AvatarGroup, CommandPalette, ToggleGroup, ChangelogEntry, Toast)
-- Tabs: items render, clicking changes value, onChange called, variants render correct classes
-- Tooltip: shows on hover, hides on mouse leave, content renders, side positioning
-- Avatar: image renders, fallback initials when no src, sizes, status dot renders with correct color
-- AvatarGroup: renders children, max prop shows overflow count
-- CommandPalette: opens/closes, search input works, Escape closes, items render, groups render
-- ToggleGroup: options render, clicking changes value, active state
-- ChangelogEntry: date/version/title/description render, tags render, image renders
-- Toast: variants render correct icon, title/description render, auto-dismiss timer, close button calls onClose, action renders
-
-6. **Testing patterns**:
+6. **Common patterns**:
 
 ```tsx
-// Test className merging
+// className merging
 const { container } = render(<Button className="my-class">Test</Button>);
 expect(container.firstChild).toHaveClass("my-class");
 
-// Test click handler
+// Click handler
 const onClick = vi.fn();
 render(<Button onClick={onClick}>Click</Button>);
 fireEvent.click(screen.getByRole("button"));
 expect(onClick).toHaveBeenCalledTimes(1);
 
-// Test disabled
+// Disabled
 const onClick = vi.fn();
 render(<Button disabled onClick={onClick}>Click</Button>);
 fireEvent.click(screen.getByRole("button"));
 expect(onClick).not.toHaveBeenCalled();
 
-// Test ref forwarding
+// Ref forwarding
 const ref = { current: null };
 render(<Button ref={ref}>Test</Button>);
 expect(ref.current).toBeInstanceOf(HTMLButtonElement);
 
-// Test controlled state
+// Controlled state
 const onChange = vi.fn();
 render(<Toggle checked={false} onChange={onChange} />);
 fireEvent.click(screen.getByRole("switch"));
 expect(onChange).toHaveBeenCalledWith(true);
-
-// Test conditional rendering
-render(<Input label="Email" error errorMessage="Required" />);
-expect(screen.getByText("Email")).toBeInTheDocument();
-expect(screen.getByText("Required")).toBeInTheDocument();
 ```
 
-7. **After writing tests**:
-   - Run `npm run test` to verify all tests pass
-   - Run `npm run test:coverage` if available to check coverage
-   - Report: total tests written, pass/fail count, coverage percentage
+7. **Important rules**:
+   - Tests MUST use Vitest (`describe`, `it`, `expect`, `vi`) not Jest
+   - Tests MUST use `@testing-library/react` for rendering
+   - Use `@testing-library/user-event` for complex interactions (typing, etc.)
+   - Use `@testing-library/jest-dom` matchers (toBeInTheDocument, toHaveClass, etc.)
+   - Do NOT test implementation details — test behavior
+   - Each test should be independent — no shared state between tests
+   - Use `vi.fn()` for mocks, `vi.useFakeTimers()` for timers
 
-## Important rules
-- Tests MUST use Vitest (`describe`, `it`, `expect`, `vi`) not Jest
-- Tests MUST use `@testing-library/react` for rendering
-- Use `@testing-library/user-event` for complex interactions (typing, etc.)
-- Use `@testing-library/jest-dom` matchers (toBeInTheDocument, toHaveClass, toBeDisabled, etc.)
-- Do NOT test implementation details (internal state, CSS class names beyond variant verification)
-- DO test behavior: what the user sees and can interact with
-- Each test should be independent — no shared state between tests
-- Use `vi.fn()` for mock functions, `vi.useFakeTimers()` for timers (Toast auto-dismiss)
+8. **After writing tests**:
+   - Run `npm run test` to verify all pass
+   - Report: total tests written, pass/fail count
+
+9. **Also remember**: When adding a new component, you must also create its story and registry entry (see sync-docs and sync-registry skills).

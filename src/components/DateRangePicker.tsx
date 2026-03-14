@@ -14,6 +14,8 @@ import { Calendar, X, ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "../utils/cn";
 import { useControllableState } from "../hooks/useControllableState";
 import { useFieldAware } from "../hooks/useFieldAware";
+import { useFocusTrap } from "../hooks/useFocusTrap";
+import { useFocusReturn } from "../hooks/useFocusReturn";
 
 // ---------------------------------------------------------------------------
 // Types
@@ -93,14 +95,14 @@ const calendarClassNames = {
   chevron: "h-4 w-4",
   month_grid: "w-full border-collapse",
   weekdays: "",
-  weekday: "text-xs text-white/30 font-normal w-9 pb-2 text-center",
+  weekday: "text-xs text-white/60 font-normal w-9 pb-2 text-center",
   weeks: "",
   week: "",
   day: "p-0 text-center",
   day_button:
     "inline-flex items-center justify-center h-9 w-9 rounded-md text-sm text-white/80 hover:bg-white/5 transition-colors cursor-pointer",
   today: "border border-white/10 rounded-md",
-  outside: "text-white/20",
+  outside: "text-white/60",
   disabled: "text-white/10 cursor-not-allowed hover:bg-transparent",
   hidden: "invisible",
   focused: "ring-1 ring-white/20",
@@ -183,6 +185,11 @@ function DateRangePicker({
 
   const [open, setOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+  const popoverRef = useRef<HTMLDivElement>(null);
+
+  // Focus trap and return for calendar popover
+  useFocusTrap(popoverRef, open, true);
+  useFocusReturn(open);
 
   /* ── Field-aware integration ── */
   const resolvedDescription = description ?? helperText;
@@ -304,16 +311,17 @@ function DateRangePicker({
       aria-haspopup="dialog"
       aria-invalid={ariaInvalid}
       aria-describedby={ariaDescribedBy}
+      aria-label={label || placeholder}
       disabled={disabled}
       onClick={() => !disabled && setOpen(!open)}
       className={triggerClasses}
       data-testid="daterangepicker-trigger"
     >
-      <Calendar className="h-4 w-4 text-white/40 mr-2 shrink-0" />
+      <Calendar className="h-4 w-4 text-white/60 mr-2 shrink-0" />
       <span
         className={cn(
           "flex-1 text-left truncate",
-          displayValue ? "text-white" : "text-white/40"
+          displayValue ? "text-white" : "text-white/60"
         )}
       >
         {displayValue || placeholder}
@@ -323,7 +331,7 @@ function DateRangePicker({
           role="button"
           tabIndex={0}
           aria-label="Clear date range"
-          className="text-white/30 hover:text-white/60 ml-2 shrink-0 cursor-pointer"
+          className="text-white/60 hover:text-white/60 ml-2 shrink-0 cursor-pointer"
           onClick={handleClear}
           onKeyDown={(e) => {
             if (e.key === "Enter" || e.key === " ") {
@@ -355,6 +363,7 @@ function DateRangePicker({
     <AnimatePresence>
       {open && (
         <motion.div
+          ref={popoverRef}
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.95 }}
@@ -414,7 +423,7 @@ function DateRangePicker({
   return (
     <div ref={containerRef} className="relative inline-block w-full">
       {label && (
-        <label className="text-sm font-medium text-white/80 mb-1.5 block">
+        <label htmlFor={controlId} className="text-sm font-medium text-white/80 mb-1.5 block">
           {label}
           {required && <span className="text-red ml-0.5">*</span>}
         </label>
@@ -425,7 +434,7 @@ function DateRangePicker({
       {calendarDropdown}
 
       {resolvedDescription && !error && (
-        <p id={`${controlId}-description`} className="text-xs text-white/40 mt-1.5">{resolvedDescription}</p>
+        <p id={`${controlId}-description`} className="text-xs text-white/60 mt-1.5">{resolvedDescription}</p>
       )}
       {error && errorMessage && (
         <p id={`${controlId}-error`} className="text-xs text-red mt-1.5">{errorMessage}</p>

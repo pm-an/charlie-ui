@@ -1,6 +1,7 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import { describe, it, expect, vi } from "vitest";
 import { ComparisonTable } from "../ComparisonTable";
+import { expectNoA11yViolations } from "../../test/a11y";
 
 const defaultPlans = [
   { name: "Free", price: "$0", period: "month", cta: "Get started" },
@@ -237,6 +238,37 @@ describe("ComparisonTable", () => {
         />
       );
       expect(screen.getByTestId("table")).toHaveAttribute("aria-label", "Plan comparison");
+    });
+  });
+
+  describe("accessibility", () => {
+    it("has scope=col on column headers", () => {
+      const { container } = render(
+        <ComparisonTable plans={defaultPlans} features={defaultFeatures} />
+      );
+      const ths = container.querySelectorAll("thead th");
+      ths.forEach((th) => {
+        expect(th).toHaveAttribute("scope", "col");
+      });
+    });
+
+    it("has scope=row on feature row headers", () => {
+      const { container } = render(
+        <ComparisonTable plans={defaultPlans} features={defaultFeatures} />
+      );
+      const rowHeaders = container.querySelectorAll("tbody th[scope='row']");
+      expect(rowHeaders.length).toBe(2);
+    });
+
+    it("passes axe accessibility checks", async () => {
+      const { container } = render(
+        <ComparisonTable
+          title="Compare plans"
+          plans={defaultPlans}
+          features={defaultFeatures}
+        />
+      );
+      await expectNoA11yViolations(container);
     });
   });
 });

@@ -4,6 +4,7 @@ import { describe, it, expect, vi } from "vitest";
 import { DateRangePicker } from "../DateRangePicker";
 import { Field } from "../Field";
 import { format, addDays } from "date-fns";
+import { expectNoA11yViolations } from "../../test/a11y";
 
 describe("DateRangePicker", () => {
   describe("rendering", () => {
@@ -517,5 +518,12 @@ describe("DateRangePicker", () => {
       expect(screen.getByText("Standalone Label")).toBeInTheDocument();
       expect(screen.getByText("Standalone help")).toBeInTheDocument();
     });
+  });
+
+  it("passes axe accessibility checks", async () => {
+    const { container } = render(
+      <DateRangePicker label="Booking dates" placeholder="Select range" />
+    );
+    await expectNoA11yViolations(container);
   });
 });

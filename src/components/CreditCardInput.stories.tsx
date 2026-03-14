@@ -36,7 +36,7 @@ export const Controlled: Story = {
     return (
       <div className="space-y-6">
         <CreditCardInput value={data} onChange={setData} />
-        <pre className="text-xs text-white/40 bg-white/5 rounded-md p-3 font-mono">
+        <pre className="text-xs text-white/60 bg-white/5 rounded-md p-3 font-mono">
           {JSON.stringify(data, null, 2)}
         </pre>
       </div>

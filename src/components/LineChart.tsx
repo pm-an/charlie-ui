@@ -1,4 +1,4 @@
-import { forwardRef, type HTMLAttributes } from "react";
+import { forwardRef, useId, type HTMLAttributes } from "react";
 import {
   ResponsiveContainer,
   LineChart as RechartsLineChart,
@@ -15,6 +15,7 @@ import {
   getAxisTickStyle,
   getLegendStyle,
   gridStroke,
+  createChartSummary,
 } from "../utils/chart-helpers";
 import { cn } from "../utils/cn";
 
@@ -37,6 +38,8 @@ export type LineChartProps = Omit<HTMLAttributes<HTMLDivElement>, "data"> & {
   showXAxis?: boolean;
   showYAxis?: boolean;
   curveType?: "monotone" | "linear" | "step" | "natural";
+  /** Accessible description for screen readers */
+  description?: string;
 };
 
 const LineChart = forwardRef<HTMLDivElement, LineChartProps>(
@@ -52,16 +55,37 @@ const LineChart = forwardRef<HTMLDivElement, LineChartProps>(
       showXAxis = true,
       showYAxis = true,
       curveType = "monotone",
+      description,
       className,
+      "aria-label": ariaLabel,
       ...props
     },
     ref,
   ) => {
     const tooltip = getTooltipStyles();
     const tickStyle = getAxisTickStyle();
+    const descId = useId();
+    const summaryText =
+      description ??
+      createChartSummary(
+        data,
+        lines.map((l) => l.dataKey),
+        xAxisKey,
+      );
 
     return (
-      <div ref={ref} data-slot="line-chart" className={cn("w-full", className)} {...props}>
+      <div
+        ref={ref}
+        data-slot="line-chart"
+        role="img"
+        aria-label={ariaLabel ?? "Line chart"}
+        aria-describedby={descId}
+        className={cn("w-full", className)}
+        {...props}
+      >
+        <div id={descId} className="sr-only">
+          {summaryText}
+        </div>
         <ResponsiveContainer width="100%" height={height}>
           <RechartsLineChart data={data}>
             {showGrid && (

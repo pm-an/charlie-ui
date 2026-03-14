@@ -102,6 +102,7 @@ export const Default: Story = {
     columns,
     enablePagination: true,
     showPagination: true,
+    caption: "Team member directory",
   },
 };
 
@@ -157,7 +158,7 @@ export const WithSelection: Story = {
     const [selection, setSelection] = React.useState<RowSelectionState>({});
     return (
       <div>
-        <div className="mb-2 text-xs text-white/40">
+        <div className="mb-2 text-xs text-white/60">
           {Object.keys(selection).length} row(s) selected
         </div>
         <DataTable<User>

@@ -1,6 +1,6 @@
 import type { CharlieTheme } from "../components/ThemeProvider";
 
-/** Default Charlie UI theme (Raycast-inspired dark) */
+/** Default Charlie UI theme */
 export const defaultTheme: CharlieTheme = {
   accent: "#ff6363",
   accentMuted: "#2c1617",

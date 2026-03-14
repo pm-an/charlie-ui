@@ -95,7 +95,7 @@ export const ImageOnly: Story = {
     accept: "image/*",
     label: "Upload images",
     description: "PNG, JPG, GIF, WebP accepted",
-    icon: <ImageIcon className="h-10 w-10 text-white/20" />,
+    icon: <ImageIcon className="h-10 w-10 text-white/60" />,
   },
   render: function ImageOnlyStory(args) {
     return (

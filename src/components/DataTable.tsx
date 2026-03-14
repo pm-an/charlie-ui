@@ -107,6 +107,9 @@ type DataTableProps<TData> = Omit<HTMLAttributes<HTMLDivElement>, "children"> & 
   enableFiltering?: boolean;
   enableRowSelection?: boolean;
   enablePagination?: boolean;
+
+  /** Screen-reader-only table caption */
+  caption?: string;
 };
 
 // ---------------------------------------------------------------------------
@@ -155,6 +158,8 @@ function DataTable<TData>({
   enableFiltering,
   enableRowSelection = false,
   enablePagination = true,
+
+  caption,
 
   ...props
 }: DataTableProps<TData>) {
@@ -287,7 +292,7 @@ function DataTable<TData>({
       {/* Search bar */}
       {showSearch && (
         <div className="mb-4 relative flex items-center">
-          <span className="absolute left-3 text-white/40 pointer-events-none">
+          <span className="absolute left-3 text-white/60 pointer-events-none">
             <Search size={14} />
           </span>
           <input
@@ -302,7 +307,7 @@ function DataTable<TData>({
             placeholder={searchPlaceholder}
             className={cn(
               "w-full bg-white/5 border border-white/6 rounded-md h-9 pl-9 pr-3 text-sm text-white",
-              "placeholder:text-white/40",
+              "placeholder:text-white/60",
               "outline-none transition-all duration-200",
               "focus:ring-1 focus:ring-white/15 focus:border-white/15"
             )}
@@ -315,6 +320,9 @@ function DataTable<TData>({
       <div className="rounded-lg border border-white/6 overflow-hidden">
         <div className={stickyHeader ? "overflow-auto" : undefined}>
           <table className="w-full border-collapse">
+            {caption && (
+              <caption className="sr-only">{caption}</caption>
+            )}
             {/* Header */}
             <thead
               className={cn(
@@ -332,8 +340,18 @@ function DataTable<TData>({
                     return (
                       <th
                         key={header.id}
+                        scope="col"
+                        aria-sort={
+                          canSort
+                            ? sorted === "asc"
+                              ? "ascending"
+                              : sorted === "desc"
+                                ? "descending"
+                                : "none"
+                            : undefined
+                        }
                         className={cn(
-                          "px-4 text-left text-xs font-medium text-white/40 uppercase tracking-wider",
+                          "px-4 text-left text-xs font-medium text-white/60 uppercase tracking-wider",
                           tableCellVariants({ density }),
                           canSort &&
                             "cursor-pointer hover:text-white/60 select-none"
@@ -397,7 +415,7 @@ function DataTable<TData>({
                 <tr>
                   <td
                     colSpan={finalColumns.length}
-                    className="text-center text-white/40 py-12"
+                    className="text-center text-white/60 py-12"
                   >
                     {emptyMessage}
                   </td>
@@ -444,7 +462,7 @@ function DataTable<TData>({
         {showPagination && enablePagination && !loading && rows.length > 0 && (
           <div className="flex items-center justify-between px-4 py-3 border-t border-white/6">
             {/* Left: info */}
-            <span className="text-xs text-white/40">
+            <span className="text-xs text-white/60">
               Showing {from} to {to} of {totalRows} results
             </span>
 

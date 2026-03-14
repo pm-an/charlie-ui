@@ -49,6 +49,8 @@ const KanbanBoard = forwardRef<HTMLDivElement, KanbanBoardProps>(
       <div
         ref={ref}
         data-slot="kanban-board"
+        role="region"
+        aria-label="Kanban board"
         className={cn(
           "overflow-x-auto flex gap-4 p-4",
           className
@@ -58,6 +60,8 @@ const KanbanBoard = forwardRef<HTMLDivElement, KanbanBoardProps>(
         {columns.map((column) => (
           <div
             key={column.id}
+            role="group"
+            aria-label={`${column.title} column, ${column.cards.length} cards`}
             className="min-w-[280px] w-[280px] flex-shrink-0 flex flex-col"
           >
             {/* Column header */}
@@ -72,7 +76,7 @@ const KanbanBoard = forwardRef<HTMLDivElement, KanbanBoardProps>(
                   />
                 )}
                 <h3 className="text-sm font-medium text-white">{column.title}</h3>
-                <span className="inline-flex items-center rounded-md bg-white/5 px-1.5 py-0.5 text-[10px] font-medium text-white/40">
+                <span className="inline-flex items-center rounded-md bg-white/5 px-1.5 py-0.5 text-[10px] font-medium text-white/60">
                   {column.cards.length}
                 </span>
               </div>
@@ -80,7 +84,7 @@ const KanbanBoard = forwardRef<HTMLDivElement, KanbanBoardProps>(
                 <button
                   type="button"
                   onClick={() => onAddCard(column.id)}
-                  className="p-1 text-white/30 hover:text-white/60 transition-colors rounded hover:bg-white/5"
+                  className="p-1 text-white/60 hover:text-white/80 transition-colors rounded hover:bg-white/5"
                   aria-label={`Add card to ${column.title}`}
                 >
                   <Plus className="h-4 w-4" />
@@ -109,7 +113,7 @@ const KanbanBoard = forwardRef<HTMLDivElement, KanbanBoardProps>(
                 >
                   <p className="text-sm font-medium text-white">{card.title}</p>
                   {card.description && (
-                    <p className="text-xs text-white/40 mt-1 line-clamp-2">
+                    <p className="text-xs text-white/60 mt-1 line-clamp-2">
                       {card.description}
                     </p>
                   )}

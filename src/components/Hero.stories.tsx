@@ -71,7 +71,7 @@ export const Split: Story = {
     ),
     children: (
       <div className="rounded-xl border border-white/[0.06] bg-white/[0.03] p-8 flex items-center justify-center min-h-[300px]">
-        <span className="text-white/40 text-sm">Media or illustration</span>
+        <span className="text-white/60 text-sm">Media or illustration</span>
       </div>
     ),
   },

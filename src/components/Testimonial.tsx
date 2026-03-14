@@ -23,7 +23,7 @@ const Testimonial = forwardRef<HTMLDivElement, TestimonialProps>(
       {/* Decorative quote mark */}
       <span
         aria-hidden="true"
-        className="mb-3 block select-none text-2xl leading-none text-white/20"
+        className="mb-3 block select-none text-2xl leading-none text-white/60"
       >
         &ldquo;
       </span>
@@ -45,7 +45,7 @@ const Testimonial = forwardRef<HTMLDivElement, TestimonialProps>(
         </div>
         <div className="min-w-0">
           <p className="text-sm font-medium text-white">{author}</p>
-          <p className="text-xs text-white/40">
+          <p className="text-xs text-white/60">
             {role}
             {company && <>, {company}</>}
           </p>

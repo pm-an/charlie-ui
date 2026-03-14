@@ -1,6 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { describe, it, expect } from "vitest";
 import { FeatureSection } from "../FeatureSection";
+import { expectNoA11yViolations } from "../../test/a11y";
 
 const mockFeatures = [
   {
@@ -223,6 +224,15 @@ describe("FeatureSection", () => {
     it("renders with single feature", () => {
       render(<FeatureSection features={[mockFeatures[0]]} />);
       expect(screen.getByText("Feature One")).toBeInTheDocument();
+    });
+  });
+
+  describe("accessibility", () => {
+    it("passes axe accessibility checks", async () => {
+      const { container } = render(
+        <FeatureSection features={mockFeatures} title="Our Features" />
+      );
+      await expectNoA11yViolations(container);
     });
   });
 });

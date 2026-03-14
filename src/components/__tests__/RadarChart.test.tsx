@@ -1,6 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { describe, it, expect, beforeAll } from "vitest";
 import { RadarChart } from "../RadarChart";
+import { expectNoA11yViolations } from "../../test/a11y";
 
 const sampleData = [
   { subject: "A", score: 80, other: 60 },
@@ -99,5 +100,74 @@ describe("RadarChart", () => {
       />
     );
     expect(container.querySelector('[data-slot="radar-chart"]')).toBeInTheDocument();
+  });
+
+  // Accessibility tests
+  it("has role='img' on the wrapper", () => {
+    render(
+      <RadarChart data={sampleData} radars={[{ dataKey: "score" }]} />
+    );
+    expect(screen.getByRole("img")).toBeInTheDocument();
+  });
+
+  it("uses default aria-label when none provided", () => {
+    render(
+      <RadarChart data={sampleData} radars={[{ dataKey: "score" }]} />
+    );
+    expect(screen.getByLabelText("Radar chart")).toBeInTheDocument();
+  });
+
+  it("uses custom aria-label when provided", () => {
+    render(
+      <RadarChart
+        data={sampleData}
+        radars={[{ dataKey: "score" }]}
+        aria-label="Team skill assessment"
+      />
+    );
+    expect(screen.getByLabelText("Team skill assessment")).toBeInTheDocument();
+  });
+
+  it("renders sr-only description with auto-generated summary", () => {
+    const { container } = render(
+      <RadarChart data={sampleData} radars={[{ dataKey: "score" }]} />
+    );
+    const srOnly = container.querySelector(".sr-only");
+    expect(srOnly).toBeInTheDocument();
+    expect(srOnly!.textContent).toContain("4 data points");
+    expect(srOnly!.textContent).toContain("score:");
+  });
+
+  it("renders sr-only description with custom description", () => {
+    const { container } = render(
+      <RadarChart
+        data={sampleData}
+        radars={[{ dataKey: "score" }]}
+        description="Team excels at testing and security"
+      />
+    );
+    const srOnly = container.querySelector(".sr-only");
+    expect(srOnly!.textContent).toBe("Team excels at testing and security");
+  });
+
+  it("has aria-describedby pointing to the description", () => {
+    const { container } = render(
+      <RadarChart data={sampleData} radars={[{ dataKey: "score" }]} />
+    );
+    const wrapper = container.querySelector('[data-slot="radar-chart"]')!;
+    const descId = wrapper.getAttribute("aria-describedby");
+    expect(descId).toBeTruthy();
+    expect(container.querySelector(`#${CSS.escape(descId!)}`)?.className).toContain("sr-only");
+  });
+
+  it("passes axe accessibility checks", async () => {
+    const { container } = render(
+      <RadarChart
+        data={sampleData}
+        radars={[{ dataKey: "score" }]}
+        aria-label="Test chart"
+      />
+    );
+    await expectNoA11yViolations(container);
   });
 });

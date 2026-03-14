@@ -21,6 +21,8 @@ type ResizablePanelProps = PanelProps & {
 
 type ResizableHandleProps = Omit<PanelResizeHandleProps, "children"> & {
   withHandle?: boolean;
+  /** Accessible label for the resize handle (default: "Resize panel") */
+  handleAriaLabel?: string;
   className?: string;
 };
 
@@ -36,6 +38,7 @@ function ResizablePanel({ className, ...props }: ResizablePanelProps) {
 
 function ResizableHandle({
   withHandle = false,
+  handleAriaLabel = "Resize panel",
   className,
   ...props
 }: ResizableHandleProps) {
@@ -52,12 +55,13 @@ function ResizableHandle({
         withHandle && "data-[panel-group-direction=vertical]:h-2",
         className
       )}
+      aria-label={handleAriaLabel}
       {...props}
     >
       {withHandle && (
         <div className="z-10 flex items-center justify-center rounded-sm border border-white/10 bg-bg-200">
-          <GripVertical className="h-3 w-3 text-white/30 data-[panel-group-direction=vertical]:hidden" />
-          <GripHorizontal className="h-3 w-3 text-white/30 hidden data-[panel-group-direction=vertical]:block" />
+          <GripVertical aria-hidden="true" className="h-3 w-3 text-white/60 data-[panel-group-direction=vertical]:hidden" />
+          <GripHorizontal aria-hidden="true" className="h-3 w-3 text-white/60 hidden data-[panel-group-direction=vertical]:block" />
         </div>
       )}
     </PanelResizeHandle>

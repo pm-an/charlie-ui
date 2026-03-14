@@ -52,7 +52,7 @@ function getCircleClasses(status: StepStatus): string {
     case "active":
       return "bg-accent text-white ring-2 ring-accent/30";
     case "upcoming":
-      return "bg-white/5 border border-white/10 text-white/40";
+      return "bg-white/5 border border-white/10 text-white/60";
     case "error":
       return "bg-red/20 border border-red/50 text-red";
   }
@@ -65,7 +65,7 @@ function getLabelClasses(status: StepStatus): string {
     case "active":
       return "text-white";
     case "upcoming":
-      return "text-white/40";
+      return "text-white/60";
     case "error":
       return "text-red";
   }
@@ -282,11 +282,11 @@ function Stepper({
               >
                 {step.label}
                 {step.optional && (
-                  <span className="text-white/30"> (Optional)</span>
+                  <span className="text-white/60"> (Optional)</span>
                 )}
               </span>
               {step.description && (
-                <span className="text-xs text-white/40">
+                <span className="text-xs text-white/60">
                   {step.description}
                 </span>
               )}
@@ -347,11 +347,11 @@ function Stepper({
               >
                 {step.label}
                 {step.optional && (
-                  <span className="text-white/30"> (Optional)</span>
+                  <span className="text-white/60"> (Optional)</span>
                 )}
               </span>
               {step.description && (
-                <span className="text-xs text-white/40">
+                <span className="text-xs text-white/60">
                   {step.description}
                 </span>
               )}

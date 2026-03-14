@@ -33,9 +33,13 @@ function genId() {
 
 /* ─── Public API ─────────────────────────── */
 
+/** Minimum toast duration in ms for accessibility (ensures screen readers can announce). */
+const MIN_TOAST_DURATION = 5000;
+
 type ToastOptions = {
   description?: string;
   action?: ReactNode;
+  /** Duration in ms. Values below 5000 are clamped to 5000 for accessibility. Use 0 for no auto-dismiss. */
   duration?: number;
 };
 
@@ -45,13 +49,19 @@ function createToast(
   options: ToastOptions = {}
 ): string {
   const id = genId();
+  // Enforce minimum duration (0 = no auto-dismiss is allowed)
+  let resolvedDuration = options.duration;
+  if (resolvedDuration !== undefined && resolvedDuration !== 0 && resolvedDuration < MIN_TOAST_DURATION) {
+    resolvedDuration = MIN_TOAST_DURATION;
+  }
+
   const newToast: ToastData = {
     id,
     title,
     variant,
     description: options.description,
     action: options.action,
-    duration: options.duration,
+    duration: resolvedDuration,
   };
   toasts = [...toasts, newToast];
   emit();

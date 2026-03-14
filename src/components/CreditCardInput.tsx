@@ -572,7 +572,7 @@ const CreditCardInput = forwardRef<HTMLDivElement, CreditCardInputProps>(
               {/* Bottom row: name + expiry */}
               <div className="relative z-10 flex items-end justify-between">
                 <div className="flex-1 min-w-0 mr-4">
-                  <div className="text-[9px] uppercase tracking-wider text-white/40 mb-0.5">
+                  <div className="text-[9px] uppercase tracking-wider text-white/60 mb-0.5">
                     Card Holder
                   </div>
                   <motion.div
@@ -589,7 +589,7 @@ const CreditCardInput = forwardRef<HTMLDivElement, CreditCardInputProps>(
                   </motion.div>
                 </div>
                 <div className="text-right flex-shrink-0">
-                  <div className="text-[9px] uppercase tracking-wider text-white/40 mb-0.5">
+                  <div className="text-[9px] uppercase tracking-wider text-white/60 mb-0.5">
                     Expires
                   </div>
                   <motion.div
@@ -663,13 +663,13 @@ const CreditCardInput = forwardRef<HTMLDivElement, CreditCardInputProps>(
                           "repeating-linear-gradient(90deg, transparent, transparent 4px, white 4px, white 5px)",
                       }}
                     />
-                    <div className="absolute right-2 top-1/2 -translate-y-1/2 text-[10px] text-white/30 italic font-mono">
+                    <div className="absolute right-2 top-1/2 -translate-y-1/2 text-[10px] text-white/60 italic font-mono">
                       Authorized Signature
                     </div>
                   </div>
                   {/* CVV */}
                   <div className="flex flex-col items-center">
-                    <div className="text-[8px] uppercase tracking-wider text-white/40 mb-0.5">
+                    <div className="text-[8px] uppercase tracking-wider text-white/60 mb-0.5">
                       CVV
                     </div>
                     <motion.div
@@ -690,7 +690,7 @@ const CreditCardInput = forwardRef<HTMLDivElement, CreditCardInputProps>(
 
               {/* Bottom info */}
               <div className="mt-auto px-5 pb-4 flex items-end justify-between">
-                <div className="text-[8px] text-white/20 max-w-[180px] leading-tight">
+                <div className="text-[8px] text-white/60 max-w-[180px] leading-tight">
                   This card is property of the issuing bank. If found, please return to the nearest branch.
                 </div>
                 <motion.div

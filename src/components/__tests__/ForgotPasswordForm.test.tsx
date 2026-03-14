@@ -1,6 +1,7 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import { describe, it, expect, vi } from "vitest";
 import { ForgotPasswordForm } from "../ForgotPasswordForm";
+import { expectNoA11yViolations } from "../../test/a11y";
 
 describe("ForgotPasswordForm", () => {
   describe("rendering", () => {
@@ -137,6 +138,13 @@ describe("ForgotPasswordForm", () => {
     it("email input is required", () => {
       render(<ForgotPasswordForm />);
       expect(screen.getByLabelText("Email")).toBeRequired();
+    });
+  });
+
+  describe("accessibility", () => {
+    it("passes axe accessibility checks", async () => {
+      const { container } = render(<ForgotPasswordForm />);
+      await expectNoA11yViolations(container);
     });
   });
 });

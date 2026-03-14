@@ -75,7 +75,7 @@ const ContactSection = forwardRef<HTMLElement, ContactSectionProps>(
             placeholder="Your name"
             value={formData.name}
             onChange={(e) => handleChange("name", e.target.value)}
-            className="w-full bg-white/5 border border-white/6 rounded-md h-10 px-3 text-sm text-white placeholder:text-white/40 outline-none transition-all duration-200 focus:ring-1 focus:ring-white/15 focus:border-white/15"
+            className="w-full bg-white/5 border border-white/6 rounded-md h-10 px-3 text-sm text-white placeholder:text-white/60 outline-none transition-all duration-200 focus:ring-1 focus:ring-white/15 focus:border-white/15"
           />
         </div>
 
@@ -89,7 +89,7 @@ const ContactSection = forwardRef<HTMLElement, ContactSectionProps>(
             placeholder="you@example.com"
             value={formData.email}
             onChange={(e) => handleChange("email", e.target.value)}
-            className="w-full bg-white/5 border border-white/6 rounded-md h-10 px-3 text-sm text-white placeholder:text-white/40 outline-none transition-all duration-200 focus:ring-1 focus:ring-white/15 focus:border-white/15"
+            className="w-full bg-white/5 border border-white/6 rounded-md h-10 px-3 text-sm text-white placeholder:text-white/60 outline-none transition-all duration-200 focus:ring-1 focus:ring-white/15 focus:border-white/15"
           />
         </div>
 
@@ -103,7 +103,7 @@ const ContactSection = forwardRef<HTMLElement, ContactSectionProps>(
             rows={4}
             value={formData.message}
             onChange={(e) => handleChange("message", e.target.value)}
-            className="w-full bg-white/5 border border-white/6 rounded-md px-3 py-2 text-sm text-white placeholder:text-white/40 outline-none transition-all duration-200 focus:ring-1 focus:ring-white/15 focus:border-white/15 min-h-[80px] resize-vertical"
+            className="w-full bg-white/5 border border-white/6 rounded-md px-3 py-2 text-sm text-white placeholder:text-white/60 outline-none transition-all duration-200 focus:ring-1 focus:ring-white/15 focus:border-white/15 min-h-[80px] resize-vertical"
           />
         </div>
 

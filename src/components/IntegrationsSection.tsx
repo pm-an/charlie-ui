@@ -121,7 +121,7 @@ const IntegrationsSection = forwardRef<HTMLElement, IntegrationsSectionProps>(
                       "px-3 py-1.5 rounded-full text-sm font-medium transition-colors duration-200",
                       activeCategory === category
                         ? "bg-white/10 text-white"
-                        : "text-white/40 hover:text-white/60 hover:bg-white/5"
+                        : "text-white/60 hover:text-white/60 hover:bg-white/5"
                     )}
                   >
                     {category}
@@ -140,7 +140,7 @@ const IntegrationsSection = forwardRef<HTMLElement, IntegrationsSectionProps>(
                     {integration.name}
                   </p>
                   {integration.description && (
-                    <p className="mt-1 text-xs text-white/40">
+                    <p className="mt-1 text-xs text-white/60">
                       {integration.description}
                     </p>
                   )}

@@ -50,15 +50,15 @@ export const Horizontal: Story = {
             </p>
             <div className="grid grid-cols-3 gap-4">
               <div className="rounded-lg border border-white/6 bg-white/[0.02] p-4">
-                <p className="text-xs text-white/40 mb-1">Total Commits</p>
+                <p className="text-xs text-white/60 mb-1">Total Commits</p>
                 <p className="text-2xl font-bold text-white">142</p>
               </div>
               <div className="rounded-lg border border-white/6 bg-white/[0.02] p-4">
-                <p className="text-xs text-white/40 mb-1">Open PRs</p>
+                <p className="text-xs text-white/60 mb-1">Open PRs</p>
                 <p className="text-2xl font-bold text-white">8</p>
               </div>
               <div className="rounded-lg border border-white/6 bg-white/[0.02] p-4">
-                <p className="text-xs text-white/40 mb-1">Deployments</p>
+                <p className="text-xs text-white/60 mb-1">Deployments</p>
                 <p className="text-2xl font-bold text-white">23</p>
               </div>
             </div>
@@ -76,7 +76,7 @@ export const Vertical: Story = {
         <ResizablePanels.Panel defaultSize={65} minSize={30}>
           <div className="h-full bg-bg-200 p-4">
             <div className="flex items-center gap-2 mb-3">
-              <span className="text-xs font-mono text-white/40">
+              <span className="text-xs font-mono text-white/60">
                 main.tsx
               </span>
             </div>
@@ -100,7 +100,7 @@ root.render(<App />);`}</code>
               <span className="text-xs font-mono text-green-400/80">
                 ~ /project
               </span>
-              <span className="text-xs font-mono text-white/40">$</span>
+              <span className="text-xs font-mono text-white/60">$</span>
             </div>
             <pre className="text-sm font-mono text-white/60 leading-relaxed">
               <code>{`$ npm run build
@@ -170,7 +170,7 @@ export const ThreePanels: Story = {
               Explorer
             </h3>
             <ul className="space-y-0.5 text-sm font-mono text-white/50">
-              <li className="px-2 py-1 text-white/30">src/</li>
+              <li className="px-2 py-1 text-white/60">src/</li>
               <li className="px-2 py-1 pl-5 rounded bg-white/5 text-white/90">
                 Button.tsx
               </li>
@@ -183,7 +183,7 @@ export const ThreePanels: Story = {
         <ResizablePanels.Handle />
         <ResizablePanels.Panel defaultSize={55} minSize={30}>
           <div className="h-full p-4">
-            <div className="text-xs font-mono text-white/40 mb-3">
+            <div className="text-xs font-mono text-white/60 mb-3">
               Button.tsx
             </div>
             <pre className="text-sm font-mono text-white/80 leading-relaxed">
@@ -214,19 +214,19 @@ const buttonVariants = cva(
             </h3>
             <div className="space-y-3 text-sm">
               <div>
-                <span className="text-white/40">variant</span>
+                <span className="text-white/60">variant</span>
                 <p className="text-white/70 mt-0.5">
                   &quot;primary&quot; | &quot;secondary&quot; | &quot;ghost&quot;
                 </p>
               </div>
               <div>
-                <span className="text-white/40">size</span>
+                <span className="text-white/60">size</span>
                 <p className="text-white/70 mt-0.5">
                   &quot;sm&quot; | &quot;md&quot; | &quot;lg&quot;
                 </p>
               </div>
               <div>
-                <span className="text-white/40">disabled</span>
+                <span className="text-white/60">disabled</span>
                 <p className="text-white/70 mt-0.5">boolean</p>
               </div>
             </div>
@@ -261,7 +261,7 @@ export const Nested: Story = {
           <ResizablePanels direction="vertical">
             <ResizablePanels.Panel defaultSize={60} minSize={25}>
               <div className="h-full p-4">
-                <div className="text-xs font-mono text-white/40 mb-3">
+                <div className="text-xs font-mono text-white/60 mb-3">
                   Editor
                 </div>
                 <pre className="text-sm font-mono text-white/80 leading-relaxed">
@@ -280,7 +280,7 @@ export const Nested: Story = {
             <ResizablePanels.Handle withHandle />
             <ResizablePanels.Panel defaultSize={40} minSize={20}>
               <div className="h-full bg-black/30 p-4">
-                <div className="text-xs font-mono text-white/40 mb-2">
+                <div className="text-xs font-mono text-white/60 mb-2">
                   Output
                 </div>
                 <pre className="text-sm font-mono text-green-400/70 leading-relaxed">
@@ -314,7 +314,7 @@ export const WithMinMax: Story = {
             <h3 className="text-sm font-medium text-white/80 mb-1">
               Sidebar
             </h3>
-            <p className="text-xs text-white/40 mb-3">
+            <p className="text-xs text-white/60 mb-3">
               Constrained: 15% min, 40% max
             </p>
             <ul className="space-y-1 text-sm text-white/60">
@@ -332,7 +332,7 @@ export const WithMinMax: Story = {
         <ResizablePanels.Panel defaultSize={70} minSize={40}>
           <div className="h-full p-6">
             <h2 className="text-lg font-semibold text-white mb-1">Inbox</h2>
-            <p className="text-xs text-white/40 mb-4">
+            <p className="text-xs text-white/60 mb-4">
               Content panel: 40% minimum
             </p>
             <div className="space-y-2">
@@ -341,7 +341,7 @@ export const WithMinMax: Story = {
                   <span className="text-sm font-medium text-white/90">
                     Design review feedback
                   </span>
-                  <span className="text-xs text-white/30">2h ago</span>
+                  <span className="text-xs text-white/60">2h ago</span>
                 </div>
                 <p className="text-sm text-white/50">
                   The latest mockups look great. A few notes on spacing...
@@ -352,7 +352,7 @@ export const WithMinMax: Story = {
                   <span className="text-sm font-medium text-white/90">
                     CI pipeline update
                   </span>
-                  <span className="text-xs text-white/30">5h ago</span>
+                  <span className="text-xs text-white/60">5h ago</span>
                 </div>
                 <p className="text-sm text-white/50">
                   Build times have been reduced by 40% after switching to...
@@ -363,7 +363,7 @@ export const WithMinMax: Story = {
                   <span className="text-sm font-medium text-white/90">
                     Sprint planning notes
                   </span>
-                  <span className="text-xs text-white/30">1d ago</span>
+                  <span className="text-xs text-white/60">1d ago</span>
                 </div>
                 <p className="text-sm text-white/50">
                   Here are the action items from today's planning session...

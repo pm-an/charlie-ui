@@ -77,7 +77,7 @@ const BreadcrumbsSeparator = forwardRef<HTMLSpanElement, BreadcrumbsSeparatorPro
       <li role="presentation" aria-hidden="true" className="inline-flex items-center">
         <span
           ref={ref}
-          className={cn("text-white/30 mx-0.5", className)}
+          className={cn("text-white/60 mx-0.5", className)}
           {...props}
         >
           {children ?? <ChevronRight className="h-3.5 w-3.5" />}
@@ -123,7 +123,7 @@ const BreadcrumbsRoot = forwardRef<HTMLElement, BreadcrumbsProps>(
       // Ellipsis
       visibleItems.push(
         <li key="ellipsis" className="inline-flex items-center">
-          <span className="text-white/40 inline-flex items-center" role="presentation">
+          <span className="text-white/60 inline-flex items-center" role="presentation">
             <MoreHorizontal className="h-3.5 w-3.5" />
           </span>
         </li>

@@ -1,6 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { describe, it, expect, beforeAll } from "vitest";
 import { AreaChart } from "../AreaChart";
+import { expectNoA11yViolations } from "../../test/a11y";
 
 const sampleData = [
   { name: "Jan", value: 100, other: 50 },
@@ -101,5 +102,74 @@ describe("AreaChart", () => {
       />
     );
     expect(container.querySelector('[data-slot="area-chart"]')).toBeInTheDocument();
+  });
+
+  // Accessibility tests
+  it("has role='img' on the wrapper", () => {
+    render(
+      <AreaChart data={sampleData} areas={[{ dataKey: "value" }]} />
+    );
+    expect(screen.getByRole("img")).toBeInTheDocument();
+  });
+
+  it("uses default aria-label when none provided", () => {
+    render(
+      <AreaChart data={sampleData} areas={[{ dataKey: "value" }]} />
+    );
+    expect(screen.getByLabelText("Area chart")).toBeInTheDocument();
+  });
+
+  it("uses custom aria-label when provided", () => {
+    render(
+      <AreaChart
+        data={sampleData}
+        areas={[{ dataKey: "value" }]}
+        aria-label="Monthly active users"
+      />
+    );
+    expect(screen.getByLabelText("Monthly active users")).toBeInTheDocument();
+  });
+
+  it("renders sr-only description with auto-generated summary", () => {
+    const { container } = render(
+      <AreaChart data={sampleData} areas={[{ dataKey: "value" }]} />
+    );
+    const srOnly = container.querySelector(".sr-only");
+    expect(srOnly).toBeInTheDocument();
+    expect(srOnly!.textContent).toContain("3 data points");
+    expect(srOnly!.textContent).toContain("value:");
+  });
+
+  it("renders sr-only description with custom description", () => {
+    const { container } = render(
+      <AreaChart
+        data={sampleData}
+        areas={[{ dataKey: "value" }]}
+        description="User growth over Q1"
+      />
+    );
+    const srOnly = container.querySelector(".sr-only");
+    expect(srOnly!.textContent).toBe("User growth over Q1");
+  });
+
+  it("has aria-describedby pointing to the description", () => {
+    const { container } = render(
+      <AreaChart data={sampleData} areas={[{ dataKey: "value" }]} />
+    );
+    const wrapper = container.querySelector('[data-slot="area-chart"]')!;
+    const descId = wrapper.getAttribute("aria-describedby");
+    expect(descId).toBeTruthy();
+    expect(container.querySelector(`#${CSS.escape(descId!)}`)?.className).toContain("sr-only");
+  });
+
+  it("passes axe accessibility checks", async () => {
+    const { container } = render(
+      <AreaChart
+        data={sampleData}
+        areas={[{ dataKey: "value" }]}
+        aria-label="Test chart"
+      />
+    );
+    await expectNoA11yViolations(container);
   });
 });

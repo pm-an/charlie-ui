@@ -3,6 +3,7 @@ import userEvent from "@testing-library/user-event";
 import { describe, it, expect, vi } from "vitest";
 import { OTPInput } from "../OTPInput";
 import { Field } from "../Field";
+import { expectNoA11yViolations } from "../../test/a11y";
 
 describe("OTPInput", () => {
   describe("rendering", () => {
@@ -417,6 +418,44 @@ describe("OTPInput", () => {
     });
   });
 
+  describe("group ARIA attributes", () => {
+    it("container has role=group", () => {
+      render(<OTPInput length={4} />);
+      expect(screen.getByRole("group")).toBeInTheDocument();
+    });
+
+    it("container has aria-label from label prop", () => {
+      render(<OTPInput length={4} label="Verification Code" />);
+      expect(screen.getByRole("group")).toHaveAttribute("aria-label", "Verification Code");
+    });
+
+    it("container has default aria-label when no label", () => {
+      render(<OTPInput length={4} />);
+      expect(screen.getByRole("group")).toHaveAttribute("aria-label", "One-time password");
+    });
+
+    it("error message has role=alert and id for aria-describedby", () => {
+      render(<OTPInput length={4} error errorMessage="Invalid code" />);
+      const errorEl = screen.getByRole("alert");
+      expect(errorEl).toHaveTextContent("Invalid code");
+      expect(errorEl).toHaveAttribute("id");
+    });
+
+    it("hidden input has aria-invalid when error", () => {
+      render(<OTPInput length={4} error />);
+      expect(screen.getByTestId("otp-hidden-input")).toHaveAttribute("aria-invalid", "true");
+    });
+
+    it("hidden input has aria-describedby referencing error message", () => {
+      render(<OTPInput length={4} error errorMessage="Bad code" />);
+      const input = screen.getByTestId("otp-hidden-input");
+      const describedBy = input.getAttribute("aria-describedby");
+      expect(describedBy).toBeTruthy();
+      const errorEl = screen.getByRole("alert");
+      expect(describedBy).toContain(errorEl.id);
+    });
+  });
+
   describe("displayName", () => {
     it("has correct displayName", () => {
       expect(OTPInput.displayName).toBe("OTPInput");
@@ -443,5 +482,19 @@ describe("OTPInput", () => {
       expect(screen.getByText("Standalone Label")).toBeInTheDocument();
       expect(screen.getByText("Standalone error")).toBeInTheDocument();
     });
+  });
+
+  it("passes axe accessibility checks", async () => {
+    const { container } = render(
+      <OTPInput length={6} label="Verification Code" />
+    );
+    await expectNoA11yViolations(container);
+  });
+
+  it("passes axe accessibility checks with error", async () => {
+    const { container } = render(
+      <OTPInput length={6} label="Code" error errorMessage="Invalid code" />
+    );
+    await expectNoA11yViolations(container);
   });
 });

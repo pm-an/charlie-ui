@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Form } from "../Form";
 import { Input } from "../Input";
+import { expectNoA11yViolations } from "../../test/a11y";
 
 /* ─── Helpers ──────────────────────────────── */
 
@@ -176,5 +177,12 @@ describe("Form", () => {
     await waitFor(() => {
       expect(handleSubmit).toHaveBeenCalled();
     });
+  });
+
+  it("passes axe accessibility checks", async () => {
+    const { container } = render(
+      <TestForm defaultValues={{ name: "Jane", email: "jane@example.com" }} />
+    );
+    await expectNoA11yViolations(container);
   });
 });
