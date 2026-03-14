@@ -10,9 +10,10 @@ A dark-first React component library with 110+ components, built on Tailwind CSS
 - **Component registry** — install only what you need via the CLI registry
 - **Tailwind CSS v4** — built on `@theme` tokens and `--charlie-*` CSS custom properties
 - **Fully typed** — written in TypeScript with exported types for every component
-- **Accessible** — keyboard navigation, ARIA attributes, and screen reader support
+- **Accessible** — WCAG 2.1 AA compliant with keyboard navigation, ARIA attributes, focus management, and screen reader support
 - **Animated** — smooth transitions with reduced-motion support
-- **Interactive docs** — browse and test every component in the included Storybook
+- **WCAG 2.1 AA compliant** — all components meet accessibility standards with proper ARIA attributes, keyboard navigation, focus management, and screen reader support
+- **Interactive docs** — browse and test every component in the [live Storybook](https://pm-an.github.io/charlie-ui/storybook/)
 
 ## Quick Start
 
