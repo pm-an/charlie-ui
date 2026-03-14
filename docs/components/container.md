@@ -5,7 +5,7 @@ A centered content wrapper with horizontal padding and a configurable maximum wi
 ## Import
 
 ```tsx
-import { Container } from "@piotr/charlie-ui";
+import { Container } from "@charlietogolden/charlie-ui";
 ```
 
 ## Props

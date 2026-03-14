@@ -1,7 +1,10 @@
-import { type HTMLAttributes } from "react";
+"use client";
+
+import { type HTMLAttributes, useId } from "react";
 import { cva, type VariantProps } from "class-variance-authority";
-import { motion } from "framer-motion";
+import { LayoutGroup, motion } from "framer-motion";
 import { cn } from "../utils/cn";
+import { useControllableState } from "../hooks/useControllableState";
 
 const tabsContainerVariants = cva("relative flex overflow-x-auto", {
   variants: {
@@ -17,7 +20,7 @@ const tabsContainerVariants = cva("relative flex overflow-x-auto", {
 });
 
 const tabItemVariants = cva(
-  "relative z-10 cursor-pointer select-none text-sm font-medium transition-colors whitespace-nowrap min-h-[44px] flex items-center justify-center",
+  "relative z-10 cursor-pointer select-none text-sm font-medium transition-colors whitespace-nowrap flex items-center justify-center",
   {
     variants: {
       variant: {
@@ -54,22 +57,32 @@ export interface TabItem {
 export type TabsProps = Omit<HTMLAttributes<HTMLDivElement>, "onChange"> &
   VariantProps<typeof tabsContainerVariants> & {
     items: TabItem[];
-    value: string;
-    onChange: (value: string) => void;
+    value?: string;
+    defaultValue?: string;
+    onChange?: (value: string) => void;
   };
 
 function Tabs({
   className,
   variant = "pills",
   items,
-  value,
+  value: controlledValue,
+  defaultValue,
   onChange,
   ...props
 }: TabsProps) {
+  const [value, setValue] = useControllableState(
+    controlledValue,
+    defaultValue ?? items[0]?.value ?? "",
+    onChange
+  );
+  const id = useId();
   return (
+    <LayoutGroup id={id}>
     <div
       className={cn(tabsContainerVariants({ variant }), className)}
       role="tablist"
+      data-slot="tabs"
       {...props}
     >
       {items.map((item) => {
@@ -80,8 +93,9 @@ function Tabs({
             type="button"
             role="tab"
             aria-selected={isActive}
+            data-state={isActive ? "active" : "inactive"}
             className={cn(tabItemVariants({ variant, active: isActive }))}
-            onClick={() => onChange(item.value)}
+            onClick={() => setValue(item.value)}
           >
             {isActive && variant === "pills" && (
               <motion.span
@@ -117,6 +131,7 @@ function Tabs({
         );
       })}
     </div>
+    </LayoutGroup>
   );
 }
 

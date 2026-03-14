@@ -5,7 +5,7 @@ A hover/focus-activated tooltip that appears near the trigger element. Supports 
 ## Import
 
 ```tsx
-import { Tooltip } from "@piotr/charlie-ui";
+import { Tooltip } from "@charlietogolden/charlie-ui";
 ```
 
 ## Props

@@ -23,6 +23,7 @@ function Divider({ className, variant, label, ...props }: DividerProps) {
   if (label) {
     return (
       <div
+        data-slot="divider"
         className={cn("flex items-center gap-3 w-full", className)}
         role="separator"
         {...props}
@@ -36,6 +37,7 @@ function Divider({ className, variant, label, ...props }: DividerProps) {
 
   return (
     <div
+      data-slot="divider"
       className={cn(dividerVariants({ variant }), className)}
       role="separator"
       {...props}

@@ -1,6 +1,8 @@
 import { forwardRef, type ReactNode, type ButtonHTMLAttributes } from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "../utils/cn";
+import { Slot } from "../utils/Slot";
+import { Spinner } from "./Spinner";
 
 const buttonVariants = cva(
   [
@@ -13,7 +15,7 @@ const buttonVariants = cva(
     variants: {
       variant: {
         primary: [
-          "bg-white/80 hover:bg-white text-[#18191a]",
+          "bg-white/80 hover:bg-white text-button-fg",
           "shadow-[inset_0_0.5px_0_0_rgba(255,255,255,0.3)]",
         ],
         secondary: [
@@ -28,7 +30,7 @@ const buttonVariants = cva(
           "bg-red hover:bg-red/90 text-white",
         ],
         brand: [
-          "bg-[#ff6363] hover:bg-[#ff6363]/90 text-white",
+          "bg-accent hover:bg-accent/90 text-white",
         ],
       },
       size: {
@@ -44,13 +46,12 @@ const buttonVariants = cva(
   }
 );
 
-const spinnerClasses = "animate-spin h-4 w-4 border-2 border-current border-t-transparent rounded-full";
-
 export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> &
   VariantProps<typeof buttonVariants> & {
     leftIcon?: ReactNode;
     rightIcon?: ReactNode;
     loading?: boolean;
+    asChild?: boolean;
   };
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
@@ -64,19 +65,34 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       loading = false,
       disabled,
       children,
+      asChild = false,
       ...props
     },
     ref
   ) => {
+    if (asChild) {
+      return (
+        <Slot
+          ref={ref as React.Ref<HTMLElement>}
+          data-slot="button"
+          className={cn(buttonVariants({ variant, size }), className)}
+          {...props}
+        >
+          {children as React.ReactElement}
+        </Slot>
+      );
+    }
+
     return (
       <button
         ref={ref}
+        data-slot="button"
         className={cn(buttonVariants({ variant, size }), className)}
         disabled={disabled || loading}
         {...props}
       >
         {loading ? (
-          <span className={spinnerClasses} />
+          <Spinner size="xs" color="currentColor" label="Loading" />
         ) : (
           leftIcon
         )}

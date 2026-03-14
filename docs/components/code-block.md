@@ -5,7 +5,7 @@ A styled `<pre>` block for displaying code snippets. Includes an optional langua
 ## Import
 
 ```tsx
-import { CodeBlock } from "@piotr/charlie-ui";
+import { CodeBlock } from "@charlietogolden/charlie-ui";
 ```
 
 ## Props
@@ -29,7 +29,7 @@ import { CodeBlock } from "@piotr/charlie-ui";
 ### Multi-line Code
 
 ```tsx
-<CodeBlock language="tsx" code={`import { Button } from "@piotr/charlie-ui";
+<CodeBlock language="tsx" code={`import { Button } from "@charlietogolden/charlie-ui";
 
 function App() {
   return <Button variant="primary">Click me</Button>;
@@ -42,7 +42,7 @@ You can pass code as children instead of the `code` prop:
 
 ```tsx
 <CodeBlock language="bash">
-  npm install @piotr/charlie-ui
+  npm install @charlietogolden/charlie-ui
 </CodeBlock>
 ```
 

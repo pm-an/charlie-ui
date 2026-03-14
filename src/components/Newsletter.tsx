@@ -1,3 +1,5 @@
+"use client";
+
 import { type FormEvent, useState } from "react";
 import { cn } from "../utils/cn";
 
@@ -21,6 +23,7 @@ function Newsletter({ title, description, onSubmit, className }: NewsletterProps
 
   return (
     <div
+      data-slot="newsletter"
       className={cn(
         "bg-card-gradient rounded-xl border border-white/[0.06] p-5 md:p-8 text-center",
         className

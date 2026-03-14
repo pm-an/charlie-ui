@@ -2,7 +2,7 @@ import { useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { ProductGrid } from "./ProductGrid";
 import type { ProductCardProps } from "./ProductCard";
-import { fn } from "@storybook/test";
+import { fn } from "storybook/test";
 
 const sampleProducts: ProductCardProps[] = [
   {

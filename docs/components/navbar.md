@@ -5,7 +5,7 @@ A fixed-position navigation bar with a logo, desktop links, action buttons, and 
 ## Import
 
 ```tsx
-import { Navbar } from "@piotr/charlie-ui";
+import { Navbar } from "@charlietogolden/charlie-ui";
 ```
 
 ## Props

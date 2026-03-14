@@ -5,7 +5,7 @@ A gradient-backed card for linking to social media profiles or community channel
 ## Import
 
 ```tsx
-import { SocialCard } from "@piotr/charlie-ui";
+import { SocialCard } from "@charlietogolden/charlie-ui";
 ```
 
 ## Props

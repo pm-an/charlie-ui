@@ -5,7 +5,7 @@ A decorative gradient overlay used to add atmospheric depth to sections. Positio
 ## Import
 
 ```tsx
-import { GradientBackground } from "@piotr/charlie-ui";
+import { GradientBackground } from "@charlietogolden/charlie-ui";
 ```
 
 ## Props

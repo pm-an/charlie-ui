@@ -5,7 +5,7 @@ A timeline-style entry for displaying changelog items, release notes, or version
 ## Import
 
 ```tsx
-import { ChangelogEntry } from "@piotr/charlie-ui";
+import { ChangelogEntry } from "@charlietogolden/charlie-ui";
 ```
 
 ## Props

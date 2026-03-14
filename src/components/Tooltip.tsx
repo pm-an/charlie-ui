@@ -1,4 +1,6 @@
-import { type ReactNode, useState, useRef, useCallback, useEffect } from "react";
+"use client";
+
+import { type ReactNode, type CSSProperties, useState, useRef, useCallback, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { cn } from "../utils/cn";
 
@@ -12,28 +14,28 @@ export interface TooltipProps {
 
 const sideConfig = {
   top: {
-    placement: "bottom-full left-1/2 -translate-x-1/2 mb-2" as const,
-    initial: { opacity: 0, y: 4 },
-    animate: { opacity: 1, y: 0 },
-    exit: { opacity: 0, y: 4 },
+    style: { bottom: "100%", left: "50%", marginBottom: 8 } as CSSProperties,
+    initial: { opacity: 0, x: "-50%", y: 4 },
+    animate: { opacity: 1, x: "-50%", y: 0 },
+    exit: { opacity: 0, x: "-50%", y: 4 },
   },
   bottom: {
-    placement: "top-full left-1/2 -translate-x-1/2 mt-2" as const,
-    initial: { opacity: 0, y: -4 },
-    animate: { opacity: 1, y: 0 },
-    exit: { opacity: 0, y: -4 },
+    style: { top: "100%", left: "50%", marginTop: 8 } as CSSProperties,
+    initial: { opacity: 0, x: "-50%", y: -4 },
+    animate: { opacity: 1, x: "-50%", y: 0 },
+    exit: { opacity: 0, x: "-50%", y: -4 },
   },
   left: {
-    placement: "right-full top-1/2 -translate-y-1/2 mr-2" as const,
-    initial: { opacity: 0, x: 4 },
-    animate: { opacity: 1, x: 0 },
-    exit: { opacity: 0, x: 4 },
+    style: { right: "100%", top: "50%", marginRight: 8 } as CSSProperties,
+    initial: { opacity: 0, y: "-50%", x: 4 },
+    animate: { opacity: 1, y: "-50%", x: 0 },
+    exit: { opacity: 0, y: "-50%", x: 4 },
   },
   right: {
-    placement: "left-full top-1/2 -translate-y-1/2 ml-2" as const,
-    initial: { opacity: 0, x: -4 },
-    animate: { opacity: 1, x: 0 },
-    exit: { opacity: 0, x: -4 },
+    style: { left: "100%", top: "50%", marginLeft: 8 } as CSSProperties,
+    initial: { opacity: 0, y: "-50%", x: -4 },
+    animate: { opacity: 1, y: "-50%", x: 0 },
+    exit: { opacity: 0, y: "-50%", x: -4 },
   },
 };
 
@@ -69,7 +71,9 @@ function Tooltip({
 
   return (
     <span
+      data-slot="tooltip"
       className="relative inline-flex"
+      data-state={visible ? "open" : "closed"}
       onMouseEnter={show}
       onMouseLeave={hide}
       onFocus={show}
@@ -84,13 +88,13 @@ function Tooltip({
               "pointer-events-none absolute z-50 whitespace-nowrap",
               "bg-grey-700 border border-white/10 rounded-md px-3 py-1.5",
               "text-xs text-white/80 shadow-lg",
-              config.placement,
               className
             )}
+            style={config.style}
             initial={config.initial}
             animate={config.animate}
             exit={config.exit}
-            transition={{ duration: 0.15, ease: "easeOut" }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
           >
             {content}
           </motion.span>

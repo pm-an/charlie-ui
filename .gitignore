@@ -26,5 +26,14 @@ dist-ssr
 # Storybook
 storybook-static
 
+# Registry (generated)
+registry/
+
+# Combined Pages build
+_site/
+
+# Planning / internal docs
+.planning/
+
 # Reference files
 https_

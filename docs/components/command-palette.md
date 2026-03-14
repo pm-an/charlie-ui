@@ -5,7 +5,7 @@ A Raycast/Spotlight-inspired command palette overlay with a search input and gro
 ## Import
 
 ```tsx
-import { CommandPalette, CommandGroup, CommandItem } from "@piotr/charlie-ui";
+import { CommandPalette, CommandGroup, CommandItem } from "@charlietogolden/charlie-ui";
 ```
 
 ## Props
@@ -44,7 +44,7 @@ import { CommandPalette, CommandGroup, CommandItem } from "@piotr/charlie-ui";
 
 ```tsx
 import { useState } from "react";
-import { CommandPalette, CommandGroup, CommandItem } from "@piotr/charlie-ui";
+import { CommandPalette, CommandGroup, CommandItem } from "@charlietogolden/charlie-ui";
 import { FileText, Settings, Users } from "lucide-react";
 
 function App() {

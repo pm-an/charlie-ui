@@ -5,7 +5,7 @@ A content card designed for blog post previews, featuring an image area, tag, ti
 ## Import
 
 ```tsx
-import { BlogCard } from "@piotr/charlie-ui";
+import { BlogCard } from "@charlietogolden/charlie-ui";
 ```
 
 ## Props

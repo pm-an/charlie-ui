@@ -5,7 +5,7 @@ A horizontal separator with solid or dotted styles. Optionally displays a center
 ## Import
 
 ```tsx
-import { Divider } from "@piotr/charlie-ui";
+import { Divider } from "@charlietogolden/charlie-ui";
 ```
 
 ## Props

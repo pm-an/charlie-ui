@@ -5,7 +5,7 @@ A full-width hero section for landing pages. Supports centered and split (two-co
 ## Import
 
 ```tsx
-import { Hero } from "@piotr/charlie-ui";
+import { Hero } from "@charlietogolden/charlie-ui";
 ```
 
 ## Props

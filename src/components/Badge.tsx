@@ -8,11 +8,11 @@ const badgeVariants = cva(
     variants: {
       variant: {
         default: "bg-white/5 text-white/60",
-        red: "bg-[rgba(255,99,99,0.15)] text-red",
+        red: "bg-red-muted text-red",
         blue: "bg-blue-muted text-blue",
         green: "bg-green-muted text-green",
         yellow: "bg-yellow-muted text-yellow",
-        pro: "bg-[rgba(162,223,253,0.15)] text-[#A2DFFD]",
+        pro: "bg-blue-muted text-blue",
       },
       size: {
         sm: "text-[10px] px-1.5 py-0.5",
@@ -32,6 +32,7 @@ export type BadgeProps = HTMLAttributes<HTMLSpanElement> &
 function Badge({ className, variant, size, ...props }: BadgeProps) {
   return (
     <span
+      data-slot="badge"
       className={cn(badgeVariants({ variant, size }), className)}
       {...props}
     />

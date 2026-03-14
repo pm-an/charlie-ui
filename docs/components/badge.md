@@ -5,7 +5,7 @@ An inline label for displaying status, categories, or metadata. Supports multipl
 ## Import
 
 ```tsx
-import { Badge } from "@piotr/charlie-ui";
+import { Badge } from "@charlietogolden/charlie-ui";
 ```
 
 ## Props

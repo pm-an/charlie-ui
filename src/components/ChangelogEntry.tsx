@@ -23,7 +23,7 @@ function ChangelogEntry({
   ...props
 }: ChangelogEntryProps) {
   return (
-    <div className={cn("flex flex-col md:flex-row gap-4 md:gap-8", className)} {...props}>
+    <div data-slot="changelog-entry" className={cn("flex flex-col md:flex-row gap-4 md:gap-8", className)} {...props}>
       {/* Left column: date + timeline */}
       <div className="flex md:w-[120px] shrink-0 gap-3 items-center md:items-start">
         <span className="text-sm text-white/40">{date}</span>

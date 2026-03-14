@@ -5,7 +5,7 @@ A keyboard shortcut display element styled to resemble a physical key cap. Ideal
 ## Import
 
 ```tsx
-import { Kbd } from "@piotr/charlie-ui";
+import { Kbd } from "@charlietogolden/charlie-ui";
 ```
 
 ## Props

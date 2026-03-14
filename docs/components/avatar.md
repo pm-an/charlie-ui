@@ -5,7 +5,7 @@ A circular user avatar that displays an image, falls back to initials, and optio
 ## Import
 
 ```tsx
-import { Avatar } from "@piotr/charlie-ui";
+import { Avatar } from "@charlietogolden/charlie-ui";
 ```
 
 ## Props

@@ -1,3 +1,5 @@
+"use client";
+
 import { type ReactNode, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
@@ -21,6 +23,7 @@ function Navbar({ logo, links = [], actions, className }: NavbarProps) {
 
   return (
     <nav
+      data-slot="navbar"
       className={cn(
         "fixed top-0 left-0 right-0 z-50 h-[58px] bg-black/50 backdrop-blur-xl border-b border-white/[0.06]",
         className
@@ -40,7 +43,7 @@ function Navbar({ logo, links = [], actions, className }: NavbarProps) {
             >
               {link.label}
               {link.badge && (
-                <span className="ml-1.5 inline-flex items-center rounded-md bg-[rgba(255,99,99,0.15)] text-red text-[10px] px-1.5 py-0.5 font-medium">
+                <span className="ml-1.5 inline-flex items-center rounded-md bg-red-muted text-red text-[10px] px-1.5 py-0.5 font-medium">
                   {link.badge}
                 </span>
               )}
@@ -71,7 +74,7 @@ function Navbar({ logo, links = [], actions, className }: NavbarProps) {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.2, ease: "easeInOut" }}
+            transition={{ duration: 0.26, ease: "easeInOut" }}
             className="md:hidden bg-black/90 backdrop-blur-xl border-b border-white/[0.06] overflow-hidden"
           >
             <div className="max-w-[1280px] mx-auto px-4 sm:px-6 py-4 flex flex-col gap-1">
@@ -84,7 +87,7 @@ function Navbar({ logo, links = [], actions, className }: NavbarProps) {
                 >
                   {link.label}
                   {link.badge && (
-                    <span className="ml-1.5 inline-flex items-center rounded-md bg-[rgba(255,99,99,0.15)] text-red text-[10px] px-1.5 py-0.5 font-medium">
+                    <span className="ml-1.5 inline-flex items-center rounded-md bg-red-muted text-red text-[10px] px-1.5 py-0.5 font-medium">
                       {link.badge}
                     </span>
                   )}

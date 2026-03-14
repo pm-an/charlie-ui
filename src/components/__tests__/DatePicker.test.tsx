@@ -7,6 +7,7 @@ import {
 import userEvent from "@testing-library/user-event";
 import { describe, it, expect, vi } from "vitest";
 import { DatePicker } from "../DatePicker";
+import { Field } from "../Field";
 import { format, addDays } from "date-fns";
 
 describe("DatePicker", () => {
@@ -81,18 +82,13 @@ describe("DatePicker", () => {
       expect(trigger).toHaveAttribute("aria-expanded", "false");
     });
 
-    it("closes on click outside", async () => {
+    it("closes on click outside (backdrop)", async () => {
       const user = userEvent.setup();
-      render(
-        <div>
-          <DatePicker />
-          <button>Outside</button>
-        </div>
-      );
+      render(<DatePicker />);
       const trigger = screen.getByTestId("datepicker-trigger");
       await user.click(trigger);
       expect(trigger).toHaveAttribute("aria-expanded", "true");
-      fireEvent.mouseDown(screen.getByText("Outside"));
+      await user.click(screen.getByTestId("datepicker-backdrop"));
       expect(trigger).toHaveAttribute("aria-expanded", "false");
     });
 
@@ -228,6 +224,85 @@ describe("DatePicker", () => {
       expect(
         screen.getByText(format(from, "PPP"))
       ).toBeInTheDocument();
+    });
+
+    it("does not auto-close popover in range mode", async () => {
+      const user = userEvent.setup();
+      const onRangeChange = vi.fn();
+      render(
+        <DatePicker mode="range" onRangeChange={onRangeChange} />
+      );
+      // Open the popover
+      await user.click(screen.getByTestId("datepicker-trigger"));
+      expect(screen.getByRole("dialog")).toBeInTheDocument();
+
+      // Click a day to set the start date
+      const dayButtons = screen.getAllByRole("gridcell").filter(
+        (cell) => cell.querySelector("button") && !cell.classList.contains("outside")
+      );
+      const firstDay = dayButtons[0]?.querySelector("button");
+      if (firstDay) await user.click(firstDay);
+
+      // Popover should still be open after selecting start date
+      expect(screen.getByRole("dialog")).toBeInTheDocument();
+
+      // Click another day (end)
+      const lastDay = dayButtons[dayButtons.length - 1]?.querySelector("button");
+      if (lastDay) await user.click(lastDay);
+
+      // Popover should STILL be open even after both dates selected
+      expect(screen.getByRole("dialog")).toBeInTheDocument();
+    });
+
+    it("shows Done button in range mode", async () => {
+      const user = userEvent.setup();
+      render(<DatePicker mode="range" />);
+      await user.click(screen.getByTestId("datepicker-trigger"));
+      expect(screen.getByTestId("datepicker-done")).toBeInTheDocument();
+      expect(screen.getByTestId("datepicker-done")).toHaveTextContent("Done");
+    });
+
+    it("does not show Done button in single mode", async () => {
+      const user = userEvent.setup();
+      render(<DatePicker mode="single" />);
+      await user.click(screen.getByTestId("datepicker-trigger"));
+      expect(screen.queryByTestId("datepicker-done")).not.toBeInTheDocument();
+    });
+
+    it("closes popover when Done button is clicked", async () => {
+      const user = userEvent.setup();
+      render(<DatePicker mode="range" />);
+      await user.click(screen.getByTestId("datepicker-trigger"));
+      expect(screen.getByRole("dialog")).toBeInTheDocument();
+      await user.click(screen.getByTestId("datepicker-done"));
+      await waitForElementToBeRemoved(() => screen.queryByRole("dialog"));
+    });
+
+    it("does not show backdrop in range mode", async () => {
+      const user = userEvent.setup();
+      render(<DatePicker mode="range" />);
+      await user.click(screen.getByTestId("datepicker-trigger"));
+      expect(screen.queryByTestId("datepicker-backdrop")).not.toBeInTheDocument();
+    });
+
+    it("trigger does not toggle-close in range mode", async () => {
+      const user = userEvent.setup();
+      render(<DatePicker mode="range" />);
+      const trigger = screen.getByTestId("datepicker-trigger");
+      await user.click(trigger);
+      expect(screen.getByRole("dialog")).toBeInTheDocument();
+      // Clicking trigger again should NOT close in range mode
+      await user.click(trigger);
+      expect(screen.getByRole("dialog")).toBeInTheDocument();
+    });
+
+    it("Escape does not close popover in range mode", async () => {
+      const user = userEvent.setup();
+      render(<DatePicker mode="range" />);
+      await user.click(screen.getByTestId("datepicker-trigger"));
+      expect(screen.getByRole("dialog")).toBeInTheDocument();
+      await user.keyboard("{Escape}");
+      expect(screen.getByRole("dialog")).toBeInTheDocument();
     });
 
     it("calls onRangeChange when range is cleared", async () => {
@@ -482,6 +557,36 @@ describe("DatePicker", () => {
       await user.click(screen.getByTestId("datepicker-trigger"));
       const popover = screen.getByTestId("datepicker-popover");
       expect(popover).toHaveClass("left-1/2");
+    });
+  });
+
+  describe("DatePicker inside Field", () => {
+    it("suppresses own label and error when inside Field", () => {
+      render(
+        <Field label="Field Label" error errorMessage="Field error">
+          <DatePicker label="Own Label" error errorMessage="Own error" />
+        </Field>
+      );
+      expect(screen.getByText("Field Label")).toBeInTheDocument();
+      expect(screen.queryByText("Own Label")).not.toBeInTheDocument();
+      expect(screen.getByText("Field error")).toBeInTheDocument();
+      expect(screen.queryByText("Own error")).not.toBeInTheDocument();
+    });
+
+    it("suppresses own helper text when inside Field", () => {
+      render(
+        <Field label="Field Label">
+          <DatePicker helperText="Own helper" />
+        </Field>
+      );
+      expect(screen.getByText("Field Label")).toBeInTheDocument();
+      expect(screen.queryByText("Own helper")).not.toBeInTheDocument();
+    });
+
+    it("renders normally when standalone", () => {
+      render(<DatePicker label="Standalone Label" helperText="Standalone help" />);
+      expect(screen.getByText("Standalone Label")).toBeInTheDocument();
+      expect(screen.getByText("Standalone help")).toBeInTheDocument();
     });
   });
 });

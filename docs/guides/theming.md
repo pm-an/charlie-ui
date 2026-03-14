@@ -83,7 +83,7 @@ Because Charlie UI uses `tailwind-merge`, conflicting classes are resolved in yo
 Many components export their variant functions (e.g. `buttonVariants`, `badgeVariants`, `cardVariants`). You can use these to apply component styles to your own elements:
 
 ```tsx
-import { buttonVariants } from "@piotr/charlie-ui";
+import { buttonVariants } from "@charlietogolden/charlie-ui";
 
 // Style a Next.js Link as a Button
 <Link href="/docs" className={buttonVariants({ variant: "secondary", size: "sm" })}>

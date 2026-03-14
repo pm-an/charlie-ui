@@ -1,3 +1,5 @@
+"use client";
+
 import { type CSSProperties } from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { motion } from "framer-motion";
@@ -22,11 +24,11 @@ const gradientVariants = cva(
 
 const gradientStyles: Record<string, string> = {
   aurora:
-    "radial-gradient(ellipse 80% 50% at 50% -20%, rgba(255,99,99,0.15), rgba(155,77,255,0.08), transparent)",
+    "radial-gradient(ellipse 80% 50% at 50% -20%, color-mix(in srgb, var(--color-accent) 15%, transparent), color-mix(in srgb, var(--color-purple) 8%, transparent), transparent)",
   nebula:
-    "radial-gradient(ellipse 80% 50% at 50% -20%, rgba(86,194,255,0.1), rgba(155,77,255,0.1), transparent)",
+    "radial-gradient(ellipse 80% 50% at 50% -20%, color-mix(in srgb, var(--color-blue) 10%, transparent), color-mix(in srgb, var(--color-purple) 10%, transparent), transparent)",
   warm:
-    "radial-gradient(ellipse 80% 50% at 50% -20%, rgba(255,146,23,0.1), rgba(255,99,99,0.08), transparent)",
+    "radial-gradient(ellipse 80% 50% at 50% -20%, color-mix(in srgb, var(--color-orange) 10%, transparent), color-mix(in srgb, var(--color-accent) 8%, transparent), transparent)",
 };
 
 export type GradientBackgroundProps = VariantProps<typeof gradientVariants> & {
@@ -47,6 +49,7 @@ function GradientBackground({
   if (animate) {
     return (
       <motion.div
+        data-slot="gradient-background"
         className={cn(gradientVariants({ variant }), className)}
         style={combinedStyle}
         animate={{ opacity: [0.6, 1, 0.6] }}
@@ -57,6 +60,7 @@ function GradientBackground({
 
   return (
     <div
+      data-slot="gradient-background"
       className={cn(gradientVariants({ variant }), className)}
       style={combinedStyle}
     />

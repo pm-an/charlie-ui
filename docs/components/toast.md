@@ -5,7 +5,7 @@ A notification popup that appears in the bottom-right corner of the viewport. Su
 ## Import
 
 ```tsx
-import { Toast } from "@piotr/charlie-ui";
+import { Toast } from "@charlietogolden/charlie-ui";
 ```
 
 ## Props

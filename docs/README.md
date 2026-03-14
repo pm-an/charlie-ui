@@ -29,8 +29,8 @@ Charlie UI provides a comprehensive set of beautifully crafted, dark-first UI co
 ## Quick Example
 
 ```tsx
-import { Button, Badge, Card } from "@piotr/charlie-ui";
-import "@piotr/charlie-ui/styles.css";
+import { Button, Badge, Card } from "@charlietogolden/charlie-ui";
+import "@charlietogolden/charlie-ui/styles.css";
 
 function App() {
   return (

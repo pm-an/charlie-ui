@@ -5,7 +5,7 @@ A card designed for showcasing product features. Includes an icon, title, descri
 ## Import
 
 ```tsx
-import { FeatureCard } from "@piotr/charlie-ui";
+import { FeatureCard } from "@charlietogolden/charlie-ui";
 ```
 
 ## Props

@@ -5,7 +5,7 @@ A styled text input with support for labels, helper text, error states, and icon
 ## Import
 
 ```tsx
-import { Input } from "@piotr/charlie-ui";
+import { Input } from "@charlietogolden/charlie-ui";
 ```
 
 ## Props

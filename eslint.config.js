@@ -1,5 +1,6 @@
 // For more info, see https://github.com/storybookjs/eslint-plugin-storybook#configuration-flat-config-format
 import storybook from "eslint-plugin-storybook";
+import jsxA11y from "eslint-plugin-jsx-a11y";
 
 import js from '@eslint/js'
 import globals from 'globals'
@@ -15,9 +16,15 @@ export default defineConfig([globalIgnores(['dist']), {
     tseslint.configs.recommended,
     reactHooks.configs.flat.recommended,
     reactRefresh.configs.vite,
+    jsxA11y.flatConfigs.recommended,
   ],
   languageOptions: {
     ecmaVersion: 2020,
     globals: globals.browser,
+  },
+  rules: {
+    "jsx-a11y/no-autofocus": "warn",
+    "jsx-a11y/click-events-have-key-events": "warn",
+    "jsx-a11y/no-static-element-interactions": "warn",
   },
 }, ...storybook.configs["flat/recommended"]])

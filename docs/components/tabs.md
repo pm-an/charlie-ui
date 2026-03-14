@@ -5,7 +5,7 @@ An animated tab navigation component with three visual styles: pills, underline,
 ## Import
 
 ```tsx
-import { Tabs } from "@piotr/charlie-ui";
+import { Tabs } from "@charlietogolden/charlie-ui";
 ```
 
 ## Props

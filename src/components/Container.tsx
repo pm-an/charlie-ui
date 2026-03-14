@@ -22,6 +22,7 @@ export type ContainerProps = HTMLAttributes<HTMLDivElement> &
 function Container({ className, size, ...props }: ContainerProps) {
   return (
     <div
+      data-slot="container"
       className={cn(containerVariants({ size }), className)}
       {...props}
     />

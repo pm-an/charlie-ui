@@ -5,6 +5,8 @@ import {
 } from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "../utils/cn";
+import { Slot } from "../utils/Slot";
+import { Skeleton } from "./Skeleton";
 
 /* ─── Card Root ─────────────────────────────── */
 
@@ -31,16 +33,46 @@ const cardVariants = cva(
 );
 
 type CardProps = HTMLAttributes<HTMLDivElement> &
-  VariantProps<typeof cardVariants>;
+  VariantProps<typeof cardVariants> & {
+    asChild?: boolean;
+    loading?: boolean;
+  };
 
 const CardRoot = forwardRef<HTMLDivElement, CardProps>(
-  ({ className, variant, padding, ...props }, ref) => (
-    <div
-      ref={ref}
-      className={cn(cardVariants({ variant, padding }), className)}
-      {...props}
-    />
-  )
+  ({ className, variant, padding, asChild = false, loading = false, children, ...props }, ref) => {
+    if (asChild) {
+      return (
+        <Slot
+          ref={ref as React.Ref<HTMLElement>}
+          data-slot="card"
+          className={cn(cardVariants({ variant, padding }), className)}
+          {...props}
+        >
+          {children as React.ReactElement}
+        </Slot>
+      );
+    }
+
+    return (
+      <div
+        ref={ref}
+        data-slot="card"
+        aria-busy={loading || undefined}
+        className={cn(cardVariants({ variant, padding }), className)}
+        {...props}
+      >
+        {loading ? (
+          <div className="space-y-3">
+            <Skeleton variant="text" height={16} width="60%" />
+            <Skeleton variant="text" height={12} width="80%" />
+            <Skeleton variant="text" height={12} width="40%" />
+          </div>
+        ) : (
+          children
+        )}
+      </div>
+    );
+  }
 );
 CardRoot.displayName = "Card";
 
@@ -56,6 +88,7 @@ const CardHeader = forwardRef<HTMLDivElement, CardHeaderProps>(
   ({ className, icon, title, description, children, ...props }, ref) => (
     <div
       ref={ref}
+      data-slot="card-header"
       className={cn("flex items-center gap-3 pb-4", className)}
       {...props}
     >
@@ -80,7 +113,7 @@ CardHeader.displayName = "Card.Header";
 
 const CardBody = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
   ({ className, ...props }, ref) => (
-    <div ref={ref} className={cn(className)} {...props} />
+    <div ref={ref} data-slot="card-body" className={cn(className)} {...props} />
   )
 );
 CardBody.displayName = "Card.Body";
@@ -91,6 +124,7 @@ const CardFooter = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
   ({ className, ...props }, ref) => (
     <div
       ref={ref}
+      data-slot="card-footer"
       className={cn("pt-4 border-t border-white/[0.06]", className)}
       {...props}
     />

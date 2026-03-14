@@ -1,9 +1,10 @@
+"use client";
+
 import {
   createContext,
   useCallback,
   useContext,
   useMemo,
-  useState,
   forwardRef,
   type HTMLAttributes,
   type ReactNode,
@@ -11,11 +12,12 @@ import {
 import { cn } from "../utils/cn";
 import { ChevronDown } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
+import { useControllableState } from "../hooks/useControllableState";
 
 /* ─── Context ───────────────────────────────── */
 
 type AccordionContextValue = {
-  openItems: Set<string>;
+  openItems: string[];
   toggle: (id: string) => void;
 };
 
@@ -32,37 +34,42 @@ function useAccordion() {
 export type AccordionProps = HTMLAttributes<HTMLDivElement> & {
   mode?: "single" | "multiple";
   defaultOpen?: string[];
+  /** Controlled open items */
+  value?: string[];
+  /** Called when open items change (controlled mode) */
+  onValueChange?: (value: string[]) => void;
 };
 
 const AccordionRoot = forwardRef<HTMLDivElement, AccordionProps>(
-  ({ className, mode = "single", defaultOpen = [], children, ...props }, ref) => {
-    const [openItems, setOpenItems] = useState<Set<string>>(
-      () => new Set(defaultOpen)
+  ({ className, mode = "single", defaultOpen = [], value: controlledValue, onValueChange, children, ...props }, ref) => {
+    const [openItems, setOpenItems] = useControllableState<string[]>(
+      controlledValue,
+      defaultOpen,
+      onValueChange
     );
 
     const toggle = useCallback(
       (id: string) => {
         setOpenItems((prev) => {
-          const next = new Set(prev);
-          if (next.has(id)) {
-            next.delete(id);
+          const isOpen = prev.includes(id);
+          if (isOpen) {
+            return prev.filter((item) => item !== id);
           } else {
             if (mode === "single") {
-              next.clear();
+              return [id];
             }
-            next.add(id);
+            return [...prev, id];
           }
-          return next;
         });
       },
-      [mode]
+      [mode, setOpenItems]
     );
 
-    const value = useMemo(() => ({ openItems, toggle }), [openItems, toggle]);
+    const contextValue = useMemo(() => ({ openItems, toggle }), [openItems, toggle]);
 
     return (
-      <AccordionContext.Provider value={value}>
-        <div ref={ref} className={cn("space-y-0", className)} {...props}>
+      <AccordionContext.Provider value={contextValue}>
+        <div ref={ref} className={cn("space-y-0", className)} data-slot="accordion" {...props}>
           {children}
         </div>
       </AccordionContext.Provider>
@@ -84,7 +91,7 @@ export type AccordionItemProps = Omit<
 const AccordionItem = forwardRef<HTMLDivElement, AccordionItemProps>(
   ({ className, value, title, children, ...props }, ref) => {
     const { openItems, toggle } = useAccordion();
-    const isOpen = openItems.has(value);
+    const isOpen = openItems.includes(value);
 
     return (
       <div
@@ -93,11 +100,15 @@ const AccordionItem = forwardRef<HTMLDivElement, AccordionItemProps>(
           "border-b border-dotted border-white/10",
           className
         )}
+        data-state={isOpen ? "open" : "closed"}
+        data-slot="accordion-item"
         {...props}
       >
         <button
           type="button"
           onClick={() => toggle(value)}
+          aria-expanded={isOpen}
+          data-slot="accordion-trigger"
           className="flex w-full cursor-pointer items-center justify-between py-4 md:py-5 min-h-[44px] text-left"
         >
           <span className="text-sm md:text-base font-medium text-white">{title}</span>
@@ -116,8 +127,9 @@ const AccordionItem = forwardRef<HTMLDivElement, AccordionItemProps>(
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: "auto", opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
-              transition={{ duration: 0.25, ease: "easeInOut" }}
+              transition={{ duration: 0.33, ease: "easeInOut" }}
               className="overflow-hidden"
+              data-slot="accordion-content"
             >
               <div className="pb-5 text-sm leading-relaxed text-white/60">
                 {children}

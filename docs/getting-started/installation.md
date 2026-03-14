@@ -6,13 +6,13 @@ Choose your preferred package manager:
 
 ```bash
 # npm
-npm install @piotr/charlie-ui
+npm install @charlietogolden/charlie-ui
 
 # yarn
-yarn add @piotr/charlie-ui
+yarn add @charlietogolden/charlie-ui
 
 # pnpm
-pnpm add @piotr/charlie-ui
+pnpm add @charlietogolden/charlie-ui
 ```
 
 ## Peer Dependencies
@@ -30,7 +30,7 @@ The library bundles its own copies of `framer-motion`, `class-variance-authority
 Charlie UI ships a single CSS file that includes all component styles and design tokens. Import it once at the root of your application -- typically in your entry file or root layout:
 
 ```tsx
-import "@piotr/charlie-ui/styles.css";
+import "@charlietogolden/charlie-ui/styles.css";
 ```
 
 This import provides:
@@ -73,7 +73,7 @@ export default defineConfig({
 
 ```tsx
 import "./app.css";
-import "@piotr/charlie-ui/styles.css";
+import "@charlietogolden/charlie-ui/styles.css";
 ```
 
 ## Verify the Installation
@@ -81,7 +81,7 @@ import "@piotr/charlie-ui/styles.css";
 Create a simple test component to confirm everything is working:
 
 ```tsx
-import { Button } from "@piotr/charlie-ui";
+import { Button } from "@charlietogolden/charlie-ui";
 
 function App() {
   return (
@@ -92,4 +92,4 @@ function App() {
 }
 ```
 
-You should see a white primary button on a dark background. If the button appears unstyled, double-check that you have imported `@piotr/charlie-ui/styles.css`.
+You should see a white primary button on a dark background. If the button appears unstyled, double-check that you have imported `@charlietogolden/charlie-ui/styles.css`.

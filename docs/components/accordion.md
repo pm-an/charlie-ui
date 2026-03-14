@@ -5,7 +5,7 @@ An expandable content panel component that supports single or multiple open item
 ## Import
 
 ```tsx
-import { Accordion } from "@piotr/charlie-ui";
+import { Accordion } from "@charlietogolden/charlie-ui";
 ```
 
 ## Props
@@ -71,7 +71,7 @@ Multiple items can be open simultaneously.
 ```tsx
 <Accordion defaultOpen={["faq-1"]}>
   <Accordion.Item value="faq-1" title="How do I install it?">
-    Run npm install @piotr/charlie-ui and import the stylesheet.
+    Run npm install @charlietogolden/charlie-ui and import the stylesheet.
   </Accordion.Item>
   <Accordion.Item value="faq-2" title="What React version is required?">
     React 18 or 19.

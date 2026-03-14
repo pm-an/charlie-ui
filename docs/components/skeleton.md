@@ -5,7 +5,7 @@ A loading placeholder that pulses to indicate content is being loaded. Supports 
 ## Import
 
 ```tsx
-import { Skeleton } from "@piotr/charlie-ui";
+import { Skeleton } from "@charlietogolden/charlie-ui";
 ```
 
 ## Props

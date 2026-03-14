@@ -35,6 +35,7 @@ const PricingCard = forwardRef<HTMLDivElement, PricingCardProps>(
   ) => (
     <div
       ref={ref}
+      data-slot="pricing-card"
       className={cn(
         "bg-card-gradient rounded-xl border p-6 flex flex-col",
         highlighted

@@ -24,23 +24,23 @@ export type KanbanBoardProps = HTMLAttributes<HTMLDivElement> & {
 };
 
 const tagColors: Record<string, string> = {
-  red: "bg-[rgba(255,99,99,0.15)] text-[#ff6363]",
-  blue: "bg-[rgba(96,165,250,0.15)] text-[#60a5fa]",
-  green: "bg-[rgba(74,222,128,0.15)] text-[#4ade80]",
-  yellow: "bg-[rgba(250,204,21,0.15)] text-[#facc15]",
-  purple: "bg-[rgba(167,139,250,0.15)] text-[#a78bfa]",
-  orange: "bg-[rgba(251,146,60,0.15)] text-[#fb923c]",
-  pink: "bg-[rgba(244,114,182,0.15)] text-[#f472b6]",
+  red: "bg-red-muted text-red",
+  blue: "bg-blue-muted text-blue",
+  green: "bg-green-muted text-green",
+  yellow: "bg-yellow-muted text-yellow",
+  purple: "bg-purple/15 text-purple",
+  orange: "bg-orange/15 text-orange",
+  pink: "bg-pink-400/15 text-pink-400",
 };
 
 const columnDotColors: Record<string, string> = {
-  red: "bg-[#ff6363]",
-  blue: "bg-[#60a5fa]",
-  green: "bg-[#4ade80]",
-  yellow: "bg-[#facc15]",
-  purple: "bg-[#a78bfa]",
-  orange: "bg-[#fb923c]",
-  pink: "bg-[#f472b6]",
+  red: "bg-red",
+  blue: "bg-blue",
+  green: "bg-green",
+  yellow: "bg-yellow",
+  purple: "bg-purple",
+  orange: "bg-orange",
+  pink: "bg-pink-400",
 };
 
 const KanbanBoard = forwardRef<HTMLDivElement, KanbanBoardProps>(

@@ -1,5 +1,5 @@
 {
-  "name": "@piotr/charlie-ui",
+  "name": "@charlietogolden/charlie-ui",
   "version": "0.1.0",
   "type": "module",
   "description": "Charlie UI — A dark-themed React component library inspired by Raycast",
@@ -13,7 +13,279 @@
       "require": "./dist/index.cjs"
     },
     "./styles.css": "./dist/style.css",
-    "./theme.css": "./dist/style.css"
+    "./theme.css": "./dist/style.css",
+    "./button": {
+      "types": "./dist/components/Button.d.ts",
+      "import": "./dist/components/Button.mjs"
+    },
+    "./badge": {
+      "types": "./dist/components/Badge.d.ts",
+      "import": "./dist/components/Badge.mjs"
+    },
+    "./input": {
+      "types": "./dist/components/Input.d.ts",
+      "import": "./dist/components/Input.mjs"
+    },
+    "./toggle": {
+      "types": "./dist/components/Toggle.d.ts",
+      "import": "./dist/components/Toggle.mjs"
+    },
+    "./kbd": {
+      "types": "./dist/components/Kbd.d.ts",
+      "import": "./dist/components/Kbd.mjs"
+    },
+    "./divider": {
+      "types": "./dist/components/Divider.d.ts",
+      "import": "./dist/components/Divider.mjs"
+    },
+    "./code-block": {
+      "types": "./dist/components/CodeBlock.d.ts",
+      "import": "./dist/components/CodeBlock.mjs"
+    },
+    "./skeleton": {
+      "types": "./dist/components/Skeleton.d.ts",
+      "import": "./dist/components/Skeleton.mjs"
+    },
+    "./label": {
+      "types": "./dist/components/Label.d.ts",
+      "import": "./dist/components/Label.mjs"
+    },
+    "./checkbox": {
+      "types": "./dist/components/Checkbox.d.ts",
+      "import": "./dist/components/Checkbox.mjs"
+    },
+    "./radio-group": {
+      "types": "./dist/components/RadioGroup.d.ts",
+      "import": "./dist/components/RadioGroup.mjs"
+    },
+    "./switch": {
+      "types": "./dist/components/Switch.d.ts",
+      "import": "./dist/components/Switch.mjs"
+    },
+    "./textarea": {
+      "types": "./dist/components/Textarea.d.ts",
+      "import": "./dist/components/Textarea.mjs"
+    },
+    "./slider": {
+      "types": "./dist/components/Slider.d.ts",
+      "import": "./dist/components/Slider.mjs"
+    },
+    "./alert": {
+      "types": "./dist/components/Alert.d.ts",
+      "import": "./dist/components/Alert.mjs"
+    },
+    "./progress": {
+      "types": "./dist/components/Progress.d.ts",
+      "import": "./dist/components/Progress.mjs"
+    },
+    "./select": {
+      "types": "./dist/components/Select.d.ts",
+      "import": "./dist/components/Select.mjs"
+    },
+    "./card": {
+      "types": "./dist/components/Card.d.ts",
+      "import": "./dist/components/Card.mjs"
+    },
+    "./feature-card": {
+      "types": "./dist/components/FeatureCard.d.ts",
+      "import": "./dist/components/FeatureCard.mjs"
+    },
+    "./pricing-card": {
+      "types": "./dist/components/PricingCard.d.ts",
+      "import": "./dist/components/PricingCard.mjs"
+    },
+    "./accordion": {
+      "types": "./dist/components/Accordion.d.ts",
+      "import": "./dist/components/Accordion.mjs"
+    },
+    "./testimonial": {
+      "types": "./dist/components/Testimonial.d.ts",
+      "import": "./dist/components/Testimonial.mjs"
+    },
+    "./blog-card": {
+      "types": "./dist/components/BlogCard.d.ts",
+      "import": "./dist/components/BlogCard.mjs"
+    },
+    "./stat-card": {
+      "types": "./dist/components/StatCard.d.ts",
+      "import": "./dist/components/StatCard.mjs"
+    },
+    "./navbar": {
+      "types": "./dist/components/Navbar.d.ts",
+      "import": "./dist/components/Navbar.mjs"
+    },
+    "./hero": {
+      "types": "./dist/components/Hero.d.ts",
+      "import": "./dist/components/Hero.mjs"
+    },
+    "./section": {
+      "types": "./dist/components/Section.d.ts",
+      "import": "./dist/components/Section.mjs"
+    },
+    "./container": {
+      "types": "./dist/components/Container.d.ts",
+      "import": "./dist/components/Container.mjs"
+    },
+    "./footer": {
+      "types": "./dist/components/Footer.d.ts",
+      "import": "./dist/components/Footer.mjs"
+    },
+    "./newsletter": {
+      "types": "./dist/components/Newsletter.d.ts",
+      "import": "./dist/components/Newsletter.mjs"
+    },
+    "./gradient-background": {
+      "types": "./dist/components/GradientBackground.d.ts",
+      "import": "./dist/components/GradientBackground.mjs"
+    },
+    "./social-card": {
+      "types": "./dist/components/SocialCard.d.ts",
+      "import": "./dist/components/SocialCard.mjs"
+    },
+    "./breadcrumbs": {
+      "types": "./dist/components/Breadcrumbs.d.ts",
+      "import": "./dist/components/Breadcrumbs.mjs"
+    },
+    "./scroll-area": {
+      "types": "./dist/components/ScrollArea.d.ts",
+      "import": "./dist/components/ScrollArea.mjs"
+    },
+    "./sidebar": {
+      "types": "./dist/components/Sidebar.d.ts",
+      "import": "./dist/components/Sidebar.mjs"
+    },
+    "./resizable-panels": {
+      "types": "./dist/components/ResizablePanels.d.ts",
+      "import": "./dist/components/ResizablePanels.mjs"
+    },
+    "./tabs": {
+      "types": "./dist/components/Tabs.d.ts",
+      "import": "./dist/components/Tabs.mjs"
+    },
+    "./tooltip": {
+      "types": "./dist/components/Tooltip.d.ts",
+      "import": "./dist/components/Tooltip.mjs"
+    },
+    "./avatar": {
+      "types": "./dist/components/Avatar.d.ts",
+      "import": "./dist/components/Avatar.mjs"
+    },
+    "./avatar-group": {
+      "types": "./dist/components/AvatarGroup.d.ts",
+      "import": "./dist/components/AvatarGroup.mjs"
+    },
+    "./command-palette": {
+      "types": "./dist/components/CommandPalette.d.ts",
+      "import": "./dist/components/CommandPalette.mjs"
+    },
+    "./toggle-group": {
+      "types": "./dist/components/ToggleGroup.d.ts",
+      "import": "./dist/components/ToggleGroup.mjs"
+    },
+    "./changelog-entry": {
+      "types": "./dist/components/ChangelogEntry.d.ts",
+      "import": "./dist/components/ChangelogEntry.mjs"
+    },
+    "./toast": {
+      "types": "./dist/components/Toast.d.ts",
+      "import": "./dist/components/Toast.mjs"
+    },
+    "./toaster": {
+      "types": "./dist/components/Toaster.d.ts",
+      "import": "./dist/components/Toaster.mjs"
+    },
+    "./pagination": {
+      "types": "./dist/components/Pagination.d.ts",
+      "import": "./dist/components/Pagination.mjs"
+    },
+    "./modal": {
+      "types": "./dist/components/Modal.d.ts",
+      "import": "./dist/components/Modal.mjs"
+    },
+    "./fullscreen-modal": {
+      "types": "./dist/components/FullscreenModal.d.ts",
+      "import": "./dist/components/FullscreenModal.mjs"
+    },
+    "./dropdown": {
+      "types": "./dist/components/Dropdown.d.ts",
+      "import": "./dist/components/Dropdown.mjs"
+    },
+    "./popover": {
+      "types": "./dist/components/Popover.d.ts",
+      "import": "./dist/components/Popover.mjs"
+    },
+    "./drawer": {
+      "types": "./dist/components/Drawer.d.ts",
+      "import": "./dist/components/Drawer.mjs"
+    },
+    "./collapsible": {
+      "types": "./dist/components/Collapsible.d.ts",
+      "import": "./dist/components/Collapsible.mjs"
+    },
+    "./stepper": {
+      "types": "./dist/components/Stepper.d.ts",
+      "import": "./dist/components/Stepper.mjs"
+    },
+    "./copy-button": {
+      "types": "./dist/components/CopyButton.d.ts",
+      "import": "./dist/components/CopyButton.mjs"
+    },
+    "./data-table": {
+      "types": "./dist/components/DataTable.d.ts",
+      "import": "./dist/components/DataTable.mjs"
+    },
+    "./timeline": {
+      "types": "./dist/components/Timeline.d.ts",
+      "import": "./dist/components/Timeline.mjs"
+    },
+    "./file-upload": {
+      "types": "./dist/components/FileUpload.d.ts",
+      "import": "./dist/components/FileUpload.mjs"
+    },
+    "./otp-input": {
+      "types": "./dist/components/OTPInput.d.ts",
+      "import": "./dist/components/OTPInput.mjs"
+    },
+    "./date-picker": {
+      "types": "./dist/components/DatePicker.d.ts",
+      "import": "./dist/components/DatePicker.mjs"
+    },
+    "./dropdown-menu": {
+      "types": "./dist/components/DropdownMenu.d.ts",
+      "import": "./dist/components/DropdownMenu.mjs"
+    },
+    "./context-menu": {
+      "types": "./dist/components/ContextMenu.d.ts",
+      "import": "./dist/components/ContextMenu.mjs"
+    },
+    "./virtual-list": {
+      "types": "./dist/components/VirtualList.d.ts",
+      "import": "./dist/components/VirtualList.mjs"
+    },
+    "./rich-text-editor": {
+      "types": "./dist/components/RichTextEditor.d.ts",
+      "import": "./dist/components/RichTextEditor.mjs"
+    },
+    "./animate": {
+      "types": "./dist/components/Animate.d.ts",
+      "import": "./dist/components/Animate.mjs"
+    },
+    "./stagger-group": {
+      "types": "./dist/components/StaggerGroup.d.ts",
+      "import": "./dist/components/StaggerGroup.mjs"
+    },
+    "./form-field": {
+      "types": "./dist/components/FormField.d.ts",
+      "import": "./dist/components/FormField.mjs"
+    },
+    "./field": {
+      "types": "./dist/components/Field.d.ts",
+      "import": "./dist/components/Field.mjs"
+    },
+    "./form": {
+      "types": "./dist/form.d.ts",
+      "import": "./dist/form.mjs"
+    }
   },
   "files": [
     "dist"
@@ -23,38 +295,120 @@
   ],
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "tsc -b --force tsconfig.build.json && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build",
+    "test": "vitest run --project unit",
+    "test:watch": "vitest --project unit",
+    "test:coverage": "vitest run --project unit --coverage",
+    "test:storybook": "vitest run --project storybook",
+    "test:all": "vitest run",
+    "build:registry": "tsx scripts/build-registry.ts",
+    "validate:registry": "tsx scripts/validate-registry.ts",
+    "prepublishOnly": "npm run build"
   },
   "peerDependencies": {
+    "@hookform/resolvers": "^3.3.0",
+    "@tiptap/core": "^3.0.0",
+    "@tiptap/pm": "^3.0.0",
+    "@tiptap/react": "^3.0.0",
+    "@tiptap/starter-kit": "^3.0.0",
     "react": "^18.0.0 || ^19.0.0",
-    "react-dom": "^18.0.0 || ^19.0.0"
+    "react-dom": "^18.0.0 || ^19.0.0",
+    "react-hook-form": "^7.50.0",
+    "zod": "^3.22.0"
+  },
+  "peerDependenciesMeta": {
+    "@tiptap/core": {
+      "optional": true
+    },
+    "@tiptap/pm": {
+      "optional": true
+    },
+    "@tiptap/react": {
+      "optional": true
+    },
+    "@tiptap/starter-kit": {
+      "optional": true
+    },
+    "react-hook-form": {
+      "optional": true
+    },
+    "@hookform/resolvers": {
+      "optional": true
+    },
+    "zod": {
+      "optional": true
+    }
   },
   "dependencies": {
+    "@tanstack/react-table": "^8.21.3",
+    "@tiptap/extension-bubble-menu": "^3.20.1",
+    "@tiptap/extension-color": "^3.20.1",
+    "@tiptap/extension-highlight": "^3.20.1",
+    "@tiptap/extension-link": "^3.20.1",
+    "@tiptap/extension-placeholder": "^3.20.1",
+    "@tiptap/extension-task-item": "^3.20.1",
+    "@tiptap/extension-task-list": "^3.20.1",
+    "@tiptap/extension-text-align": "^3.20.1",
+    "@tiptap/extension-text-style": "^3.20.1",
+    "@tiptap/extension-typography": "^3.20.1",
+    "@tiptap/extension-underline": "^3.20.1",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "date-fns": "^4.1.0",
     "framer-motion": "^12.36.0",
     "lucide-react": "^0.577.0",
+    "react-day-picker": "^9.14.0",
+    "react-resizable-panels": "^2.1.9",
+    "recharts": "^3.8.0",
     "tailwind-merge": "^3.5.0"
   },
   "devDependencies": {
+    "@chromatic-com/storybook": "^5.0.1",
     "@eslint/js": "^9.39.4",
+    "@hookform/resolvers": "^5.2.2",
+    "@storybook/addon-a11y": "^10.2.19",
+    "@storybook/addon-docs": "^10.2.19",
+    "@storybook/addon-onboarding": "^10.2.19",
+    "@storybook/addon-vitest": "^10.2.19",
+    "@storybook/react-vite": "^10.2.19",
     "@tailwindcss/vite": "^4.2.1",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "@testing-library/user-event": "^14.6.1",
+    "@tiptap/core": "^3.20.1",
+    "@tiptap/pm": "^3.20.1",
+    "@tiptap/react": "^3.20.1",
+    "@tiptap/starter-kit": "^3.20.1",
     "@types/node": "^24.12.0",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^4.7.0",
+    "@vitest/browser-playwright": "^4.1.0",
+    "@vitest/coverage-v8": "^4.1.0",
     "eslint": "^9.39.4",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-react-refresh": "^0.5.2",
+    "eslint-plugin-storybook": "^10.2.19",
     "globals": "^17.4.0",
+    "jsdom": "^28.1.0",
+    "playwright": "^1.58.2",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
+    "react-hook-form": "^7.71.2",
+    "storybook": "^10.2.19",
     "tailwindcss": "^4.2.1",
+    "tsx": "^4.21.0",
     "typescript": "~5.9.3",
     "typescript-eslint": "^8.56.1",
     "vite": "^7.3.1",
-    "vite-plugin-dts": "^4.5.4"
+    "vite-plugin-dts": "^4.5.4",
+    "vitest": "^4.1.0",
+    "vitest-axe": "^0.1.0",
+    "zod": "^4.3.6"
   }
 }

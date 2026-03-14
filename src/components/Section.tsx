@@ -38,6 +38,7 @@ function Section({
 
   return (
     <section
+      data-slot="section"
       className={cn(sectionVariants({ size }), className)}
       {...props}
     >

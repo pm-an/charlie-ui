@@ -16,8 +16,8 @@ import {
   Button,
   Badge,
   Footer,
-} from "@piotr/charlie-ui";
-import "@piotr/charlie-ui/styles.css";
+} from "@charlietogolden/charlie-ui";
+import "@charlietogolden/charlie-ui/styles.css";
 ```
 
 ## Building a Landing Page
@@ -92,7 +92,7 @@ import { Zap, Shield, Palette } from "lucide-react";
 ### 4. Use Cards for Content
 
 ```tsx
-import { Card } from "@piotr/charlie-ui";
+import { Card } from "@charlietogolden/charlie-ui";
 
 <Card>
   <Card.Header
@@ -147,8 +147,8 @@ Here is the complete page assembled together:
 import {
   Navbar, Hero, Section, FeatureCard,
   Card, Badge, Button, Footer,
-} from "@piotr/charlie-ui";
-import "@piotr/charlie-ui/styles.css";
+} from "@charlietogolden/charlie-ui";
+import "@charlietogolden/charlie-ui/styles.css";
 import { Zap, Shield, Palette } from "lucide-react";
 
 export default function LandingPage() {

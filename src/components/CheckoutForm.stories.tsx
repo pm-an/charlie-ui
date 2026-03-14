@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { CheckoutForm } from "./CheckoutForm";
-import { fn } from "@storybook/test";
+import { fn } from "storybook/test";
 
 const meta: Meta<typeof CheckoutForm> = {
   title: "Blocks/Ecommerce/CheckoutForm",

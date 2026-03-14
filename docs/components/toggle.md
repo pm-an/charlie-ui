@@ -5,7 +5,7 @@ An animated on/off switch component. Uses Framer Motion for smooth spring-based 
 ## Import
 
 ```tsx
-import { Toggle } from "@piotr/charlie-ui";
+import { Toggle } from "@charlietogolden/charlie-ui";
 ```
 
 ## Props

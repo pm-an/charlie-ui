@@ -39,6 +39,7 @@ function Hero({
 
   return (
     <section
+      data-slot="hero"
       className={cn(heroVariants({ variant }), className)}
       {...props}
     >

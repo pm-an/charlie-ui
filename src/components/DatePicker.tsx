@@ -1,6 +1,7 @@
+"use client";
+
 import {
   useState,
-  useRef,
   useEffect,
   useCallback,
   type MouseEvent as ReactMouseEvent,
@@ -10,28 +11,9 @@ import { format } from "date-fns";
 import { AnimatePresence, motion } from "framer-motion";
 import { Calendar, X, ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "../utils/cn";
-
-// ---------------------------------------------------------------------------
-// Controllable state helper
-// ---------------------------------------------------------------------------
-
-function useControllableState<T>(
-  controlled: T | undefined,
-  defaultVal: T | undefined,
-  onChange?: (val: T | undefined) => void
-) {
-  const [internal, setInternal] = useState(defaultVal);
-  const isControlled = controlled !== undefined;
-  const value = isControlled ? controlled : internal;
-  const setValue = useCallback(
-    (next: T | undefined) => {
-      if (!isControlled) setInternal(next);
-      onChange?.(next);
-    },
-    [isControlled, onChange]
-  );
-  return [value, setValue] as const;
-}
+import { useControllableState } from "../hooks/useControllableState";
+import { useFieldAware } from "../hooks/useFieldAware";
+import { Popover } from "./Popover";
 
 // ---------------------------------------------------------------------------
 // Types
@@ -62,12 +44,17 @@ export type DatePickerProps = {
 
   // Form integration
   label?: string;
+  /** Description text shown below the picker */
+  description?: string;
+  /** @deprecated Use `description` instead */
   helperText?: string;
   error?: boolean;
   errorMessage?: string;
   required?: boolean;
   disabled?: boolean;
   name?: string;
+  /** HTML id for the trigger element */
+  id?: string;
 
   // Presets
   presets?: SinglePreset[] | RangePreset[];
@@ -184,6 +171,77 @@ function CustomChevron({ orientation }: { orientation?: string }) {
 }
 
 // ---------------------------------------------------------------------------
+// Shared: builds the disabled-dates matcher for DayPicker
+// ---------------------------------------------------------------------------
+
+function buildDisabledMatcher(
+  disabledDates?: Date[] | ((date: Date) => boolean)
+) {
+  if (!disabledDates) return undefined;
+  return disabledDates;
+}
+
+// ---------------------------------------------------------------------------
+// Shared: hidden-dates matcher for min/max
+// ---------------------------------------------------------------------------
+
+function buildHiddenMatcher(minDate?: Date, maxDate?: Date) {
+  if (!minDate && !maxDate) return undefined;
+  return [
+    ...(minDate ? [{ before: minDate }] : []),
+    ...(maxDate ? [{ after: maxDate }] : []),
+  ];
+}
+
+// ---------------------------------------------------------------------------
+// Trigger button (shared between both modes)
+// ---------------------------------------------------------------------------
+
+function TriggerContent({
+  displayValue,
+  placeholder,
+  hasValue,
+  disabled,
+  onClear,
+}: {
+  displayValue: string;
+  placeholder: string;
+  hasValue: boolean;
+  disabled: boolean;
+  onClear: (e: ReactMouseEvent) => void;
+}) {
+  return (
+    <>
+      <Calendar className="h-4 w-4 text-white/40 mr-2 shrink-0" />
+      <span
+        className={cn(
+          "flex-1 text-left truncate",
+          displayValue ? "text-white" : "text-white/40"
+        )}
+      >
+        {displayValue || placeholder}
+      </span>
+      {hasValue && !disabled && (
+        <span
+          role="button"
+          tabIndex={0}
+          aria-label="Clear date"
+          className="text-white/30 hover:text-white/60 ml-2 shrink-0 cursor-pointer"
+          onClick={onClear}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              onClear(e as unknown as ReactMouseEvent);
+            }
+          }}
+        >
+          <X className="h-4 w-4" />
+        </span>
+      )}
+    </>
+  );
+}
+
+// ---------------------------------------------------------------------------
 // DatePicker Component
 // ---------------------------------------------------------------------------
 
@@ -200,15 +258,17 @@ function DatePicker({
   dateFormat = "PPP",
   placeholder = "Pick a date",
   label,
+  description,
   helperText,
-  error = false,
+  error: errorProp,
   errorMessage,
-  required = false,
-  disabled = false,
+  required: requiredProp,
+  disabled: disabledProp,
   name,
   presets,
   className,
   align = "start",
+  id,
 }: DatePickerProps) {
   const [internalValue, setInternalValue] = useControllableState(
     value,
@@ -228,33 +288,30 @@ function DatePicker({
   }, [rangeValue]);
 
   const [open, setOpen] = useState(false);
-  const containerRef = useRef<HTMLDivElement>(null);
 
-  // Click outside to close
-  useEffect(() => {
-    if (!open) return;
-    const handler = (e: MouseEvent) => {
-      if (!containerRef.current?.contains(e.target as Node)) {
-        setOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", handler);
-    return () => document.removeEventListener("mousedown", handler);
-  }, [open]);
+  /* ── Field-aware integration ── */
+  const resolvedDescription = description ?? helperText;
 
-  // Escape to close
-  useEffect(() => {
-    if (!open) return;
-    const handler = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setOpen(false);
-    };
-    document.addEventListener("keydown", handler);
-    return () => document.removeEventListener("keydown", handler);
-  }, [open]);
+  const {
+    controlId,
+    insideField,
+    error,
+    disabled,
+    required,
+    ariaDescribedBy,
+    ariaInvalid,
+  } = useFieldAware({
+    id,
+    error: errorProp,
+    disabled: disabledProp,
+    required: requiredProp,
+    description: resolvedDescription,
+    errorMessage,
+  });
 
-  // Compute display value
   const currentRange = rangeValue !== undefined ? rangeValue : internalRange;
 
+  // Compute display value
   let displayValue = "";
   if (mode === "single" && internalValue) {
     displayValue = format(internalValue, dateFormat);
@@ -266,7 +323,13 @@ function DatePicker({
     }
   }
 
-  // Handlers
+  const hasValue =
+    mode === "single"
+      ? !!internalValue
+      : !!(currentRange?.from || currentRange?.to);
+
+  // --- Handlers ---
+
   const handleSingleSelect = useCallback(
     (
       date: Date | undefined,
@@ -290,10 +353,6 @@ function DatePicker({
       const newRange = range ?? { from: undefined, to: undefined };
       setInternalRange(newRange);
       onRangeChange?.(newRange);
-      // Close if both dates are selected
-      if (newRange.from && newRange.to) {
-        setOpen(false);
-      }
     },
     [onRangeChange]
   );
@@ -324,28 +383,22 @@ function DatePicker({
     (range: { from: Date; to: Date }) => {
       setInternalRange(range);
       onRangeChange?.(range);
-      setOpen(false);
     },
     [onRangeChange]
   );
 
-  // Disabled matcher for DayPicker
-  const disabledMatcher = (() => {
-    const matchers: (Date[] | ((date: Date) => boolean))[] = [];
-    if (disabledDates) {
-      if (Array.isArray(disabledDates)) {
-        matchers.push(disabledDates);
-      } else {
-        matchers.push(disabledDates);
-      }
-    }
-    if (matchers.length === 0) return undefined;
-    if (matchers.length === 1) return matchers[0];
-    return matchers;
-  })();
+  // Escape to close (single mode only)
+  useEffect(() => {
+    if (!open || mode === "range") return;
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    document.addEventListener("keydown", handler);
+    return () => document.removeEventListener("keydown", handler);
+  }, [open, mode]);
 
-  const hasValue =
-    mode === "single" ? !!internalValue : !!(currentRange?.from || currentRange?.to);
+  const disabledMatcher = buildDisabledMatcher(disabledDates);
+  const hiddenMatcher = buildHiddenMatcher(minDate, maxDate);
 
   const triggerClasses = cn(
     "flex items-center w-full bg-white/5 border border-white/6 rounded-md h-10 px-3 text-sm text-white",
@@ -356,112 +409,87 @@ function DatePicker({
     className
   );
 
-  return (
-    <div ref={containerRef} className="relative inline-block w-full">
-      {label && (
-        <label className="text-sm font-medium text-white/80 mb-1.5 block">
-          {label}
-          {required && <span className="text-red ml-0.5">*</span>}
-        </label>
+  // Hidden input for form integration
+  const hiddenInput = name ? (
+    <input
+      type="hidden"
+      name={name}
+      value={
+        mode === "single"
+          ? internalValue?.toISOString() ?? ""
+          : currentRange?.from
+            ? `${currentRange.from.toISOString()}${currentRange.to ? `/${currentRange.to.toISOString()}` : ""}`
+            : ""
+      }
+    />
+  ) : null;
+
+  const labelEl = !insideField && label ? (
+    <label className="text-sm font-medium text-white/80 mb-1.5 block">
+      {label}
+      {required && <span className="text-red ml-0.5">*</span>}
+    </label>
+  ) : null;
+
+  const footerEls = !insideField ? (
+    <>
+      {resolvedDescription && !error && (
+        <p id={`${controlId}-description`} className="text-xs text-white/40 mt-1.5">{resolvedDescription}</p>
       )}
-
-      {/* Trigger */}
-      <button
-        type="button"
-        role="combobox"
-        aria-expanded={open}
-        aria-haspopup="dialog"
-        disabled={disabled}
-        onClick={() => !disabled && setOpen(!open)}
-        className={triggerClasses}
-        data-testid="datepicker-trigger"
-      >
-        <Calendar className="h-4 w-4 text-white/40 mr-2 shrink-0" />
-        <span
-          className={cn(
-            "flex-1 text-left truncate",
-            displayValue ? "text-white" : "text-white/40"
-          )}
-        >
-          {displayValue || placeholder}
-        </span>
-        {hasValue && !disabled && (
-          <span
-            role="button"
-            tabIndex={0}
-            aria-label="Clear date"
-            className="text-white/30 hover:text-white/60 ml-2 shrink-0 cursor-pointer"
-            onClick={handleClear}
-            onKeyDown={(e) => {
-              if (e.key === "Enter" || e.key === " ") {
-                handleClear(e as unknown as ReactMouseEvent);
-              }
-            }}
-          >
-            <X className="h-4 w-4" />
-          </span>
-        )}
-      </button>
-
-      {/* Hidden input for form integration */}
-      {name && (
-        <input
-          type="hidden"
-          name={name}
-          value={
-            mode === "single"
-              ? internalValue?.toISOString() ?? ""
-              : currentRange?.from
-                ? `${currentRange.from.toISOString()}${currentRange.to ? `/${currentRange.to.toISOString()}` : ""}`
-                : ""
-          }
-        />
+      {error && errorMessage && (
+        <p id={`${controlId}-error`} className="text-xs text-red mt-1.5">{errorMessage}</p>
       )}
+    </>
+  ) : null;
 
-      {/* Calendar dropdown */}
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.95 }}
-            transition={{ duration: 0.15, ease: "easeOut" }}
-            className={cn(
-              "absolute top-full mt-2 z-50",
-              alignmentClasses[align]
-            )}
-            data-testid="datepicker-popover"
+  // =========================================================================
+  // RANGE MODE — delegates to <Popover dismissible={false}>
+  // =========================================================================
+  if (mode === "range") {
+    return (
+      <div className="w-full">
+        {labelEl}
+
+        <Popover open={open} className="w-full">
+          {/* Trigger — only opens, never closes */}
+          <button
+            type="button"
+            role="combobox"
+            id={controlId}
+            aria-expanded={open}
+            aria-haspopup="dialog"
+            aria-invalid={ariaInvalid}
+            aria-describedby={ariaDescribedBy}
+            disabled={disabled}
+            onClick={() => !disabled && setOpen(true)}
+            className={triggerClasses}
+            data-testid="datepicker-trigger"
           >
-            <div className="bg-bg-200 border border-white/10 rounded-lg shadow-xl p-3 flex">
-              {presets && presets.length > 0 && (
-                <PresetsSidebar
-                  presets={presets}
-                  onSelectSingle={handlePresetSingle}
-                  onSelectRange={handlePresetRange}
-                />
-              )}
+            <TriggerContent
+              displayValue={displayValue}
+              placeholder={placeholder}
+              hasValue={hasValue}
+              disabled={disabled}
+              onClear={handleClear}
+            />
+          </button>
 
-              {mode === "single" ? (
-                <DayPicker
-                  mode="single"
-                  selected={internalValue}
-                  onSelect={handleSingleSelect}
-                  disabled={disabledMatcher}
-                  startMonth={minDate}
-                  endMonth={maxDate}
-                  hidden={
-                    minDate || maxDate
-                      ? {
-                          before: minDate,
-                          after: maxDate,
-                        }
-                      : undefined
-                  }
-                  classNames={calendarClassNames}
-                  components={{ Chevron: CustomChevron }}
-                  showOutsideDays
-                />
-              ) : (
+          {hiddenInput}
+
+          {/* Calendar — non-dismissible, only Done closes it */}
+          <Popover.Content
+            dismissible={false}
+            align={align === "center" ? "center" : align === "end" ? "end" : "start"}
+            className="p-3"
+          >
+            <div className="flex flex-col">
+              <div className="flex">
+                {presets && presets.length > 0 && (
+                  <PresetsSidebar
+                    presets={presets}
+                    onSelectRange={handlePresetRange}
+                  />
+                )}
                 <DayPicker
                   mode="range"
                   selected={currentRange as DateRange | undefined}
@@ -469,30 +497,115 @@ function DatePicker({
                   disabled={disabledMatcher}
                   startMonth={minDate}
                   endMonth={maxDate}
-                  hidden={
-                    minDate || maxDate
-                      ? {
-                          before: minDate,
-                          after: maxDate,
-                        }
-                      : undefined
-                  }
+                  hidden={hiddenMatcher}
                   classNames={calendarClassNames}
                   components={{ Chevron: CustomChevron }}
                   showOutsideDays
                 />
-              )}
+              </div>
+
+              {/* Done button — the ONLY way to close */}
+              <div className="flex justify-end border-t border-white/10 mt-3 pt-3">
+                <button
+                  type="button"
+                  className="px-3 py-1.5 text-sm font-medium rounded-md bg-accent text-white hover:bg-accent/90 transition-colors cursor-pointer"
+                  onClick={() => setOpen(false)}
+                  data-testid="datepicker-done"
+                >
+                  Done
+                </button>
+              </div>
+            </div>
+          </Popover.Content>
+        </Popover>
+
+        {footerEls}
+      </div>
+    );
+  }
+
+  // =========================================================================
+  // SINGLE MODE — original implementation with backdrop
+  // =========================================================================
+
+  return (
+    <div className="relative inline-block w-full">
+      {labelEl}
+
+      <button
+        type="button"
+        role="combobox"
+        id={controlId}
+        aria-expanded={open}
+        aria-haspopup="dialog"
+        aria-invalid={ariaInvalid}
+        aria-describedby={ariaDescribedBy}
+        disabled={disabled}
+        onClick={() => !disabled && setOpen(!open)}
+        className={cn(triggerClasses, "relative z-20")}
+        data-testid="datepicker-trigger"
+      >
+        <TriggerContent
+          displayValue={displayValue}
+          placeholder={placeholder}
+          hasValue={hasValue}
+          disabled={disabled}
+          onClear={handleClear}
+        />
+      </button>
+
+      {hiddenInput}
+
+      {/* Backdrop — click outside to close */}
+      {open && (
+        <div
+          className="fixed inset-0 z-10"
+          onClick={() => setOpen(false)}
+          aria-hidden="true"
+          data-testid="datepicker-backdrop"
+        />
+      )}
+
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.95 }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
+            className={cn(
+              "absolute top-full mt-2 z-50",
+              alignmentClasses[align]
+            )}
+            data-testid="datepicker-popover"
+          >
+            <div className="bg-bg-200 border border-white/10 rounded-lg shadow-xl p-3">
+              <div className="flex">
+                {presets && presets.length > 0 && (
+                  <PresetsSidebar
+                    presets={presets}
+                    onSelectSingle={handlePresetSingle}
+                  />
+                )}
+                <DayPicker
+                  mode="single"
+                  selected={internalValue}
+                  onSelect={handleSingleSelect}
+                  disabled={disabledMatcher}
+                  startMonth={minDate}
+                  endMonth={maxDate}
+                  hidden={hiddenMatcher}
+                  classNames={calendarClassNames}
+                  components={{ Chevron: CustomChevron }}
+                  showOutsideDays
+                />
+              </div>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
 
-      {helperText && !error && (
-        <p className="text-xs text-white/40 mt-1.5">{helperText}</p>
-      )}
-      {error && errorMessage && (
-        <p className="text-xs text-red mt-1.5">{errorMessage}</p>
-      )}
+      {footerEls}
     </div>
   );
 }

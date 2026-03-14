@@ -5,7 +5,7 @@ A general-purpose container with a dark gradient background, subtle border, and 
 ## Import
 
 ```tsx
-import { Card } from "@piotr/charlie-ui";
+import { Card } from "@charlietogolden/charlie-ui";
 ```
 
 ## Props

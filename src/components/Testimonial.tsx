@@ -13,6 +13,7 @@ const Testimonial = forwardRef<HTMLDivElement, TestimonialProps>(
   ({ className, quote, author, role, avatar, company, ...props }, ref) => (
     <div
       ref={ref}
+      data-slot="testimonial"
       className={cn(
         "bg-card-gradient rounded-xl border border-white/[0.06] p-6",
         className

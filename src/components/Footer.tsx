@@ -23,6 +23,7 @@ export interface FooterProps {
 function Footer({ logo, columns, bottom, className }: FooterProps) {
   return (
     <footer
+      data-slot="footer"
       className={cn("border-t border-white/[0.06]", className)}
     >
       <div className="max-w-[1280px] mx-auto px-4 sm:px-6 py-8 md:py-12">

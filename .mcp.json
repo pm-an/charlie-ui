@@ -3,6 +3,10 @@
     "jetbrains": {
       "url": "http://localhost:64342/sse",
       "type": "sse"
+    },
+    "charlie-ui": {
+      "command": "node",
+      "args": ["mcp/dist/index.js"]
     }
   }
 }

@@ -77,7 +77,7 @@ function Avatar({
   ...props
 }: AvatarProps) {
   return (
-    <span className={cn(avatarVariants({ size }), className)}>
+    <span data-slot="avatar" className={cn(avatarVariants({ size }), className)}>
       {src ? (
         <img
           src={src}

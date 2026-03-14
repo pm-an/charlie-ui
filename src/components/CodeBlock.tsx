@@ -1,3 +1,5 @@
+"use client";
+
 import { type HTMLAttributes, useState, useCallback } from "react";
 import { Copy, Check } from "lucide-react";
 import { cn } from "../utils/cn";
@@ -27,7 +29,7 @@ function CodeBlock({
   }, [code, children]);
 
   return (
-    <div className="relative group">
+    <div data-slot="code-block" className="relative group">
       {(language || showCopy) && (
         <div className="absolute top-3 right-3 flex items-center gap-2">
           {language && (

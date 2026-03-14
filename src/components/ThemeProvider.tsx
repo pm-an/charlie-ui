@@ -1,3 +1,5 @@
+"use client";
+
 import { createContext, useContext, useMemo, type ReactNode } from "react";
 import { cn } from "../utils/cn";
 
@@ -61,6 +63,12 @@ export interface CharlieTheme {
   fontSans?: string;
   fontDisplay?: string;
   fontMono?: string;
+
+  /** Animation */
+  durationFast?: string;
+  durationNormal?: string;
+  durationModerate?: string;
+  durationSlow?: string;
 }
 
 const ThemeContext = createContext<CharlieTheme>({});
@@ -114,6 +122,10 @@ function themeToCSS(theme: CharlieTheme): Record<string, string> {
     fontSans: "--charlie-font-sans",
     fontDisplay: "--charlie-font-display",
     fontMono: "--charlie-font-mono",
+    durationFast: "--charlie-duration-fast",
+    durationNormal: "--charlie-duration-normal",
+    durationModerate: "--charlie-duration-moderate",
+    durationSlow: "--charlie-duration-slow",
   };
 
   const styles: Record<string, string> = {};

@@ -5,7 +5,7 @@ Displays a horizontal stack of overlapping avatars with an optional overflow ind
 ## Import
 
 ```tsx
-import { AvatarGroup, Avatar } from "@piotr/charlie-ui";
+import { AvatarGroup, Avatar } from "@charlietogolden/charlie-ui";
 ```
 
 ## Props

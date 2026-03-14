@@ -48,6 +48,7 @@ function SocialCard({
     return (
       <a
         href={href}
+        data-slot="social-card"
         className={cn(socialCardVariants({ color }), className)}
         target="_blank"
         rel="noopener noreferrer"
@@ -58,7 +59,7 @@ function SocialCard({
   }
 
   return (
-    <div className={cn(socialCardVariants({ color }), className)}>
+    <div data-slot="social-card" className={cn(socialCardVariants({ color }), className)}>
       {content}
     </div>
   );

@@ -5,7 +5,7 @@ A page section wrapper with an eyebrow, title, description header area and a con
 ## Import
 
 ```tsx
-import { Section } from "@piotr/charlie-ui";
+import { Section } from "@charlietogolden/charlie-ui";
 ```
 
 ## Props

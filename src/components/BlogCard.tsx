@@ -51,6 +51,7 @@ const BlogCard = forwardRef<HTMLDivElement, BlogCardProps>(
         <a
           ref={ref as unknown as React.Ref<HTMLAnchorElement>}
           href={href}
+          data-slot="blog-card"
           className={cardClasses}
         >
           {inner}
@@ -59,7 +60,7 @@ const BlogCard = forwardRef<HTMLDivElement, BlogCardProps>(
     }
 
     return (
-      <div ref={ref} className={cardClasses} {...props}>
+      <div ref={ref} data-slot="blog-card" className={cardClasses} {...props}>
         {inner}
       </div>
     );

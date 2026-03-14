@@ -33,11 +33,13 @@ export type FeatureCardProps = Omit<HTMLAttributes<HTMLDivElement>, "title"> &
     description: string;
     href?: string;
     image?: string;
+    iconAlign?: "left" | "center" | "right";
+    textAlign?: "left" | "center" | "right";
   };
 
 const FeatureCard = forwardRef<HTMLDivElement, FeatureCardProps>(
   (
-    { className, icon, title, description, href, image, size, glow, ...props },
+    { className, icon, title, description, href, image, size, glow, iconAlign = "left", textAlign = "left", ...props },
     ref
   ) => {
     const content = (
@@ -51,8 +53,16 @@ const FeatureCard = forwardRef<HTMLDivElement, FeatureCardProps>(
             />
           </div>
         )}
-        <div className={cn(size === "lg" && "p-6")}>
-          <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-lg bg-white/5">
+        <div className={cn(
+          size === "lg" && "p-6",
+          textAlign === "center" && "text-center",
+          textAlign === "right" && "text-right",
+        )}>
+          <div className={cn(
+            "mb-4 flex h-10 w-10 items-center justify-center rounded-lg bg-white/5",
+            iconAlign === "center" && "mx-auto",
+            iconAlign === "right" && "ml-auto",
+          )}>
             <span className="text-white/80">{icon}</span>
           </div>
           <h3 className="mb-2 text-base font-semibold text-white">{title}</h3>
@@ -68,6 +78,7 @@ const FeatureCard = forwardRef<HTMLDivElement, FeatureCardProps>(
         <a
           ref={ref as unknown as React.Ref<HTMLAnchorElement>}
           href={href}
+          data-slot="feature-card"
           className={cn(classes, "block no-underline")}
         >
           {content}
@@ -76,7 +87,7 @@ const FeatureCard = forwardRef<HTMLDivElement, FeatureCardProps>(
     }
 
     return (
-      <div ref={ref} className={classes} {...props}>
+      <div ref={ref} data-slot="feature-card" className={classes} {...props}>
         {content}
       </div>
     );

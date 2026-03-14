@@ -1,10 +1,11 @@
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { DatePicker } from "./DatePicker";
+import { Field } from "./Field";
 import { addDays, subDays, startOfMonth, endOfMonth, isWeekend } from "date-fns";
 
 const meta: Meta<typeof DatePicker> = {
-  title: "Interactive/DatePicker",
+  title: "Forms/DatePicker",
   component: DatePicker,
   tags: ["autodocs"],
   argTypes: {
@@ -215,6 +216,32 @@ export const Controlled: Story = {
         <p className="text-xs text-white/40">
           Value: {date ? date.toISOString() : "none"}
         </p>
+      </div>
+    );
+  },
+};
+
+export const InsideField: Story = {
+  render: function InsideFieldStory() {
+    const [date, setDate] = React.useState<Date | undefined>();
+    return (
+      <div className="w-72">
+        <Field label="Start date" description="When does your project begin?" required>
+          <DatePicker placeholder="Pick a date" value={date} onChange={setDate} />
+        </Field>
+      </div>
+    );
+  },
+};
+
+export const InsideFieldWithError: Story = {
+  render: function InsideFieldWithErrorStory() {
+    const [date, setDate] = React.useState<Date | undefined>();
+    return (
+      <div className="w-72">
+        <Field label="Start date" error errorMessage="This field is required.">
+          <DatePicker placeholder="Pick a date" value={date} onChange={setDate} />
+        </Field>
       </div>
     );
   },

@@ -5,7 +5,7 @@ The primary interactive element in Charlie UI. Supports five visual variants, th
 ## Import
 
 ```tsx
-import { Button } from "@piotr/charlie-ui";
+import { Button } from "@charlietogolden/charlie-ui";
 ```
 
 ## Props

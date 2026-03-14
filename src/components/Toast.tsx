@@ -1,3 +1,5 @@
+"use client";
+
 import { type ReactNode, useEffect } from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { AnimatePresence, motion } from "framer-motion";
@@ -38,6 +40,17 @@ const variantIconColors = {
   warning: "text-yellow",
 } as const;
 
+export type ToastPosition =
+  | "top-left"
+  | "top-center"
+  | "top-right"
+  | "middle-left"
+  | "middle-center"
+  | "middle-right"
+  | "bottom-left"
+  | "bottom-center"
+  | "bottom-right";
+
 export type ToastProps = VariantProps<typeof toastVariants> & {
     title: string;
     description?: string;
@@ -46,7 +59,33 @@ export type ToastProps = VariantProps<typeof toastVariants> & {
     duration?: number;
     open?: boolean;
     className?: string;
+    /** Where the toast appears on screen. Default "bottom-right". */
+    position?: ToastPosition;
   };
+
+const positionClasses: Record<ToastPosition, string> = {
+  "top-left": "fixed top-4 left-4 md:top-6 md:left-6 z-50 md:min-w-[320px] md:max-w-[420px]",
+  "top-center": "fixed top-4 left-1/2 -translate-x-1/2 md:top-6 z-50 md:min-w-[320px] md:max-w-[420px]",
+  "top-right": "fixed top-4 right-4 md:top-6 md:right-6 z-50 md:min-w-[320px] md:max-w-[420px]",
+  "middle-left": "fixed top-1/2 left-4 -translate-y-1/2 md:left-6 z-50 md:min-w-[320px] md:max-w-[420px]",
+  "middle-center": "fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 md:min-w-[320px] md:max-w-[420px]",
+  "middle-right": "fixed top-1/2 right-4 -translate-y-1/2 md:right-6 z-50 md:min-w-[320px] md:max-w-[420px]",
+  "bottom-left": "fixed bottom-4 left-4 md:bottom-6 md:left-6 z-50 md:min-w-[320px] md:max-w-[420px]",
+  "bottom-center": "fixed bottom-4 left-1/2 -translate-x-1/2 md:bottom-6 z-50 md:min-w-[320px] md:max-w-[420px]",
+  "bottom-right": "fixed bottom-4 right-4 md:bottom-6 md:right-6 z-50 md:min-w-[320px] md:max-w-[420px]",
+};
+
+const positionAnimations: Record<ToastPosition, { initial: Record<string, number>; exit: Record<string, number> }> = {
+  "top-left": { initial: { opacity: 0, x: -24, scale: 0.96 }, exit: { opacity: 0, x: -24, scale: 0.96 } },
+  "top-center": { initial: { opacity: 0, y: -24, scale: 0.96 }, exit: { opacity: 0, y: -24, scale: 0.96 } },
+  "top-right": { initial: { opacity: 0, x: 24, scale: 0.96 }, exit: { opacity: 0, x: 24, scale: 0.96 } },
+  "middle-left": { initial: { opacity: 0, x: -24, scale: 0.96 }, exit: { opacity: 0, x: -24, scale: 0.96 } },
+  "middle-center": { initial: { opacity: 0, scale: 0.9 }, exit: { opacity: 0, scale: 0.9 } },
+  "middle-right": { initial: { opacity: 0, x: 24, scale: 0.96 }, exit: { opacity: 0, x: 24, scale: 0.96 } },
+  "bottom-left": { initial: { opacity: 0, x: -24, scale: 0.96 }, exit: { opacity: 0, x: -24, scale: 0.96 } },
+  "bottom-center": { initial: { opacity: 0, y: 24, scale: 0.96 }, exit: { opacity: 0, y: 24, scale: 0.96 } },
+  "bottom-right": { initial: { opacity: 0, y: 24, scale: 0.96 }, exit: { opacity: 0, y: 24, scale: 0.96 } },
+};
 
 function Toast({
   className,
@@ -57,10 +96,13 @@ function Toast({
   onClose,
   duration = 5000,
   open = true,
+  position = "bottom-right",
 }: ToastProps) {
   const resolvedVariant = variant ?? "default";
   const Icon = variantIcons[resolvedVariant];
   const iconColor = variantIconColors[resolvedVariant];
+  const resolvedPosition = position ?? "bottom-right";
+  const anim = positionAnimations[resolvedPosition];
 
   useEffect(() => {
     if (!open || duration <= 0) return;
@@ -74,15 +116,17 @@ function Toast({
     <AnimatePresence>
       {open && (
         <motion.div
+          data-slot="toast"
+          data-position={resolvedPosition}
           className={cn(
-            "fixed bottom-4 left-4 right-4 md:left-auto md:right-6 md:bottom-6 z-50 md:min-w-[320px] md:max-w-[420px]",
+            positionClasses[resolvedPosition],
             "rounded-xl border border-white/10 bg-grey-700 p-4 shadow-window",
             className
           )}
-          initial={{ opacity: 0, y: 24, scale: 0.96 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          exit={{ opacity: 0, y: 24, scale: 0.96 }}
-          transition={{ duration: 0.2, ease: "easeOut" }}
+          initial={anim.initial}
+          animate={{ opacity: 1, x: 0, y: 0, scale: 1 }}
+          exit={anim.exit}
+          transition={{ duration: 0.26, ease: "easeOut" }}
           role="alert"
         >
           <div className="flex gap-3">

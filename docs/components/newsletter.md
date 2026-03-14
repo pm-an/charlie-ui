@@ -5,7 +5,7 @@ An email subscription form card with a title, description, email input, and subm
 ## Import
 
 ```tsx
-import { Newsletter } from "@piotr/charlie-ui";
+import { Newsletter } from "@charlietogolden/charlie-ui";
 ```
 
 ## Props

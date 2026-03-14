@@ -5,7 +5,7 @@ A customer testimonial card featuring a decorative quote mark, the quote text, a
 ## Import
 
 ```tsx
-import { Testimonial } from "@piotr/charlie-ui";
+import { Testimonial } from "@charlietogolden/charlie-ui";
 ```
 
 ## Props

@@ -5,7 +5,7 @@ A multi-column site footer with a logo area, link columns, and an optional botto
 ## Import
 
 ```tsx
-import { Footer } from "@piotr/charlie-ui";
+import { Footer } from "@charlietogolden/charlie-ui";
 ```
 
 ## Props

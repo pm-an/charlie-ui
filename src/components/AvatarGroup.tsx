@@ -13,6 +13,7 @@ function AvatarGroup({ className, children, max, ...props }: AvatarGroupProps) {
 
   return (
     <div
+      data-slot="avatar-group"
       className={cn("flex -space-x-2", className)}
       {...props}
     >

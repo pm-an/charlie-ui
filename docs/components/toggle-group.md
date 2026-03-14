@@ -5,7 +5,7 @@ An animated segmented control for exclusive single-selection between a set of op
 ## Import
 
 ```tsx
-import { ToggleGroup } from "@piotr/charlie-ui";
+import { ToggleGroup } from "@charlietogolden/charlie-ui";
 ```
 
 ## Props

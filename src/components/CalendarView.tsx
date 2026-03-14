@@ -38,13 +38,13 @@ const MONTH_NAMES = [
 ];
 
 const eventDotColors: Record<string, string> = {
-  red: "bg-[#ff6363]",
-  blue: "bg-[#60a5fa]",
-  green: "bg-[#4ade80]",
-  yellow: "bg-[#facc15]",
-  purple: "bg-[#a78bfa]",
-  orange: "bg-[#fb923c]",
-  pink: "bg-[#f472b6]",
+  red: "bg-red",
+  blue: "bg-blue",
+  green: "bg-green",
+  yellow: "bg-yellow",
+  purple: "bg-purple",
+  orange: "bg-orange",
+  pink: "bg-pink-400",
 };
 
 function getDaysInMonth(year: number, month: number): number {
@@ -146,7 +146,7 @@ const CalendarView = forwardRef<HTMLDivElement, CalendarViewProps>(
         ref={ref}
         data-slot="calendar-view"
         className={cn(
-          "rounded-xl border border-white/[0.06] overflow-hidden bg-[#0a0a0b]",
+          "rounded-xl border border-white/[0.06] overflow-hidden bg-bg",
           className
         )}
         {...props}

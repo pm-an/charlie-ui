@@ -5,7 +5,7 @@ A pricing tier card with tier name, price, feature list, and a call-to-action bu
 ## Import
 
 ```tsx
-import { PricingCard } from "@piotr/charlie-ui";
+import { PricingCard } from "@charlietogolden/charlie-ui";
 ```
 
 ## Props
