@@ -5,8 +5,8 @@ import { Modal } from "../Modal";
 import { expectNoA11yViolations } from "../../test/a11y";
 
 // Mock framer-motion to avoid animation timing issues in tests
-vi.mock("framer-motion", () => {
-  const React = require("react");
+vi.mock("framer-motion", async () => {
+  const React = await import("react");
   return {
     AnimatePresence: ({ children }: { children: React.ReactNode }) => (
       <>{children}</>
@@ -15,10 +15,10 @@ vi.mock("framer-motion", () => {
       div: React.forwardRef(
         (
           {
-            initial,
-            animate,
-            exit,
-            transition,
+            initial: _initial,
+            animate: _animate,
+            exit: _exit,
+            transition: _transition,
             ...props
           }: Record<string, unknown>,
           ref: React.Ref<HTMLDivElement>

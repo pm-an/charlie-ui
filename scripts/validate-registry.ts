@@ -10,7 +10,7 @@
 
 import { readFileSync, existsSync } from "node:fs";
 import { resolve } from "node:path";
-import { globSync } from "node:fs";
+import { readdirSync } from "node:fs";
 
 const ROOT = resolve(import.meta.dirname, "..");
 const REGISTRY_DIR = resolve(ROOT, "registry");
@@ -133,7 +133,7 @@ function main() {
     for (const [dep, version] of Object.entries(item.dependencies)) {
       if (!version || typeof version !== "string") {
         error(`${name}: dependency "${dep}" has no version`);
-      } else if (!/^\^?\d|^\~?\d|^\d|^>=/.test(version)) {
+      } else if (!/^\^?\d|^~?\d|^\d|^>=/.test(version)) {
         warn(`${name}: dependency "${dep}" version "${version}" looks unusual`);
       }
     }
@@ -201,7 +201,6 @@ function main() {
 
 function readdirSyncSafe(dir: string): string[] {
   try {
-    const { readdirSync } = require("node:fs");
     return readdirSync(dir) as string[];
   } catch {
     return [];

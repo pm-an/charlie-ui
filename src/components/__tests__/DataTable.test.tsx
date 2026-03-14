@@ -15,7 +15,7 @@ type TestRow = {
   role: string;
 };
 
-const columns: ColumnDef<TestRow, any>[] = [
+const columns: ColumnDef<TestRow, unknown>[] = [
   { accessorKey: "name", header: "Name" },
   { accessorKey: "email", header: "Email" },
   { accessorKey: "role", header: "Role" },

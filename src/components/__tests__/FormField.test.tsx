@@ -49,7 +49,7 @@ describe("FormField", () => {
     );
     const label = container.querySelector("label");
     expect(label).toBeInTheDocument();
-    const styles = window.getComputedStyle(label!, "::after");
+    window.getComputedStyle(label!, "::after");
     // The required indicator is rendered via CSS after pseudo-element
     expect(label?.className).toContain("after:");
   });

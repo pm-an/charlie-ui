@@ -2,6 +2,7 @@
 
 import {
   forwardRef,
+  useMemo,
   type ReactNode,
   type ElementType,
 } from "react";
@@ -115,9 +116,11 @@ export const Animate = forwardRef<HTMLElement, AnimateProps>(function Animate(
         ? undefined
         : viewport;
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const tag = as as string;
-  const MotionTag: any = (motion as any)[tag] ?? motion.create(tag);
+  // Memoize the motion component to avoid recreating it on every render
+  const MotionTag = useMemo(() => {
+    const tag = as as string;
+    return ((motion as unknown as Record<string, unknown>)[tag] ?? motion.create(tag)) as React.ComponentType<Record<string, unknown>>;
+  }, [as]);
 
   const motionEl = (
     <MotionTag

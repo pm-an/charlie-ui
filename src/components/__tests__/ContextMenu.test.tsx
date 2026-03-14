@@ -347,7 +347,7 @@ describe("ContextMenu", () => {
   });
 
   it("opens on Shift+F10 keyboard shortcut", async () => {
-    const user = userEvent.setup();
+    const _user = userEvent.setup();
     render(
       <ContextMenu>
         <ContextMenu.Trigger>

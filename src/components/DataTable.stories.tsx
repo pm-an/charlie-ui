@@ -49,7 +49,7 @@ function generateUsers(count: number): User[] {
 const sampleUsers = generateUsers(20);
 const largeDataset = generateUsers(57);
 
-const columns: ColumnDef<User, any>[] = [
+const columns: ColumnDef<User, unknown>[] = [
   { accessorKey: "name", header: "Name" },
   { accessorKey: "email", header: "Email" },
   { accessorKey: "role", header: "Role" },
@@ -224,7 +224,7 @@ export const ServerSide: Story = {
     React.useEffect(() => {
       setLoading(true);
       const timer = setTimeout(() => {
-        let sorted = [...allData];
+        const sorted = [...allData];
         if (sorting.length > 0) {
           const { id, desc } = sorting[0];
           sorted.sort((a, b) => {

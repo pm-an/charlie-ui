@@ -215,7 +215,7 @@ export const WithCustomKeys: Story = {
     itemHeight: 40,
     overscan: 5,
     getItemKey: (item: { uuid: string }) => item.uuid,
-    renderItem: (item: { uuid: string; name: string }, index: number) => (
+    renderItem: (item: { uuid: string; name: string }, _index: number) => (
       <div className="flex items-center justify-between px-4 text-sm border-b border-white/5 h-full">
         <span className="text-white/80">{item.name}</span>
         <span className="text-xs text-white/60 font-mono">

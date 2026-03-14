@@ -32,6 +32,7 @@ export function useControllableState<T>(
 
   // Keep a ref to onChange to avoid re-creating the setter
   const onChangeRef = useRef(onChange);
+  // eslint-disable-next-line react-hooks/refs -- intentional: keeping ref in sync with latest onChange callback
   onChangeRef.current = onChange;
 
   const setValue = useCallback(

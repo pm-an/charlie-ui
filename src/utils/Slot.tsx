@@ -54,8 +54,8 @@ function Slot({ children, ref, ...slotProps }: SlotProps) {
       key.startsWith("on")
     ) {
       mergedProps[key] = (...args: unknown[]) => {
-        (slotHandler as Function)(...args);
-        (childHandler as Function)(...args);
+        (slotHandler as (...a: unknown[]) => unknown)(...args);
+        (childHandler as (...a: unknown[]) => unknown)(...args);
       };
     } else {
       mergedProps[key] = childHandler !== undefined ? childHandler : slotHandler;

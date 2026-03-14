@@ -382,6 +382,7 @@ function TimePicker({
   // Sync controlled value
   useEffect(() => {
     if (isControlled && value) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- intentional: syncing controlled value to internal state
       setInternalValue(value);
     }
   }, [isControlled, value]);

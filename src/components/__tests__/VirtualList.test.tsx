@@ -144,7 +144,7 @@ describe("VirtualList", () => {
 
   it("uses getItemKey for stable keys", () => {
     const getItemKey = vi.fn(
-      (item: { id: number; label: string }, index: number) => `key-${item.id}`
+      (item: { id: number; label: string }, _index: number) => `key-${item.id}`
     );
     render(
       <VirtualList

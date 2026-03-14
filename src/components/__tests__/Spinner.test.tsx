@@ -163,7 +163,7 @@ describe("Spinner", () => {
 
   describe("dots type", () => {
     it("renders three dots", () => {
-      const { container } = render(<Spinner type="dots" />);
+      render(<Spinner type="dots" />);
       const wrapper = screen.getByRole("status");
       // Dots are rendered inside a motion.div with rounded-full bg-current children
       const dots = wrapper.querySelectorAll(".rounded-full.bg-current");
@@ -173,7 +173,7 @@ describe("Spinner", () => {
 
   describe("bars type", () => {
     it("renders four bars", () => {
-      const { container } = render(<Spinner type="bars" />);
+      render(<Spinner type="bars" />);
       const wrapper = screen.getByRole("status");
       const bars = wrapper.querySelectorAll(".rounded-sm.bg-current");
       expect(bars).toHaveLength(4);
@@ -182,7 +182,7 @@ describe("Spinner", () => {
 
   describe("pulse type", () => {
     it("renders a single pulsing circle", () => {
-      const { container } = render(<Spinner type="pulse" />);
+      render(<Spinner type="pulse" />);
       const wrapper = screen.getByRole("status");
       const circles = wrapper.querySelectorAll(".rounded-full.bg-current");
       expect(circles).toHaveLength(1);

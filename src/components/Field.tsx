@@ -70,8 +70,8 @@ export type FieldErrorProps = HTMLAttributes<HTMLParagraphElement>;
 
 const FieldError = forwardRef<HTMLParagraphElement, FieldErrorProps>(
   ({ className, id, children, ...props }, ref) => {
-    if (!children) return null;
     const ctx = useFieldContext();
+    if (!children) return null;
     const resolvedId = id ?? ctx?.errorId;
 
     return (

@@ -104,6 +104,7 @@ const DropdownMenuRoot = ({ children, open: controlledOpen, defaultOpen = false,
       setOpen,
       highlightedIndex,
       setHighlightedIndex,
+      // eslint-disable-next-line react-hooks/refs -- intentional: counter tracked via ref for item registration
       itemCount: itemCountRef.current,
       registerItem,
       close,
@@ -114,6 +115,7 @@ const DropdownMenuRoot = ({ children, open: controlledOpen, defaultOpen = false,
   const closeValue = useMemo(() => ({ close }), [close]);
 
   return (
+    // eslint-disable-next-line react-hooks/refs -- value contains itemCount from ref; intentional pattern for item registration
     <DropdownMenuContext.Provider value={value}>
       <MenuCloseContext.Provider value={closeValue}>
         <div data-slot="dropdown-menu" className="relative inline-block">{children}</div>

@@ -286,6 +286,7 @@ function DatePicker({
   // Sync controlled range
   useEffect(() => {
     if (rangeValue !== undefined) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- intentional: syncing controlled value to internal state
       setInternalRange(rangeValue);
     }
   }, [rangeValue]);

@@ -1,5 +1,4 @@
 import { render, screen, act, fireEvent } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
 import { describe, it, expect, vi } from "vitest";
 import { Tooltip } from "../Tooltip";
 import { expectNoA11yViolations } from "../../test/a11y";

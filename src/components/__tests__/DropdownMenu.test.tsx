@@ -227,7 +227,7 @@ describe("DropdownMenu", () => {
   });
 
   it("disabled items are not interactive", async () => {
-    const user = userEvent.setup();
+    const _user = userEvent.setup();
     const onSelect = vi.fn();
     render(
       <DropdownMenu defaultOpen>

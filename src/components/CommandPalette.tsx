@@ -137,12 +137,14 @@ function CommandPalette({
   }, [open, handleKeyDown]);
 
   // Reset item counter before each render of children
+  // eslint-disable-next-line react-hooks/refs -- intentional: counter must reset before children call registerItem
   itemCountRef.current = 0;
 
   return (
     <AnimatePresence>
       {open && (
         <CommandPaletteContext.Provider
+          // eslint-disable-next-line react-hooks/refs -- intentional: reading counter that children populate during render
           value={{ search: filter ? search : "", activeIndex, registerItem, itemCount: itemCountRef.current }}
         >
           <div

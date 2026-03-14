@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import { describe, it, expect, vi, beforeAll } from "vitest";
+import { describe, it, expect, beforeAll } from "vitest";
 import { PieChart } from "../PieChart";
 import { expectNoA11yViolations } from "../../test/a11y";
 

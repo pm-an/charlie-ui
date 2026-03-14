@@ -94,7 +94,7 @@ describe("EmptyState", () => {
 
     it("does not render action container when no action", () => {
       const { container } = render(<EmptyState title="No items" />);
-      const actionContainer = container.querySelector(".mt-4:last-child");
+      container.querySelector(".mt-4:last-child");
       // There should be no action wrapper (mt-4 only from title)
       const buttons = container.querySelectorAll("button");
       expect(buttons).toHaveLength(0);

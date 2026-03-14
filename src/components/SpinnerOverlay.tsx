@@ -30,6 +30,7 @@ function SpinnerOverlay({
 
   useEffect(() => {
     if (!spinning) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- intentional: syncing visibility with spinning prop
       setIsVisible(false);
       return;
     }

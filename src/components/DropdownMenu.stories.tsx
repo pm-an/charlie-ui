@@ -8,13 +8,9 @@ import {
   Download,
   Star,
   Archive,
-  Eye,
-  EyeOff,
   Settings,
   User,
   LogOut,
-  Bell,
-  Moon,
 } from "lucide-react";
 import { DropdownMenu } from "./DropdownMenu";
 import { Button } from "./Button";

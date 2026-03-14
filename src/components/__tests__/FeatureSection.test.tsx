@@ -98,7 +98,7 @@ describe("FeatureSection", () => {
     });
 
     it("spreads additional HTML attributes", () => {
-      const { container } = render(
+      render(
         <FeatureSection features={mockFeatures} data-testid="my-section" />
       );
       expect(screen.getByTestId("my-section")).toBeInTheDocument();

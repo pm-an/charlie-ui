@@ -66,7 +66,7 @@ type DataTableDensity = "compact" | "comfortable" | "spacious";
 type DataTableProps<TData> = Omit<HTMLAttributes<HTMLDivElement>, "children"> & {
   // Data
   data: TData[];
-  columns: ColumnDef<TData, any>[];
+  columns: ColumnDef<TData, unknown>[];
 
   // Variants
   variant?: DataTableVariant;
@@ -155,7 +155,7 @@ function DataTable<TData>({
 
   // Enable features
   enableSorting = true,
-  enableFiltering,
+  enableFiltering: _enableFiltering,
   enableRowSelection = false,
   enablePagination = true,
 
@@ -186,7 +186,7 @@ function DataTable<TData>({
   const finalColumns = useMemo(() => {
     if (!enableRowSelection) return columns;
 
-    const selectionCol: ColumnDef<TData, any> = {
+    const selectionCol: ColumnDef<TData, unknown> = {
       id: "__select",
       header: ({ table }) => (
         <input
@@ -226,37 +226,29 @@ function DataTable<TData>({
     onSortingChange: (updater) => {
       const next =
         typeof updater === "function" ? updater(resolvedSorting) : updater;
-      onSortingChange ? onSortingChange(next) : setInternalSorting(next);
+      if (onSortingChange) { onSortingChange(next); } else { setInternalSorting(next); }
     },
     onColumnFiltersChange: (updater) => {
       const next =
         typeof updater === "function" ? updater(resolvedFilters) : updater;
-      onColumnFiltersChange
-        ? onColumnFiltersChange(next)
-        : setInternalFilters(next);
+      if (onColumnFiltersChange) { onColumnFiltersChange(next); } else { setInternalFilters(next); }
     },
     onRowSelectionChange: (updater) => {
       const next =
         typeof updater === "function" ? updater(resolvedSelection) : updater;
-      onRowSelectionChange
-        ? onRowSelectionChange(next)
-        : setInternalSelection(next);
+      if (onRowSelectionChange) { onRowSelectionChange(next); } else { setInternalSelection(next); }
     },
     onPaginationChange: (updater) => {
       const next =
         typeof updater === "function" ? updater(resolvedPagination) : updater;
-      onPaginationChange
-        ? onPaginationChange(next)
-        : setInternalPagination(next);
+      if (onPaginationChange) { onPaginationChange(next); } else { setInternalPagination(next); }
     },
     onGlobalFilterChange: (updater) => {
       const next =
         typeof updater === "function"
           ? updater(resolvedGlobalFilter)
           : updater;
-      onGlobalFilterChange
-        ? onGlobalFilterChange(next)
-        : setInternalGlobalFilter(next);
+      if (onGlobalFilterChange) { onGlobalFilterChange(next); } else { setInternalGlobalFilter(next); }
     },
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: manualSorting ? undefined : getSortedRowModel(),
@@ -300,9 +292,7 @@ function DataTable<TData>({
             value={resolvedGlobalFilter}
             onChange={(e) => {
               const val = e.target.value;
-              onGlobalFilterChange
-                ? onGlobalFilterChange(val)
-                : setInternalGlobalFilter(val);
+              if (onGlobalFilterChange) { onGlobalFilterChange(val); } else { setInternalGlobalFilter(val); }
             }}
             placeholder={searchPlaceholder}
             className={cn(
@@ -477,9 +467,7 @@ function DataTable<TData>({
                     pageIndex: 0,
                     pageSize: size,
                   };
-                  onPaginationChange
-                    ? onPaginationChange(next)
-                    : setInternalPagination(next);
+                  if (onPaginationChange) { onPaginationChange(next); } else { setInternalPagination(next); }
                 }}
                 className="bg-white/5 border border-white/6 rounded-md h-8 px-2 text-xs text-white/70 outline-none"
                 aria-label="Page size"

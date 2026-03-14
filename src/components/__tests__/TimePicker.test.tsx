@@ -1,6 +1,6 @@
 import { render, screen, fireEvent, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { describe, it, expect, vi, beforeEach } from "vitest";
+import { describe, it, expect, vi } from "vitest";
 import { TimePicker, type TimeValue } from "../TimePicker";
 import { Field } from "../Field";
 import { expectNoA11yViolations } from "../../test/a11y";

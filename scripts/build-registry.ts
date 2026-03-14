@@ -9,7 +9,7 @@
  */
 
 import { readFileSync, writeFileSync, mkdirSync, existsSync, rmSync } from "node:fs";
-import { resolve, dirname, extname, basename } from "node:path";
+import { resolve, extname } from "node:path";
 import { registryMetadata, type ItemMeta } from "./registry-metadata";
 
 const ROOT = resolve(import.meta.dirname, "..");

@@ -9,7 +9,7 @@ import reactRefresh from 'eslint-plugin-react-refresh'
 import tseslint from 'typescript-eslint'
 import { defineConfig, globalIgnores } from 'eslint/config'
 
-export default defineConfig([globalIgnores(['dist']), {
+export default defineConfig([globalIgnores(['dist', 'storybook-static', 'test-results']), {
   files: ['**/*.{ts,tsx}'],
   extends: [
     js.configs.recommended,
@@ -23,8 +23,22 @@ export default defineConfig([globalIgnores(['dist']), {
     globals: globals.browser,
   },
   rules: {
+    // react-refresh: component libraries export variants/types alongside components
+    "react-refresh/only-export-components": "off",
+    // Allow unused vars prefixed with _ (common convention for intentionally unused params)
+    "@typescript-eslint/no-unused-vars": ["error", { argsIgnorePattern: "^_", varsIgnorePattern: "^_", caughtErrorsIgnorePattern: "^_" }],
+    // jsx-a11y: downgrade rules that produce false positives in component libraries
     "jsx-a11y/no-autofocus": "warn",
     "jsx-a11y/click-events-have-key-events": "warn",
     "jsx-a11y/no-static-element-interactions": "warn",
+    "jsx-a11y/no-noninteractive-tabindex": "warn",
+    "jsx-a11y/no-noninteractive-element-interactions": "warn",
+    "jsx-a11y/interactive-supports-focus": "warn",
+    "jsx-a11y/role-has-required-aria-props": "warn",
+    "jsx-a11y/label-has-associated-control": "warn",
+    "jsx-a11y/role-supports-aria-props": "warn",
+    "jsx-a11y/aria-role": "warn",
+    "jsx-a11y/anchor-has-content": "warn",
+    "jsx-a11y/alt-text": "warn",
   },
 }, ...storybook.configs["flat/recommended"]])

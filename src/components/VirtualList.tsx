@@ -54,6 +54,7 @@ function VirtualList<T>({
 
   const totalHeight = items.length * itemHeight;
 
+  /* eslint-disable react-hooks/refs -- intentional: reading container dimensions for virtual scroll calculations */
   const viewportHeight =
     containerRef.current?.clientHeight ??
     (typeof height === "number" ? height : 400);
@@ -62,6 +63,7 @@ function VirtualList<T>({
     items.length,
     Math.ceil((scrollTop + viewportHeight) / itemHeight) + overscan
   );
+  /* eslint-enable react-hooks/refs */
 
   const visibleItems = items.slice(startIndex, endIndex);
   const offsetY = startIndex * itemHeight;

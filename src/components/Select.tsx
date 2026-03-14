@@ -266,6 +266,7 @@ function Select({
       const idx = filteredOptions.findIndex(
         (opt) => opt.value === selectedValue
       );
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- intentional: syncing highlight index when options change
       setHighlightedIndex(idx >= 0 ? idx : enabledIndices[0] ?? -1);
     }
   }, [filteredOptions, open, selectedValue, enabledIndices]);
