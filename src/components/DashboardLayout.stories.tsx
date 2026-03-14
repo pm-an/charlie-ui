@@ -55,6 +55,7 @@ const HeaderContent = ({ onMenuClick }: { onMenuClick?: () => void }) => (
           type="button"
           onClick={onMenuClick}
           className="md:hidden text-white/60 hover:text-white p-1"
+          aria-label="Toggle menu"
         >
           <Menu className="h-5 w-5" />
         </button>
@@ -65,7 +66,7 @@ const HeaderContent = ({ onMenuClick }: { onMenuClick?: () => void }) => (
       </div>
     </div>
     <div className="flex items-center gap-3">
-      <button type="button" className="text-white/60 hover:text-white p-1 relative">
+      <button type="button" className="text-white/60 hover:text-white p-1 relative" aria-label="Notifications">
         <Bell className="h-5 w-5" />
         <span className="absolute -top-0.5 -right-0.5 h-2 w-2 bg-red rounded-full" />
       </button>
@@ -175,6 +176,7 @@ export const Collapsed: Story = {
                 type="button"
                 onClick={() => setCollapsed(!collapsed)}
                 className="text-white/60 hover:text-white p-1"
+                aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
               >
                 <ChevronLeft
                   className={`h-5 w-5 transition-transform ${collapsed ? "rotate-180" : ""}`}

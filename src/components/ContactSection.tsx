@@ -75,7 +75,7 @@ const ContactSection = forwardRef<HTMLElement, ContactSectionProps>(
             placeholder="Your name"
             value={formData.name}
             onChange={(e) => handleChange("name", e.target.value)}
-            className="w-full bg-white/5 border border-white/6 rounded-md h-10 px-3 text-sm text-white placeholder:text-white/60 outline-none transition-all duration-200 focus:ring-1 focus:ring-white/15 focus:border-white/15"
+            className="w-full bg-white/5 border border-white/6 rounded-md h-10 px-3 text-sm text-white placeholder:text-white/70 outline-none transition-all duration-200 focus:ring-1 focus:ring-white/15 focus:border-white/15"
           />
         </div>
 
@@ -89,7 +89,7 @@ const ContactSection = forwardRef<HTMLElement, ContactSectionProps>(
             placeholder="you@example.com"
             value={formData.email}
             onChange={(e) => handleChange("email", e.target.value)}
-            className="w-full bg-white/5 border border-white/6 rounded-md h-10 px-3 text-sm text-white placeholder:text-white/60 outline-none transition-all duration-200 focus:ring-1 focus:ring-white/15 focus:border-white/15"
+            className="w-full bg-white/5 border border-white/6 rounded-md h-10 px-3 text-sm text-white placeholder:text-white/70 outline-none transition-all duration-200 focus:ring-1 focus:ring-white/15 focus:border-white/15"
           />
         </div>
 
@@ -103,7 +103,7 @@ const ContactSection = forwardRef<HTMLElement, ContactSectionProps>(
             rows={4}
             value={formData.message}
             onChange={(e) => handleChange("message", e.target.value)}
-            className="w-full bg-white/5 border border-white/6 rounded-md px-3 py-2 text-sm text-white placeholder:text-white/60 outline-none transition-all duration-200 focus:ring-1 focus:ring-white/15 focus:border-white/15 min-h-[80px] resize-vertical"
+            className="w-full bg-white/5 border border-white/6 rounded-md px-3 py-2 text-sm text-white placeholder:text-white/70 outline-none transition-all duration-200 focus:ring-1 focus:ring-white/15 focus:border-white/15 min-h-[80px] resize-vertical"
           />
         </div>
 
@@ -127,7 +127,7 @@ const ContactSection = forwardRef<HTMLElement, ContactSectionProps>(
           {(eyebrow || title || description) && (
             <div className={cn(variant === "simple" && "text-center")}>
               {eyebrow && (
-                <p className="text-red text-sm font-medium tracking-wide uppercase mb-3">
+                <p className="text-[#f87171] text-sm font-medium tracking-wide uppercase mb-3">
                   {eyebrow}
                 </p>
               )}
@@ -139,7 +139,7 @@ const ContactSection = forwardRef<HTMLElement, ContactSectionProps>(
               {description && (
                 <p
                   className={cn(
-                    "text-white/60 text-base md:text-lg mt-3 md:mt-4 max-w-2xl",
+                    "text-white/70 text-base md:text-lg mt-3 md:mt-4 max-w-2xl",
                     variant === "simple" && "mx-auto"
                   )}
                 >
@@ -158,11 +158,11 @@ const ContactSection = forwardRef<HTMLElement, ContactSectionProps>(
                   <div className="space-y-6">
                     {info.map((item) => (
                       <div key={item.label} className="flex items-start gap-4">
-                        <div className="flex-shrink-0 h-10 w-10 rounded-lg bg-white/5 border border-white/[0.06] flex items-center justify-center text-white/60">
+                        <div className="flex-shrink-0 h-10 w-10 rounded-lg bg-white/5 border border-white/[0.06] flex items-center justify-center text-white/70">
                           {item.icon}
                         </div>
                         <div>
-                          <p className="text-sm font-medium text-white/60">
+                          <p className="text-sm font-medium text-white/70">
                             {item.label}
                           </p>
                           {item.href ? (

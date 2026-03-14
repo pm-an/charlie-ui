@@ -40,7 +40,7 @@ function SocialCard({
     <>
       <div className="w-8 h-8 mb-3">{icon}</div>
       <h3 className="text-white font-semibold text-lg">{title}</h3>
-      <p className="text-white/60 text-sm mt-2">{description}</p>
+      <p className="text-white/70 text-sm mt-2">{description}</p>
     </>
   );
 

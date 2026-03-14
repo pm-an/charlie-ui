@@ -4,7 +4,6 @@ import {
   AlertTriangle,
   ServerCrash,
   Construction,
-  Clock,
   Rocket,
 } from "lucide-react";
 
@@ -72,9 +71,9 @@ const ErrorPage = forwardRef<HTMLDivElement, ErrorPageProps>(
         <div className="text-center max-w-md">
           <div className="mb-6 flex justify-center">
             {isNumericCode ? (
-              <span className="text-7xl font-bold text-white/10">{code}</span>
+              <span className="text-7xl font-bold text-white/40" aria-hidden="true">{code}</span>
             ) : (
-              <div className="flex h-16 w-16 items-center justify-center rounded-full bg-white/5 text-white/60">
+              <div className="flex h-16 w-16 items-center justify-center rounded-full bg-white/5 text-white/70">
                 {displayIcon}
               </div>
             )}
@@ -82,7 +81,7 @@ const ErrorPage = forwardRef<HTMLDivElement, ErrorPageProps>(
 
           <h1 className="text-2xl font-bold text-white">{displayTitle}</h1>
 
-          <p className="mt-2 text-white/60">{displayDescription}</p>
+          <p className="mt-2 text-white/70">{displayDescription}</p>
 
           {(action || backHref) && (
             <div className="mt-6 flex items-center justify-center gap-3">

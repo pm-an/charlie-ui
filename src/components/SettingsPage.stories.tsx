@@ -23,14 +23,16 @@ const FormRow = ({
   label,
   description,
   children,
+  htmlFor,
 }: {
   label: string;
   description?: string;
   children: React.ReactNode;
+  htmlFor?: string;
 }) => (
   <div className="flex flex-col md:flex-row md:items-start gap-2 md:gap-8 py-4 border-b border-white/[0.06] last:border-b-0">
     <div className="md:w-48 shrink-0">
-      <label className="text-sm font-medium text-white">{label}</label>
+      <label htmlFor={htmlFor} className="text-sm font-medium text-white">{label}</label>
       {description && (
         <p className="text-xs text-white/60 mt-0.5">{description}</p>
       )}
@@ -40,13 +42,16 @@ const FormRow = ({
 );
 
 const TextInput = ({
+  id,
   defaultValue,
   placeholder,
 }: {
+  id?: string;
   defaultValue?: string;
   placeholder?: string;
 }) => (
   <input
+    id={id}
     type="text"
     defaultValue={defaultValue}
     placeholder={placeholder}
@@ -70,6 +75,9 @@ const ToggleRow = ({
     </div>
     <button
       type="button"
+      role="switch"
+      aria-checked={defaultChecked}
+      aria-label={label}
       className={`relative inline-flex h-5 w-9 items-center rounded-full transition-colors ${
         defaultChecked ? "bg-green" : "bg-white/10"
       }`}
@@ -100,14 +108,15 @@ export const Default: Story = {
           description="Your public profile information."
         >
           <div className="space-y-0">
-            <FormRow label="Display name" description="Visible to other users">
-              <TextInput defaultValue="Jane Doe" />
+            <FormRow label="Display name" description="Visible to other users" htmlFor="settings-display-name">
+              <TextInput id="settings-display-name" defaultValue="Jane Doe" />
             </FormRow>
-            <FormRow label="Email" description="Primary contact email">
-              <TextInput defaultValue="jane@acme.co" />
+            <FormRow label="Email" description="Primary contact email" htmlFor="settings-email">
+              <TextInput id="settings-email" defaultValue="jane@acme.co" />
             </FormRow>
-            <FormRow label="Bio" description="Brief description for your profile">
+            <FormRow label="Bio" description="Brief description for your profile" htmlFor="settings-bio">
               <textarea
+                id="settings-bio"
                 defaultValue="Product designer based in San Francisco."
                 className="w-full max-w-sm bg-white/5 border border-white/10 rounded-md px-3 py-2 text-sm text-white placeholder:text-white/60 focus:outline-none focus:ring-1 focus:ring-white/20 resize-none h-20"
               />

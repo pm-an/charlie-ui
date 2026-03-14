@@ -24,7 +24,7 @@ const buttonVariants = cva(
         ],
         ghost: [
           "bg-transparent hover:bg-white/5",
-          "text-white/60 hover:text-white",
+          "text-white/70 hover:text-white",
         ],
         danger: [
           "bg-red hover:bg-red/90 text-white",

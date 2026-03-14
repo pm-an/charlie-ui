@@ -18,6 +18,7 @@ function Toaster({ duration = 5000, max = 5 }: ToasterProps) {
   return (
     <div
       data-slot="toaster"
+      role="region"
       aria-live="polite"
       aria-label="Notifications"
       className="fixed bottom-0 right-0 z-50 flex flex-col gap-2 p-4 md:p-6 pointer-events-none"

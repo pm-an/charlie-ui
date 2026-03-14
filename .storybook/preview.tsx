@@ -79,8 +79,8 @@ const charlieVarMap: Record<keyof CharlieTheme, string> = {
 
 const charlieDocsTheme = create({
   base: "dark",
-  colorPrimary: "#ff6363",
-  colorSecondary: "#ff6363",
+  colorPrimary: "#dc2626",
+  colorSecondary: "#dc2626",
   appBg: "#07080a",
   appContentBg: "#0c0d0f",
   appBorderColor: "rgba(255,255,255,0.06)",

@@ -101,8 +101,8 @@ function ToggleGroup({
                 isDisabled
                   ? "cursor-not-allowed opacity-40"
                   : isActive
-                    ? "text-[#18191a]"
-                    : "text-white/60 hover:text-white"
+                    ? "text-[#18191a] bg-white"
+                    : "text-white/70 hover:text-white"
               )}
               onClick={() => {
                 if (!isDisabled) setValue(option.value);
@@ -112,7 +112,6 @@ function ToggleGroup({
                 <motion.span
                   layoutId="toggle-group-active"
                   className="absolute inset-0 rounded-full bg-white shadow-sm"
-                  style={{ zIndex: -1 }}
                   transition={
                     prefersReducedMotion
                       ? { duration: 0 }
@@ -121,11 +120,11 @@ function ToggleGroup({
                 />
               )}
               {option.icon && (
-                <span className="inline-flex shrink-0 [&>svg]:size-4" aria-hidden="true">
+                <span className="relative z-10 inline-flex shrink-0 [&>svg]:size-4" aria-hidden="true">
                   {option.icon}
                 </span>
               )}
-              {option.label}
+              <span className="relative z-10">{option.label}</span>
             </button>
           );
         })}

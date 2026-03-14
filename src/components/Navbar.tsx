@@ -58,11 +58,11 @@ function Navbar({ logo, links = [], actions, className, currentPath }: NavbarPro
               key={link.href}
               href={link.href}
               aria-current={currentPath === link.href ? "page" : undefined}
-              className="text-sm text-white/60 hover:text-white transition-colors font-medium"
+              className="text-sm text-white/70 hover:text-white transition-colors font-medium"
             >
               {link.label}
               {link.badge && (
-                <span className="ml-1.5 inline-flex items-center rounded-md bg-red-muted text-red text-[10px] px-1.5 py-0.5 font-medium">
+                <span className="ml-1.5 inline-flex items-center rounded-md bg-red-muted text-[#f87171] text-[10px] px-1.5 py-0.5 font-medium">
                   {link.badge}
                 </span>
               )}
@@ -78,7 +78,7 @@ function Navbar({ logo, links = [], actions, className, currentPath }: NavbarPro
           <button
             ref={hamburgerRef}
             type="button"
-            className="md:hidden text-white/60 hover:text-white transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center"
+            className="md:hidden text-white/70 hover:text-white transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center"
             onClick={() => setMobileOpen((prev) => !prev)}
             aria-expanded={mobileOpen}
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
@@ -107,12 +107,12 @@ function Navbar({ logo, links = [], actions, className, currentPath }: NavbarPro
                   href={link.href}
                   role="menuitem"
                   aria-current={currentPath === link.href ? "page" : undefined}
-                  className="text-sm text-white/60 hover:text-white transition-colors font-medium py-2.5 min-h-[44px] flex items-center"
+                  className="text-sm text-white/70 hover:text-white transition-colors font-medium py-2.5 min-h-[44px] flex items-center"
                   onClick={() => setMobileOpen(false)}
                 >
                   {link.label}
                   {link.badge && (
-                    <span className="ml-1.5 inline-flex items-center rounded-md bg-red-muted text-red text-[10px] px-1.5 py-0.5 font-medium">
+                    <span className="ml-1.5 inline-flex items-center rounded-md bg-red-muted text-[#f87171] text-[10px] px-1.5 py-0.5 font-medium">
                       {link.badge}
                     </span>
                   )}

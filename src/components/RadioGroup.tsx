@@ -104,7 +104,7 @@ const RadioGroupRoot = forwardRef<HTMLDivElement, RadioGroupProps>(
             {children}
           </div>
           {!insideField && resolvedError && errorMessage && (
-            <p className="text-xs text-red mt-1">{errorMessage}</p>
+            <p className="text-xs text-[#f87171] mt-1">{errorMessage}</p>
           )}
         </div>
       </RadioGroupContext.Provider>
@@ -190,7 +190,7 @@ const RadioGroupItem = forwardRef<HTMLLabelElement, RadioGroupItemProps>(
               </span>
             )}
             {description && (
-              <span className="text-xs text-white/60">{description}</span>
+              <span className="text-xs text-white/70">{description}</span>
             )}
           </span>
         )}

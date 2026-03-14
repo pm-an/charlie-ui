@@ -72,9 +72,9 @@ const dotColors = {
 
 const iconBgColors = {
   default: "bg-white/10 text-white/80",
-  accent: "bg-accent/20 text-accent",
+  accent: "bg-accent/20 text-[#f87171]",
   green: "bg-green/20 text-green",
-  red: "bg-red/20 text-red",
+  red: "bg-red/20 text-[#f87171]",
   blue: "bg-blue/20 text-blue",
   yellow: "bg-yellow/20 text-yellow",
 };
@@ -162,11 +162,11 @@ const TimelineItem = forwardRef<HTMLDivElement, TimelineItemProps>(
             {title}
           </h4>
           {timestamp && (
-            <time className="shrink-0 text-xs text-white/60" dateTime={timestamp}>{timestamp}</time>
+            <time className="shrink-0 text-xs text-white/70" dateTime={timestamp}>{timestamp}</time>
           )}
         </div>
         {description && (
-          <p className="mt-0.5 text-sm text-white/60">{description}</p>
+          <p className="mt-0.5 text-sm text-white/70">{description}</p>
         )}
         {children && <div className="mt-2">{children}</div>}
       </div>

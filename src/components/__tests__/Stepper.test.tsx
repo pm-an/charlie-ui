@@ -76,7 +76,7 @@ describe("Stepper", () => {
       render(<Stepper steps={basicSteps} activeStep={1} />);
       const upcomingCircle = screen.getByTestId("step-circle-2");
       expect(upcomingCircle).toHaveClass("bg-white/5");
-      expect(upcomingCircle).toHaveClass("text-white/60");
+      expect(upcomingCircle).toHaveClass("text-white/70");
     });
   });
 
@@ -106,7 +106,7 @@ describe("Stepper", () => {
       render(<Stepper steps={basicSteps} activeStep={1} />);
       const activeCircle = screen.getByTestId("step-circle-1");
       // Active step should not show error
-      expect(activeCircle).not.toHaveClass("text-red");
+      expect(activeCircle).not.toHaveClass("text-[#f87171]");
     });
   });
 

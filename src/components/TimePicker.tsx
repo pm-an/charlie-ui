@@ -8,7 +8,7 @@ import {
   type HTMLAttributes,
 } from "react";
 import { cn } from "../utils/cn";
-import { cva, type VariantProps } from "class-variance-authority";
+import { cva } from "class-variance-authority";
 import { AnimatePresence, motion } from "framer-motion";
 import { Clock } from "lucide-react";
 import { useFieldAware } from "../hooks/useFieldAware";
@@ -229,7 +229,7 @@ function TimeColumn({
 
   return (
     <div className="flex flex-col w-16" role="listbox" aria-label={label}>
-      <div className="text-xs text-white/60 font-medium text-center pb-1 sticky top-0 bg-bg-200 z-10">
+      <div className="text-xs text-white/70 font-medium text-center pb-1 sticky top-0 bg-bg-200 z-10">
         {label}
       </div>
       <div
@@ -256,7 +256,7 @@ function TimeColumn({
                 "h-8 w-full flex items-center justify-center text-sm rounded-md transition-colors",
                 v === selected
                   ? "bg-accent text-white"
-                  : "text-white/60 hover:bg-white/5 hover:text-white",
+                  : "text-white/70 hover:bg-white/5 hover:text-white",
                 disabled && "text-white/10 cursor-not-allowed hover:bg-transparent hover:text-white/10"
               )}
               onClick={() => {
@@ -284,7 +284,7 @@ type PeriodColumnProps = {
 function PeriodColumn({ value, onChange }: PeriodColumnProps) {
   return (
     <div className="flex flex-col w-16" role="listbox" aria-label="Period">
-      <div className="text-xs text-white/60 font-medium text-center pb-1 sticky top-0 bg-bg-200 z-10">
+      <div className="text-xs text-white/70 font-medium text-center pb-1 sticky top-0 bg-bg-200 z-10">
         &nbsp;
       </div>
       <div className="flex flex-col gap-1 pt-1">
@@ -298,7 +298,7 @@ function PeriodColumn({ value, onChange }: PeriodColumnProps) {
               "h-10 w-full flex items-center justify-center text-xs font-medium rounded-md transition-colors",
               value === period
                 ? "bg-accent text-white"
-                : "text-white/60 hover:bg-white/5 hover:text-white"
+                : "text-white/70 hover:bg-white/5 hover:text-white"
             )}
             onClick={() => onChange(period)}
           >
@@ -349,6 +349,7 @@ function TimePicker({
     required,
     ariaDescribedBy,
     ariaInvalid,
+    fieldLabelId,
   } = useFieldAware({
     id,
     error: errorProp,
@@ -515,8 +516,9 @@ function TimePicker({
       id={controlId}
       aria-expanded={open}
       aria-haspopup="listbox"
-      aria-labelledby={!insideField && label ? labelId : undefined}
-      aria-label={!label && !insideField ? "Select time" : undefined}
+      aria-controls={open ? `${controlId}-listbox` : undefined}
+      aria-labelledby={insideField ? fieldLabelId : (label ? labelId : undefined)}
+      aria-label={!label && !insideField && !fieldLabelId ? "Select time" : undefined}
       aria-describedby={ariaDescribedBy}
       aria-invalid={ariaInvalid}
       aria-required={required || undefined}
@@ -527,14 +529,14 @@ function TimePicker({
     >
       <Clock
         className={cn(
-          "shrink-0 text-white/60",
+          "shrink-0 text-white/70",
           size === "sm" ? "h-3.5 w-3.5" : size === "lg" ? "h-5 w-5" : "h-4 w-4"
         )}
       />
       <span
         className={cn(
           "flex-1 text-left",
-          !hasValue && "text-white/60"
+          !hasValue && "text-white/70"
         )}
       >
         {displayText ?? placeholder ?? "Select time"}
@@ -557,7 +559,7 @@ function TimePicker({
       {open && (
         <motion.div
           ref={dropdownRef}
-          initial={{ opacity: 0, scale: 0.95, y: -4 }}
+          initial={{ opacity: 1, scale: 0.95, y: -4 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: -4 }}
           transition={{ duration: 0.2 }}
@@ -567,7 +569,7 @@ function TimePicker({
             "bg-bg-200 border border-white/10 rounded-lg shadow-xl p-2"
           )}
         >
-          <div className="flex">
+          <div id={`${controlId}-listbox`} className="flex" role="group" aria-label="Time selection">
             {/* Hours column */}
             <TimeColumn
               label={use12Hour ? "Hour" : "Hour"}
@@ -645,7 +647,7 @@ function TimePicker({
           <div className="border-t border-white/6 mt-2 pt-2 flex justify-center">
             <button
               type="button"
-              className="text-xs text-accent hover:text-accent/80 cursor-pointer transition-colors"
+              className="text-xs text-[#f87171] hover:text-[#f87171]/80 cursor-pointer transition-colors"
               onClick={handleNow}
             >
               Now
@@ -685,7 +687,7 @@ function TimePicker({
         <label id={labelId} className="text-sm font-medium text-white/80">
           {label}
           {required && (
-            <span className="text-red ml-0.5" aria-hidden="true">
+            <span className="text-[#f87171] ml-0.5" aria-hidden="true">
               *
             </span>
           )}
@@ -698,12 +700,12 @@ function TimePicker({
 
       {/* Helper / Error text */}
       {resolvedDescription && !error && (
-        <p id={`${controlId}-description`} className="text-xs text-white/60">
+        <p id={`${controlId}-description`} className="text-xs text-white/70">
           {resolvedDescription}
         </p>
       )}
       {error && errorMessage && (
-        <p id={`${controlId}-error`} className="text-xs text-red">
+        <p id={`${controlId}-error`} className="text-xs text-[#f87171]">
           {errorMessage}
         </p>
       )}

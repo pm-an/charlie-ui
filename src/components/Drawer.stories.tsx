@@ -181,20 +181,20 @@ export const SmallSize: Story = {
         <Drawer {...args} open={open} onClose={() => setOpen(false)}>
           <div className="space-y-4">
             <div>
-              <label className="mb-1 block text-sm font-medium text-white">
+              <label htmlFor="filter-status" className="mb-1 block text-sm font-medium text-white">
                 Status
               </label>
-              <select className="w-full rounded-md border border-white/10 bg-white/5 px-3 py-2 text-sm text-white outline-none">
+              <select id="filter-status" className="w-full rounded-md border border-white/10 bg-white/5 px-3 py-2 text-sm text-white outline-none">
                 <option>All</option>
                 <option>Active</option>
                 <option>Archived</option>
               </select>
             </div>
             <div>
-              <label className="mb-1 block text-sm font-medium text-white">
+              <label htmlFor="filter-sort" className="mb-1 block text-sm font-medium text-white">
                 Sort by
               </label>
-              <select className="w-full rounded-md border border-white/10 bg-white/5 px-3 py-2 text-sm text-white outline-none">
+              <select id="filter-sort" className="w-full rounded-md border border-white/10 bg-white/5 px-3 py-2 text-sm text-white outline-none">
                 <option>Newest first</option>
                 <option>Oldest first</option>
                 <option>Name A-Z</option>
@@ -232,20 +232,22 @@ export const LargeSize: Story = {
               <h3 className="mb-3 text-sm font-medium text-white">General</h3>
               <div className="space-y-3">
                 <div>
-                  <label className="mb-1 block text-xs text-white/60">
+                  <label htmlFor="drawer-project-name" className="mb-1 block text-xs text-white/60">
                     Project name
                   </label>
                   <input
+                    id="drawer-project-name"
                     type="text"
                     defaultValue="charlie-ui"
                     className="w-full rounded-md border border-white/10 bg-white/5 px-3 py-2 text-sm text-white outline-none focus:border-white/20"
                   />
                 </div>
                 <div>
-                  <label className="mb-1 block text-xs text-white/60">
+                  <label htmlFor="drawer-project-desc" className="mb-1 block text-xs text-white/60">
                     Description
                   </label>
                   <textarea
+                    id="drawer-project-desc"
                     rows={3}
                     defaultValue="A modern React component library built with Tailwind CSS."
                     className="w-full resize-none rounded-md border border-white/10 bg-white/5 px-3 py-2 text-sm text-white outline-none focus:border-white/20"
@@ -347,10 +349,10 @@ export const CustomContent: Story = {
                 placeholder="https://github.com/..."
               />
               <div>
-                <label className="mb-1 block text-sm font-medium text-white">
+                <label htmlFor="drawer-framework" className="mb-1 block text-sm font-medium text-white">
                   Framework
                 </label>
-                <select className="w-full rounded-md border border-white/10 bg-white/5 px-3 py-2 text-sm text-white outline-none">
+                <select id="drawer-framework" className="w-full rounded-md border border-white/10 bg-white/5 px-3 py-2 text-sm text-white outline-none">
                   <option>Next.js</option>
                   <option>Remix</option>
                   <option>Vite</option>

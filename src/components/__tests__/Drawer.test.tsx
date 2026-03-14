@@ -333,11 +333,14 @@ describe("Drawer", () => {
         </Drawer>
       );
 
+      // Wait for auto-focus via useFocusTrap
+      await new Promise((r) => requestAnimationFrame(r));
+
       const closeBtn = screen.getByLabelText("Close");
       const firstBtn = screen.getByRole("button", { name: "First" });
       const secondBtn = screen.getByRole("button", { name: "Second" });
 
-      closeBtn.focus();
+      // useFocusTrap auto-focuses the first focusable (Close button)
       expect(document.activeElement).toBe(closeBtn);
 
       await user.tab();

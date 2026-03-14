@@ -2,7 +2,6 @@
 
 import {
   createContext,
-  useContext,
   forwardRef,
   type HTMLAttributes,
   type ReactNode,
@@ -69,7 +68,7 @@ const SettingsPageRoot = forwardRef<HTMLDivElement, SettingsPageProps>(
           >
             <h1 className="text-2xl font-bold text-white">{title}</h1>
             {description && (
-              <p className="mt-1 text-sm text-white/60">{description}</p>
+              <p className="mt-1 text-sm text-white/70">{description}</p>
             )}
           </div>
 
@@ -99,7 +98,7 @@ const SettingsPageRoot = forwardRef<HTMLDivElement, SettingsPageProps>(
                       "rounded-md md:rounded-none md:rounded-r-md",
                       activeSection === section.id
                         ? "text-white bg-white/5 font-medium md:border-l-2 md:border-accent"
-                        : "text-white/60 hover:text-white hover:bg-white/5"
+                        : "text-white/70 hover:text-white hover:bg-white/5"
                     )}
                   >
                     {section.icon && (
@@ -151,7 +150,7 @@ const SettingsSection = forwardRef<HTMLDivElement, SettingsSectionProps>(
       >
         <h2 className="text-lg font-semibold text-white">{title}</h2>
         {description && (
-          <p className="mt-1 text-sm text-white/60">{description}</p>
+          <p className="mt-1 text-sm text-white/70">{description}</p>
         )}
         <div className="mt-6">{children}</div>
       </div>

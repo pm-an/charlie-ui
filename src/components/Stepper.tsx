@@ -52,9 +52,9 @@ function getCircleClasses(status: StepStatus): string {
     case "active":
       return "bg-accent text-white ring-2 ring-accent/30";
     case "upcoming":
-      return "bg-white/5 border border-white/10 text-white/60";
+      return "bg-white/5 border border-white/10 text-white/70";
     case "error":
-      return "bg-red/20 border border-red/50 text-red";
+      return "bg-red/20 border border-red/50 text-[#f87171]";
   }
 }
 
@@ -65,20 +65,10 @@ function getLabelClasses(status: StepStatus): string {
     case "active":
       return "text-white";
     case "upcoming":
-      return "text-white/60";
+      return "text-white/70";
     case "error":
-      return "text-red";
+      return "text-[#f87171]";
   }
-}
-
-function getConnectorClasses(
-  fromStatus: StepStatus,
-  toStatus: StepStatus
-): string {
-  if (fromStatus === "completed" && toStatus === "completed") return "bg-green";
-  if (fromStatus === "completed" && toStatus === "active")
-    return "bg-gradient-to-r from-green to-accent";
-  return "bg-white/10";
 }
 
 function getVerticalConnectorClasses(
@@ -199,6 +189,7 @@ function Stepper({
           ? {
               role: "button" as const,
               tabIndex: 0,
+              "aria-label": `Go to step ${index + 1}: ${step.label}`,
               onClick: () => onStepClick(index),
               onKeyDown: (e: React.KeyboardEvent) => {
                 if (e.key === "Enter" || e.key === " ") {
@@ -282,11 +273,11 @@ function Stepper({
               >
                 {step.label}
                 {step.optional && (
-                  <span className="text-white/60"> (Optional)</span>
+                  <span className="text-white/70"> (Optional)</span>
                 )}
               </span>
               {step.description && (
-                <span className="text-xs text-white/60">
+                <span className="text-xs text-white/70">
                   {step.description}
                 </span>
               )}
@@ -347,11 +338,11 @@ function Stepper({
               >
                 {step.label}
                 {step.optional && (
-                  <span className="text-white/60"> (Optional)</span>
+                  <span className="text-white/70"> (Optional)</span>
                 )}
               </span>
               {step.description && (
-                <span className="text-xs text-white/60">
+                <span className="text-xs text-white/70">
                   {step.description}
                 </span>
               )}

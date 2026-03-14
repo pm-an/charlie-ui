@@ -79,7 +79,7 @@ const SignupForm = forwardRef<HTMLDivElement, SignupFormProps>(
 
         <div className="mb-6">
           <h2 className="text-xl font-semibold text-white">{title}</h2>
-          <p className="mt-1 text-sm text-white/60">{description}</p>
+          <p className="mt-1 text-sm text-white/70">{description}</p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -123,7 +123,7 @@ const SignupForm = forwardRef<HTMLDivElement, SignupFormProps>(
                 className="mt-0.5"
                 aria-label="I agree to the Terms of Service and Privacy Policy"
               />
-              <span className="text-sm text-white/60">
+              <span className="text-sm text-white/70">
                 I agree to the{" "}
                 <a
                   href={termsHref}
@@ -151,7 +151,7 @@ const SignupForm = forwardRef<HTMLDivElement, SignupFormProps>(
           <>
             <div className="flex items-center gap-3 w-full my-6">
               <div className="flex-1 h-px bg-white/6" />
-              <span className="text-xs text-white/60 shrink-0">or</span>
+              <span className="text-xs text-white/70 shrink-0">or</span>
               <div className="flex-1 h-px bg-white/6" />
             </div>
 
@@ -173,11 +173,11 @@ const SignupForm = forwardRef<HTMLDivElement, SignupFormProps>(
         )}
 
         {loginHref && (
-          <p className="mt-6 text-center text-sm text-white/60">
+          <p className="mt-6 text-center text-sm text-white/70">
             {loginLabel}{" "}
             <a
               href={loginHref}
-              className="text-white/60 hover:text-white transition-colors duration-200"
+              className="text-white/70 hover:text-white transition-colors duration-200"
             >
               Sign in
             </a>

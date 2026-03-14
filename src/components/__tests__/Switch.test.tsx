@@ -229,7 +229,7 @@ describe("Switch", () => {
     it("has opacity and cursor styles when disabled", () => {
       render(<Switch disabled />);
       expect(screen.getByRole("switch")).toHaveClass(
-        "opacity-50",
+        "opacity-65",
         "cursor-not-allowed"
       );
     });

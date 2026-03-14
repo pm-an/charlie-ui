@@ -127,7 +127,7 @@ const PieChart = forwardRef<HTMLDivElement, PieChartProps>(
               </span>
             )}
             {label && (
-              <span className="text-sm text-white/60">{label}</span>
+              <span className="text-sm text-white/70">{label}</span>
             )}
           </div>
         )}

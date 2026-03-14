@@ -5,6 +5,7 @@ import { Section } from "./Section";
 
 export interface PricingSectionPlan
   extends Omit<PricingCardProps, "price" | "className" | "style"> {
+  price?: string;
   monthlyPrice?: string;
   annualPrice?: string;
 }
@@ -51,7 +52,7 @@ const PricingSection = forwardRef<HTMLElement, PricingSectionProps>(
             <span
               className={cn(
                 "text-sm font-medium transition-colors",
-                billing === "monthly" ? "text-white" : "text-white/60"
+                billing === "monthly" ? "text-white" : "text-white/70"
               )}
             >
               {billingLabel.monthly}
@@ -79,7 +80,7 @@ const PricingSection = forwardRef<HTMLElement, PricingSectionProps>(
             <span
               className={cn(
                 "text-sm font-medium transition-colors",
-                billing === "annual" ? "text-white" : "text-white/60"
+                billing === "annual" ? "text-white" : "text-white/70"
               )}
             >
               {billingLabel.annual}
@@ -97,6 +98,7 @@ const PricingSection = forwardRef<HTMLElement, PricingSectionProps>(
         >
           {plans.map((plan) => {
             const {
+              price: planPrice,
               monthlyPrice,
               annualPrice: planAnnualPrice,
               ...cardProps
@@ -107,7 +109,7 @@ const PricingSection = forwardRef<HTMLElement, PricingSectionProps>(
                 ? billing === "monthly"
                   ? monthlyPrice
                   : planAnnualPrice
-                : plan.price;
+                : (planPrice ?? "");
 
             return (
               <PricingCard

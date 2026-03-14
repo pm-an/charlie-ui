@@ -132,13 +132,14 @@ function ModalRoot({
             role="dialog"
             aria-modal="true"
             aria-labelledby={title ? titleId : undefined}
+            aria-label={!title ? "Dialog" : undefined}
             aria-describedby={description ? descriptionId : undefined}
             tabIndex={-1}
             data-state={open ? "open" : "closed"}
             initial={
               fullscreen
-                ? { opacity: 0, scale: 0.98 }
-                : { opacity: 0, scale: 0.96, y: -8 }
+                ? { opacity: 1, scale: 0.98 }
+                : { opacity: 1, scale: 0.96, y: -8 }
             }
             animate={
               fullscreen
@@ -175,7 +176,7 @@ function ModalRoot({
                     </h2>
                   )}
                   {description && (
-                    <p id={descriptionId} className="mt-1 text-sm text-white/60">{description}</p>
+                    <p id={descriptionId} className="mt-1 text-sm text-white/70">{description}</p>
                   )}
                 </div>
 
@@ -185,8 +186,8 @@ function ModalRoot({
                     className={cn(
                       "shrink-0 rounded-md transition-colors",
                       fullscreen
-                        ? "flex h-8 w-8 items-center justify-center text-white/60 hover:bg-white/5 hover:text-white"
-                        : "p-1 text-white/60 hover:bg-white/5 hover:text-white"
+                        ? "flex h-8 w-8 items-center justify-center text-white/70 hover:bg-white/5 hover:text-white"
+                        : "p-1 text-white/70 hover:bg-white/5 hover:text-white"
                     )}
                     onClick={() => onOpenChange(false)}
                     aria-label="Close"
@@ -232,11 +233,12 @@ ModalHeader.displayName = "Modal.Header";
 /* ─── Modal.Body ────────────────────────────── */
 
 const ModalBody = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
-  ({ className, ...props }, ref) => (
+  ({ className, tabIndex, ...props }, ref) => (
     <div
       ref={ref}
       data-slot="modal-body"
-      className={cn("max-h-[60vh] overflow-y-auto px-6 py-4", className)}
+      tabIndex={tabIndex ?? 0}
+      className={cn("max-h-[60vh] overflow-y-auto px-6 py-4 focus-visible:outline-none", className)}
       {...props}
     />
   )

@@ -27,6 +27,8 @@ export type UseFieldAwareReturn = {
   ariaDescribedBy: string | undefined;
   /** aria-invalid value derived from error state */
   ariaInvalid: boolean | undefined;
+  /** The label element's id from Field context (for aria-labelledby) */
+  fieldLabelId: string | undefined;
 };
 
 /**
@@ -81,5 +83,6 @@ export function useFieldAware(
     required,
     ariaDescribedBy,
     ariaInvalid,
+    fieldLabelId: ctx?.labelId,
   };
 }

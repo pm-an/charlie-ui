@@ -42,7 +42,7 @@ function Footer({ logo, columns, bottom, className }: FooterProps) {
                   <li key={link.href}>
                     <a
                       href={link.href}
-                      className="text-white/60 text-sm hover:text-white transition-colors inline-block py-1"
+                      className="text-white/70 text-sm hover:text-white transition-colors inline-block py-1"
                       {...(link.external
                         ? { target: "_blank", rel: "noopener noreferrer" }
                         : {})}
@@ -61,7 +61,7 @@ function Footer({ logo, columns, bottom, className }: FooterProps) {
 
         {/* Bottom */}
         {bottom && (
-          <div className="border-t border-white/[0.06] pt-6 mt-12 text-white/60 text-xs">
+          <div className="border-t border-white/[0.06] pt-6 mt-12 text-white/70 text-xs">
             {bottom}
           </div>
         )}

@@ -19,14 +19,14 @@ const copyButtonVariants = cva(
       variant: {
         default: [
           "bg-white/5 border border-white/10",
-          "text-white/60 hover:bg-white/10 hover:text-white",
+          "text-white/70 hover:bg-white/10 hover:text-white",
         ],
         ghost: [
-          "bg-transparent text-white/60",
+          "bg-transparent text-white/70",
           "hover:bg-white/5 hover:text-white",
         ],
         outline: [
-          "border border-white/10 text-white/60",
+          "border border-white/10 text-white/70",
           "hover:border-white/20",
         ],
       },

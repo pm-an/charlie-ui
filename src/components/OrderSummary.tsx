@@ -99,10 +99,10 @@ const OrderSummary = forwardRef<HTMLDivElement, OrderSummaryProps>(
             <StatusIcon className={cn("h-5 w-5", colorClass)} />
             <h2 className="text-lg font-semibold text-white">{statusLabel}</h2>
           </div>
-          <p className="mt-1 text-sm text-white/60">
+          <p className="mt-1 text-sm text-white/70">
             Order #{orderNumber}
           </p>
-          <p className="text-sm text-white/60">{date}</p>
+          <p className="text-sm text-white/70">{date}</p>
         </div>
 
         {/* Items */}
@@ -125,7 +125,7 @@ const OrderSummary = forwardRef<HTMLDivElement, OrderSummaryProps>(
                 <p className="text-sm font-medium text-white truncate">
                   {item.name}
                 </p>
-                <p className="text-xs text-white/60">Qty: {item.quantity}</p>
+                <p className="text-xs text-white/70">Qty: {item.quantity}</p>
               </div>
               <span className="shrink-0 text-sm font-medium text-white">
                 {formatPrice(item.price * item.quantity)}
@@ -137,17 +137,17 @@ const OrderSummary = forwardRef<HTMLDivElement, OrderSummaryProps>(
         {/* Totals */}
         <div className="border-t border-white/[0.06] px-6 py-4">
           <div className="flex justify-between text-sm">
-            <span className="text-white/60">Subtotal</span>
+            <span className="text-white/70">Subtotal</span>
             <span className="text-white">{formatPrice(subtotal)}</span>
           </div>
           <div className="mt-2 flex justify-between text-sm">
-            <span className="text-white/60">Shipping</span>
+            <span className="text-white/70">Shipping</span>
             <span className="text-white">
               {shipping === 0 ? "Free" : formatPrice(shipping)}
             </span>
           </div>
           <div className="mt-2 flex justify-between text-sm">
-            <span className="text-white/60">Tax</span>
+            <span className="text-white/70">Tax</span>
             <span className="text-white">{formatPrice(tax)}</span>
           </div>
           <div className="my-3 border-t border-white/[0.06]" />
@@ -162,13 +162,13 @@ const OrderSummary = forwardRef<HTMLDivElement, OrderSummaryProps>(
         {/* Shipping address */}
         {shippingAddress && (
           <div className="border-t border-white/[0.06] px-6 py-4">
-            <h3 className="text-sm font-medium text-white/60 mb-2">
+            <h3 className="text-sm font-medium text-white/70 mb-2">
               Shipping Address
             </h3>
             <div className="text-sm text-white">
               <p>{shippingAddress.name}</p>
-              <p className="text-white/60">{shippingAddress.address}</p>
-              <p className="text-white/60">
+              <p className="text-white/70">{shippingAddress.address}</p>
+              <p className="text-white/70">
                 {shippingAddress.city}, {shippingAddress.state}{" "}
                 {shippingAddress.zip}
               </p>

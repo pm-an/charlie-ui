@@ -60,8 +60,8 @@ function ResizableHandle({
     >
       {withHandle && (
         <div className="z-10 flex items-center justify-center rounded-sm border border-white/10 bg-bg-200">
-          <GripVertical aria-hidden="true" className="h-3 w-3 text-white/60 data-[panel-group-direction=vertical]:hidden" />
-          <GripHorizontal aria-hidden="true" className="h-3 w-3 text-white/60 hidden data-[panel-group-direction=vertical]:block" />
+          <GripVertical aria-hidden="true" className="h-3 w-3 text-white/70 data-[panel-group-direction=vertical]:hidden" />
+          <GripHorizontal aria-hidden="true" className="h-3 w-3 text-white/70 hidden data-[panel-group-direction=vertical]:block" />
         </div>
       )}
     </PanelResizeHandle>

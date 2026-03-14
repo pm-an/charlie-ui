@@ -166,7 +166,7 @@ function CommandPalette({
               data-slot="command-palette"
               className="relative w-[calc(100%-32px)] md:w-full max-w-[640px] overflow-hidden rounded-xl border border-white/[0.06] bg-grey-700 shadow-window"
               data-state={open ? "open" : "closed"}
-              initial={{ opacity: 0, scale: 0.96, y: -8 }}
+              initial={{ opacity: 1, scale: 0.96, y: -8 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.96, y: -8 }}
               transition={{ duration: 0.2, ease: "easeOut" }}
@@ -178,7 +178,7 @@ function CommandPalette({
                 {loading ? (
                   <Spinner size="sm" color="rgba(255,255,255,0.4)" />
                 ) : (
-                  <Search className="h-5 w-5 shrink-0 text-white/60" />
+                  <Search className="h-5 w-5 shrink-0 text-white/70" />
                 )}
                 <input
                   ref={inputRef}
@@ -186,19 +186,21 @@ function CommandPalette({
                   placeholder={placeholder}
                   value={search}
                   onChange={(e) => handleSearchChange(e.target.value)}
-                  className="h-full flex-1 bg-transparent text-base text-white placeholder:text-white/60 outline-none"
+                  className="h-full flex-1 bg-transparent text-base text-white placeholder:text-white/70 outline-none"
                   autoFocus
                   role="combobox"
                   aria-expanded={true}
                   aria-autocomplete="list"
+                  aria-controls="command-palette-listbox"
+                  aria-label={placeholder ?? "Search commands"}
                 />
               </div>
 
               {/* Results */}
-              <div className="max-h-[360px] overflow-y-auto py-2" role="listbox">
+              <div id="command-palette-listbox" className="max-h-[360px] overflow-y-auto py-2" role="listbox" aria-label="Results">
                 {children}
                 {filter && search && !hasVisibleChildren(children, search) && (
-                  <div className="px-4 py-8 text-center text-sm text-white/60">
+                  <div className="px-4 py-8 text-center text-sm text-white/70">
                     {emptyMessage}
                   </div>
                 )}
@@ -265,7 +267,7 @@ function CommandGroup({ className, label, children, ...props }: CommandGroupProp
   return (
     <div className={cn("", className)} {...props}>
       {label && (
-        <div className="px-4 py-2 text-xs font-medium uppercase tracking-wider text-white/60">
+        <div className="px-4 py-2 text-xs font-medium uppercase tracking-wider text-white/70">
           {label}
         </div>
       )}
@@ -332,10 +334,10 @@ function CommandItem({
       aria-disabled={disabled || undefined}
       {...props}
     >
-      {Icon && <Icon className="h-4 w-4 shrink-0 text-white/60" />}
+      {Icon && <Icon className="h-4 w-4 shrink-0 text-white/70" />}
       <span className="flex-1 truncate">{children}</span>
       {shortcut && (
-        <span className="ml-auto text-xs text-white/60 shrink-0">{shortcut}</span>
+        <span className="ml-auto text-xs text-white/70 shrink-0">{shortcut}</span>
       )}
     </div>
   );

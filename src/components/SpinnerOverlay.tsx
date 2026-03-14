@@ -64,7 +64,7 @@ function SpinnerOverlay({
                 <Spinner {...spinnerProps} size={spinnerProps?.size ?? "xl"} />
               )}
               {description && (
-                <p className="mt-4 text-base text-white/60">{description}</p>
+                <p className="mt-4 text-base text-white/70">{description}</p>
               )}
             </motion.div>
           )}
@@ -85,7 +85,7 @@ function SpinnerOverlay({
       >
         {indicator || <Spinner {...spinnerProps} />}
         {description && (
-          <p className="mt-3 text-sm text-white/60">{description}</p>
+          <p className="mt-3 text-sm text-white/70">{description}</p>
         )}
       </div>
     );
@@ -108,7 +108,7 @@ function SpinnerOverlay({
           >
             {indicator || <Spinner {...spinnerProps} />}
             {description && (
-              <p className="mt-3 text-sm text-white/60">{description}</p>
+              <p className="mt-3 text-sm text-white/70">{description}</p>
             )}
           </motion.div>
         )}

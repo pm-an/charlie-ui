@@ -53,7 +53,7 @@ const ComparisonTable = forwardRef<HTMLDivElement, ComparisonTableProps>(
               </h2>
             )}
             {description && (
-              <p className="mt-2 text-white/60">{description}</p>
+              <p className="mt-2 text-white/70">{description}</p>
             )}
           </div>
         )}
@@ -84,7 +84,7 @@ const ComparisonTable = forwardRef<HTMLDivElement, ComparisonTableProps>(
                           {plan.price}
                         </span>
                         {plan.period && (
-                          <span className="text-sm text-white/60">
+                          <span className="text-sm text-white/70">
                             / {plan.period}
                           </span>
                         )}
@@ -149,7 +149,7 @@ function FeatureGroup({
         <tr>
           <td
             colSpan={plans.length + 1}
-            className="px-4 pb-2 pt-6 text-sm font-medium uppercase tracking-wider text-white/60"
+            className="px-4 pb-2 pt-6 text-sm font-medium uppercase tracking-wider text-white/70"
           >
             {group.category}
           </td>
@@ -178,12 +178,12 @@ function FeatureGroup({
                   />
                 ) : (
                   <X
-                    className="mx-auto h-5 w-5 text-white/60"
+                    className="mx-auto h-5 w-5 text-white/70"
                     aria-label="Not included"
                   />
                 )
               ) : (
-                <span className="text-sm text-white/60">{value}</span>
+                <span className="text-sm text-white/70">{value}</span>
               )}
             </td>
           ))}

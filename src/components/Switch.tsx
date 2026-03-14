@@ -77,6 +77,7 @@ const Switch = forwardRef<HTMLInputElement, SwitchProps>(
       disabled: resolvedDisabled,
       ariaDescribedBy,
       ariaInvalid,
+      fieldLabelId,
     } = useFieldAware({ id, error, disabled, description, errorMessage });
 
     const switchId = controlId;
@@ -117,7 +118,8 @@ const Switch = forwardRef<HTMLInputElement, SwitchProps>(
           name={name}
           id={switchId}
           onChange={(e) => setChecked(e.target.checked)}
-          aria-labelledby={!insideField ? labelId : undefined}
+          aria-labelledby={insideField ? fieldLabelId : labelId}
+          aria-label={!labelId && !fieldLabelId ? "Toggle" : undefined}
           aria-describedby={effectiveAriaDescribedBy}
           aria-invalid={ariaInvalid}
           {...props}
@@ -126,7 +128,8 @@ const Switch = forwardRef<HTMLInputElement, SwitchProps>(
           type="button"
           role="switch"
           aria-checked={checked}
-          aria-labelledby={!insideField ? labelId : undefined}
+          aria-labelledby={insideField ? fieldLabelId : labelId}
+          aria-label={!labelId && !fieldLabelId ? "Toggle" : undefined}
           aria-describedby={effectiveAriaDescribedBy}
           disabled={resolvedDisabled}
           tabIndex={-1}
@@ -134,7 +137,7 @@ const Switch = forwardRef<HTMLInputElement, SwitchProps>(
           className={cn(
             switchVariants({ size }),
             checked ? "bg-accent" : "bg-white/10",
-            resolvedDisabled && "opacity-50 cursor-not-allowed",
+            resolvedDisabled && "opacity-65 cursor-not-allowed",
             className
           )}
           onClick={() => {
@@ -165,7 +168,7 @@ const Switch = forwardRef<HTMLInputElement, SwitchProps>(
             {description && (
               <span
                 id={descriptionId}
-                className="text-xs text-white/60 select-none"
+                className="text-xs text-white/70 select-none"
               >
                 {description}
               </span>
@@ -183,7 +186,7 @@ const Switch = forwardRef<HTMLInputElement, SwitchProps>(
       return (
         <div className="flex flex-col gap-1">
           {switchElement}
-          <p id={`${switchId}-error`} className="text-xs text-red" role="alert">{errorMessage}</p>
+          <p id={`${switchId}-error`} className="text-xs text-[#f87171]" role="alert">{errorMessage}</p>
         </div>
       );
     }

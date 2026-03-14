@@ -184,7 +184,7 @@ function OTPInput({
         <span
           key={`sep-${i}`}
           data-testid={`otp-separator-${i}`}
-          className="px-1 text-lg text-white/60"
+          className="px-1 text-lg text-white/70"
         >
           -
         </span>,
@@ -229,7 +229,7 @@ function OTPInput({
         {elements}
       </div>
       {!insideField && resolvedError && errorMessage && (
-        <p id={`${controlId}-error`} role="alert" className="mt-1.5 text-xs text-red">{errorMessage}</p>
+        <p id={`${controlId}-error`} role="alert" className="mt-1.5 text-xs text-[#f87171]">{errorMessage}</p>
       )}
     </div>
   );

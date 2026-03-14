@@ -2,7 +2,7 @@ import type { CharlieTheme } from "../components/ThemeProvider";
 
 /** Default Charlie UI theme */
 export const defaultTheme: CharlieTheme = {
-  accent: "#ff6363",
+  accent: "#dc2626",
   accentMuted: "#2c1617",
   accentDim: "#833637",
   bg: "#07080a",

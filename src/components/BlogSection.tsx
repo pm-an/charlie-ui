@@ -57,7 +57,7 @@ const BlogSection = forwardRef<HTMLElement, BlogSectionProps>(
           <div className="mb-8 flex justify-end">
             <a
               href={viewAllHref}
-              className="inline-flex items-center gap-1.5 text-sm font-medium text-red hover:underline"
+              className="inline-flex items-center gap-1.5 text-sm font-medium text-[#f87171] hover:underline"
             >
               {viewAllLabel}
               <ArrowRight className="h-4 w-4" />

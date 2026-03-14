@@ -99,7 +99,7 @@ const CardHeader = forwardRef<HTMLDivElement, CardHeaderProps>(
             <h3 className="text-white font-semibold text-base">{title}</h3>
           )}
           {description && (
-            <p className="text-white/60 text-sm">{description}</p>
+            <p className="text-white/70 text-sm">{description}</p>
           )}
         </div>
       )}

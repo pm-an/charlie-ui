@@ -49,23 +49,23 @@ const PricingCard = forwardRef<HTMLDivElement, PricingCardProps>(
       <div className="flex items-center gap-2">
         <h3 className="text-lg font-semibold text-white">{tier}</h3>
         {badge && (
-          <span className="inline-flex items-center rounded-md bg-white/5 px-2 py-0.5 text-xs font-medium text-white/60">
+          <span className="inline-flex items-center rounded-md bg-white/5 px-2 py-0.5 text-xs font-medium text-white/70">
             {badge}
           </span>
         )}
       </div>
 
       {/* Description */}
-      <p className="mt-2 text-sm text-white/60">{description}</p>
+      <p className="mt-2 text-sm text-white/70">{description}</p>
 
       {/* Price */}
       <div className="mt-4 flex items-baseline gap-1">
         <span className="text-3xl md:text-4xl font-bold text-white">{price}</span>
-        <span className="text-sm text-white/60">/ {period}</span>
+        <span className="text-sm text-white/70">/ {period}</span>
       </div>
 
       {annualPrice && (
-        <p className="mt-1 text-sm text-white/60 line-through">
+        <p className="mt-1 text-sm text-white/70 line-through">
           {annualPrice}
         </p>
       )}

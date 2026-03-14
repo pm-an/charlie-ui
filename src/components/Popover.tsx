@@ -153,7 +153,7 @@ function PopoverContent({
   "aria-label": ariaLabel,
   "aria-labelledby": ariaLabelledBy,
 }: PopoverContentProps) {
-  const { open, setOpen, triggerRef } = usePopoverContext();
+  const { open, setOpen } = usePopoverContext();
   const contentRef = useRef<HTMLDivElement | null>(null);
 
   const handleEscape = useCallback(() => {
@@ -217,12 +217,12 @@ function PopoverContent({
   const motionConfig =
     side === "bottom"
       ? {
-          initial: { opacity: 0, y: -4 },
+          initial: { opacity: 1, y: -4 },
           animate: { opacity: 1, y: 0 },
           exit: { opacity: 0, y: -4 },
         }
       : {
-          initial: { opacity: 0, y: 4 },
+          initial: { opacity: 1, y: 4 },
           animate: { opacity: 1, y: 0 },
           exit: { opacity: 0, y: 4 },
         };
@@ -247,7 +247,7 @@ function PopoverContent({
           exit={motionConfig.exit}
           transition={{ duration: 0.2, ease: "easeOut" }}
           role="dialog"
-          aria-label={ariaLabel}
+          aria-label={ariaLabel ?? (!ariaLabelledBy ? "Popover" : undefined)}
           aria-labelledby={ariaLabelledBy}
         >
           {children}

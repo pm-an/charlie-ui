@@ -35,7 +35,7 @@ const iconContainerVariants = cva(
   }
 );
 
-const iconVariants = cva("text-white/60", {
+const iconVariants = cva("text-white/70", {
   variants: {
     size: {
       sm: "h-8 w-8",
@@ -61,7 +61,7 @@ const titleVariants = cva("font-medium text-white mt-4", {
   },
 });
 
-const descriptionVariants = cva("text-white/60 mt-1", {
+const descriptionVariants = cva("text-white/70 mt-1", {
   variants: {
     size: {
       sm: "text-xs",

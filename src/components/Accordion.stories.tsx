@@ -44,10 +44,10 @@ export const Default: Story = {
     expect(canvas.queryByText(/dark-themed React component library/)).toBeNull();
     // Click first item to open
     await userEvent.click(canvas.getByText("What is Charlie UI?"));
-    await expect(canvas.getByText(/dark-themed React component library/)).toBeInTheDocument();
+    await expect(await canvas.findByText(/dark-first React component library/)).toBeInTheDocument();
     // Click second item — in single mode, first should close
     await userEvent.click(canvas.getByText("How do I install it?"));
-    await expect(canvas.getByText(/Install via npm/)).toBeInTheDocument();
+    await expect(await canvas.findByText(/Install via npm/)).toBeInTheDocument();
   },
 };
 

@@ -61,7 +61,7 @@ const ShoppingCart = forwardRef<HTMLDivElement, ShoppingCartProps>(
         {/* Header */}
         <div className="flex items-center justify-between border-b border-white/[0.06] px-6 py-4">
           <h2 className="text-lg font-semibold text-white">Shopping Cart</h2>
-          <span className="text-sm text-white/60">
+          <span className="text-sm text-white/70">
             {itemCount} {itemCount === 1 ? "item" : "items"}
           </span>
         </div>
@@ -69,8 +69,8 @@ const ShoppingCart = forwardRef<HTMLDivElement, ShoppingCartProps>(
         {items.length === 0 ? (
           /* Empty state */
           <div className="flex flex-col items-center justify-center px-6 py-12">
-            <ShoppingBag className="h-10 w-10 text-white/60" />
-            <p className="mt-3 text-sm text-white/60">Your cart is empty</p>
+            <ShoppingBag className="h-10 w-10 text-white/70" />
+            <p className="mt-3 text-sm text-white/70">Your cart is empty</p>
           </div>
         ) : (
           <>
@@ -98,7 +98,7 @@ const ShoppingCart = forwardRef<HTMLDivElement, ShoppingCartProps>(
                       {item.name}
                     </p>
                     {item.variant && (
-                      <p className="text-xs text-white/60">{item.variant}</p>
+                      <p className="text-xs text-white/70">{item.variant}</p>
                     )}
                   </div>
 
@@ -112,7 +112,7 @@ const ShoppingCart = forwardRef<HTMLDivElement, ShoppingCartProps>(
                           Math.max(1, item.quantity - 1)
                         )
                       }
-                      className="flex h-7 w-7 items-center justify-center rounded-md border border-white/[0.06] bg-white/5 text-white/60 transition-colors hover:bg-white/10 hover:text-white"
+                      className="flex h-7 w-7 items-center justify-center rounded-md border border-white/[0.06] bg-white/5 text-white/70 transition-colors hover:bg-white/10 hover:text-white"
                       aria-label={`Decrease quantity of ${item.name}`}
                     >
                       <Minus className="h-3 w-3" />
@@ -125,7 +125,7 @@ const ShoppingCart = forwardRef<HTMLDivElement, ShoppingCartProps>(
                       onClick={() =>
                         onUpdateQuantity?.(item.id, item.quantity + 1)
                       }
-                      className="flex h-7 w-7 items-center justify-center rounded-md border border-white/[0.06] bg-white/5 text-white/60 transition-colors hover:bg-white/10 hover:text-white"
+                      className="flex h-7 w-7 items-center justify-center rounded-md border border-white/[0.06] bg-white/5 text-white/70 transition-colors hover:bg-white/10 hover:text-white"
                       aria-label={`Increase quantity of ${item.name}`}
                     >
                       <Plus className="h-3 w-3" />
@@ -142,7 +142,7 @@ const ShoppingCart = forwardRef<HTMLDivElement, ShoppingCartProps>(
                     <button
                       type="button"
                       onClick={() => onRemoveItem(item.id)}
-                      className="shrink-0 text-white/60 transition-colors hover:text-white"
+                      className="shrink-0 text-white/70 transition-colors hover:text-white"
                       aria-label={`Remove ${item.name}`}
                     >
                       <X className="h-4 w-4" />
@@ -155,13 +155,13 @@ const ShoppingCart = forwardRef<HTMLDivElement, ShoppingCartProps>(
             {/* Summary */}
             <div className="px-6 py-4">
               <div className="flex justify-between text-sm">
-                <span className="text-white/60">Subtotal</span>
+                <span className="text-white/70">Subtotal</span>
                 <span className="text-white">{formatPrice(subtotal)}</span>
               </div>
 
               {shipping !== undefined && (
                 <div className="mt-2 flex justify-between text-sm">
-                  <span className="text-white/60">Shipping</span>
+                  <span className="text-white/70">Shipping</span>
                   <span className="text-white">
                     {shipping === 0 ? "Free" : formatPrice(shipping)}
                   </span>
@@ -170,7 +170,7 @@ const ShoppingCart = forwardRef<HTMLDivElement, ShoppingCartProps>(
 
               {tax !== undefined && (
                 <div className="mt-2 flex justify-between text-sm">
-                  <span className="text-white/60">Tax</span>
+                  <span className="text-white/70">Tax</span>
                   <span className="text-white">{formatPrice(tax)}</span>
                 </div>
               )}

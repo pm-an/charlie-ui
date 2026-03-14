@@ -156,7 +156,7 @@ const Progress = forwardRef<HTMLDivElement, ProgressProps>(
             )}
           </div>
           {label && (
-            <span className="text-xs text-white/60">{label}</span>
+            <span className="text-xs text-white/70">{label}</span>
           )}
         </div>
       );
@@ -192,13 +192,13 @@ const Progress = forwardRef<HTMLDivElement, ProgressProps>(
             />
           </div>
           {showValue && !indeterminate && (
-            <span className="text-xs font-medium text-white/60 tabular-nums">
+            <span className="text-xs font-medium text-white/70 tabular-nums">
               {Math.round(clampedValue)}%
             </span>
           )}
         </div>
         {label && (
-          <span className="mt-1 block text-xs text-white/60">{label}</span>
+          <span className="mt-1 block text-xs text-white/70">{label}</span>
         )}
       </div>
     );

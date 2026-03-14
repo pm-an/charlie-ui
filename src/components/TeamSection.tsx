@@ -70,7 +70,7 @@ const TeamSection = forwardRef<HTMLElement, TeamSectionProps>(
           {(eyebrow || title || description) && (
             <div className="text-center">
               {eyebrow && (
-                <p className="text-red text-sm font-medium tracking-wide uppercase mb-3">
+                <p className="text-[#f87171] text-sm font-medium tracking-wide uppercase mb-3">
                   {eyebrow}
                 </p>
               )}
@@ -80,7 +80,7 @@ const TeamSection = forwardRef<HTMLElement, TeamSectionProps>(
                 </h2>
               )}
               {description && (
-                <p className="text-white/60 text-base md:text-lg mt-3 md:mt-4 max-w-2xl mx-auto">
+                <p className="text-white/70 text-base md:text-lg mt-3 md:mt-4 max-w-2xl mx-auto">
                   {description}
                 </p>
               )}
@@ -106,7 +106,7 @@ const TeamSection = forwardRef<HTMLElement, TeamSectionProps>(
                   />
                 ) : (
                   <div className="h-16 w-16 rounded-full bg-white/10 flex items-center justify-center">
-                    <span className="text-white/60 text-lg font-semibold">
+                    <span className="text-white/70 text-lg font-semibold">
                       {member.name
                         .split(" ")
                         .map((n) => n[0])
@@ -116,10 +116,10 @@ const TeamSection = forwardRef<HTMLElement, TeamSectionProps>(
                 )}
 
                 <h3 className="mt-4 text-white font-semibold">{member.name}</h3>
-                <p className="text-white/60 text-sm">{member.role}</p>
+                <p className="text-white/70 text-sm">{member.role}</p>
 
                 {member.bio && (
-                  <p className="mt-2 text-white/60 text-sm line-clamp-2">
+                  <p className="mt-2 text-white/70 text-sm line-clamp-2">
                     {member.bio}
                   </p>
                 )}
@@ -132,7 +132,7 @@ const TeamSection = forwardRef<HTMLElement, TeamSectionProps>(
                         href={social.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-white/60 hover:text-white transition-colors duration-200"
+                        className="text-white/70 hover:text-white transition-colors duration-200"
                         aria-label={`${member.name} on ${social.platform}`}
                       >
                         {socialIcons[social.platform.toLowerCase()] ?? (

@@ -237,6 +237,7 @@ describe("Modal", () => {
 
       // Focus should be auto-set into the modal. The close button is the first
       // focusable element. Tab through all elements and verify it cycles.
+      // Modal.Body has tabIndex={0} so it's also in the focus order.
       const closeBtn = screen.getByRole("button", { name: "Close" });
       const firstBtn = screen.getByRole("button", { name: "First" });
       const secondBtn = screen.getByRole("button", { name: "Second" });
@@ -245,6 +246,8 @@ describe("Modal", () => {
       closeBtn.focus();
       expect(document.activeElement).toBe(closeBtn);
 
+      // Tab to Modal.Body (tabIndex=0 scrollable region)
+      await user.tab();
       // Tab to First
       await user.tab();
       expect(document.activeElement).toBe(firstBtn);

@@ -55,12 +55,12 @@ const StatCard = forwardRef<HTMLDivElement, StatCardProps>(
         {...props}
       >
         {icon && (
-          <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-white/5 text-white/60">
+          <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-white/5 text-white/70">
             {icon}
           </div>
         )}
 
-        <p className="mb-1 text-sm text-white/60">{label}</p>
+        <p className="mb-1 text-sm text-white/70">{label}</p>
 
         {loading ? (
           <>
@@ -79,8 +79,8 @@ const StatCard = forwardRef<HTMLDivElement, StatCardProps>(
                   className={cn(
                     "flex items-center gap-1 font-medium",
                     resolvedTrend === "up" && "text-green",
-                    resolvedTrend === "down" && "text-red",
-                    resolvedTrend === "neutral" && "text-white/60"
+                    resolvedTrend === "down" && "text-[#f87171]",
+                    resolvedTrend === "neutral" && "text-white/70"
                   )}
                 >
                   {resolvedTrend === "up" && (
@@ -93,7 +93,7 @@ const StatCard = forwardRef<HTMLDivElement, StatCardProps>(
                   {change}%
                 </span>
                 {changeLabel && (
-                  <span className="text-white/60">{changeLabel}</span>
+                  <span className="text-white/70">{changeLabel}</span>
                 )}
               </div>
             )}

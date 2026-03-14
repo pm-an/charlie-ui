@@ -42,12 +42,12 @@ const tabItemVariants = cva(
       },
     },
     compoundVariants: [
-      { variant: "pills", active: true, class: "text-[#18191a]" },
-      { variant: "pills", active: false, class: "text-white/60 hover:text-white" },
+      { variant: "pills", active: true, class: "text-[#18191a] bg-white" },
+      { variant: "pills", active: false, class: "text-white/70 hover:text-white" },
       { variant: "underline", active: true, class: "text-white" },
-      { variant: "underline", active: false, class: "text-white/60 hover:text-white" },
+      { variant: "underline", active: false, class: "text-white/70 hover:text-white" },
       { variant: "segment", active: true, class: "text-white" },
-      { variant: "segment", active: false, class: "text-white/60 hover:text-white" },
+      { variant: "segment", active: false, class: "text-white/70 hover:text-white" },
     ],
     defaultVariants: {
       variant: "pills",
@@ -193,7 +193,6 @@ function TabsRoot({
                   <motion.span
                     layoutId="tabs-pill"
                     className="absolute inset-0 rounded-full bg-white"
-                    style={{ zIndex: -1 }}
                     transition={{ type: "spring", stiffness: 500, damping: 35 }}
                   />
                 )}
@@ -201,7 +200,6 @@ function TabsRoot({
                   <motion.span
                     layoutId="tabs-underline"
                     className="absolute bottom-0 left-0 right-0 h-0.5 bg-red"
-                    style={{ zIndex: -1 }}
                     transition={{ type: "spring", stiffness: 500, damping: 35 }}
                   />
                 )}
@@ -209,13 +207,12 @@ function TabsRoot({
                   <motion.span
                     layoutId="tabs-segment"
                     className="absolute inset-0 rounded-md bg-white/10"
-                    style={{ zIndex: -1 }}
                     transition={{ type: "spring", stiffness: 500, damping: 35 }}
                   />
                 )}
-                {item.label}
+                <span className="relative z-10">{item.label}</span>
                 {item.badge && (
-                  <span className="ml-2 inline-flex items-center rounded-md bg-white/5 px-1.5 py-0.5 text-[10px] text-white/60">
+                  <span className="relative z-10 ml-2 inline-flex items-center rounded-md bg-white/5 px-1.5 py-0.5 text-[10px] text-white/70">
                     {item.badge}
                   </span>
                 )}

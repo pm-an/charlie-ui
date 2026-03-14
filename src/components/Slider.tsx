@@ -101,6 +101,7 @@ const Slider = forwardRef<HTMLDivElement, SliderProps>(
       disabled: resolvedDisabled,
       ariaDescribedBy,
       ariaInvalid,
+      fieldLabelId,
     } = useFieldAware({ id: undefined, error: undefined, disabled, required: undefined });
 
     const trackRef = useRef<HTMLDivElement>(null);
@@ -194,7 +195,7 @@ const Slider = forwardRef<HTMLDivElement, SliderProps>(
         data-slot="slider"
         className={cn(
           "flex flex-col gap-2",
-          resolvedDisabled && "opacity-50 cursor-not-allowed",
+          resolvedDisabled && "opacity-65 cursor-not-allowed",
           className
         )}
         {...props}
@@ -207,7 +208,7 @@ const Slider = forwardRef<HTMLDivElement, SliderProps>(
               </span>
             )}
             {showValue && (
-              <span className="text-sm tabular-nums text-white/60">
+              <span className="text-sm tabular-nums text-white/70">
                 {value}
               </span>
             )}
@@ -236,7 +237,8 @@ const Slider = forwardRef<HTMLDivElement, SliderProps>(
             aria-valuemax={max}
             aria-valuenow={value}
             aria-orientation="horizontal"
-            aria-label={label}
+            aria-label={label || (!fieldLabelId ? "Slider" : undefined)}
+            aria-labelledby={!label && fieldLabelId ? fieldLabelId : undefined}
             aria-disabled={resolvedDisabled || undefined}
             aria-describedby={ariaDescribedBy}
             aria-invalid={ariaInvalid}
@@ -255,7 +257,7 @@ const Slider = forwardRef<HTMLDivElement, SliderProps>(
               return (
                 <span
                   key={mark.value}
-                  className="absolute -translate-x-1/2 text-xs text-white/60"
+                  className="absolute -translate-x-1/2 text-xs text-white/70"
                   style={{ left: `${markPercent}%` }}
                 >
                   {mark.label}

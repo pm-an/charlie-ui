@@ -154,7 +154,7 @@ function ToolbarButton({
       onClick={() => item.action(editor)}
       className={cn(
         "inline-flex items-center justify-center rounded-md p-1.5 transition-colors",
-        "text-white/60 hover:text-white hover:bg-white/10",
+        "text-white/70 hover:text-white hover:bg-white/10",
         "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/20",
         isActive && "bg-white/10 text-white"
       )}

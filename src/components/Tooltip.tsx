@@ -16,25 +16,25 @@ export interface TooltipProps {
 const sideConfig = {
   top: {
     style: { bottom: "100%", left: "50%", marginBottom: 8 } as CSSProperties,
-    initial: { opacity: 0, x: "-50%", y: 4 },
+    initial: { opacity: 1, x: "-50%", y: 4 },
     animate: { opacity: 1, x: "-50%", y: 0 },
     exit: { opacity: 0, x: "-50%", y: 4 },
   },
   bottom: {
     style: { top: "100%", left: "50%", marginTop: 8 } as CSSProperties,
-    initial: { opacity: 0, x: "-50%", y: -4 },
+    initial: { opacity: 1, x: "-50%", y: -4 },
     animate: { opacity: 1, x: "-50%", y: 0 },
     exit: { opacity: 0, x: "-50%", y: -4 },
   },
   left: {
     style: { right: "100%", top: "50%", marginRight: 8 } as CSSProperties,
-    initial: { opacity: 0, y: "-50%", x: 4 },
+    initial: { opacity: 1, y: "-50%", x: 4 },
     animate: { opacity: 1, y: "-50%", x: 0 },
     exit: { opacity: 0, y: "-50%", x: 4 },
   },
   right: {
     style: { left: "100%", top: "50%", marginLeft: 8 } as CSSProperties,
-    initial: { opacity: 0, y: "-50%", x: -4 },
+    initial: { opacity: 1, y: "-50%", x: -4 },
     animate: { opacity: 1, y: "-50%", x: 0 },
     exit: { opacity: 0, y: "-50%", x: -4 },
   },
@@ -94,7 +94,7 @@ function Tooltip({
             className={cn(
               "absolute z-50 whitespace-nowrap",
               "bg-grey-700 border border-white/10 rounded-md px-3 py-1.5",
-              "text-xs text-white/80 shadow-lg",
+              "text-xs text-white shadow-lg",
               className
             )}
             style={config.style}

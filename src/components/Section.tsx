@@ -1,4 +1,4 @@
-import { type HTMLAttributes, type ReactNode } from "react";
+import { forwardRef, type HTMLAttributes, type ReactNode } from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "../utils/cn";
 
@@ -24,20 +24,24 @@ export type SectionProps = HTMLAttributes<HTMLElement> &
     align?: "left" | "center";
   };
 
-function Section({
-  className,
-  size,
-  eyebrow,
-  title,
-  description,
-  children,
-  align = "center",
-  ...props
-}: SectionProps) {
+const Section = forwardRef<HTMLElement, SectionProps>(function Section(
+  {
+    className,
+    size,
+    eyebrow,
+    title,
+    description,
+    children,
+    align = "center",
+    ...props
+  },
+  ref
+) {
   const isCentered = align === "center";
 
   return (
     <section
+      ref={ref}
       data-slot="section"
       className={cn(sectionVariants({ size }), className)}
       {...props}
@@ -46,7 +50,7 @@ function Section({
         {(eyebrow || title || description) && (
           <div className={cn(isCentered && "text-center")}>
             {eyebrow && (
-              <p className="text-red text-sm font-medium tracking-wide uppercase mb-3">
+              <p className="text-[#f87171] text-sm font-medium tracking-wide uppercase mb-3">
                 {eyebrow}
               </p>
             )}
@@ -58,7 +62,7 @@ function Section({
             {description && (
               <p
                 className={cn(
-                  "text-white/60 text-base md:text-lg mt-3 md:mt-4 max-w-2xl",
+                  "text-white/70 text-base md:text-lg mt-3 md:mt-4 max-w-2xl",
                   isCentered && "mx-auto"
                 )}
               >
@@ -71,7 +75,7 @@ function Section({
       </div>
     </section>
   );
-}
+});
 
 Section.displayName = "Section";
 

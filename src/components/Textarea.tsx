@@ -110,7 +110,7 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
         required={required}
         className={cn(
           "w-full bg-white/5 border border-white/6 rounded-md px-3 py-2 text-sm text-white",
-          "placeholder:text-white/60",
+          "placeholder:text-white/70",
           "outline-none transition-all duration-200",
           "focus:ring-1 focus:ring-white/15 focus:border-white/15",
           "min-h-[80px]",
@@ -141,10 +141,10 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
         )}
         {textareaElement}
         {resolvedDescription && !error && (
-          <p id={`${controlId}-description`} className="text-xs text-white/60">{resolvedDescription}</p>
+          <p id={`${controlId}-description`} className="text-xs text-white/70">{resolvedDescription}</p>
         )}
         {error && errorMessage && (
-          <p id={`${controlId}-error`} className="text-xs text-red">{errorMessage}</p>
+          <p id={`${controlId}-error`} className="text-xs text-[#f87171]">{errorMessage}</p>
         )}
       </div>
     );

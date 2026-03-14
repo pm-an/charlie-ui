@@ -30,7 +30,7 @@ function Newsletter({ title, description, onSubmit, className }: NewsletterProps
       )}
     >
       <h3 className="text-white font-semibold text-xl mb-2">{title}</h3>
-      <p className="text-white/60 text-sm mb-6">{description}</p>
+      <p className="text-white/70 text-sm mb-6">{description}</p>
       <form onSubmit={handleSubmit} className="flex flex-col md:flex-row gap-3">
         <label htmlFor="newsletter-email" className="sr-only">Email address</label>
         <input

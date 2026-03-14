@@ -10,6 +10,14 @@ const defaultRender = (item: { id: number; label: string }) => (
   <span>{item.label}</span>
 );
 
+/** Helper to get the scroll container (inside the wrapper div) */
+function getScrollContainer(container: HTMLElement): HTMLElement {
+  // When items exist, structure is: wrapper > scrollContainer[data-slot="virtual-list"]
+  // When empty, structure is: div[data-slot="virtual-list"] (no wrapper)
+  const scrollEl = container.querySelector('[data-slot="virtual-list"]') as HTMLElement;
+  return scrollEl;
+}
+
 describe("VirtualList", () => {
   it("renders container with correct height (number)", () => {
     const { container } = render(
@@ -20,7 +28,7 @@ describe("VirtualList", () => {
         renderItem={defaultRender}
       />
     );
-    expect(container.firstChild).toHaveStyle({ height: "400px" });
+    expect(getScrollContainer(container)).toHaveStyle({ height: "400px" });
   });
 
   it("renders container with correct height (string)", () => {
@@ -32,7 +40,7 @@ describe("VirtualList", () => {
         renderItem={defaultRender}
       />
     );
-    expect(container.firstChild).toHaveStyle({ height: "50vh" });
+    expect(getScrollContainer(container)).toHaveStyle({ height: "50vh" });
   });
 
   it("only renders visible items plus overscan, not all items", () => {
@@ -202,8 +210,9 @@ describe("VirtualList", () => {
         className="my-custom-class"
       />
     );
-    expect(container.firstChild).toHaveClass("my-custom-class");
-    expect(container.firstChild).toHaveClass("overflow-auto");
+    const scrollContainer = getScrollContainer(container);
+    expect(scrollContainer).toHaveClass("my-custom-class");
+    expect(scrollContainer).toHaveClass("overflow-auto");
   });
 
   it("merges custom className on empty state", () => {
@@ -243,17 +252,18 @@ describe("VirtualList", () => {
         renderItem={defaultRender}
       />
     );
-    expect(container.firstChild).toHaveClass("[&::-webkit-scrollbar]:w-1.5");
-    expect(container.firstChild).toHaveClass(
+    const scrollContainer = getScrollContainer(container);
+    expect(scrollContainer).toHaveClass("[&::-webkit-scrollbar]:w-1.5");
+    expect(scrollContainer).toHaveClass(
       "[&::-webkit-scrollbar-track]:bg-transparent"
     );
-    expect(container.firstChild).toHaveClass(
+    expect(scrollContainer).toHaveClass(
       "[&::-webkit-scrollbar-thumb]:bg-white/10"
     );
-    expect(container.firstChild).toHaveClass(
+    expect(scrollContainer).toHaveClass(
       "[&::-webkit-scrollbar-thumb]:rounded-full"
     );
-    expect(container.firstChild).toHaveClass(
+    expect(scrollContainer).toHaveClass(
       "[&::-webkit-scrollbar-thumb:hover]:bg-white/20"
     );
   });
@@ -269,8 +279,7 @@ describe("VirtualList", () => {
         renderItem={defaultRender}
       />
     );
-    // The first child of the scrollable container is the spacer div
-    const scrollContainer = container.firstChild as HTMLElement;
+    const scrollContainer = getScrollContainer(container);
     const spacer = scrollContainer.firstChild as HTMLElement;
     expect(spacer).toHaveStyle({ height: `${500 * 40}px` });
   });
@@ -333,7 +342,7 @@ describe("VirtualList", () => {
         endReachedThreshold={200}
       />
     );
-    const scrollContainer = container.firstChild as HTMLElement;
+    const scrollContainer = getScrollContainer(container);
 
     // Mock clientHeight for scroll calculations
     Object.defineProperty(scrollContainer, "clientHeight", { value: 400 });
@@ -354,7 +363,8 @@ describe("VirtualList", () => {
         style={{ padding: "8px" }}
       />
     );
-    expect(container.firstChild).toHaveStyle({
+    const scrollContainer = getScrollContainer(container);
+    expect(scrollContainer).toHaveStyle({
       height: "400px",
       padding: "8px",
     });
@@ -370,7 +380,7 @@ describe("VirtualList", () => {
         renderItem={defaultRender}
       />
     );
-    expect(container.firstChild).toHaveAttribute("tabindex", "0");
+    expect(getScrollContainer(container)).toHaveAttribute("tabindex", "0");
   });
 
   it("supports aria-label on the list container", () => {
@@ -395,7 +405,7 @@ describe("VirtualList", () => {
         renderItem={defaultRender}
       />
     );
-    expect(container.firstChild).toHaveClass("focus-visible:ring-1");
+    expect(getScrollContainer(container)).toHaveClass("focus-visible:ring-1");
   });
 
   it("passes axe accessibility checks with items", async () => {

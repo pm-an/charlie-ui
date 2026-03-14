@@ -32,8 +32,8 @@ export const Default: Story = {
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const alert = canvas.getByRole("alert");
-    await expect(alert).toBeInTheDocument();
+    const status = canvas.getByRole("status");
+    await expect(status).toBeInTheDocument();
     await expect(canvas.getByText("New update available")).toBeInTheDocument();
   },
 };

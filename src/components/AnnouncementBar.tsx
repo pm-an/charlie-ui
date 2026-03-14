@@ -77,7 +77,7 @@ const AnnouncementBar = forwardRef<HTMLDivElement, AnnouncementBarProps>(
         role="banner"
         {...props}
       >
-        {icon && <span className="flex-shrink-0 text-white/60">{icon}</span>}
+        {icon && <span className="flex-shrink-0 text-white/70">{icon}</span>}
 
         <div className="flex items-center gap-2 min-w-0">
           {href ? (
@@ -108,7 +108,7 @@ const AnnouncementBar = forwardRef<HTMLDivElement, AnnouncementBarProps>(
           <button
             type="button"
             onClick={handleDismiss}
-            className="absolute right-3 p-1 text-white/60 hover:text-white transition-colors duration-200 rounded-md hover:bg-white/5"
+            className="absolute right-3 p-1 text-white/70 hover:text-white transition-colors duration-200 rounded-md hover:bg-white/5"
             aria-label="Dismiss announcement"
           >
             <X className="h-4 w-4" />

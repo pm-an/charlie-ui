@@ -120,7 +120,7 @@ const AccordionItem = forwardRef<HTMLDivElement, AccordionItemProps>(
           <span className="text-sm md:text-base font-medium text-white">{title}</span>
           <ChevronDown
             className={cn(
-              "h-4 w-4 shrink-0 text-white/60 transition-transform duration-200",
+              "h-4 w-4 shrink-0 text-white/70 transition-transform duration-200",
               isOpen && "rotate-180"
             )}
           />
@@ -140,7 +140,7 @@ const AccordionItem = forwardRef<HTMLDivElement, AccordionItemProps>(
               className="overflow-hidden"
               data-slot="accordion-content"
             >
-              <div className="pb-5 text-sm leading-relaxed text-white/60">
+              <div className="pb-5 text-sm leading-relaxed text-white/70">
                 {children}
               </div>
             </motion.div>

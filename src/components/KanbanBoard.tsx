@@ -24,7 +24,7 @@ export type KanbanBoardProps = HTMLAttributes<HTMLDivElement> & {
 };
 
 const tagColors: Record<string, string> = {
-  red: "bg-red-muted text-red",
+  red: "bg-red-muted text-[#f87171]",
   blue: "bg-blue-muted text-blue",
   green: "bg-green-muted text-green",
   yellow: "bg-yellow-muted text-yellow",
@@ -76,7 +76,7 @@ const KanbanBoard = forwardRef<HTMLDivElement, KanbanBoardProps>(
                   />
                 )}
                 <h3 className="text-sm font-medium text-white">{column.title}</h3>
-                <span className="inline-flex items-center rounded-md bg-white/5 px-1.5 py-0.5 text-[10px] font-medium text-white/60">
+                <span className="inline-flex items-center rounded-md bg-white/5 px-1.5 py-0.5 text-[10px] font-medium text-white/70">
                   {column.cards.length}
                 </span>
               </div>
@@ -84,7 +84,7 @@ const KanbanBoard = forwardRef<HTMLDivElement, KanbanBoardProps>(
                 <button
                   type="button"
                   onClick={() => onAddCard(column.id)}
-                  className="p-1 text-white/60 hover:text-white/80 transition-colors rounded hover:bg-white/5"
+                  className="p-1 text-white/70 hover:text-white/80 transition-colors rounded hover:bg-white/5"
                   aria-label={`Add card to ${column.title}`}
                 >
                   <Plus className="h-4 w-4" />
@@ -113,7 +113,7 @@ const KanbanBoard = forwardRef<HTMLDivElement, KanbanBoardProps>(
                 >
                   <p className="text-sm font-medium text-white">{card.title}</p>
                   {card.description && (
-                    <p className="text-xs text-white/60 mt-1 line-clamp-2">
+                    <p className="text-xs text-white/70 mt-1 line-clamp-2">
                       {card.description}
                     </p>
                   )}
@@ -128,7 +128,7 @@ const KanbanBoard = forwardRef<HTMLDivElement, KanbanBoardProps>(
                               "inline-flex items-center rounded px-1.5 py-0.5 text-[10px] font-medium",
                               tag.color && tagColors[tag.color]
                                 ? tagColors[tag.color]
-                                : "bg-white/5 text-white/60"
+                                : "bg-white/5 text-white/70"
                             )}
                           >
                             {tag.label}
@@ -144,7 +144,7 @@ const KanbanBoard = forwardRef<HTMLDivElement, KanbanBoardProps>(
                               className="h-full w-full object-cover"
                             />
                           ) : (
-                            <span className="text-[10px] font-medium text-white/60">
+                            <span className="text-[10px] font-medium text-white/70">
                               {card.assignee.name.charAt(0).toUpperCase()}
                             </span>
                           )}

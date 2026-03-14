@@ -66,7 +66,7 @@ const FeatureCard = forwardRef<HTMLDivElement, FeatureCardProps>(
             <span className="text-white/80">{icon}</span>
           </div>
           <h3 className="mb-2 text-base font-semibold text-white">{title}</h3>
-          <p className="text-sm leading-relaxed text-white/60">{description}</p>
+          <p className="text-sm leading-relaxed text-white/70">{description}</p>
         </div>
       </>
     );

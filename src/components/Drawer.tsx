@@ -159,7 +159,7 @@ function Drawer({
                   {description && (
                     <p
                       id={descriptionId}
-                      className="text-sm text-white/60 mt-1"
+                      className="text-sm text-white/70 mt-1"
                     >
                       {description}
                     </p>
@@ -169,7 +169,7 @@ function Drawer({
                 {showClose && (
                   <button
                     type="button"
-                    className="shrink-0 rounded-md p-1 text-white/60 transition-colors hover:bg-white/5 hover:text-white"
+                    className="shrink-0 rounded-md p-1 text-white/70 transition-colors hover:bg-white/5 hover:text-white"
                     onClick={onClose}
                     aria-label="Close"
                   >

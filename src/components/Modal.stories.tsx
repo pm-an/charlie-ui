@@ -86,10 +86,11 @@ export const Small: Story = {
         </div>
         <Modal {...args} open={open} onOpenChange={setOpen}>
           <Modal.Body>
-            <label className="block text-sm text-white/60 mb-2">
+            <label className="block text-sm text-white/60 mb-2" htmlFor="rename-input">
               File name
             </label>
             <input
+              id="rename-input"
               type="text"
               defaultValue="README.md"
               className="w-full rounded-md border border-white/10 bg-white/5 px-3 py-2 text-sm text-white outline-none focus:border-white/20"
@@ -128,20 +129,22 @@ export const Large: Story = {
           <Modal.Body>
             <div className="space-y-4">
               <div>
-                <h4 className="text-sm font-medium text-white mb-1">
+                <label htmlFor="project-name" className="text-sm font-medium text-white mb-1 block">
                   Project name
-                </h4>
+                </label>
                 <input
+                  id="project-name"
                   type="text"
                   defaultValue="charlie-ui"
                   className="w-full rounded-md border border-white/10 bg-white/5 px-3 py-2 text-sm text-white outline-none focus:border-white/20"
                 />
               </div>
               <div>
-                <h4 className="text-sm font-medium text-white mb-1">
+                <label htmlFor="project-description" className="text-sm font-medium text-white mb-1 block">
                   Description
-                </h4>
+                </label>
                 <textarea
+                  id="project-description"
                   rows={3}
                   defaultValue="A modern React component library built with Tailwind CSS."
                   className="w-full rounded-md border border-white/10 bg-white/5 px-3 py-2 text-sm text-white outline-none focus:border-white/20 resize-none"
@@ -272,9 +275,9 @@ export const LongContent: Story = {
             <div className="space-y-4 text-sm text-white/60">
               {Array.from({ length: 12 }, (_, i) => (
                 <div key={i}>
-                  <h4 className="font-medium text-white mb-1">
+                  <h3 className="font-medium text-white mb-1">
                     Section {i + 1}: General provisions
-                  </h4>
+                  </h3>
                   <p>
                     By accessing and using this service, you acknowledge that
                     you have read, understood, and agree to be bound by these

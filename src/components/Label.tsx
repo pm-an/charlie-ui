@@ -18,13 +18,13 @@ function Label({
       data-slot="label"
       className={cn(
         "text-sm font-medium text-white/80",
-        disabled && "opacity-50 cursor-not-allowed",
+        disabled && "opacity-65 cursor-not-allowed",
         className
       )}
       {...props}
     >
       {children}
-      {required && <span className="text-red ml-0.5">*</span>}
+      {required && <span className="text-[#f87171] ml-0.5">*</span>}
     </label>
   );
 }

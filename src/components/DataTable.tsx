@@ -292,7 +292,7 @@ function DataTable<TData>({
       {/* Search bar */}
       {showSearch && (
         <div className="mb-4 relative flex items-center">
-          <span className="absolute left-3 text-white/60 pointer-events-none">
+          <span className="absolute left-3 text-white/70 pointer-events-none">
             <Search size={14} />
           </span>
           <input
@@ -307,7 +307,7 @@ function DataTable<TData>({
             placeholder={searchPlaceholder}
             className={cn(
               "w-full bg-white/5 border border-white/6 rounded-md h-9 pl-9 pr-3 text-sm text-white",
-              "placeholder:text-white/60",
+              "placeholder:text-white/70",
               "outline-none transition-all duration-200",
               "focus:ring-1 focus:ring-white/15 focus:border-white/15"
             )}
@@ -351,10 +351,10 @@ function DataTable<TData>({
                             : undefined
                         }
                         className={cn(
-                          "px-4 text-left text-xs font-medium text-white/60 uppercase tracking-wider",
+                          "px-4 text-left text-xs font-medium text-white/70 uppercase tracking-wider",
                           tableCellVariants({ density }),
                           canSort &&
-                            "cursor-pointer hover:text-white/60 select-none"
+                            "cursor-pointer hover:text-white/70 select-none"
                         )}
                         style={
                           header.column.columnDef.size
@@ -415,7 +415,7 @@ function DataTable<TData>({
                 <tr>
                   <td
                     colSpan={finalColumns.length}
-                    className="text-center text-white/60 py-12"
+                    className="text-center text-white/70 py-12"
                   >
                     {emptyMessage}
                   </td>
@@ -462,7 +462,7 @@ function DataTable<TData>({
         {showPagination && enablePagination && !loading && rows.length > 0 && (
           <div className="flex items-center justify-between px-4 py-3 border-t border-white/6">
             {/* Left: info */}
-            <span className="text-xs text-white/60">
+            <span className="text-xs text-white/70">
               Showing {from} to {to} of {totalRows} results
             </span>
 
@@ -481,7 +481,7 @@ function DataTable<TData>({
                     ? onPaginationChange(next)
                     : setInternalPagination(next);
                 }}
-                className="bg-white/5 border border-white/6 rounded-md h-8 px-2 text-xs text-white/60 outline-none"
+                className="bg-white/5 border border-white/6 rounded-md h-8 px-2 text-xs text-white/70 outline-none"
                 aria-label="Page size"
               >
                 {pageSizeOptions.map((size) => (
@@ -496,7 +496,7 @@ function DataTable<TData>({
                 onClick={() => table.previousPage()}
                 disabled={!table.getCanPreviousPage()}
                 className={cn(
-                  "h-8 w-8 rounded-md text-xs text-white/60 hover:bg-white/5 inline-flex items-center justify-center",
+                  "h-8 w-8 rounded-md text-xs text-white/70 hover:bg-white/5 inline-flex items-center justify-center",
                   "disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-transparent"
                 )}
                 aria-label="Previous page"
@@ -505,7 +505,7 @@ function DataTable<TData>({
               </button>
 
               {/* Page indicator */}
-              <span className="text-xs text-white/60">
+              <span className="text-xs text-white/70">
                 {currentPagination.pageIndex + 1} /{" "}
                 {table.getPageCount() || 1}
               </span>
@@ -515,7 +515,7 @@ function DataTable<TData>({
                 onClick={() => table.nextPage()}
                 disabled={!table.getCanNextPage()}
                 className={cn(
-                  "h-8 w-8 rounded-md text-xs text-white/60 hover:bg-white/5 inline-flex items-center justify-center",
+                  "h-8 w-8 rounded-md text-xs text-white/70 hover:bg-white/5 inline-flex items-center justify-center",
                   "disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-transparent"
                 )}
                 aria-label="Next page"

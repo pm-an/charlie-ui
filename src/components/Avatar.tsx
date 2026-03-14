@@ -20,7 +20,7 @@ const avatarVariants = cva(
   }
 );
 
-const fallbackTextVariants = cva("font-medium text-white/60 leading-none select-none", {
+const fallbackTextVariants = cva("font-medium text-white/70 leading-none select-none", {
   variants: {
     size: {
       xs: "text-[10px]",

@@ -25,7 +25,7 @@ function AvatarGroup({ className, children, max, ...props }: AvatarGroupProps) {
         </span>
       ))}
       {overflowCount > 0 && (
-        <span className="relative inline-flex h-8 w-8 items-center justify-center rounded-full bg-white/10 text-xs font-medium text-white/60 ring-2 ring-bg">
+        <span className="relative inline-flex h-8 w-8 items-center justify-center rounded-full bg-white/10 text-xs font-medium text-white/70 ring-2 ring-bg">
           +{overflowCount}
         </span>
       )}

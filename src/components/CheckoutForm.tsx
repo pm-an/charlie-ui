@@ -33,7 +33,7 @@ export type CheckoutFormProps = Omit<
 };
 
 const inputClasses =
-  "w-full bg-white/5 border border-white/[0.06] rounded-lg px-3 py-2 text-sm text-white placeholder:text-white/60 focus:border-white/15 focus:outline-none focus:ring-1 focus:ring-white/15 transition-colors";
+  "w-full bg-white/5 border border-white/[0.06] rounded-lg px-3 py-2 text-sm text-white placeholder:text-white/70 focus:border-white/15 focus:outline-none focus:ring-1 focus:ring-white/15 transition-colors";
 
 const labelClasses = "block text-sm font-medium text-white/80 mb-1.5";
 
@@ -109,7 +109,7 @@ const CheckoutForm = forwardRef<HTMLDivElement, CheckoutFormProps>(
                       ? "bg-green text-white"
                       : index === currentStep
                         ? "bg-white/20 text-white ring-2 ring-white/30"
-                        : "bg-white/5 text-white/60"
+                        : "bg-white/5 text-white/70"
                   )}
                   aria-current={index === currentStep ? "step" : undefined}
                 >
@@ -122,7 +122,7 @@ const CheckoutForm = forwardRef<HTMLDivElement, CheckoutFormProps>(
                 <span
                   className={cn(
                     "mt-1.5 text-xs",
-                    index <= currentStep ? "text-white/80" : "text-white/60"
+                    index <= currentStep ? "text-white/80" : "text-white/70"
                   )}
                 >
                   {step}
@@ -315,16 +315,16 @@ const CheckoutForm = forwardRef<HTMLDivElement, CheckoutFormProps>(
               </h3>
 
               <div>
-                <h4 className="text-sm font-medium text-white/60 mb-2">
+                <h4 className="text-sm font-medium text-white/70 mb-2">
                   Shipping Address
                 </h4>
                 <div className="rounded-lg bg-white/[0.03] p-3 text-sm text-white">
                   <p>
                     {shipping.firstName} {shipping.lastName}
                   </p>
-                  <p className="text-white/60">{shipping.email}</p>
-                  <p className="mt-1 text-white/60">{shipping.address}</p>
-                  <p className="text-white/60">
+                  <p className="text-white/70">{shipping.email}</p>
+                  <p className="mt-1 text-white/70">{shipping.address}</p>
+                  <p className="text-white/70">
                     {shipping.city}
                     {shipping.state && `, ${shipping.state}`} {shipping.zip}
                   </p>
@@ -332,7 +332,7 @@ const CheckoutForm = forwardRef<HTMLDivElement, CheckoutFormProps>(
               </div>
 
               <div>
-                <h4 className="text-sm font-medium text-white/60 mb-2">
+                <h4 className="text-sm font-medium text-white/70 mb-2">
                   Payment Method
                 </h4>
                 <div className="rounded-lg bg-white/[0.03] p-3 text-sm text-white">
@@ -340,7 +340,7 @@ const CheckoutForm = forwardRef<HTMLDivElement, CheckoutFormProps>(
                     Card ending in{" "}
                     {payment.cardNumber.slice(-4) || "****"}
                   </p>
-                  <p className="text-white/60">
+                  <p className="text-white/70">
                     Expires {payment.expiry || "MM/YY"}
                   </p>
                 </div>

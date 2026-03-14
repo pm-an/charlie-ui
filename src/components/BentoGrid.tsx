@@ -53,7 +53,7 @@ const BentoGridItem = forwardRef<HTMLDivElement, BentoGridItemProps>(
                   <h3 className="text-lg font-semibold text-white">{title}</h3>
                 )}
                 {description && (
-                  <p className="mt-1 text-sm text-white/60">{description}</p>
+                  <p className="mt-1 text-sm text-white/70">{description}</p>
                 )}
               </div>
             )}
@@ -71,7 +71,7 @@ const BentoGridItem = forwardRef<HTMLDivElement, BentoGridItemProps>(
               <h3 className="text-base font-semibold text-white">{title}</h3>
             )}
             {description && (
-              <p className="mt-1 text-sm leading-relaxed text-white/60">
+              <p className="mt-1 text-sm leading-relaxed text-white/70">
                 {description}
               </p>
             )}

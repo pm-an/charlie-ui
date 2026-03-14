@@ -89,20 +89,20 @@ const calendarClassNames = {
   caption_label: "text-sm font-medium text-white",
   nav: "absolute top-0 inset-x-0 flex items-center justify-between z-10",
   button_previous:
-    "inline-flex items-center justify-center h-7 w-7 rounded-md hover:bg-white/5 text-white/60 hover:text-white transition-colors",
+    "inline-flex items-center justify-center h-7 w-7 rounded-md hover:bg-white/5 text-white/70 hover:text-white transition-colors",
   button_next:
-    "inline-flex items-center justify-center h-7 w-7 rounded-md hover:bg-white/5 text-white/60 hover:text-white transition-colors",
+    "inline-flex items-center justify-center h-7 w-7 rounded-md hover:bg-white/5 text-white/70 hover:text-white transition-colors",
   chevron: "h-4 w-4",
   month_grid: "w-full border-collapse",
   weekdays: "",
-  weekday: "text-xs text-white/60 font-normal w-9 pb-2 text-center",
+  weekday: "text-xs text-white/70 font-normal w-9 pb-2 text-center",
   weeks: "",
   week: "",
   day: "p-0 text-center",
   day_button:
     "inline-flex items-center justify-center h-9 w-9 rounded-md text-sm text-white/80 hover:bg-white/5 transition-colors cursor-pointer",
   today: "border border-white/10 rounded-md",
-  outside: "text-white/60",
+  outside: "text-white/70",
   disabled: "text-white/10 cursor-not-allowed hover:bg-transparent",
   hidden: "invisible",
   focused: "ring-1 ring-white/20",
@@ -129,7 +129,7 @@ function PresetsSidebar({
         <button
           key={preset.label}
           type="button"
-          className="text-sm text-white/60 hover:text-white hover:bg-white/5 px-3 py-1.5 rounded-md cursor-pointer text-left transition-colors"
+          className="text-sm text-white/70 hover:text-white hover:bg-white/5 px-3 py-1.5 rounded-md cursor-pointer text-left transition-colors"
           onClick={() => onSelect(preset.range)}
         >
           {preset.label}
@@ -317,11 +317,11 @@ function DateRangePicker({
       className={triggerClasses}
       data-testid="daterangepicker-trigger"
     >
-      <Calendar className="h-4 w-4 text-white/60 mr-2 shrink-0" />
+      <Calendar className="h-4 w-4 text-white/70 mr-2 shrink-0" />
       <span
         className={cn(
           "flex-1 text-left truncate",
-          displayValue ? "text-white" : "text-white/60"
+          displayValue ? "text-white" : "text-white/70"
         )}
       >
         {displayValue || placeholder}
@@ -331,7 +331,7 @@ function DateRangePicker({
           role="button"
           tabIndex={0}
           aria-label="Clear date range"
-          className="text-white/60 hover:text-white/60 ml-2 shrink-0 cursor-pointer"
+          className="text-white/70 hover:text-white/70 ml-2 shrink-0 cursor-pointer"
           onClick={handleClear}
           onKeyDown={(e) => {
             if (e.key === "Enter" || e.key === " ") {
@@ -425,7 +425,7 @@ function DateRangePicker({
       {label && (
         <label htmlFor={controlId} className="text-sm font-medium text-white/80 mb-1.5 block">
           {label}
-          {required && <span className="text-red ml-0.5">*</span>}
+          {required && <span className="text-[#f87171] ml-0.5">*</span>}
         </label>
       )}
 
@@ -434,10 +434,10 @@ function DateRangePicker({
       {calendarDropdown}
 
       {resolvedDescription && !error && (
-        <p id={`${controlId}-description`} className="text-xs text-white/60 mt-1.5">{resolvedDescription}</p>
+        <p id={`${controlId}-description`} className="text-xs text-white/70 mt-1.5">{resolvedDescription}</p>
       )}
       {error && errorMessage && (
-        <p id={`${controlId}-error`} className="text-xs text-red mt-1.5">{errorMessage}</p>
+        <p id={`${controlId}-error`} className="text-xs text-[#f87171] mt-1.5">{errorMessage}</p>
       )}
     </div>
   );

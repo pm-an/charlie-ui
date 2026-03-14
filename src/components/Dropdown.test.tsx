@@ -214,7 +214,7 @@ describe("Dropdown", () => {
     );
     await user.click(screen.getByText("Open"));
     const item = screen.getByText("Delete").closest("[role='menuitem']");
-    expect(item).toHaveClass("text-red");
+    expect(item).toHaveClass("text-[#f87171]");
   });
 
   it("menu has role='menu'", async () => {

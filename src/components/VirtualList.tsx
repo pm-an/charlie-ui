@@ -92,7 +92,7 @@ function VirtualList<T>({
       <div
         data-slot="virtual-list"
         className={cn(
-          "flex items-center justify-center text-white/50",
+          "flex items-center justify-center text-white/70",
           className
         )}
         style={{ height, ...style }}
@@ -105,41 +105,43 @@ function VirtualList<T>({
   }
 
   return (
-    <div
-      ref={containerRef}
-      data-slot="virtual-list"
-      onScroll={handleScroll}
-      tabIndex={0}
-      className={cn(
-        "overflow-auto",
-        "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/20 focus-visible:ring-offset-1 focus-visible:ring-offset-transparent",
-        scrollbarClasses,
-        className,
-      )}
-      style={{ height, ...style }}
-      role="list"
-      {...props}
-    >
-      <div style={{ height: totalHeight, position: "relative" }}>
-        <div
-          style={{ position: "absolute", top: offsetY, left: 0, right: 0 }}
-        >
-          {visibleItems.map((item, i) => {
-            const actualIndex = startIndex + i;
-            const key = getItemKey
-              ? getItemKey(item, actualIndex)
-              : actualIndex;
-            return (
-              <div key={key} style={{ height: itemHeight }} role="listitem">
-                {renderItem(item, actualIndex)}
-              </div>
-            );
-          })}
+    <div data-slot="virtual-list-wrapper">
+      <div
+        ref={containerRef}
+        data-slot="virtual-list"
+        onScroll={handleScroll}
+        tabIndex={0}
+        className={cn(
+          "overflow-auto",
+          "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/20 focus-visible:ring-offset-1 focus-visible:ring-offset-transparent",
+          scrollbarClasses,
+          className,
+        )}
+        style={{ height, ...style }}
+        role="list"
+        {...props}
+      >
+        <div style={{ height: totalHeight, position: "relative" }}>
+          <div
+            style={{ position: "absolute", top: offsetY, left: 0, right: 0 }}
+          >
+            {visibleItems.map((item, i) => {
+              const actualIndex = startIndex + i;
+              const key = getItemKey
+                ? getItemKey(item, actualIndex)
+                : actualIndex;
+              return (
+                <div key={key} style={{ height: itemHeight }} role="listitem">
+                  {renderItem(item, actualIndex)}
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
 
       {loading && (
-        <div className="flex items-center justify-center py-4">
+        <div className="flex items-center justify-center py-4" role="status">
           {loadingContent ?? (
             <Spinner size="sm" color="currentColor" />
           )}

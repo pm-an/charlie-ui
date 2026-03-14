@@ -36,7 +36,7 @@ const variantIcons = {
 const variantIconColors = {
   default: "text-blue",
   success: "text-green",
-  error: "text-red",
+  error: "text-[#f87171]",
   warning: "text-yellow",
 } as const;
 
@@ -76,15 +76,15 @@ const positionClasses: Record<ToastPosition, string> = {
 };
 
 const positionAnimations: Record<ToastPosition, { initial: Record<string, number>; exit: Record<string, number> }> = {
-  "top-left": { initial: { opacity: 0, x: -24, scale: 0.96 }, exit: { opacity: 0, x: -24, scale: 0.96 } },
-  "top-center": { initial: { opacity: 0, y: -24, scale: 0.96 }, exit: { opacity: 0, y: -24, scale: 0.96 } },
-  "top-right": { initial: { opacity: 0, x: 24, scale: 0.96 }, exit: { opacity: 0, x: 24, scale: 0.96 } },
-  "middle-left": { initial: { opacity: 0, x: -24, scale: 0.96 }, exit: { opacity: 0, x: -24, scale: 0.96 } },
-  "middle-center": { initial: { opacity: 0, scale: 0.9 }, exit: { opacity: 0, scale: 0.9 } },
-  "middle-right": { initial: { opacity: 0, x: 24, scale: 0.96 }, exit: { opacity: 0, x: 24, scale: 0.96 } },
-  "bottom-left": { initial: { opacity: 0, x: -24, scale: 0.96 }, exit: { opacity: 0, x: -24, scale: 0.96 } },
-  "bottom-center": { initial: { opacity: 0, y: 24, scale: 0.96 }, exit: { opacity: 0, y: 24, scale: 0.96 } },
-  "bottom-right": { initial: { opacity: 0, y: 24, scale: 0.96 }, exit: { opacity: 0, y: 24, scale: 0.96 } },
+  "top-left": { initial: { opacity: 1, x: -24, scale: 0.96 }, exit: { opacity: 0, x: -24, scale: 0.96 } },
+  "top-center": { initial: { opacity: 1, y: -24, scale: 0.96 }, exit: { opacity: 0, y: -24, scale: 0.96 } },
+  "top-right": { initial: { opacity: 1, x: 24, scale: 0.96 }, exit: { opacity: 0, x: 24, scale: 0.96 } },
+  "middle-left": { initial: { opacity: 1, x: -24, scale: 0.96 }, exit: { opacity: 0, x: -24, scale: 0.96 } },
+  "middle-center": { initial: { opacity: 1, scale: 0.9 }, exit: { opacity: 0, scale: 0.9 } },
+  "middle-right": { initial: { opacity: 1, x: 24, scale: 0.96 }, exit: { opacity: 0, x: 24, scale: 0.96 } },
+  "bottom-left": { initial: { opacity: 1, x: -24, scale: 0.96 }, exit: { opacity: 0, x: -24, scale: 0.96 } },
+  "bottom-center": { initial: { opacity: 1, y: 24, scale: 0.96 }, exit: { opacity: 0, y: 24, scale: 0.96 } },
+  "bottom-right": { initial: { opacity: 1, y: 24, scale: 0.96 }, exit: { opacity: 0, y: 24, scale: 0.96 } },
 };
 
 function Toast({
@@ -134,7 +134,7 @@ function Toast({
             <div className="flex-1">
               <p className="text-sm font-medium text-white">{title}</p>
               {description && (
-                <p className="mt-0.5 text-xs text-white/60">{description}</p>
+                <p className="mt-0.5 text-xs text-white/70">{description}</p>
               )}
               {action && <div className="mt-2">{action}</div>}
             </div>
@@ -142,7 +142,7 @@ function Toast({
           {onClose && (
             <button
               type="button"
-              className="absolute right-2 top-2 min-h-[44px] min-w-[44px] flex items-center justify-center text-white/60 transition-colors hover:text-white"
+              className="absolute right-2 top-2 min-h-[44px] min-w-[44px] flex items-center justify-center text-white/70 transition-colors hover:text-white"
               onClick={onClose}
               aria-label="Close"
             >

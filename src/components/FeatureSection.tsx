@@ -85,7 +85,7 @@ const FeatureSection = forwardRef<HTMLElement, FeatureSectionProps>(
                       />
                     ) : (
                       <div className="flex h-full w-full items-center justify-center">
-                        <span className="text-white/60 text-sm">
+                        <span className="text-white/70 text-sm">
                           Feature image
                         </span>
                       </div>
@@ -100,13 +100,13 @@ const FeatureSection = forwardRef<HTMLElement, FeatureSectionProps>(
                     <h3 className="mb-3 text-xl font-semibold text-white md:text-2xl">
                       {feature.title}
                     </h3>
-                    <p className="text-sm leading-relaxed text-white/60 md:text-base">
+                    <p className="text-sm leading-relaxed text-white/70 md:text-base">
                       {feature.description}
                     </p>
                     {feature.href && (
                       <a
                         href={feature.href}
-                        className="mt-4 inline-flex items-center text-sm font-medium text-red hover:underline"
+                        className="mt-4 inline-flex items-center text-sm font-medium text-[#f87171] hover:underline"
                       >
                         Learn more &rarr;
                       </a>

@@ -219,7 +219,7 @@ describe("Slider", () => {
     it("applies disabled styling", () => {
       const { container } = render(<Slider disabled />);
       expect(container.firstChild).toHaveClass(
-        "opacity-50",
+        "opacity-65",
         "cursor-not-allowed"
       );
     });

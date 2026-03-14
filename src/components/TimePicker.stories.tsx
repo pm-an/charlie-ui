@@ -239,9 +239,9 @@ export const Controlled: Story = {
     return (
       <div className="flex flex-col gap-4 items-start">
         <TimePicker value={value} onChange={setValue} />
-        <p className="text-sm text-white/60">
+        <p className="text-sm text-white/70">
           Selected:{" "}
-          <code className="text-accent">
+          <code className="text-[#f87171]">
             {String(value.hours).padStart(2, "0")}:
             {String(value.minutes).padStart(2, "0")}
           </code>

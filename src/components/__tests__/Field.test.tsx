@@ -89,7 +89,7 @@ describe("Field", () => {
       </Field>
     );
     const label = container.querySelector("label");
-    expect(label?.className).toContain("opacity-50");
+    expect(label?.className).toContain("opacity-65");
   });
 
   it("has data-slot attribute", () => {

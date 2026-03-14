@@ -59,7 +59,7 @@ const FAQSection = forwardRef<HTMLElement, FAQSectionProps>(
           {hasHeader && (
             <div className="text-center mb-8 md:mb-12">
               {eyebrow && (
-                <p className="text-red text-sm font-medium tracking-wide uppercase mb-3">
+                <p className="text-[#f87171] text-sm font-medium tracking-wide uppercase mb-3">
                   {eyebrow}
                 </p>
               )}
@@ -69,7 +69,7 @@ const FAQSection = forwardRef<HTMLElement, FAQSectionProps>(
                 </h2>
               )}
               {description && (
-                <p className="text-white/60 text-base md:text-lg mt-3 md:mt-4 max-w-2xl mx-auto">
+                <p className="text-white/70 text-base md:text-lg mt-3 md:mt-4 max-w-2xl mx-auto">
                   {description}
                 </p>
               )}

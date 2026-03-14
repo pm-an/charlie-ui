@@ -477,7 +477,7 @@ describe("Select", () => {
 
     it("applies disabled styling", () => {
       render(<Select options={options} disabled />);
-      expect(screen.getByRole("combobox")).toHaveClass("opacity-50");
+      expect(screen.getByRole("combobox")).toHaveClass("opacity-65");
     });
   });
 

@@ -155,6 +155,7 @@ function FileUpload({
     disabled: resolvedDisabled,
     ariaDescribedBy,
     ariaInvalid,
+    fieldLabelId,
   } = useFieldAware({ id: undefined, error, disabled, required: undefined });
 
   const [isDragOver, setIsDragOver] = useState(false);
@@ -247,7 +248,7 @@ function FileUpload({
 
   const isImage = (file: File) => file.type.startsWith("image/");
 
-  const uploadIcon = icon ?? <Upload className="h-10 w-10 text-white/60" />;
+  const uploadIcon = icon ?? <Upload className="h-10 w-10 text-white/70" />;
 
   return (
     <div data-slot="file-upload" className={cn("w-full", className)} {...props}>
@@ -259,6 +260,8 @@ function FileUpload({
         multiple={multiple}
         onChange={handleInputChange}
         disabled={resolvedDisabled}
+        aria-hidden="true"
+        tabIndex={-1}
         data-testid="file-input"
       />
 
@@ -270,9 +273,9 @@ function FileUpload({
           className={cn(
             "inline-flex items-center gap-2",
             "border border-white/10 bg-white/5 hover:bg-white/10",
-            "rounded-md px-4 py-2 text-sm text-white/60",
+            "rounded-md px-4 py-2 text-sm text-white/70",
             "transition-colors duration-200",
-            resolvedDisabled && "opacity-50 cursor-not-allowed hover:bg-white/5",
+            resolvedDisabled && "opacity-70 cursor-not-allowed hover:bg-white/5",
             resolvedError && "border-red/50"
           )}
           aria-describedby={ariaDescribedBy}
@@ -306,21 +309,23 @@ function FileUpload({
             "cursor-pointer",
             fileUploadVariants({ size }),
             isDragOver && "border-accent/50 bg-accent/5",
-            resolvedDisabled && "opacity-50 cursor-not-allowed",
+            resolvedDisabled && "opacity-70 cursor-not-allowed",
             resolvedError && "border-red/50"
           )}
+          aria-label={insideField ? undefined : (label ?? defaultLabel)}
+          aria-labelledby={insideField ? fieldLabelId : undefined}
           aria-describedby={ariaDescribedBy}
           aria-invalid={ariaInvalid}
           data-testid="dropzone"
         >
           <div className="mb-3">{uploadIcon}</div>
           {!insideField && (
-            <p className="text-sm font-medium text-white/60">
+            <p className="text-sm font-medium text-white/70">
               {label ?? defaultLabel}
             </p>
           )}
           {!insideField && description && (
-            <p className="text-xs text-white/60 mt-1">{description}</p>
+            <p className="text-xs text-white/70 mt-1">{description}</p>
           )}
         </div>
       )}
@@ -345,7 +350,7 @@ function FileUpload({
                       className="h-8 w-8 rounded object-cover shrink-0"
                     />
                   ) : (
-                    <FileIcon className="h-5 w-5 text-white/60 shrink-0" />
+                    <FileIcon className="h-5 w-5 text-white/70 shrink-0" />
                   )}
 
                   <div className="flex-1 min-w-0">
@@ -353,7 +358,7 @@ function FileUpload({
                       <span className="text-sm text-white/80 truncate">
                         {fileItem.file.name}
                       </span>
-                      <span className="text-xs text-white/60 shrink-0">
+                      <span className="text-xs text-white/70 shrink-0">
                         {formatFileSize(fileItem.file.size)}
                       </span>
                     </div>
@@ -362,6 +367,7 @@ function FileUpload({
                       <div
                         className="h-1 bg-white/10 rounded-full overflow-hidden mt-1"
                         role="progressbar"
+                        aria-label={`Uploading ${fileItem.file.name}`}
                         aria-valuenow={fileItem.progress}
                         aria-valuemin={0}
                         aria-valuemax={100}
@@ -374,7 +380,7 @@ function FileUpload({
                     )}
 
                     {fileItem.status === "error" && fileItem.error && (
-                      <p className="text-xs text-red mt-0.5">{fileItem.error}</p>
+                      <p className="text-xs text-[#f87171] mt-0.5">{fileItem.error}</p>
                     )}
                   </div>
 
@@ -387,7 +393,7 @@ function FileUpload({
                     )}
                     {fileItem.status === "error" && (
                       <AlertCircle
-                        className="h-4 w-4 text-red"
+                        className="h-4 w-4 text-[#f87171]"
                         data-testid="error-icon"
                       />
                     )}
@@ -398,7 +404,7 @@ function FileUpload({
                           e.stopPropagation();
                           onRemove(fileItem.id);
                         }}
-                        className="p-1 text-white/60 hover:text-white/60 transition-colors"
+                        className="p-1 text-white/70 hover:text-white/70 transition-colors"
                         aria-label={`Remove ${fileItem.file.name}`}
                       >
                         <X className="h-4 w-4" />
@@ -413,7 +419,7 @@ function FileUpload({
       )}
 
       {!insideField && resolvedError && errorMessage && (
-        <p className="mt-1.5 text-xs text-red">{errorMessage}</p>
+        <p className="mt-1.5 text-xs text-[#f87171]">{errorMessage}</p>
       )}
     </div>
   );

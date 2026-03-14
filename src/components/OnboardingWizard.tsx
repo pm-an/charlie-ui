@@ -126,7 +126,7 @@ const OnboardingWizard = forwardRef<HTMLDivElement, OnboardingWizardProps>(
                     <span
                       className={cn(
                         "text-xs font-medium",
-                        isActive ? "text-white" : "text-white/60"
+                        isActive ? "text-white" : "text-white/70"
                       )}
                     >
                       {index + 1}
@@ -142,14 +142,14 @@ const OnboardingWizard = forwardRef<HTMLDivElement, OnboardingWizardProps>(
         <div data-slot="onboarding-step-header" className="px-6 pt-6 text-center">
           {step.icon && (
             <div className="flex justify-center mb-3">
-              <span className="h-10 w-10 flex items-center justify-center rounded-lg bg-white/5 text-white/60">
+              <span className="h-10 w-10 flex items-center justify-center rounded-lg bg-white/5 text-white/70">
                 {step.icon}
               </span>
             </div>
           )}
           <h2 className="text-lg font-semibold text-white">{step.title}</h2>
           {step.description && (
-            <p className="mt-1 text-sm text-white/60">{step.description}</p>
+            <p className="mt-1 text-sm text-white/70">{step.description}</p>
           )}
         </div>
 
@@ -179,7 +179,7 @@ const OnboardingWizard = forwardRef<HTMLDivElement, OnboardingWizardProps>(
                 type="button"
                 data-slot="onboarding-back-button"
                 onClick={handleBack}
-                className="px-4 py-2 text-sm font-medium text-white/60 hover:text-white border border-white/10 hover:border-white/20 rounded-md transition-colors"
+                className="px-4 py-2 text-sm font-medium text-white/70 hover:text-white border border-white/10 hover:border-white/20 rounded-md transition-colors"
               >
                 {backLabel}
               </button>

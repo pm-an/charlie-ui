@@ -58,14 +58,14 @@ describe("Label", () => {
     it("applies disabled styles when disabled", () => {
       const { container } = render(<Label disabled>Email</Label>);
       const label = container.querySelector("label");
-      expect(label).toHaveClass("opacity-50");
+      expect(label).toHaveClass("opacity-65");
       expect(label).toHaveClass("cursor-not-allowed");
     });
 
     it("does not apply disabled styles when not disabled", () => {
       const { container } = render(<Label>Email</Label>);
       const label = container.querySelector("label");
-      expect(label).not.toHaveClass("opacity-50");
+      expect(label).not.toHaveClass("opacity-65");
     });
   });
 
@@ -77,7 +77,7 @@ describe("Label", () => {
         </Label>
       );
       const label = container.querySelector("label");
-      expect(label).toHaveClass("opacity-50");
+      expect(label).toHaveClass("opacity-65");
       const asterisk = container.querySelector("span");
       expect(asterisk).toHaveTextContent("*");
     });

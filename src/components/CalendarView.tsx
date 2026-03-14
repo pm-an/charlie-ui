@@ -160,7 +160,7 @@ const CalendarView = forwardRef<HTMLDivElement, CalendarViewProps>(
             <button
               type="button"
               onClick={handlePrevMonth}
-              className="p-1.5 text-white/60 hover:text-white hover:bg-white/5 rounded transition-colors"
+              className="p-1.5 text-white/70 hover:text-white hover:bg-white/5 rounded transition-colors"
               aria-label="Previous month"
             >
               <ChevronLeft className="h-4 w-4" />
@@ -168,7 +168,7 @@ const CalendarView = forwardRef<HTMLDivElement, CalendarViewProps>(
             <button
               type="button"
               onClick={handleNextMonth}
-              className="p-1.5 text-white/60 hover:text-white hover:bg-white/5 rounded transition-colors"
+              className="p-1.5 text-white/70 hover:text-white hover:bg-white/5 rounded transition-colors"
               aria-label="Next month"
             >
               <ChevronRight className="h-4 w-4" />
@@ -179,7 +179,7 @@ const CalendarView = forwardRef<HTMLDivElement, CalendarViewProps>(
         {/* Day headers */}
         <div className="grid grid-cols-7 text-center border-b border-white/[0.06]">
           {DAYS_OF_WEEK.map((day) => (
-            <div key={day} className="text-xs text-white/60 py-2 font-medium">
+            <div key={day} className="text-xs text-white/70 py-2 font-medium">
               {day}
             </div>
           ))}
@@ -226,7 +226,7 @@ const CalendarView = forwardRef<HTMLDivElement, CalendarViewProps>(
                       "text-xs inline-flex items-center justify-center",
                       isToday
                         ? "bg-red text-white rounded-full h-6 w-6 font-medium"
-                        : "text-white/60 h-6 w-6"
+                        : "text-white/70 h-6 w-6"
                     )}
                   >
                     {day.date.getDate()}
@@ -238,8 +238,8 @@ const CalendarView = forwardRef<HTMLDivElement, CalendarViewProps>(
                   {dayEvents.slice(0, 3).map((event) => (
                     <div
                       key={event.id}
-                      role={onEventClick ? "button" : undefined}
-                      tabIndex={onEventClick ? 0 : undefined}
+                      role={onEventClick && !onDateClick ? "button" : undefined}
+                      tabIndex={onEventClick && !onDateClick ? 0 : undefined}
                       onClick={(e) => {
                         if (onEventClick) {
                           e.stopPropagation();
@@ -249,6 +249,7 @@ const CalendarView = forwardRef<HTMLDivElement, CalendarViewProps>(
                       onKeyDown={(e) => {
                         if (
                           onEventClick &&
+                          !onDateClick &&
                           (e.key === "Enter" || e.key === " ")
                         ) {
                           e.preventDefault();
@@ -274,13 +275,13 @@ const CalendarView = forwardRef<HTMLDivElement, CalendarViewProps>(
                             : "bg-white/40"
                         )}
                       />
-                      <span className="text-white/60 truncate">
+                      <span className="text-white/70 truncate">
                         {event.title}
                       </span>
                     </div>
                   ))}
                   {dayEvents.length > 3 && (
-                    <div className="text-[10px] text-white/60 px-1">
+                    <div className="text-[10px] text-white/70 px-1">
                       +{dayEvents.length - 3} more
                     </div>
                   )}

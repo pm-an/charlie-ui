@@ -66,7 +66,7 @@ const FileManager = forwardRef<HTMLDivElement, FileManagerProps>(
               breadcrumbs.map((crumb, index) => (
                 <span key={crumb.path} className="flex items-center gap-1 shrink-0">
                   {index > 0 && (
-                    <ChevronRight className="h-3 w-3 text-white/60 shrink-0" />
+                    <ChevronRight className="h-3 w-3 text-white/70 shrink-0" />
                   )}
                   <button
                     type="button"
@@ -75,7 +75,7 @@ const FileManager = forwardRef<HTMLDivElement, FileManagerProps>(
                       "transition-colors truncate",
                       index === breadcrumbs.length - 1
                         ? "text-white font-medium"
-                        : "text-white/60 hover:text-white/60"
+                        : "text-white/70 hover:text-white/70"
                     )}
                   >
                     {crumb.label}
@@ -83,7 +83,7 @@ const FileManager = forwardRef<HTMLDivElement, FileManagerProps>(
                 </span>
               ))
             ) : (
-              <span className="text-white/60">{currentPath}</span>
+              <span className="text-white/70">{currentPath}</span>
             )}
           </nav>
 
@@ -96,7 +96,7 @@ const FileManager = forwardRef<HTMLDivElement, FileManagerProps>(
                 "p-1.5 rounded transition-colors",
                 view === "list"
                   ? "bg-white/10 text-white"
-                  : "text-white/60 hover:text-white/60"
+                  : "text-white/70 hover:text-white/70"
               )}
               aria-label="List view"
             >
@@ -109,7 +109,7 @@ const FileManager = forwardRef<HTMLDivElement, FileManagerProps>(
                 "p-1.5 rounded transition-colors",
                 view === "grid"
                   ? "bg-white/10 text-white"
-                  : "text-white/60 hover:text-white/60"
+                  : "text-white/70 hover:text-white/70"
               )}
               aria-label="Grid view"
             >
@@ -121,12 +121,12 @@ const FileManager = forwardRef<HTMLDivElement, FileManagerProps>(
         {/* Content */}
         {files.length === 0 ? (
           <div className="flex items-center justify-center py-16">
-            <p className="text-sm text-white/60">This folder is empty</p>
+            <p className="text-sm text-white/70">This folder is empty</p>
           </div>
         ) : view === "list" ? (
           <div>
             {/* List header */}
-            <div className="grid grid-cols-[1fr_100px_140px] px-4 py-2 border-b border-white/[0.06] text-xs text-white/60">
+            <div className="grid grid-cols-[1fr_100px_140px] px-4 py-2 border-b border-white/[0.06] text-xs text-white/70">
               <span>Name</span>
               <span>Size</span>
               <span>Modified</span>
@@ -149,24 +149,24 @@ const FileManager = forwardRef<HTMLDivElement, FileManagerProps>(
                 <div className="flex items-center gap-2 min-w-0">
                   {file.icon || (
                     file.type === "folder" ? (
-                      <Folder className="h-4 w-4 text-white/60 shrink-0" />
+                      <Folder className="h-4 w-4 text-white/70 shrink-0" />
                     ) : (
-                      <File className="h-4 w-4 text-white/60 shrink-0" />
+                      <File className="h-4 w-4 text-white/70 shrink-0" />
                     )
                   )}
                   <span
                     className={cn(
                       "text-sm truncate",
-                      file.type === "folder" ? "text-white" : "text-white/60"
+                      file.type === "folder" ? "text-white" : "text-white/70"
                     )}
                   >
                     {file.name}
                   </span>
                 </div>
-                <span className="text-xs text-white/60">
+                <span className="text-xs text-white/70">
                   {file.type === "folder" ? "--" : file.size || "--"}
                 </span>
-                <span className="text-xs text-white/60">{file.modified || "--"}</span>
+                <span className="text-xs text-white/70">{file.modified || "--"}</span>
               </div>
             ))}
           </div>
@@ -189,15 +189,15 @@ const FileManager = forwardRef<HTMLDivElement, FileManagerProps>(
               >
                 {file.icon || (
                   file.type === "folder" ? (
-                    <Folder className="h-10 w-10 text-white/60" />
+                    <Folder className="h-10 w-10 text-white/70" />
                   ) : (
-                    <File className="h-10 w-10 text-white/60" />
+                    <File className="h-10 w-10 text-white/70" />
                   )
                 )}
                 <span
                   className={cn(
                     "text-xs text-center truncate w-full mt-2",
-                    file.type === "folder" ? "text-white" : "text-white/60"
+                    file.type === "folder" ? "text-white" : "text-white/70"
                   )}
                 >
                   {file.name}

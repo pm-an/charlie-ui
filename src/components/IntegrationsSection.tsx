@@ -90,7 +90,7 @@ const IntegrationsSection = forwardRef<HTMLElement, IntegrationsSectionProps>(
           {(eyebrow || title || description) && (
             <div className="text-center">
               {eyebrow && (
-                <p className="text-red text-sm font-medium tracking-wide uppercase mb-3">
+                <p className="text-[#f87171] text-sm font-medium tracking-wide uppercase mb-3">
                   {eyebrow}
                 </p>
               )}
@@ -100,7 +100,7 @@ const IntegrationsSection = forwardRef<HTMLElement, IntegrationsSectionProps>(
                 </h2>
               )}
               {description && (
-                <p className="text-white/60 text-base md:text-lg mt-3 md:mt-4 max-w-2xl mx-auto">
+                <p className="text-white/70 text-base md:text-lg mt-3 md:mt-4 max-w-2xl mx-auto">
                   {description}
                 </p>
               )}
@@ -121,7 +121,7 @@ const IntegrationsSection = forwardRef<HTMLElement, IntegrationsSectionProps>(
                       "px-3 py-1.5 rounded-full text-sm font-medium transition-colors duration-200",
                       activeCategory === category
                         ? "bg-white/10 text-white"
-                        : "text-white/60 hover:text-white/60 hover:bg-white/5"
+                        : "text-white/70 hover:text-white/70 hover:bg-white/5"
                     )}
                   >
                     {category}
@@ -133,14 +133,14 @@ const IntegrationsSection = forwardRef<HTMLElement, IntegrationsSectionProps>(
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
               {filteredIntegrations.map((integration) => (
                 <CardWrapper key={integration.name} integration={integration}>
-                  <div className="h-10 w-10 flex items-center justify-center text-white/60 mb-3">
+                  <div className="h-10 w-10 flex items-center justify-center text-white/70 mb-3">
                     {integration.icon}
                   </div>
                   <p className="text-sm font-medium text-white">
                     {integration.name}
                   </p>
                   {integration.description && (
-                    <p className="mt-1 text-xs text-white/60">
+                    <p className="mt-1 text-xs text-white/70">
                       {integration.description}
                     </p>
                   )}

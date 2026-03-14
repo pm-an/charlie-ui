@@ -152,7 +152,7 @@ function CollapsibleContent({
           data-slot="collapsible-content"
           id={contentId}
           role="region"
-          initial={{ height: 0, opacity: 0 }}
+          initial={{ height: 0, opacity: 1 }}
           animate={{ height: "auto", opacity: 1 }}
           exit={{ height: 0, opacity: 0 }}
           transition={{ duration: 0.26, ease: "easeInOut" }}

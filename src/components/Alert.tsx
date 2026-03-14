@@ -18,7 +18,7 @@ const alertVariants = cva(
         info: "bg-blue-muted border-blue/20 text-blue",
         success: "bg-green-muted border-green/20 text-green",
         warning: "bg-yellow-muted border-yellow/20 text-yellow",
-        error: "bg-red-muted border-red/20 text-red",
+        error: "bg-red-muted border-red/20 text-[#f87171]",
       },
     },
     defaultVariants: {
@@ -88,7 +88,7 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(
             <p className="font-medium text-sm">{title}</p>
           )}
           {children && (
-            <div className={cn("text-sm opacity-80", title && "mt-1")}>
+            <div className={cn("text-sm opacity-90", title && "mt-1")}>
               {children}
             </div>
           )}
@@ -97,7 +97,7 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(
         {closable && (
           <button
             type="button"
-            className="shrink-0 text-current opacity-60 transition-opacity hover:opacity-100"
+            className="shrink-0 text-current opacity-80 transition-opacity hover:opacity-100"
             onClick={onClose}
             aria-label="Close"
           >

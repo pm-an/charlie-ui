@@ -191,6 +191,7 @@ function Select({
     required,
     ariaDescribedBy,
     ariaInvalid,
+    fieldLabelId,
   } = useFieldAware({
     id,
     error: errorProp,
@@ -429,7 +430,9 @@ function Select({
       id={controlId}
       aria-expanded={open}
       aria-haspopup="listbox"
-      aria-labelledby={insideField ? undefined : labelId}
+      aria-controls={open ? `${controlId}-listbox` : undefined}
+      aria-labelledby={insideField ? fieldLabelId : labelId}
+      aria-label={!labelId && !fieldLabelId ? placeholder : undefined}
       aria-invalid={ariaInvalid}
       aria-describedby={ariaDescribedBy}
       aria-required={required || undefined}
@@ -438,7 +441,7 @@ function Select({
       className={cn(
         selectTriggerVariants({ size }),
         error && "border-red/50 focus:ring-red/30 focus:border-red/50",
-        (disabled || loading) && "opacity-50 cursor-not-allowed",
+        (disabled || loading) && "opacity-65 cursor-not-allowed",
         className
       )}
       onClick={() => (open ? closeDropdown() : openDropdown())}
@@ -447,7 +450,7 @@ function Select({
       <span
         className={cn(
           "truncate text-left flex-1",
-          !selectedOption && "text-white/60"
+          !selectedOption && "text-white/70"
         )}
       >
         {selectedOption ? selectedOption.label : placeholder}
@@ -457,7 +460,7 @@ function Select({
       ) : (
         <ChevronDown
           className={cn(
-            "h-4 w-4 shrink-0 text-white/60 transition-transform duration-200",
+            "h-4 w-4 shrink-0 text-white/70 transition-transform duration-200",
             open && "rotate-180"
           )}
         />
@@ -474,7 +477,7 @@ function Select({
             "absolute z-50 left-0 right-0 top-full mt-1",
             "bg-grey-700 border border-white/10 rounded-lg shadow-lg overflow-hidden"
           )}
-          initial={{ opacity: 0, y: -4 }}
+          initial={{ opacity: 1, y: -4 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -4 }}
           transition={{ duration: 0.2, ease: "easeOut" }}
@@ -483,11 +486,11 @@ function Select({
           {/* Search input */}
           {searchable && (
             <div className="flex items-center gap-2 border-b border-white/[0.06] px-3 py-2">
-              <Search className="h-4 w-4 shrink-0 text-white/60" />
+              <Search className="h-4 w-4 shrink-0 text-white/70" />
               <input
                 ref={searchInputRef}
                 type="text"
-                className="flex-1 bg-transparent text-sm text-white placeholder:text-white/60 outline-none"
+                className="flex-1 bg-transparent text-sm text-white placeholder:text-white/70 outline-none"
                 placeholder={searchPlaceholder}
                 value={searchQuery}
                 onChange={handleSearchChange}
@@ -500,11 +503,13 @@ function Select({
           <div
             ref={listboxRef}
             role="listbox"
+            id={`${controlId}-listbox`}
             aria-labelledby={labelId}
+            aria-label={!labelId ? placeholder : undefined}
             className="max-h-[240px] overflow-y-auto py-1"
           >
             {filteredOptions.length === 0 ? (
-              <div className="px-3 py-6 text-center text-sm text-white/60">
+              <div className="px-3 py-6 text-center text-sm text-white/70">
                 {emptyMessage}
               </div>
             ) : (
@@ -567,7 +572,7 @@ function Select({
                         {option.label}
                       </span>
                       {option.description && (
-                        <span className="block text-xs text-white/60 truncate">
+                        <span className="block text-xs text-white/70 truncate">
                           {option.description}
                         </span>
                       )}
@@ -623,7 +628,7 @@ function Select({
           className={cn(
             "text-sm font-medium text-white/80",
             required &&
-              "after:content-['*'] after:ml-0.5 after:text-red"
+              "after:content-['*'] after:ml-0.5 after:text-[#f87171]"
           )}
         >
           {label}
@@ -641,12 +646,12 @@ function Select({
 
       {/* Helper text */}
       {resolvedDescription && !error && (
-        <p id={`${controlId}-description`} className="text-xs text-white/60">{resolvedDescription}</p>
+        <p id={`${controlId}-description`} className="text-xs text-white/70">{resolvedDescription}</p>
       )}
 
       {/* Error message */}
       {error && errorMessage && (
-        <p id={`${controlId}-error`} className="text-xs text-red">{errorMessage}</p>
+        <p id={`${controlId}-error`} className="text-xs text-[#f87171]">{errorMessage}</p>
       )}
     </div>
   );

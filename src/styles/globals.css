@@ -47,10 +47,10 @@
   --color-text-faint: var(--charlie-text-faint, #434345);
 
   /* --- Brand / Accent (main customization points) --- */
-  --color-accent: var(--charlie-accent, #ff6363);
+  --color-accent: var(--charlie-accent, #dc2626);
   --color-accent-muted: var(--charlie-accent-muted, #2c1617);
   --color-accent-dim: var(--charlie-accent-dim, #833637);
-  --color-red: var(--charlie-accent, #ff6363);
+  --color-red: var(--charlie-accent, #dc2626);
   --color-red-muted: var(--charlie-accent-muted, #2c1617);
   --color-red-dim: var(--charlie-accent-dim, #833637);
   --color-blue: var(--charlie-blue, #56c2ff);

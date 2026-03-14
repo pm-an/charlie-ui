@@ -51,7 +51,7 @@ const ProductGrid = forwardRef<HTMLDivElement, ProductGridProps>(
 
     const filteredProducts =
       activeCategory && showFilters
-        ? products.filter((p) => {
+        ? products.filter(() => {
             // If products have a className that includes the category, filter
             // In practice, filtering is done externally. This is a presentation layer.
             return true;
@@ -74,7 +74,7 @@ const ProductGrid = forwardRef<HTMLDivElement, ProductGridProps>(
               </h2>
             )}
             {description && (
-              <p className="mt-2 text-sm text-white/60 md:text-base">
+              <p className="mt-2 text-sm text-white/70 md:text-base">
                 {description}
               </p>
             )}
@@ -93,7 +93,7 @@ const ProductGrid = forwardRef<HTMLDivElement, ProductGridProps>(
                 "shrink-0 rounded-full px-4 py-1.5 text-sm font-medium transition-all duration-200",
                 activeCategory === null
                   ? "bg-white/15 text-white"
-                  : "bg-white/5 text-white/60 hover:bg-white/10 hover:text-white"
+                  : "bg-white/5 text-white/70 hover:bg-white/10 hover:text-white"
               )}
             >
               All
@@ -109,7 +109,7 @@ const ProductGrid = forwardRef<HTMLDivElement, ProductGridProps>(
                   "shrink-0 rounded-full px-4 py-1.5 text-sm font-medium transition-all duration-200",
                   activeCategory === category
                     ? "bg-white/15 text-white"
-                    : "bg-white/5 text-white/60 hover:bg-white/10 hover:text-white"
+                    : "bg-white/5 text-white/70 hover:bg-white/10 hover:text-white"
                 )}
               >
                 {category}

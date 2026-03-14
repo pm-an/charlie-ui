@@ -54,7 +54,7 @@ const FieldDescription = forwardRef<HTMLParagraphElement, FieldDescriptionProps>
         ref={ref}
         id={resolvedId}
         data-slot="field-description"
-        className={cn("text-xs text-white/60", className)}
+        className={cn("text-xs text-white/70", className)}
         {...props}
       >
         {children}
@@ -80,7 +80,7 @@ const FieldError = forwardRef<HTMLParagraphElement, FieldErrorProps>(
         id={resolvedId}
         data-slot="field-error"
         role="alert"
-        className={cn("text-xs text-red", className)}
+        className={cn("text-xs text-[#f87171]", className)}
         {...props}
       >
         {children}
@@ -196,9 +196,9 @@ const FieldRoot = forwardRef<HTMLDivElement, FieldProps>(
                   id={labelId}
                   className={cn(
                     "text-sm font-medium text-white/80",
-                    disabled && "opacity-50",
+                    disabled && "opacity-65",
                     required &&
-                      "after:content-['*'] after:ml-0.5 after:text-red"
+                      "after:content-['*'] after:ml-0.5 after:text-[#f87171]"
                   )}
                 >
                   {label}
@@ -208,7 +208,7 @@ const FieldRoot = forwardRef<HTMLDivElement, FieldProps>(
               {resolvedDescription && (
                 <p
                   id={descriptionId}
-                  className="text-xs text-white/60 -mt-0.5"
+                  className="text-xs text-white/70 -mt-0.5"
                 >
                   {resolvedDescription}
                 </p>
@@ -217,7 +217,7 @@ const FieldRoot = forwardRef<HTMLDivElement, FieldProps>(
               {children}
 
               {error && errorMessage && (
-                <p id={errorId} className="text-xs text-red" role="alert">
+                <p id={errorId} className="text-xs text-[#f87171]" role="alert">
                   {errorMessage}
                 </p>
               )}

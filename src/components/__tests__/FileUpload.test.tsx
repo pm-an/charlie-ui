@@ -356,7 +356,7 @@ describe("FileUpload", () => {
     it("applies disabled styling to dropzone", () => {
       render(<FileUpload disabled />);
       const dropzone = screen.getByTestId("dropzone");
-      expect(dropzone).toHaveClass("opacity-50");
+      expect(dropzone).toHaveClass("opacity-70");
       expect(dropzone).toHaveClass("cursor-not-allowed");
     });
 
@@ -364,7 +364,7 @@ describe("FileUpload", () => {
       render(<FileUpload variant="button" disabled />);
       const button = screen.getByRole("button");
       expect(button).toBeDisabled();
-      expect(button).toHaveClass("opacity-50");
+      expect(button).toHaveClass("opacity-70");
     });
 
     it("disables the hidden file input", () => {

@@ -174,7 +174,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
               </span>
             )}
             {description && (
-              <span className="text-xs text-white/60">{description}</span>
+              <span className="text-xs text-white/70">{description}</span>
             )}
           </span>
         )}
@@ -196,7 +196,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
           {checkboxElement}
         </div>
         {resolvedError && errorMessage && (
-          <p className="text-xs text-red ml-6">{errorMessage}</p>
+          <p className="text-xs text-[#f87171] ml-6">{errorMessage}</p>
         )}
       </div>
     );

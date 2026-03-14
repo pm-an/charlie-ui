@@ -57,7 +57,7 @@ const CTASection = forwardRef<HTMLElement, CTASectionProps>(
                 <h2 className="text-white text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight">
                   {title}
                 </h2>
-                <p className="text-white/60 text-base md:text-lg mt-3 md:mt-4 max-w-xl">
+                <p className="text-white/70 text-base md:text-lg mt-3 md:mt-4 max-w-xl">
                   {description}
                 </p>
               </div>
@@ -72,7 +72,7 @@ const CTASection = forwardRef<HTMLElement, CTASectionProps>(
               </h2>
               <p
                 className={cn(
-                  "text-white/60 text-base md:text-lg mt-3 md:mt-4 max-w-2xl",
+                  "text-white/70 text-base md:text-lg mt-3 md:mt-4 max-w-2xl",
                   isCentered && "mx-auto"
                 )}
               >

@@ -159,7 +159,7 @@ const SidebarGroup = forwardRef<HTMLDivElement, SidebarGroupProps>(
     return (
       <div ref={ref} className={cn("px-3 py-2", className)} {...props}>
         {label && !collapsed && (
-          <div className="text-xs font-medium text-white/60 uppercase tracking-wider px-3 mb-1">
+          <div className="text-xs font-medium text-white/70 uppercase tracking-wider px-3 mb-1">
             {label}
           </div>
         )}
@@ -203,7 +203,7 @@ const SidebarItem = forwardRef<HTMLButtonElement, SidebarItemProps>(
       "flex items-center gap-3 px-3 py-2 text-sm transition-colors w-full",
       active
         ? "bg-white/5 text-white font-medium border-l-2 border-accent rounded-r-md"
-        : "text-white/60 hover:bg-white/5 hover:text-white rounded-md",
+        : "text-white/70 hover:bg-white/5 hover:text-white rounded-md",
       disabled && "opacity-40 cursor-not-allowed pointer-events-none",
       collapsed && "justify-center px-0",
       className
