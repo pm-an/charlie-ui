@@ -11,6 +11,7 @@ import {
   type HTMLAttributes,
   type ReactNode,
 } from "react";
+import { createPortal } from "react-dom";
 import { cn } from "../utils/cn";
 import { AnimatePresence, motion } from "framer-motion";
 
@@ -213,7 +214,7 @@ const ContextMenuContent = ({ children, className }: ContextMenuContentProps) =>
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, [open, close, setHighlightedIndex]);
 
-  return (
+  return createPortal(
     <AnimatePresence>
       {open && (
         <motion.div
@@ -232,7 +233,8 @@ const ContextMenuContent = ({ children, className }: ContextMenuContentProps) =>
           {children}
         </motion.div>
       )}
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body
   );
 };
 ContextMenuContent.displayName = "ContextMenu.Content";

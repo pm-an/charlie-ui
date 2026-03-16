@@ -19,7 +19,7 @@ const announcementBarVariants = cva(
         info: "bg-blue/10",
         warning: "bg-yellow/10",
         success: "bg-green/10",
-        brand: "bg-red/10",
+        accent: "bg-accent/10",
       },
     },
     defaultVariants: {

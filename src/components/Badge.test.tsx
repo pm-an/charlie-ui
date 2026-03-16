@@ -13,7 +13,7 @@ describe("Badge", () => {
     expect(container.querySelector("span")).toBeInTheDocument();
   });
 
-  it.each(["default", "red", "blue", "green", "yellow", "pro"] as const)(
+  it.each(["default", "primary", "red", "blue", "green", "yellow", "pro"] as const)(
     "renders %s variant without error",
     (variant) => {
       render(<Badge variant={variant}>{variant}</Badge>);

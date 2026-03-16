@@ -65,16 +65,14 @@ const dotColors = {
   default: "border-white/20 bg-white/10",
   accent: "border-accent bg-accent/20",
   green: "border-green bg-green/20",
-  red: "border-red bg-red/20",
   blue: "border-blue bg-blue/20",
   yellow: "border-yellow bg-yellow/20",
 };
 
 const iconBgColors = {
   default: "bg-white/10 text-white/80",
-  accent: "bg-accent/20 text-[#f87171]",
+  accent: "bg-accent/20 text-accent",
   green: "bg-green/20 text-green",
-  red: "bg-red/20 text-[#f87171]",
   blue: "bg-blue/20 text-blue",
   yellow: "bg-yellow/20 text-yellow",
 };
@@ -86,7 +84,7 @@ export type TimelineItemProps = HTMLAttributes<HTMLDivElement> & {
   description?: string;
   timestamp?: string;
   icon?: ReactNode;
-  color?: "default" | "accent" | "green" | "red" | "blue" | "yellow";
+  color?: "default" | "accent" | "green" | "blue" | "yellow";
   active?: boolean;
   children?: ReactNode;
   /** @internal injected by Timeline */

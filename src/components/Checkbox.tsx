@@ -113,7 +113,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
           className={cn(
             checkboxVariants({ size }),
             isCheckedOrIndeterminate
-              ? "bg-red border-red"
+              ? "bg-accent border-accent"
               : "bg-white/5 border-white/10",
             resolvedError && !isCheckedOrIndeterminate && "border-red/50"
           )}

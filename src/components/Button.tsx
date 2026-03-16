@@ -15,6 +15,9 @@ const buttonVariants = cva(
     variants: {
       variant: {
         primary: [
+          "bg-accent hover:bg-accent/90 text-white",
+        ],
+        neutral: [
           "bg-button-bg hover:bg-button-bg-hover text-button-fg",
           "shadow-[inset_0_0.5px_0_0_rgba(255,255,255,0.3)]",
         ],
@@ -28,9 +31,6 @@ const buttonVariants = cva(
         ],
         danger: [
           "bg-red hover:bg-red/90 text-white",
-        ],
-        brand: [
-          "bg-accent hover:bg-accent/90 text-white",
         ],
       },
       size: {

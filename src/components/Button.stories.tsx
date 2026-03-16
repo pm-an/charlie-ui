@@ -10,7 +10,7 @@ const meta: Meta<typeof Button> = {
   argTypes: {
     variant: {
       control: "select",
-      options: ["primary", "secondary", "ghost", "danger", "brand"],
+      options: ["primary", "neutral", "secondary", "ghost", "danger"],
     },
     size: {
       control: "select",
@@ -66,10 +66,10 @@ export const Danger: Story = {
   },
 };
 
-export const Brand: Story = {
+export const Neutral: Story = {
   args: {
-    variant: "brand",
-    children: "Upgrade to Pro",
+    variant: "neutral",
+    children: "Learn more",
   },
 };
 
@@ -136,10 +136,10 @@ export const AllVariants: Story = {
   render: () => (
     <div className="flex items-center gap-3">
       <Button variant="primary">Primary</Button>
+      <Button variant="neutral">Neutral</Button>
       <Button variant="secondary">Secondary</Button>
       <Button variant="ghost">Ghost</Button>
       <Button variant="danger">Danger</Button>
-      <Button variant="brand">Brand</Button>
     </div>
   ),
 };

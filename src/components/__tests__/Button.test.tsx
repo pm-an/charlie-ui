@@ -35,11 +35,11 @@ describe("Button", () => {
   describe("variants", () => {
     it("renders primary variant by default", () => {
       const { container } = render(<Button>Test</Button>);
-      expect(container.firstChild).toHaveClass("bg-white/80");
+      expect(container.firstChild).toHaveClass("bg-accent");
     });
 
     it("renders each variant without errors", () => {
-      const variants = ["primary", "secondary", "ghost", "danger", "brand"] as const;
+      const variants = ["primary", "neutral", "secondary", "ghost", "danger"] as const;
       variants.forEach((variant) => {
         const { unmount } = render(<Button variant={variant}>{variant}</Button>);
         expect(screen.getByRole("button", { name: variant })).toBeInTheDocument();

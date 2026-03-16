@@ -9,7 +9,7 @@ const meta: Meta<typeof Badge> = {
   argTypes: {
     variant: {
       control: "select",
-      options: ["default", "red", "blue", "green", "yellow", "pro"],
+      options: ["default", "primary", "red", "blue", "green", "yellow", "pro"],
     },
     size: {
       control: "select",
@@ -23,6 +23,13 @@ type Story = StoryObj<typeof Badge>;
 export const Default: Story = {
   args: {
     children: "Default",
+  },
+};
+
+export const Primary: Story = {
+  args: {
+    variant: "primary",
+    children: "Selected",
   },
 };
 
@@ -79,6 +86,7 @@ export const AllVariants: Story = {
   render: () => (
     <div className="flex items-center gap-2">
       <Badge variant="default">Default</Badge>
+      <Badge variant="primary">Selected</Badge>
       <Badge variant="red">Overdue</Badge>
       <Badge variant="blue">In progress</Badge>
       <Badge variant="green">Completed</Badge>
@@ -89,6 +97,7 @@ export const AllVariants: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     await expect(canvas.getByText("Default")).toBeVisible();
+    await expect(canvas.getByText("Selected")).toBeVisible();
     await expect(canvas.getByText("Overdue")).toBeVisible();
     await expect(canvas.getByText("In progress")).toBeVisible();
     await expect(canvas.getByText("Completed")).toBeVisible();

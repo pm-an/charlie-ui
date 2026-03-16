@@ -74,6 +74,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             "placeholder:text-white/70",
             "outline-none transition-all duration-200",
             "focus:ring-1 focus:ring-white/15 focus:border-white/15",
+            "[&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none [-moz-appearance:textfield]",
             error && "border-red/50 focus:ring-red/30 focus:border-red/50",
             leftIcon && "pl-10",
             rightIcon && "pr-10",

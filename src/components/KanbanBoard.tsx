@@ -24,7 +24,7 @@ export type KanbanBoardProps = HTMLAttributes<HTMLDivElement> & {
 };
 
 const tagColors: Record<string, string> = {
-  red: "bg-red-muted text-[#f87171]",
+  accent: "bg-accent-muted text-accent",
   blue: "bg-blue-muted text-blue",
   green: "bg-green-muted text-green",
   yellow: "bg-yellow-muted text-yellow",
@@ -34,7 +34,7 @@ const tagColors: Record<string, string> = {
 };
 
 const columnDotColors: Record<string, string> = {
-  red: "bg-red",
+  accent: "bg-accent",
   blue: "bg-blue",
   green: "bg-green",
   yellow: "bg-yellow",

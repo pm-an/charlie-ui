@@ -67,7 +67,7 @@ const ProductCard = forwardRef<HTMLDivElement, ProductCardProps>(
         )}
 
         {badge && (
-          <span className="absolute top-2 left-2 rounded-md bg-red px-2 py-0.5 text-xs font-medium text-white">
+          <span className="absolute top-2 left-2 rounded-md bg-accent px-2 py-0.5 text-xs font-medium text-white">
             {badge}
           </span>
         )}

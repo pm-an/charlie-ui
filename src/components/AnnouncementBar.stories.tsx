@@ -41,10 +41,10 @@ export const Success: Story = {
   },
 };
 
-export const Brand: Story = {
+export const Accent: Story = {
   args: {
     message: "Charlie UI is now open source. Star us on GitHub!",
-    variant: "brand",
+    variant: "accent",
     icon: <Sparkles className="h-4 w-4" />,
   },
 };
@@ -62,7 +62,7 @@ export const WithLink: Story = {
     message: "Version 3.0 is here with dark mode, animations, and more.",
     href: "https://charlieui.com/changelog",
     linkText: "Learn more \u2192",
-    variant: "brand",
+    variant: "accent",
     icon: <Zap className="h-4 w-4" />,
   },
 };

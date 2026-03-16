@@ -90,9 +90,9 @@ describe("AnnouncementBar", () => {
       expect(container.firstChild).toHaveClass("bg-green/10");
     });
 
-    it("renders brand variant", () => {
+    it("renders accent variant", () => {
       const { container } = render(
-        <AnnouncementBar message="Test" variant="brand" />
+        <AnnouncementBar message="Test" variant="accent" />
       );
       expect(container.firstChild).toHaveClass("bg-red/10");
     });

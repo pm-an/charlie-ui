@@ -41,9 +41,9 @@
   --color-accent: var(--charlie-accent, #dc2626);
   --color-accent-muted: var(--charlie-accent-muted, #2c1617);
   --color-accent-dim: var(--charlie-accent-dim, #833637);
-  --color-red: var(--charlie-accent, #dc2626);
-  --color-red-muted: var(--charlie-accent-muted, #2c1617);
-  --color-red-dim: var(--charlie-accent-dim, #833637);
+  --color-red: var(--charlie-red, #dc2626);
+  --color-red-muted: var(--charlie-red-muted, #2c1617);
+  --color-red-dim: var(--charlie-red-dim, #833637);
   --color-blue: var(--charlie-blue, #56c2ff);
   --color-blue-muted: var(--charlie-blue-muted, rgba(86, 194, 255, 0.15));
   --color-green: var(--charlie-green, #59d499);

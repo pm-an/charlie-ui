@@ -38,7 +38,7 @@ const MONTH_NAMES = [
 ];
 
 const eventDotColors: Record<string, string> = {
-  red: "bg-red",
+  accent: "bg-accent",
   blue: "bg-blue",
   green: "bg-green",
   yellow: "bg-yellow",
@@ -225,7 +225,7 @@ const CalendarView = forwardRef<HTMLDivElement, CalendarViewProps>(
                     className={cn(
                       "text-xs inline-flex items-center justify-center",
                       isToday
-                        ? "bg-red text-white rounded-full h-6 w-6 font-medium"
+                        ? "bg-accent text-white rounded-full h-6 w-6 font-medium"
                         : "text-white/70 h-6 w-6"
                     )}
                   >

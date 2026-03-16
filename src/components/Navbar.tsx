@@ -62,7 +62,7 @@ function Navbar({ logo, links = [], actions, className, currentPath }: NavbarPro
             >
               {link.label}
               {link.badge && (
-                <span className="ml-1.5 inline-flex items-center rounded-md bg-red-muted text-[#f87171] text-[10px] px-1.5 py-0.5 font-medium">
+                <span className="ml-1.5 inline-flex items-center rounded-md bg-accent-muted text-accent text-[10px] px-1.5 py-0.5 font-medium">
                   {link.badge}
                 </span>
               )}
@@ -112,7 +112,7 @@ function Navbar({ logo, links = [], actions, className, currentPath }: NavbarPro
                 >
                   {link.label}
                   {link.badge && (
-                    <span className="ml-1.5 inline-flex items-center rounded-md bg-red-muted text-[#f87171] text-[10px] px-1.5 py-0.5 font-medium">
+                    <span className="ml-1.5 inline-flex items-center rounded-md bg-accent-muted text-accent text-[10px] px-1.5 py-0.5 font-medium">
                       {link.badge}
                     </span>
                   )}

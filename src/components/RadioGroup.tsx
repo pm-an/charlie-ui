@@ -164,7 +164,7 @@ const RadioGroupItem = forwardRef<HTMLLabelElement, RadioGroupItemProps>(
           className={cn(
             "relative mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full border transition-colors duration-150",
             isSelected
-              ? "border-red bg-transparent"
+              ? "border-accent bg-transparent"
               : "border-white/10 bg-white/5"
           )}
           aria-hidden="true"
@@ -177,7 +177,7 @@ const RadioGroupItem = forwardRef<HTMLLabelElement, RadioGroupItemProps>(
                 animate={{ scale: 1 }}
                 exit={{ scale: 0 }}
                 transition={{ type: "spring", stiffness: 500, damping: 30 }}
-                className="block h-2 w-2 rounded-full bg-red"
+                className="block h-2 w-2 rounded-full bg-accent"
               />
             )}
           </AnimatePresence>

@@ -34,6 +34,9 @@ export interface CharlieTheme {
   textFaint?: string;
 
   /** Semantic colors */
+  red?: string;
+  redMuted?: string;
+  redDim?: string;
   blue?: string;
   green?: string;
   yellow?: string;
@@ -99,6 +102,9 @@ function themeToCSS(theme: CharlieTheme): Record<string, string> {
     textDefault: "--charlie-text-default",
     textMuted: "--charlie-text-muted",
     textFaint: "--charlie-text-faint",
+    red: "--charlie-red",
+    redMuted: "--charlie-red-muted",
+    redDim: "--charlie-red-dim",
     blue: "--charlie-blue",
     green: "--charlie-green",
     yellow: "--charlie-yellow",

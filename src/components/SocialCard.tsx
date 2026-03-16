@@ -7,14 +7,14 @@ const socialCardVariants = cva(
   {
     variants: {
       color: {
-        red: "bg-gradient-to-br from-red/20 to-red/5",
+        accent: "bg-gradient-to-br from-accent/20 to-accent/5",
         blue: "bg-gradient-to-br from-blue/20 to-blue/5",
         purple: "bg-gradient-to-br from-purple/20 to-purple/5",
         orange: "bg-gradient-to-br from-orange/20 to-orange/5",
       },
     },
     defaultVariants: {
-      color: "red",
+      color: "accent",
     },
   }
 );
@@ -23,7 +23,7 @@ export type SocialCardProps = Omit<VariantProps<typeof socialCardVariants>, "col
   icon: ReactNode;
   title: string;
   description: string;
-  color: "red" | "blue" | "purple" | "orange";
+  color: "accent" | "blue" | "purple" | "orange";
   href?: string;
   className?: string;
 };
