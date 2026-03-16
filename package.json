@@ -12,8 +12,8 @@
       "import": "./dist/index.mjs",
       "require": "./dist/index.cjs"
     },
-    "./styles.css": "./dist/style.css",
-    "./theme.css": "./dist/style.css",
+    "./styles.css": "./dist/charlie-ui.css",
+    "./theme.css": "./dist/theme.css",
     "./button": {
       "types": "./dist/components/Button.d.ts",
       "import": "./dist/components/Button.mjs"
@@ -295,7 +295,7 @@
   ],
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b --force tsconfig.build.json && vite build",
+    "build": "tsc -b --force tsconfig.build.json && vite build && cp src/styles/theme.css dist/theme.css",
     "lint": "eslint .",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",

@@ -131,24 +131,24 @@ function Toast({
         >
           <div className="flex gap-3">
             <Icon className={cn("mt-0.5 h-5 w-5 shrink-0", iconColor)} />
-            <div className="flex-1">
+            <div className="flex-1 min-w-0">
               <p className="text-sm font-medium text-white">{title}</p>
               {description && (
                 <p className="mt-0.5 text-xs text-white/70">{description}</p>
               )}
               {action && <div className="mt-2">{action}</div>}
             </div>
+            {onClose && (
+              <button
+                type="button"
+                className="shrink-0 -mt-1 -mr-1 p-1 rounded-md text-white/50 transition-colors hover:text-white hover:bg-white/5"
+                onClick={onClose}
+                aria-label="Close"
+              >
+                <X className="h-4 w-4" />
+              </button>
+            )}
           </div>
-          {onClose && (
-            <button
-              type="button"
-              className="absolute right-2 top-2 min-h-[44px] min-w-[44px] flex items-center justify-center text-white/70 transition-colors hover:text-white"
-              onClick={onClose}
-              aria-label="Close"
-            >
-              <X className="h-4 w-4" />
-            </button>
-          )}
         </motion.div>
       )}
     </AnimatePresence>
