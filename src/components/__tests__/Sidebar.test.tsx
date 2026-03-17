@@ -206,6 +206,77 @@ describe("Sidebar", () => {
     });
   });
 
+  describe("keyboard collapse toggle", () => {
+    it("collapses on ArrowLeft when expanded", () => {
+      const onCollapsedChange = vi.fn();
+      render(
+        <Sidebar collapsed={false} onCollapsedChange={onCollapsedChange}>
+          <Sidebar.Content>
+            <Sidebar.Item label="Home" />
+          </Sidebar.Content>
+        </Sidebar>
+      );
+      const nav = screen.getByLabelText("Sidebar navigation");
+      fireEvent.keyDown(nav, { key: "ArrowLeft" });
+      expect(onCollapsedChange).toHaveBeenCalledWith(true);
+    });
+
+    it("expands on ArrowRight when collapsed", () => {
+      const onCollapsedChange = vi.fn();
+      render(
+        <Sidebar collapsed onCollapsedChange={onCollapsedChange}>
+          <Sidebar.Content>
+            <Sidebar.Item label="Home" />
+          </Sidebar.Content>
+        </Sidebar>
+      );
+      const nav = screen.getByLabelText("Sidebar navigation");
+      fireEvent.keyDown(nav, { key: "ArrowRight" });
+      expect(onCollapsedChange).toHaveBeenCalledWith(false);
+    });
+
+    it("does not collapse on ArrowLeft when already collapsed", () => {
+      const onCollapsedChange = vi.fn();
+      render(
+        <Sidebar collapsed onCollapsedChange={onCollapsedChange}>
+          <Sidebar.Content>
+            <Sidebar.Item label="Home" />
+          </Sidebar.Content>
+        </Sidebar>
+      );
+      const nav = screen.getByLabelText("Sidebar navigation");
+      fireEvent.keyDown(nav, { key: "ArrowLeft" });
+      expect(onCollapsedChange).not.toHaveBeenCalled();
+    });
+
+    it("does not expand on ArrowRight when already expanded", () => {
+      const onCollapsedChange = vi.fn();
+      render(
+        <Sidebar collapsed={false} onCollapsedChange={onCollapsedChange}>
+          <Sidebar.Content>
+            <Sidebar.Item label="Home" />
+          </Sidebar.Content>
+        </Sidebar>
+      );
+      const nav = screen.getByLabelText("Sidebar navigation");
+      fireEvent.keyDown(nav, { key: "ArrowRight" });
+      expect(onCollapsedChange).not.toHaveBeenCalled();
+    });
+
+    it("does nothing when no onCollapsedChange is provided", () => {
+      render(
+        <Sidebar collapsed={false}>
+          <Sidebar.Content>
+            <Sidebar.Item label="Home" />
+          </Sidebar.Content>
+        </Sidebar>
+      );
+      const nav = screen.getByLabelText("Sidebar navigation");
+      // Should not throw
+      fireEvent.keyDown(nav, { key: "ArrowLeft" });
+    });
+  });
+
   describe("groups", () => {
     it("renders group label", () => {
       render(

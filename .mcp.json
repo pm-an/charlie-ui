@@ -6,7 +6,9 @@
     },
     "charlie-ui": {
       "command": "node",
-      "args": ["mcp/dist/index.js"]
+      "args": [
+        "mcp/dist/index.js"
+      ]
     }
   }
 }

@@ -71,6 +71,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
       insideField,
       error: resolvedError,
       disabled: resolvedDisabled,
+      required: resolvedRequired,
       ariaDescribedBy,
       ariaInvalid,
     } = useFieldAware({ id, error, disabled });
@@ -169,7 +170,10 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
         {!insideField && (label || description) && (
           <span className="flex flex-col">
             {label && (
-              <span className="text-sm font-medium text-white/80">
+              <span className={cn(
+                "text-sm font-medium text-white/80",
+                resolvedRequired && "after:content-['*'] after:ml-0.5 after:text-[#f87171]"
+              )}>
                 {label}
               </span>
             )}
@@ -179,7 +183,10 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
           </span>
         )}
         {insideField && label && (
-          <span className="text-sm font-medium text-white/80">
+          <span className={cn(
+            "text-sm font-medium text-white/80",
+            resolvedRequired && "after:content-['*'] after:ml-0.5 after:text-[#f87171]"
+          )}>
             {label}
           </span>
         )}

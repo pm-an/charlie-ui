@@ -230,6 +230,72 @@ describe("DashboardLayout", () => {
     });
   });
 
+  describe("sidebar keyboard collapse", () => {
+    it("collapses on ArrowLeft when expanded", () => {
+      const onToggle = vi.fn();
+      const { container } = render(
+        <DashboardLayout sidebarCollapsed={false} onSidebarToggle={onToggle}>
+          <DashboardLayout.Sidebar>
+            <span>Nav</span>
+          </DashboardLayout.Sidebar>
+        </DashboardLayout>
+      );
+      const sidebar = container.querySelector("[data-slot='dashboard-sidebar']");
+      if (sidebar) {
+        fireEvent.keyDown(sidebar, { key: "ArrowLeft" });
+        expect(onToggle).toHaveBeenCalledTimes(1);
+      }
+    });
+
+    it("expands on ArrowRight when collapsed", () => {
+      const onToggle = vi.fn();
+      const { container } = render(
+        <DashboardLayout sidebarCollapsed onSidebarToggle={onToggle}>
+          <DashboardLayout.Sidebar>
+            <span>Nav</span>
+          </DashboardLayout.Sidebar>
+        </DashboardLayout>
+      );
+      const sidebar = container.querySelector("[data-slot='dashboard-sidebar']");
+      if (sidebar) {
+        fireEvent.keyDown(sidebar, { key: "ArrowRight" });
+        expect(onToggle).toHaveBeenCalledTimes(1);
+      }
+    });
+
+    it("does not toggle on ArrowLeft when already collapsed", () => {
+      const onToggle = vi.fn();
+      const { container } = render(
+        <DashboardLayout sidebarCollapsed onSidebarToggle={onToggle}>
+          <DashboardLayout.Sidebar>
+            <span>Nav</span>
+          </DashboardLayout.Sidebar>
+        </DashboardLayout>
+      );
+      const sidebar = container.querySelector("[data-slot='dashboard-sidebar']");
+      if (sidebar) {
+        fireEvent.keyDown(sidebar, { key: "ArrowLeft" });
+        expect(onToggle).not.toHaveBeenCalled();
+      }
+    });
+
+    it("does not toggle on ArrowRight when already expanded", () => {
+      const onToggle = vi.fn();
+      const { container } = render(
+        <DashboardLayout sidebarCollapsed={false} onSidebarToggle={onToggle}>
+          <DashboardLayout.Sidebar>
+            <span>Nav</span>
+          </DashboardLayout.Sidebar>
+        </DashboardLayout>
+      );
+      const sidebar = container.querySelector("[data-slot='dashboard-sidebar']");
+      if (sidebar) {
+        fireEvent.keyDown(sidebar, { key: "ArrowRight" });
+        expect(onToggle).not.toHaveBeenCalled();
+      }
+    });
+  });
+
   describe("sidebar toggle", () => {
     it("calls onSidebarToggle when backdrop is clicked", () => {
       const onToggle = vi.fn();

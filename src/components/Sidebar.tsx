@@ -3,9 +3,11 @@
 import {
   createContext,
   useContext,
+  useCallback,
   forwardRef,
   type HTMLAttributes,
   type ReactNode,
+  type KeyboardEvent,
 } from "react";
 import { motion } from "framer-motion";
 import { cn } from "../utils/cn";
@@ -51,6 +53,20 @@ const SidebarRoot = forwardRef<HTMLElement, SidebarProps>(
   ) => {
     const currentWidth = collapsed ? collapsedWidth : width;
 
+    const handleKeyDown = useCallback(
+      (e: KeyboardEvent) => {
+        if (!onCollapsedChange) return;
+        if (e.key === "ArrowLeft" && !collapsed) {
+          e.preventDefault();
+          onCollapsedChange(true);
+        } else if (e.key === "ArrowRight" && collapsed) {
+          e.preventDefault();
+          onCollapsedChange(false);
+        }
+      },
+      [collapsed, onCollapsedChange]
+    );
+
     return (
       <SidebarContext.Provider value={{ collapsed, onCollapsedChange }}>
         <motion.nav
@@ -59,6 +75,7 @@ const SidebarRoot = forwardRef<HTMLElement, SidebarProps>(
           aria-label="Sidebar navigation"
           animate={{ width: currentWidth }}
           transition={{ duration: 0.26, ease: "easeInOut" }}
+          onKeyDown={handleKeyDown}
           className={cn(
             "fixed top-0 h-screen z-40 flex flex-col bg-bg-100 overflow-hidden",
             side === "left"

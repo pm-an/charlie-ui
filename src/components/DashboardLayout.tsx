@@ -3,9 +3,11 @@
 import {
   createContext,
   useContext,
+  useCallback,
   forwardRef,
   type HTMLAttributes,
   type ReactNode,
+  type KeyboardEvent,
 } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { cn } from "../utils/cn";
@@ -70,6 +72,20 @@ const DashboardSidebar = forwardRef<HTMLElement, DashboardSidebarProps>(
   ({ className, logo, footer, children, ...props }, ref) => {
     const { sidebarCollapsed, onSidebarToggle } = useDashboard();
 
+    const handleKeyDown = useCallback(
+      (e: KeyboardEvent) => {
+        if (!onSidebarToggle) return;
+        if (e.key === "ArrowLeft" && !sidebarCollapsed) {
+          e.preventDefault();
+          onSidebarToggle();
+        } else if (e.key === "ArrowRight" && sidebarCollapsed) {
+          e.preventDefault();
+          onSidebarToggle();
+        }
+      },
+      [sidebarCollapsed, onSidebarToggle]
+    );
+
     return (
       <>
         {/* Desktop sidebar */}
@@ -79,6 +95,7 @@ const DashboardSidebar = forwardRef<HTMLElement, DashboardSidebarProps>(
           aria-label="Sidebar navigation"
           animate={{ width: sidebarCollapsed ? 64 : 256 }}
           transition={{ duration: 0.26, ease: "easeInOut" }}
+          onKeyDown={handleKeyDown}
           className={cn(
             "hidden md:flex flex-col border-r border-white/[0.06] bg-[#0a0a0b] overflow-hidden shrink-0",
             className
