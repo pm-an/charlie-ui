@@ -37,10 +37,10 @@ const PricingCard = forwardRef<HTMLDivElement, PricingCardProps>(
       ref={ref}
       data-slot="pricing-card"
       className={cn(
-        "bg-card-gradient rounded-2xl border p-6 flex flex-col transition-all duration-300 ease-[cubic-bezier(0.23,1,0.32,1)]",
+        "bg-card-gradient rounded-xl border p-6 flex flex-col transform-gpu transition-all duration-300 hover:-translate-y-0.5",
         highlighted
           ? "border-white/15 shadow-card-elevated"
-          : "border-white/[0.06] shadow-card hover:shadow-card-hover",
+          : "border-white/[0.06]",
         className
       )}
       {...props}
@@ -60,7 +60,7 @@ const PricingCard = forwardRef<HTMLDivElement, PricingCardProps>(
 
       {/* Price */}
       <div className="mt-4 flex items-baseline gap-1">
-        <span className="text-3xl md:text-4xl font-bold tracking-tight text-white">{price}</span>
+        <span className="text-3xl md:text-4xl font-bold text-white">{price}</span>
         <span className="text-sm text-white/70">/ {period}</span>
       </div>
 
@@ -87,8 +87,8 @@ const PricingCard = forwardRef<HTMLDivElement, PricingCardProps>(
         className={cn(
           "mt-6 w-full rounded-md px-4 py-2.5 min-h-[44px] text-sm font-medium transition-all duration-200 active:scale-[0.98]",
           highlighted
-            ? "bg-white/80 hover:bg-white text-[#18191a] shadow-button hover:shadow-button-hover"
-            : "border border-white/10 hover:border-white/15 bg-transparent text-white shadow-xs hover:shadow-soft"
+            ? "bg-white/80 hover:bg-white text-[#18191a]"
+            : "border border-white/10 hover:border-white/15 bg-transparent text-white"
         )}
       >
         {cta}

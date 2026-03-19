@@ -16,6 +16,7 @@ const Testimonial = forwardRef<HTMLDivElement, TestimonialProps>(
       data-slot="testimonial"
       className={cn(
         "bg-card-gradient rounded-xl border border-white/[0.06] p-6",
+        "shadow-card hover:shadow-card-hover transition-all duration-300 transform-gpu",
         className
       )}
       {...props}

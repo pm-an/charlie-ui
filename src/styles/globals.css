@@ -338,3 +338,80 @@ body {
     #ff2136 473.23deg
   );
 }
+
+/* --- Gradient Text (heading shimmer) --- */
+.text-gradient-subtle {
+  background: linear-gradient(180deg, #eae9ff, rgba(146, 148, 172, 0.5));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-white {
+  background: linear-gradient(180deg, #ffffff, rgba(255, 255, 255, 0.7));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* --- Section Background Alternation --- */
+.bg-section-alt {
+  background: linear-gradient(137deg, var(--color-grey-700) 4.87%, var(--color-grey-800) 75.88%);
+}
+
+.bg-section-glow {
+  position: relative;
+}
+.bg-section-glow::before {
+  content: "";
+  position: absolute;
+  inset: -20%;
+  background: radial-gradient(
+    ellipse 60% 40% at 50% 50%,
+    rgba(154, 170, 255, 0.03),
+    transparent
+  );
+  pointer-events: none;
+}
+
+/* --- Card Hover Reveal (Raycast pseudo-element pattern) --- */
+.card-hover-reveal {
+  position: relative;
+  overflow: hidden;
+}
+.card-hover-reveal::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(100% 100% at 50% 0, var(--color-grey-700) 0, var(--color-grey-600) 150%);
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+  pointer-events: none;
+  border-radius: inherit;
+}
+.card-hover-reveal:hover::after {
+  opacity: 1;
+}
+.card-hover-reveal > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* --- Smooth Heading Text Shadow --- */
+.text-shadow-glow {
+  text-shadow: 0 2px 40px rgba(154, 170, 255, 0.05);
+}
+
+/* --- Decorative Blur Blob --- */
+.blur-blob {
+  filter: blur(128px);
+  pointer-events: none;
+}
+
+/* --- Focus Ring (Raycast-style) --- */
+.focus-ring {
+  outline: none;
+}
+.focus-ring:focus-visible {
+  box-shadow: 0 0 0 2px var(--color-bg), 0 0 0 4px rgba(255, 255, 255, 0.3);
+}

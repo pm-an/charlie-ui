@@ -5,7 +5,8 @@ import { cn } from "../utils/cn";
 const featureCardVariants = cva(
   [
     "bg-card-gradient rounded-xl border border-white/[0.06]",
-    "hover:border-white/10 transition-all duration-300",
+    "hover:border-white/10 transition-all duration-300 ease-[cubic-bezier(0.23,1,0.32,1)]",
+    "transform-gpu hover:-translate-y-0.5 shadow-card hover:shadow-card-hover",
   ],
   {
     variants: {
