@@ -22,7 +22,7 @@ import { useScrollLock } from "../hooks/useScrollLock";
 const modalVariants = cva(
   [
     "relative w-[calc(100%-32px)] md:w-full overflow-hidden rounded-xl",
-    "border border-white/[0.06] bg-grey-700 shadow-window",
+    "border border-white/[0.06] bg-grey-700 shadow-float backdrop-blur-xl",
   ],
   {
     variants: {
@@ -105,8 +105,8 @@ function ModalRoot({
           {/* Backdrop */}
           <motion.div
             className={cn(
-              "absolute inset-0 bg-black/60",
-              !fullscreen && "backdrop-blur-sm"
+              "absolute inset-0 bg-black/70",
+              !fullscreen && "backdrop-blur-md"
             )}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -124,7 +124,7 @@ function ModalRoot({
             className={
               fullscreen
                 ? cn(
-                    "absolute inset-4 md:inset-6 flex flex-col overflow-hidden rounded-2xl border border-white/[0.06] bg-grey-700 shadow-window",
+                    "absolute inset-4 md:inset-6 flex flex-col overflow-hidden rounded-2xl border border-white/[0.06] bg-grey-700 shadow-float backdrop-blur-xl",
                     className
                   )
                 : cn(modalVariants({ size }), className)

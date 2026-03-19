@@ -251,7 +251,7 @@ const DropdownMenuContent = ({ children, className, align = "start" }: DropdownM
           exit={{ opacity: 0, scale: 0.95 }}
           transition={{ duration: 0.2, ease: "easeOut" }}
           className={cn(
-            "absolute top-full mt-1 z-50 min-w-[180px] rounded-lg border border-white/10 bg-[var(--charlie-bg-200,#1a1a1a)] p-1 shadow-xl",
+            "absolute top-full mt-1 z-50 min-w-[180px] rounded-lg border border-white/10 bg-grey-700/95 p-1 shadow-elevated backdrop-blur-xl",
             alignClass,
             className
           )}
@@ -309,7 +309,7 @@ const DropdownMenuItem = ({
         "flex items-center gap-2 rounded-md px-2 py-1.5 text-sm outline-none transition-colors cursor-pointer",
         destructive
           ? "text-red-400 hover:bg-red-500/10 focus:bg-red-500/10"
-          : "text-white/80 hover:bg-white/5 focus:bg-white/5",
+          : "text-white/80 hover:bg-white/[0.06] focus:bg-white/[0.06]",
         disabled && "opacity-40 cursor-not-allowed pointer-events-none",
         className
       )}
@@ -361,7 +361,7 @@ const DropdownMenuCheckboxItem = ({
       data-disabled={disabled || undefined}
       aria-disabled={disabled || undefined}
       className={cn(
-        "flex items-center gap-2 rounded-md px-2 py-1.5 text-sm text-white/80 outline-none transition-colors cursor-pointer hover:bg-white/5 focus:bg-white/5",
+        "flex items-center gap-2 rounded-md px-2 py-1.5 text-sm text-white/80 outline-none transition-colors cursor-pointer hover:bg-white/[0.06] focus:bg-white/[0.06]",
         disabled && "opacity-40 cursor-not-allowed pointer-events-none",
         className
       )}
@@ -434,7 +434,7 @@ const DropdownMenuRadioItem = ({
       data-disabled={disabled || undefined}
       aria-disabled={disabled || undefined}
       className={cn(
-        "flex items-center gap-2 rounded-md px-2 py-1.5 text-sm text-white/80 outline-none transition-colors cursor-pointer hover:bg-white/5 focus:bg-white/5",
+        "flex items-center gap-2 rounded-md px-2 py-1.5 text-sm text-white/80 outline-none transition-colors cursor-pointer hover:bg-white/[0.06] focus:bg-white/[0.06]",
         disabled && "opacity-40 cursor-not-allowed pointer-events-none",
         className
       )}
