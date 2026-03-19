@@ -17,9 +17,9 @@ import { useRovingTabIndex } from "../hooks/useRovingTabIndex";
 const tabsContainerVariants = cva("relative flex overflow-x-auto", {
   variants: {
     variant: {
-      pills: "bg-white/5 rounded-full p-1",
+      pills: "bg-white/[0.04] rounded-full p-1 shadow-xs",
       underline: "border-b border-white/10",
-      segment: "bg-white/5 rounded-lg p-0.5",
+      segment: "bg-white/[0.04] rounded-lg p-0.5 shadow-xs",
     },
   },
   defaultVariants: {
@@ -28,7 +28,7 @@ const tabsContainerVariants = cva("relative flex overflow-x-auto", {
 });
 
 const tabItemVariants = cva(
-  "relative z-10 cursor-pointer select-none text-sm font-medium transition-colors whitespace-nowrap flex items-center justify-center",
+  "relative z-10 cursor-pointer select-none text-[13px] font-medium transition-all duration-200 whitespace-nowrap flex items-center justify-center",
   {
     variants: {
       variant: {
@@ -192,21 +192,21 @@ function TabsRoot({
                 {isActive && variant === "pills" && (
                   <motion.span
                     layoutId="tabs-pill"
-                    className="absolute inset-0 rounded-full bg-white"
+                    className="absolute inset-0 rounded-full bg-white shadow-soft"
                     transition={{ type: "spring", stiffness: 500, damping: 35 }}
                   />
                 )}
                 {isActive && variant === "underline" && (
                   <motion.span
                     layoutId="tabs-underline"
-                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-accent"
+                    className="absolute bottom-0 left-0 right-0 h-[2px] bg-accent"
                     transition={{ type: "spring", stiffness: 500, damping: 35 }}
                   />
                 )}
                 {isActive && variant === "segment" && (
                   <motion.span
                     layoutId="tabs-segment"
-                    className="absolute inset-0 rounded-md bg-white/10"
+                    className="absolute inset-0 rounded-md bg-white/10 shadow-soft"
                     transition={{ type: "spring", stiffness: 500, damping: 35 }}
                   />
                 )}

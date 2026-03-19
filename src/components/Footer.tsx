@@ -24,7 +24,7 @@ function Footer({ logo, columns, bottom, className }: FooterProps) {
   return (
     <footer
       data-slot="footer"
-      className={cn("border-t border-white/[0.06]", className)}
+      className={cn("border-t border-white/[0.04]", className)}
     >
       <div className="max-w-[1280px] mx-auto px-4 sm:px-6 py-8 md:py-12">
         {/* Logo */}
@@ -34,7 +34,7 @@ function Footer({ logo, columns, bottom, className }: FooterProps) {
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 md:gap-8">
           {columns.map((column) => (
             <div key={column.title}>
-              <h3 className="text-white text-sm font-semibold mb-4">
+              <h3 className="text-white text-sm font-semibold tracking-tight mb-4">
                 {column.title}
               </h3>
               <ul className="space-y-2.5">
@@ -42,7 +42,7 @@ function Footer({ logo, columns, bottom, className }: FooterProps) {
                   <li key={link.href}>
                     <a
                       href={link.href}
-                      className="text-white/70 text-sm hover:text-white transition-colors inline-block py-1"
+                      className="text-white/70 text-[13px] hover:text-white transition-colors inline-block py-1"
                       {...(link.external
                         ? { target: "_blank", rel: "noopener noreferrer" }
                         : {})}
@@ -61,7 +61,7 @@ function Footer({ logo, columns, bottom, className }: FooterProps) {
 
         {/* Bottom */}
         {bottom && (
-          <div className="border-t border-white/[0.06] pt-6 mt-12 text-white/70 text-xs">
+          <div className="border-t border-white/[0.04] pt-6 mt-12 text-white/70 text-xs">
             {bottom}
           </div>
         )}

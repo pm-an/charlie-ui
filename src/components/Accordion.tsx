@@ -101,7 +101,7 @@ const AccordionItem = forwardRef<HTMLDivElement, AccordionItemProps>(
       <div
         ref={ref}
         className={cn(
-          "border-b border-dotted border-white/10",
+          "border-b border-solid border-white/[0.06]",
           className
         )}
         data-state={isOpen ? "open" : "closed"}
@@ -115,12 +115,12 @@ const AccordionItem = forwardRef<HTMLDivElement, AccordionItemProps>(
           aria-expanded={isOpen}
           aria-controls={contentId}
           data-slot="accordion-trigger"
-          className="flex w-full cursor-pointer items-center justify-between py-4 md:py-5 min-h-[44px] text-left"
+          className="flex w-full cursor-pointer items-center justify-between py-4 md:py-5 min-h-[44px] text-left hover:bg-white/[0.02] transition-colors"
         >
           <span className="text-sm md:text-base font-medium text-white">{title}</span>
           <ChevronDown
             className={cn(
-              "h-4 w-4 shrink-0 text-white/70 transition-transform duration-200",
+              "h-4 w-4 shrink-0 text-white/50 transition-transform duration-200",
               isOpen && "rotate-180"
             )}
           />
@@ -140,7 +140,7 @@ const AccordionItem = forwardRef<HTMLDivElement, AccordionItemProps>(
               className="overflow-hidden"
               data-slot="accordion-content"
             >
-              <div className="pb-5 text-sm leading-relaxed text-white/70">
+              <div className="pb-5 text-sm leading-relaxed text-white/60">
                 {children}
               </div>
             </motion.div>

@@ -50,19 +50,19 @@ const Section = forwardRef<HTMLElement, SectionProps>(function Section(
         {(eyebrow || title || description) && (
           <div className={cn(isCentered && "text-center")}>
             {eyebrow && (
-              <p className="text-[#f87171] text-sm font-medium tracking-wide uppercase mb-3">
+              <p className="text-[#f87171] text-sm font-medium tracking-widest uppercase mb-3">
                 {eyebrow}
               </p>
             )}
             {title && (
-              <h2 className="text-white text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight">
+              <h2 className="text-white text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight leading-[1.1]">
                 {title}
               </h2>
             )}
             {description && (
               <p
                 className={cn(
-                  "text-white/70 text-base md:text-lg mt-3 md:mt-4 max-w-2xl",
+                  "text-white/60 text-base md:text-lg mt-3 md:mt-4 max-w-2xl",
                   isCentered && "mx-auto"
                 )}
               >
