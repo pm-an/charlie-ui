@@ -50,9 +50,9 @@
   --color-accent: var(--charlie-accent, #dc2626);
   --color-accent-muted: var(--charlie-accent-muted, #2c1617);
   --color-accent-dim: var(--charlie-accent-dim, #833637);
-  --color-red: var(--charlie-accent, #dc2626);
-  --color-red-muted: var(--charlie-accent-muted, #2c1617);
-  --color-red-dim: var(--charlie-accent-dim, #833637);
+  --color-red: var(--charlie-red, #f87171);
+  --color-red-muted: var(--charlie-red-muted, rgba(248, 113, 113, 0.12));
+  --color-red-dim: var(--charlie-red-dim, #b91c1c);
   --color-blue: var(--charlie-blue, #56c2ff);
   --color-blue-muted: var(--charlie-blue-muted, rgba(86, 194, 255, 0.15));
   --color-green: var(--charlie-green, #59d499);
@@ -105,8 +105,8 @@
   --font-mono: var(--charlie-font-mono, "JetBrains Mono", "Geist Mono", "SF Mono", Monaco,
     "Cascadia Code", "Roboto Mono", Consolas, "Courier New", monospace);
 
-  --text-xs: 11px;
-  --text-sm: 13px;
+  --text-xs: 12px;
+  --text-sm: 14px;
   --text-base: 16px;
   --text-lg: 18px;
   --text-xl: 20px;
@@ -224,7 +224,8 @@ body {
   background-color: var(--color-bg);
   color: var(--color-fg);
   font-family: var(--font-sans);
-  font-size: 15px;
+  font-size: 16px;
+  font-weight: 450;
   line-height: 1.5;
   letter-spacing: -0.011em;
   font-feature-settings: "cv02", "cv03", "cv04", "cv11";

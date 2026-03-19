@@ -41,9 +41,9 @@
   --color-accent: var(--charlie-accent, #dc2626);
   --color-accent-muted: var(--charlie-accent-muted, #2c1617);
   --color-accent-dim: var(--charlie-accent-dim, #833637);
-  --color-red: var(--charlie-red, #dc2626);
-  --color-red-muted: var(--charlie-red-muted, #2c1617);
-  --color-red-dim: var(--charlie-red-dim, #833637);
+  --color-red: var(--charlie-red, #f87171);
+  --color-red-muted: var(--charlie-red-muted, rgba(248, 113, 113, 0.12));
+  --color-red-dim: var(--charlie-red-dim, #b91c1c);
   --color-blue: var(--charlie-blue, #56c2ff);
   --color-blue-muted: var(--charlie-blue-muted, rgba(86, 194, 255, 0.15));
   --color-green: var(--charlie-green, #59d499);
@@ -92,9 +92,9 @@
   --font-mono: var(--charlie-font-mono, "JetBrains Mono", "Geist Mono", "SF Mono", Monaco, monospace);
 
   /* --- Typography Scale --- */
-  --text-xs: var(--charlie-text-xs, 11px);
-  --text-sm: var(--charlie-text-sm, 13px);
-  --text-base: var(--charlie-text-base, 15px);
+  --text-xs: var(--charlie-text-xs, 12px);
+  --text-sm: var(--charlie-text-sm, 14px);
+  --text-base: var(--charlie-text-base, 16px);
   --text-lg: var(--charlie-text-lg, 18px);
   --text-xl: var(--charlie-text-xl, 20px);
   --text-2xl: var(--charlie-text-2xl, 24px);

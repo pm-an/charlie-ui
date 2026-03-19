@@ -50,7 +50,7 @@ const Section = forwardRef<HTMLElement, SectionProps>(function Section(
         {(eyebrow || title || description) && (
           <div className={cn(isCentered && "text-center")}>
             {eyebrow && (
-              <p className="text-[#f87171] text-sm font-medium tracking-widest uppercase mb-3">
+              <p className="text-accent text-sm font-medium tracking-widest uppercase mb-3">
                 {eyebrow}
               </p>
             )}

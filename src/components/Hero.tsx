@@ -51,7 +51,7 @@ function Hero({
         {isCentered ? (
           <div className="text-center">
             {eyebrow && (
-              <p className="text-[#f87171] text-sm font-medium tracking-widest uppercase mb-4">
+              <p className="text-accent text-sm font-medium tracking-widest uppercase mb-4">
                 {eyebrow}
               </p>
             )}
@@ -70,7 +70,7 @@ function Hero({
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-center">
             <div>
               {eyebrow && (
-                <p className="text-[#f87171] text-sm font-medium tracking-widest uppercase mb-4">
+                <p className="text-accent text-sm font-medium tracking-widest uppercase mb-4">
                   {eyebrow}
                 </p>
               )}

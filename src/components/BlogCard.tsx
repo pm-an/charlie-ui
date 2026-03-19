@@ -33,11 +33,11 @@ const BlogCard = forwardRef<HTMLDivElement, BlogCardProps>(
         {/* Content */}
         <div className="p-4 md:p-5">
           {tag && (
-            <span className="mb-2 block text-xs font-medium uppercase tracking-wide text-[#f87171]">
+            <span className="mb-2 block text-xs font-medium uppercase tracking-wide text-accent">
               {tag}
             </span>
           )}
-          <h3 className="mb-2 text-lg font-semibold text-white transition-colors group-hover:text-[#f87171]">
+          <h3 className="mb-2 text-lg font-semibold text-white transition-colors group-hover:text-accent">
             {title}
           </h3>
           <p className="line-clamp-2 text-sm text-white/70">{excerpt}</p>

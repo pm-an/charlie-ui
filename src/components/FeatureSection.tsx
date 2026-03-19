@@ -106,7 +106,7 @@ const FeatureSection = forwardRef<HTMLElement, FeatureSectionProps>(
                     {feature.href && (
                       <a
                         href={feature.href}
-                        className="mt-4 inline-flex items-center text-sm font-medium text-[#f87171] hover:underline"
+                        className="mt-4 inline-flex items-center text-sm font-medium text-accent hover:underline"
                       >
                         Learn more &rarr;
                       </a>
