@@ -36,7 +36,7 @@ const variantIcons = {
 const variantIconColors = {
   default: "text-blue",
   success: "text-green",
-  error: "text-[#f87171]",
+  error: "text-red",
   warning: "text-yellow",
 } as const;
 

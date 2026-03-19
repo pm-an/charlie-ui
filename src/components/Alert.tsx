@@ -18,7 +18,7 @@ const alertVariants = cva(
         info: "bg-blue-muted border-blue/20 text-blue",
         success: "bg-green-muted border-green/20 text-green",
         warning: "bg-yellow-muted border-yellow/20 text-yellow",
-        error: "bg-red-muted border-red/20 text-[#f87171]",
+        error: "bg-red-muted border-red/20 text-red",
       },
     },
     defaultVariants: {

@@ -380,7 +380,7 @@ function FileUpload({
                     )}
 
                     {fileItem.status === "error" && fileItem.error && (
-                      <p className="text-xs text-[#f87171] mt-0.5">{fileItem.error}</p>
+                      <p className="text-xs text-red mt-0.5">{fileItem.error}</p>
                     )}
                   </div>
 
@@ -393,7 +393,7 @@ function FileUpload({
                     )}
                     {fileItem.status === "error" && (
                       <AlertCircle
-                        className="h-4 w-4 text-[#f87171]"
+                        className="h-4 w-4 text-red"
                         data-testid="error-icon"
                       />
                     )}
@@ -419,7 +419,7 @@ function FileUpload({
       )}
 
       {!insideField && resolvedError && errorMessage && (
-        <p className="mt-1.5 text-xs text-[#f87171]">{errorMessage}</p>
+        <p className="mt-1.5 text-xs text-red">{errorMessage}</p>
       )}
     </div>
   );

@@ -24,7 +24,7 @@ function Label({
       {...props}
     >
       {children}
-      {required && <span className="text-[#f87171] ml-0.5">*</span>}
+      {required && <span className="text-red ml-0.5">*</span>}
     </label>
   );
 }

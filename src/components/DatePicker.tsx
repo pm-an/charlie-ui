@@ -8,7 +8,7 @@ import {
   type MouseEvent as ReactMouseEvent,
 } from "react";
 import { DayPicker, type DateRange } from "react-day-picker";
-import { format } from "date-fns";
+import { format, type Locale } from "date-fns";
 import { AnimatePresence, motion } from "framer-motion";
 import { Calendar, X, ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "../utils/cn";
@@ -44,6 +44,8 @@ export type DatePickerProps = {
   // Format
   dateFormat?: string;
   placeholder?: string;
+  /** date-fns locale for formatting and calendar day names */
+  locale?: Locale;
 
   // Form integration
   label?: string;
@@ -117,7 +119,7 @@ const calendarClassNames = {
   today: "border border-white/10 rounded-md",
   outside: "text-white/70",
   disabled: "text-white/10 cursor-not-allowed hover:bg-transparent",
-  hidden: "invisible",
+  hidden: "invisible !border-transparent",
   focused: "ring-1 ring-white/20",
 
   // Selection
@@ -260,6 +262,7 @@ function DatePicker({
   disabledDates,
   dateFormat = "PPP",
   placeholder = "Pick a date",
+  locale: localeProp,
   label,
   description,
   helperText,
@@ -321,14 +324,15 @@ function DatePicker({
   const currentRange = rangeValue !== undefined ? rangeValue : internalRange;
 
   // Compute display value
+  const fmtOpts = localeProp ? { locale: localeProp } : undefined;
   let displayValue = "";
   if (mode === "single" && internalValue) {
-    displayValue = format(internalValue, dateFormat);
+    displayValue = format(internalValue, dateFormat, fmtOpts);
   } else if (mode === "range" && currentRange) {
     if (currentRange.from && currentRange.to) {
-      displayValue = `${format(currentRange.from, dateFormat)} - ${format(currentRange.to, dateFormat)}`;
+      displayValue = `${format(currentRange.from, dateFormat, fmtOpts)} - ${format(currentRange.to, dateFormat, fmtOpts)}`;
     } else if (currentRange.from) {
-      displayValue = format(currentRange.from, dateFormat);
+      displayValue = format(currentRange.from, dateFormat, fmtOpts);
     }
   }
 
@@ -436,7 +440,7 @@ function DatePicker({
   const labelEl = !insideField && label ? (
     <label htmlFor={controlId} className="text-sm font-medium text-white/80 mb-1.5 block">
       {label}
-      {required && <span className="text-[#f87171] ml-0.5">*</span>}
+      {required && <span className="text-red ml-0.5">*</span>}
     </label>
   ) : null;
 
@@ -446,7 +450,7 @@ function DatePicker({
         <p id={`${controlId}-description`} className="text-xs text-white/70 mt-1.5">{resolvedDescription}</p>
       )}
       {error && errorMessage && (
-        <p id={`${controlId}-error`} className="text-xs text-[#f87171] mt-1.5">{errorMessage}</p>
+        <p id={`${controlId}-error`} className="text-xs text-red mt-1.5">{errorMessage}</p>
       )}
     </>
   ) : null;
@@ -508,6 +512,7 @@ function DatePicker({
                   startMonth={minDate}
                   endMonth={maxDate}
                   hidden={hiddenMatcher}
+                  locale={localeProp}
                   classNames={calendarClassNames}
                   components={{ Chevron: CustomChevron }}
                   showOutsideDays
@@ -607,6 +612,7 @@ function DatePicker({
                   startMonth={minDate}
                   endMonth={maxDate}
                   hidden={hiddenMatcher}
+                  locale={localeProp}
                   classNames={calendarClassNames}
                   components={{ Chevron: CustomChevron }}
                   showOutsideDays

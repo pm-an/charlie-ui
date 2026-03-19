@@ -130,7 +130,7 @@ function DropdownItem({
       className={cn(
         "flex items-center gap-2 rounded-lg px-3 py-2 text-sm cursor-pointer transition-colors",
         destructive
-          ? "text-[#f87171] hover:bg-red-muted"
+          ? "text-red hover:bg-red-muted"
           : "text-white/80 hover:bg-white/5",
         disabled && "opacity-50 cursor-not-allowed pointer-events-none",
         className

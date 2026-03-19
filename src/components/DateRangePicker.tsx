@@ -425,7 +425,7 @@ function DateRangePicker({
       {label && (
         <label htmlFor={controlId} className="text-sm font-medium text-white/80 mb-1.5 block">
           {label}
-          {required && <span className="text-[#f87171] ml-0.5">*</span>}
+          {required && <span className="text-red ml-0.5">*</span>}
         </label>
       )}
 
@@ -437,7 +437,7 @@ function DateRangePicker({
         <p id={`${controlId}-description`} className="text-xs text-white/70 mt-1.5">{resolvedDescription}</p>
       )}
       {error && errorMessage && (
-        <p id={`${controlId}-error`} className="text-xs text-[#f87171] mt-1.5">{errorMessage}</p>
+        <p id={`${controlId}-error`} className="text-xs text-red mt-1.5">{errorMessage}</p>
       )}
     </div>
   );

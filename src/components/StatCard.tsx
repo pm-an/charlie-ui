@@ -79,7 +79,7 @@ const StatCard = forwardRef<HTMLDivElement, StatCardProps>(
                   className={cn(
                     "flex items-center gap-1 font-medium",
                     resolvedTrend === "up" && "text-green",
-                    resolvedTrend === "down" && "text-[#f87171]",
+                    resolvedTrend === "down" && "text-red",
                     resolvedTrend === "neutral" && "text-white/70"
                   )}
                 >

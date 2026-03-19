@@ -629,7 +629,7 @@ function Select({
           className={cn(
             "text-sm font-medium text-white/80",
             required &&
-              "after:content-['*'] after:ml-0.5 after:text-[#f87171]"
+              "after:content-['*'] after:ml-0.5 after:text-red"
           )}
         >
           {label}
@@ -652,7 +652,7 @@ function Select({
 
       {/* Error message */}
       {error && errorMessage && (
-        <p id={`${controlId}-error`} className="text-xs text-[#f87171]">{errorMessage}</p>
+        <p id={`${controlId}-error`} className="text-xs text-red">{errorMessage}</p>
       )}
     </div>
   );

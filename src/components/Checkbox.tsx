@@ -172,7 +172,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
             {label && (
               <span className={cn(
                 "text-sm font-medium text-white/70",
-                resolvedRequired && "after:content-['*'] after:ml-0.5 after:text-[#f87171]"
+                resolvedRequired && "after:content-['*'] after:ml-0.5 after:text-red"
               )}>
                 {label}
               </span>
@@ -185,7 +185,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
         {insideField && label && (
           <span className={cn(
             "text-sm font-medium text-white/70",
-            resolvedRequired && "after:content-['*'] after:ml-0.5 after:text-[#f87171]"
+            resolvedRequired && "after:content-['*'] after:ml-0.5 after:text-red"
           )}>
             {label}
           </span>
@@ -203,7 +203,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
           {checkboxElement}
         </div>
         {resolvedError && errorMessage && (
-          <p className="text-xs text-[#f87171] ml-6">{errorMessage}</p>
+          <p className="text-xs text-red ml-6">{errorMessage}</p>
         )}
       </div>
     );

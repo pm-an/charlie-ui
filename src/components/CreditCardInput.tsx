@@ -764,7 +764,7 @@ const CreditCardInput = forwardRef<HTMLDivElement, CreditCardInputProps>(
                 initial={{ opacity: 0, y: -4 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.2 }}
-                className="text-xs text-[#f87171]"
+                className="text-xs text-red"
                 role="alert"
               >
                 {errors.number}
@@ -807,7 +807,7 @@ const CreditCardInput = forwardRef<HTMLDivElement, CreditCardInputProps>(
                 initial={{ opacity: 0, y: -4 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.2 }}
-                className="text-xs text-[#f87171]"
+                className="text-xs text-red"
                 role="alert"
               >
                 {errors.name}
@@ -852,7 +852,7 @@ const CreditCardInput = forwardRef<HTMLDivElement, CreditCardInputProps>(
                   initial={{ opacity: 0, y: -4 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.2 }}
-                  className="text-xs text-[#f87171]"
+                  className="text-xs text-red"
                   role="alert"
                 >
                   {errors.expiry}
@@ -894,7 +894,7 @@ const CreditCardInput = forwardRef<HTMLDivElement, CreditCardInputProps>(
                   initial={{ opacity: 0, y: -4 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.2 }}
-                  className="text-xs text-[#f87171]"
+                  className="text-xs text-red"
                   role="alert"
                 >
                   {errors.cvc}

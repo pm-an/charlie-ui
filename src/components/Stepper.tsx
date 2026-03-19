@@ -54,7 +54,7 @@ function getCircleClasses(status: StepStatus): string {
     case "upcoming":
       return "bg-white/5 border border-white/10 text-white/70";
     case "error":
-      return "bg-red/20 border border-red/50 text-[#f87171]";
+      return "bg-red/20 border border-red/50 text-red";
   }
 }
 
@@ -67,7 +67,7 @@ function getLabelClasses(status: StepStatus): string {
     case "upcoming":
       return "text-white/70";
     case "error":
-      return "text-[#f87171]";
+      return "text-red";
   }
 }
 

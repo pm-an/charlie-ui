@@ -236,7 +236,7 @@ describe("OTPInput", () => {
       render(<OTPInput length={4} error errorMessage="Bad code" />);
       const msg = screen.getByText("Bad code");
       expect(msg).toHaveClass("text-xs");
-      expect(msg).toHaveClass("text-[#f87171]");
+      expect(msg).toHaveClass("text-red");
     });
   });
 

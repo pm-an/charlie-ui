@@ -648,7 +648,7 @@ function TimePicker({
           <div className="border-t border-white/6 mt-2 pt-2 flex justify-center">
             <button
               type="button"
-              className="text-xs text-[#f87171] hover:text-[#f87171]/80 cursor-pointer transition-colors"
+              className="text-xs text-red hover:text-red/80 cursor-pointer transition-colors"
               onClick={handleNow}
             >
               Now
@@ -688,7 +688,7 @@ function TimePicker({
         <label id={labelId} className="text-sm font-medium text-white/80">
           {label}
           {required && (
-            <span className="text-[#f87171] ml-0.5" aria-hidden="true">
+            <span className="text-red ml-0.5" aria-hidden="true">
               *
             </span>
           )}
@@ -706,7 +706,7 @@ function TimePicker({
         </p>
       )}
       {error && errorMessage && (
-        <p id={`${controlId}-error`} className="text-xs text-[#f87171]">
+        <p id={`${controlId}-error`} className="text-xs text-red">
           {errorMessage}
         </p>
       )}

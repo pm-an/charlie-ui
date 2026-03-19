@@ -187,7 +187,7 @@ const Switch = forwardRef<HTMLInputElement, SwitchProps>(
       return (
         <div className="flex flex-col gap-1">
           {switchElement}
-          <p id={`${switchId}-error`} className="text-xs text-[#f87171]" role="alert">{errorMessage}</p>
+          <p id={`${switchId}-error`} className="text-xs text-red" role="alert">{errorMessage}</p>
         </div>
       );
     }

@@ -106,7 +106,7 @@ describe("Stepper", () => {
       render(<Stepper steps={basicSteps} activeStep={1} />);
       const activeCircle = screen.getByTestId("step-circle-1");
       // Active step should not show error
-      expect(activeCircle).not.toHaveClass("text-[#f87171]");
+      expect(activeCircle).not.toHaveClass("text-red");
     });
   });
 

@@ -229,7 +229,7 @@ function OTPInput({
         {elements}
       </div>
       {!insideField && resolvedError && errorMessage && (
-        <p id={`${controlId}-error`} role="alert" className="mt-1.5 text-xs text-[#f87171]">{errorMessage}</p>
+        <p id={`${controlId}-error`} role="alert" className="mt-1.5 text-xs text-red">{errorMessage}</p>
       )}
     </div>
   );

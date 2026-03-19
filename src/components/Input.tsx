@@ -111,7 +111,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           <p id={`${controlId}-description`} className="text-xs text-white/70">{resolvedDescription}</p>
         )}
         {error && errorMessage && (
-          <p id={`${controlId}-error`} className="text-xs text-[#f87171]">{errorMessage}</p>
+          <p id={`${controlId}-error`} className="text-xs text-red">{errorMessage}</p>
         )}
       </div>
     );
