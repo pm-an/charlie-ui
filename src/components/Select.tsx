@@ -84,16 +84,16 @@ export type SelectProps = VariantProps<typeof selectTriggerVariants> & {
 const selectTriggerVariants = cva(
   [
     "w-full flex items-center justify-between gap-2",
-    "bg-white/5 border border-white/6 rounded-md text-sm text-white",
-    "outline-none transition-all duration-200 cursor-pointer",
-    "focus:ring-1 focus:ring-white/15 focus:border-white/15",
+    "bg-white/5 border border-white/[0.08] rounded-lg text-sm text-white",
+    "shadow-input outline-none transition-shadow duration-200 cursor-pointer",
+    "focus:shadow-input-focus focus:border-white/12",
   ],
   {
     variants: {
       size: {
-        sm: "h-8 px-2.5 text-xs",
-        md: "h-10 px-3 text-sm",
-        lg: "h-12 px-4 text-base",
+        sm: "h-7 px-2.5 text-xs",
+        md: "h-9 px-3 text-sm",
+        lg: "h-11 px-4 text-base",
       },
     },
     defaultVariants: {
@@ -476,7 +476,7 @@ function Select({
         <motion.div
           className={cn(
             "absolute z-50 left-0 right-0 top-full mt-1",
-            "bg-grey-700 border border-white/10 rounded-lg shadow-lg overflow-hidden"
+            "bg-grey-700 border border-white/[0.08] rounded-lg shadow-elevated backdrop-blur-xl overflow-hidden"
           )}
           initial={{ opacity: 1, y: -4 }}
           animate={{ opacity: 1, y: 0 }}
@@ -550,8 +550,8 @@ function Select({
                     aria-disabled={option.disabled || undefined}
                     data-index={index}
                     className={cn(
-                      "flex items-center gap-2 mx-1 px-3 py-2 text-sm rounded cursor-pointer transition-colors",
-                      isHighlighted && "bg-white/5",
+                      "flex items-center gap-2 mx-1 px-3 py-2 text-sm rounded-md cursor-pointer transition-colors",
+                      isHighlighted && "bg-white/[0.06]",
                       isSelected && "text-white",
                       !isSelected && "text-white/80",
                       option.disabled &&
