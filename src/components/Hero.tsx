@@ -51,14 +51,14 @@ function Hero({
         {isCentered ? (
           <div className="text-center">
             {eyebrow && (
-              <p className="text-[#f87171] text-sm font-medium tracking-wide uppercase mb-4">
+              <p className="text-[#f87171] text-sm font-medium tracking-widest uppercase mb-4">
                 {eyebrow}
               </p>
             )}
-            <h1 className="text-white text-3xl md:text-5xl lg:text-7xl font-bold tracking-tight leading-[1.1]">
+            <h1 className="text-white text-3xl md:text-5xl lg:text-7xl font-bold tracking-tight leading-[1.05]">
               {title}
             </h1>
-            <p className="text-white/70 text-base md:text-lg lg:text-xl max-w-2xl mx-auto mt-4 md:mt-6 leading-relaxed">
+            <p className="text-white/60 text-base md:text-lg lg:text-xl max-w-2xl mx-auto mt-4 md:mt-6 leading-relaxed">
               {description}
             </p>
             {actions && (
@@ -70,14 +70,14 @@ function Hero({
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-center">
             <div>
               {eyebrow && (
-                <p className="text-[#f87171] text-sm font-medium tracking-wide uppercase mb-4">
+                <p className="text-[#f87171] text-sm font-medium tracking-widest uppercase mb-4">
                   {eyebrow}
                 </p>
               )}
-              <h1 className="text-white text-3xl md:text-5xl lg:text-7xl font-bold tracking-tight leading-[1.1]">
+              <h1 className="text-white text-3xl md:text-5xl lg:text-7xl font-bold tracking-tight leading-[1.05]">
                 {title}
               </h1>
-              <p className="text-white/70 text-base md:text-lg lg:text-xl mt-4 md:mt-6 leading-relaxed">
+              <p className="text-white/60 text-base md:text-lg lg:text-xl mt-4 md:mt-6 leading-relaxed">
                 {description}
               </p>
               {actions && (
