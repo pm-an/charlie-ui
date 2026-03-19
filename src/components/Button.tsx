@@ -6,7 +6,7 @@ import { Spinner } from "./Spinner";
 
 const buttonVariants = cva(
   [
-    "inline-flex items-center justify-center gap-2",
+    "group inline-flex items-center justify-center gap-2",
     "rounded-md font-medium transition-all duration-200",
     "active:scale-[0.98]",
     "disabled:opacity-50 disabled:cursor-not-allowed disabled:active:scale-100",
@@ -37,6 +37,9 @@ const buttonVariants = cva(
         sm: "min-h-8 px-3 py-1 text-sm",
         md: "min-h-10 px-4 py-2 text-sm",
         lg: "min-h-12 px-6 py-3 text-base",
+        iconSm: "min-h-7 w-7 p-0 text-xs",
+        icon: "min-h-8 w-8 p-0 text-sm",
+        iconLg: "min-h-10 w-10 p-0 text-sm",
       },
     },
     defaultVariants: {
@@ -94,10 +97,14 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         {loading ? (
           <Spinner size="xs" color="currentColor" label="Loading" />
         ) : (
-          leftIcon
+          leftIcon && <span className="shrink-0">{leftIcon}</span>
         )}
         {children}
-        {!loading && rightIcon}
+        {!loading && rightIcon && (
+          <span className="transition-transform duration-200 group-hover:translate-x-0.5">
+            {rightIcon}
+          </span>
+        )}
       </button>
     );
   }
