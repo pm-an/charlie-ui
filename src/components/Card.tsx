@@ -11,14 +11,26 @@ import { Skeleton } from "./Skeleton";
 /* ─── Card Root ─────────────────────────────── */
 
 const cardVariants = cva(
-  "rounded-xl shadow-card transition-shadow duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] hover:shadow-card-hover",
+  "rounded-xl shadow-card transition-all duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] hover:shadow-card-hover transform-gpu",
   {
     variants: {
       variant: {
         default: "bg-card-gradient border border-white/[0.06]",
         translucent:
-          "bg-card-gradient-translucent backdrop-blur-xl border border-white/[0.06] shadow-card",
-        outline: "bg-transparent border border-white/10 shadow-xs",
+          "bg-card-gradient-translucent backdrop-blur-xl border border-white/[0.06]",
+        outline: "bg-transparent border border-white/10",
+        featured: [
+          "bg-card-gradient border border-white/[0.06]",
+          "shadow-[inset_0_1px_1px_0_rgba(255,255,255,0.1),0_1px_40px_0_rgba(154,170,255,0.05),0_0_16px_-7px_rgba(154,170,255,0.05),0_2px_40px_10px_rgba(154,170,255,0.05)]",
+        ],
+        glass: [
+          "bg-white/[0.03] backdrop-blur-2xl border border-white/[0.08]",
+          "shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08)]",
+        ],
+        elevated: [
+          "bg-grey-700 border border-white/[0.08]",
+          "shadow-elevated",
+        ],
       },
       padding: {
         none: "",
@@ -36,16 +48,21 @@ type CardProps = HTMLAttributes<HTMLDivElement> &
   VariantProps<typeof cardVariants> & {
     asChild?: boolean;
     loading?: boolean;
+    interactive?: boolean;
   };
 
 const CardRoot = forwardRef<HTMLDivElement, CardProps>(
-  ({ className, variant, padding, asChild = false, loading = false, children, ...props }, ref) => {
+  ({ className, variant, padding, asChild = false, loading = false, interactive = false, children, ...props }, ref) => {
     if (asChild) {
       return (
         <Slot
           ref={ref as React.Ref<HTMLElement>}
           data-slot="card"
-          className={cn(cardVariants({ variant, padding }), className)}
+          className={cn(
+            cardVariants({ variant, padding }),
+            interactive && "cursor-pointer hover:-translate-y-0.5",
+            className
+          )}
           {...props}
         >
           {children as React.ReactElement}
@@ -58,7 +75,11 @@ const CardRoot = forwardRef<HTMLDivElement, CardProps>(
         ref={ref}
         data-slot="card"
         aria-busy={loading || undefined}
-        className={cn(cardVariants({ variant, padding }), className)}
+        className={cn(
+          cardVariants({ variant, padding }),
+          interactive && "cursor-pointer hover:-translate-y-0.5",
+          className
+        )}
         {...props}
       >
         {loading ? (
@@ -96,7 +117,7 @@ const CardHeader = forwardRef<HTMLDivElement, CardHeaderProps>(
       {(title || description) && (
         <div className="min-w-0">
           {title && (
-            <h3 className="text-white text-sm font-semibold tracking-tight">{title}</h3>
+            <h3 className="text-white font-semibold text-base">{title}</h3>
           )}
           {description && (
             <p className="text-white/70 text-sm">{description}</p>
