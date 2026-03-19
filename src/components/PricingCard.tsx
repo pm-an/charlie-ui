@@ -37,7 +37,7 @@ const PricingCard = forwardRef<HTMLDivElement, PricingCardProps>(
       ref={ref}
       data-slot="pricing-card"
       className={cn(
-        "bg-card-gradient rounded-xl border p-6 flex flex-col",
+        "bg-card-gradient rounded-xl border p-6 flex flex-col transform-gpu transition-all duration-300 hover:-translate-y-0.5",
         highlighted
           ? "border-white/15 shadow-card-elevated"
           : "border-white/[0.06]",
