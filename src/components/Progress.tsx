@@ -174,13 +174,13 @@ const Progress = forwardRef<HTMLDivElement, ProgressProps>(
         <div className="flex items-center gap-3">
           <div
             className={cn(
-              "flex-1 bg-white/10 rounded-full overflow-hidden",
+              "flex-1 bg-white/[0.06] rounded-full overflow-hidden",
               trackSizeClasses[resolvedSize]
             )}
           >
             <div
               className={cn(
-                "h-full rounded-full transition-all duration-300",
+                "h-full rounded-full transition-all duration-300 shadow-[0_0_8px_0_rgba(var(--tw-shadow-color),0.3)]",
                 fillColorClasses[resolvedColor],
                 indeterminate && "animate-progress-indeterminate"
               )}

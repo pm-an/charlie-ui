@@ -12,7 +12,7 @@ import { cn } from "../utils/cn";
 import { useFieldAware } from "../hooks/useFieldAware";
 
 const checkboxVariants = cva(
-  "relative shrink-0 rounded border transition-colors duration-150 flex items-center justify-center",
+  "relative shrink-0 rounded-[5px] border transition-all duration-200 flex items-center justify-center",
   {
     variants: {
       size: {
@@ -114,8 +114,8 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
           className={cn(
             checkboxVariants({ size }),
             isCheckedOrIndeterminate
-              ? "bg-accent border-accent"
-              : "bg-white/5 border-white/10",
+              ? "bg-accent border-accent shadow-button"
+              : "bg-white/[0.04] border-white/[0.08] shadow-xs",
             resolvedError && !isCheckedOrIndeterminate && "border-red/50"
           )}
           aria-hidden="true"
@@ -171,7 +171,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
           <span className="flex flex-col">
             {label && (
               <span className={cn(
-                "text-sm font-medium text-white/80",
+                "text-sm font-medium text-white/70",
                 resolvedRequired && "after:content-['*'] after:ml-0.5 after:text-[#f87171]"
               )}>
                 {label}
@@ -184,7 +184,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
         )}
         {insideField && label && (
           <span className={cn(
-            "text-sm font-medium text-white/80",
+            "text-sm font-medium text-white/70",
             resolvedRequired && "after:content-['*'] after:ml-0.5 after:text-[#f87171]"
           )}>
             {label}
