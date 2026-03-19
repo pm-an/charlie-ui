@@ -12,7 +12,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "../utils/cn";
 import { useFieldAware } from "../hooks/useFieldAware";
 
-const sliderTrackVariants = cva("w-full rounded-full bg-white/10", {
+const sliderTrackVariants = cva("w-full rounded-full bg-white/[0.06] shadow-xs", {
   variants: {
     size: {
       sm: "h-1",
@@ -27,8 +27,8 @@ const sliderTrackVariants = cva("w-full rounded-full bg-white/10", {
 
 const sliderThumbVariants = cva(
   [
-    "absolute top-1/2 -translate-y-1/2 rounded-full bg-white shadow",
-    "border-2 border-accent",
+    "absolute top-1/2 -translate-y-1/2 rounded-full bg-white shadow-button",
+    "border-[1.5px] border-accent",
     "transition-shadow duration-150",
     "focus-visible:ring-2 focus-visible:ring-accent/30",
     "hover:ring-2 hover:ring-accent/20",
@@ -225,7 +225,7 @@ const Slider = forwardRef<HTMLDivElement, SliderProps>(
           <div className={cn(sliderTrackVariants({ size }))}>
             {/* Fill */}
             <div
-              className="h-full rounded-full bg-accent"
+              className="h-full rounded-full bg-accent transition-all duration-200"
               style={{ width: `${percentage}%` }}
             />
           </div>

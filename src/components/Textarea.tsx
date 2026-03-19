@@ -109,10 +109,10 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
         disabled={disabled}
         required={required}
         className={cn(
-          "w-full bg-white/5 border border-white/6 rounded-md px-3 py-2 text-sm text-white",
-          "placeholder:text-white/70",
-          "outline-none transition-all duration-200",
-          "focus:ring-1 focus:ring-white/15 focus:border-white/15",
+          "w-full bg-white/5 border border-white/[0.08] rounded-lg px-3 py-2 text-sm text-white shadow-input",
+          "placeholder:text-white/40",
+          "outline-none transition-shadow duration-200",
+          "focus:shadow-input-focus focus:border-white/12",
           "min-h-[80px]",
           error && "border-red/50 focus:ring-red/30 focus:border-red/50",
           className

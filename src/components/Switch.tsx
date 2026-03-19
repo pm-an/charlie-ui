@@ -136,7 +136,8 @@ const Switch = forwardRef<HTMLInputElement, SwitchProps>(
           data-state={checked ? "checked" : "unchecked"}
           className={cn(
             switchVariants({ size }),
-            checked ? "bg-accent" : "bg-white/10",
+            checked ? "bg-accent shadow-[inset_0_1px_1px_rgba(0,0,0,0.1)]" : "bg-white/[0.08] shadow-xs",
+            "border border-white/[0.04]",
             resolvedDisabled && "opacity-65 cursor-not-allowed",
             className
           )}
@@ -146,7 +147,7 @@ const Switch = forwardRef<HTMLInputElement, SwitchProps>(
         >
           <motion.span
             className={cn(
-              "block rounded-full bg-white shadow-sm",
+              "block rounded-full bg-white shadow-soft",
               resolvedSize === "sm" && "h-4 w-4",
               resolvedSize === "md" && "h-[22px] w-[22px]",
               resolvedSize === "lg" && "h-[26px] w-[26px]"
@@ -160,7 +161,7 @@ const Switch = forwardRef<HTMLInputElement, SwitchProps>(
             {label && (
               <span
                 id={labelId}
-                className="text-sm font-medium text-white/80 select-none"
+                className="text-sm font-medium text-white/70 select-none"
               >
                 {label}
               </span>
