@@ -74,8 +74,34 @@
   --radius-pill: 9999px;
   --radius-full: 9999px;
 
+  /* --- Shadows (Raycast-inspired multi-layer depth) --- */
+  --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.25);
+  --shadow-soft: inset 0 0.5px 0 0 rgba(255, 255, 255, 0.06), 0 1px 3px 0 rgba(0, 0, 0, 0.15), 0 2px 6px 0 rgba(0, 0, 0, 0.1);
+  --shadow-card: inset 0 1px 0 0 rgba(255, 255, 255, 0.06), 0 1px 2px 0 rgba(0, 0, 0, 0.12), 0 4px 8px 0 rgba(0, 0, 0, 0.08), 0 8px 16px 0 rgba(0, 0, 0, 0.04);
+  --shadow-card-hover: inset 0 1px 1px 0 rgba(255, 255, 255, 0.1), 0 2px 4px 0 rgba(0, 0, 0, 0.15), 0 8px 20px 0 rgba(0, 0, 0, 0.12), 0 2px 40px 10px rgba(154, 170, 255, 0.04);
+  --shadow-elevated: inset 0 0.5px 0 0 rgba(255, 255, 255, 0.1), 0 4px 16px 0 rgba(0, 0, 0, 0.32), 0 0 0 0.5px rgba(0, 0, 0, 0.6);
+  --shadow-float: inset 0 0.5px 0 0 rgba(255, 255, 255, 0.12), 0 8px 40px 8px rgba(0, 0, 0, 0.4), 0 0 0 0.5px rgba(0, 0, 0, 0.8);
+  --shadow-button: inset 0 0.5px 0 0 rgba(255, 255, 255, 0.1), 0 1px 1px 0 rgba(0, 0, 0, 0.12), 0 2px 4px 0 rgba(0, 0, 0, 0.08);
+  --shadow-button-hover: inset 0 0.5px 0 0 rgba(255, 255, 255, 0.15), 0 2px 3px 0 rgba(0, 0, 0, 0.16), 0 4px 8px 0 rgba(0, 0, 0, 0.1);
+  --shadow-input: inset 0 1px 2px 0 rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(255, 255, 255, 0.04);
+  --shadow-input-focus: inset 0 1px 2px 0 rgba(0, 0, 0, 0.1), 0 0 0 2px rgba(255, 255, 255, 0.12);
+
   /* --- Typography --- */
   --font-sans: var(--charlie-font-sans, "Inter", ui-sans-serif, system-ui, sans-serif);
-  --font-display: var(--charlie-font-display, "Instrument Serif", Georgia, serif);
-  --font-mono: var(--charlie-font-mono, "Geist Mono", "SF Mono", Monaco, monospace);
+  --font-display: var(--charlie-font-display, "Inter", ui-sans-serif, system-ui, sans-serif);
+  --font-mono: var(--charlie-font-mono, "JetBrains Mono", "Geist Mono", "SF Mono", Monaco, monospace);
+
+  /* --- Typography Scale --- */
+  --text-xs: var(--charlie-text-xs, 11px);
+  --text-sm: var(--charlie-text-sm, 13px);
+  --text-base: var(--charlie-text-base, 15px);
+  --text-lg: var(--charlie-text-lg, 18px);
+  --text-xl: var(--charlie-text-xl, 20px);
+  --text-2xl: var(--charlie-text-2xl, 24px);
+  --text-3xl: var(--charlie-text-3xl, 36px);
+  --text-4xl: var(--charlie-text-4xl, 40px);
+  --text-5xl: var(--charlie-text-5xl, 48px);
+  --text-6xl: var(--charlie-text-6xl, 56px);
+  --text-7xl: var(--charlie-text-7xl, 64px);
+  --text-8xl: var(--charlie-text-8xl, 72px);
 }
