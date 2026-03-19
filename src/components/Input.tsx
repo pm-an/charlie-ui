@@ -70,10 +70,10 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           disabled={disabled}
           required={required}
           className={cn(
-            "w-full bg-white/5 border border-white/6 rounded-md h-10 px-3 text-sm text-white",
-            "placeholder:text-white/70",
-            "outline-none transition-all duration-200",
-            "focus:ring-1 focus:ring-white/15 focus:border-white/15",
+            "w-full bg-white/5 border border-white/[0.08] rounded-lg h-9 px-3 text-sm text-white",
+            "shadow-input placeholder:text-white/40",
+            "outline-none transition-shadow duration-200",
+            "focus:shadow-input-focus focus:border-white/12",
             "[&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none [-moz-appearance:textfield]",
             error && "border-red/50 focus:ring-red/30 focus:border-red/50",
             leftIcon && "pl-10",
