@@ -55,7 +55,7 @@
 
 /* --- Links --- */
 .charlie-rte-content .ProseMirror a {
-  color: #f87171;
+  color: var(--color-accent, #dc2626);
   text-decoration: underline;
   text-underline-offset: 2px;
   cursor: pointer;

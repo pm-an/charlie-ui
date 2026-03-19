@@ -77,7 +77,7 @@ const StatsSection = forwardRef<HTMLElement, StatsSectionProps>(
           {hasHeader && (
             <div className="text-center mb-8 md:mb-12">
               {eyebrow && (
-                <p className="text-[#f87171] text-sm font-medium tracking-wide uppercase mb-3">
+                <p className="text-accent text-sm font-medium tracking-wide uppercase mb-3">
                   {eyebrow}
                 </p>
               )}

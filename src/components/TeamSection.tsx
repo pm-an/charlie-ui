@@ -70,7 +70,7 @@ const TeamSection = forwardRef<HTMLElement, TeamSectionProps>(
           {(eyebrow || title || description) && (
             <div className="text-center">
               {eyebrow && (
-                <p className="text-[#f87171] text-sm font-medium tracking-wide uppercase mb-3">
+                <p className="text-accent text-sm font-medium tracking-wide uppercase mb-3">
                   {eyebrow}
                 </p>
               )}

@@ -127,7 +127,7 @@ const ContactSection = forwardRef<HTMLElement, ContactSectionProps>(
           {(eyebrow || title || description) && (
             <div className={cn(variant === "simple" && "text-center")}>
               {eyebrow && (
-                <p className="text-[#f87171] text-sm font-medium tracking-wide uppercase mb-3">
+                <p className="text-accent text-sm font-medium tracking-wide uppercase mb-3">
                   {eyebrow}
                 </p>
               )}

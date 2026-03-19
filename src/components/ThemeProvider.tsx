@@ -67,6 +67,15 @@ export interface CharlieTheme {
   fontDisplay?: string;
   fontMono?: string;
 
+  /** Typography scale */
+  textXs?: string;
+  textSm?: string;
+  textBase?: string;
+  textLg?: string;
+  textXl?: string;
+  text2xl?: string;
+  text3xl?: string;
+
   /** Animation */
   durationFast?: string;
   durationNormal?: string;
@@ -128,6 +137,13 @@ function themeToCSS(theme: CharlieTheme): Record<string, string> {
     fontSans: "--charlie-font-sans",
     fontDisplay: "--charlie-font-display",
     fontMono: "--charlie-font-mono",
+    textXs: "--charlie-text-xs",
+    textSm: "--charlie-text-sm",
+    textBase: "--charlie-text-base",
+    textLg: "--charlie-text-lg",
+    textXl: "--charlie-text-xl",
+    text2xl: "--charlie-text-2xl",
+    text3xl: "--charlie-text-3xl",
     durationFast: "--charlie-duration-fast",
     durationNormal: "--charlie-duration-normal",
     durationModerate: "--charlie-duration-moderate",
