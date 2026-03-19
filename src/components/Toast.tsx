@@ -120,7 +120,7 @@ function Toast({
           data-position={resolvedPosition}
           className={cn(
             positionClasses[resolvedPosition],
-            "rounded-xl border border-white/10 bg-grey-700 p-4 shadow-window",
+            "rounded-xl border border-white/10 bg-grey-700/95 p-4 shadow-float backdrop-blur-xl",
             className
           )}
           initial={anim.initial}

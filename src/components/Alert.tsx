@@ -10,11 +10,11 @@ import {
 import { cn } from "../utils/cn";
 
 const alertVariants = cva(
-  "relative flex gap-3 rounded-lg border p-4",
+  "relative flex gap-3 rounded-xl border p-4 shadow-soft",
   {
     variants: {
       variant: {
-        default: "bg-white/5 border-white/10 text-white/80",
+        default: "bg-white/5 border-white/[0.06] text-white/80",
         info: "bg-blue-muted border-blue/20 text-blue",
         success: "bg-green-muted border-green/20 text-green",
         warning: "bg-yellow-muted border-yellow/20 text-yellow",

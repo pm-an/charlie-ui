@@ -11,14 +11,14 @@ import { Skeleton } from "./Skeleton";
 /* ─── Card Root ─────────────────────────────── */
 
 const cardVariants = cva(
-  "rounded-xl shadow-[inset_0_1px_1px_0_rgba(255,255,255,0.1)]",
+  "rounded-xl shadow-card transition-shadow duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] hover:shadow-card-hover",
   {
     variants: {
       variant: {
         default: "bg-card-gradient border border-white/[0.06]",
         translucent:
-          "bg-card-gradient-translucent backdrop-blur-xl border border-white/[0.06]",
-        outline: "bg-transparent border border-white/10",
+          "bg-card-gradient-translucent backdrop-blur-xl border border-white/[0.06] shadow-card",
+        outline: "bg-transparent border border-white/10 shadow-xs",
       },
       padding: {
         none: "",
@@ -96,7 +96,7 @@ const CardHeader = forwardRef<HTMLDivElement, CardHeaderProps>(
       {(title || description) && (
         <div className="min-w-0">
           {title && (
-            <h3 className="text-white font-semibold text-base">{title}</h3>
+            <h3 className="text-white text-sm font-semibold tracking-tight">{title}</h3>
           )}
           {description && (
             <p className="text-white/70 text-sm">{description}</p>
