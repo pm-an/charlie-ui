@@ -194,13 +194,13 @@ describe("Textarea", () => {
     it("has base input-like styling", () => {
       render(<Textarea />);
       const textarea = screen.getByRole("textbox");
-      expect(textarea).toHaveClass("bg-white/5", "border", "border-white/6", "rounded-md");
+      expect(textarea).toHaveClass("bg-bg-subtle", "border", "border-border", "rounded-lg");
     });
 
     it("applies label styling", () => {
       render(<Textarea label="Test" />);
       const label = screen.getByText("Test");
-      expect(label).toHaveClass("text-sm", "font-medium", "text-white/80");
+      expect(label).toHaveClass("text-sm", "font-medium", "text-fg-200");
     });
   });
 

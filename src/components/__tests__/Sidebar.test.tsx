@@ -107,8 +107,8 @@ describe("Sidebar", () => {
         </Sidebar>
       );
       const item = screen.getByRole("button", { name: "Home" });
-      expect(item).toHaveClass("bg-white/5");
-      expect(item).toHaveClass("text-white");
+      expect(item).toHaveClass("bg-bg-subtle");
+      expect(item).toHaveClass("text-text-loud");
       expect(item).toHaveClass("font-medium");
     });
 

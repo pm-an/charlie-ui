@@ -2,7 +2,7 @@ import { type HTMLAttributes } from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "../utils/cn";
 
-const skeletonVariants = cva("bg-white/10 relative overflow-hidden before:absolute before:inset-0 before:bg-gradient-to-r before:from-transparent before:via-white/15 before:to-transparent before:animate-[skeleton-shimmer_1.5s_ease-in-out_infinite]", {
+const skeletonVariants = cva("bg-bg-subtle-hover relative overflow-hidden before:absolute before:inset-0 before:bg-gradient-to-r before:from-transparent before:via-border-hover before:to-transparent before:animate-[skeleton-shimmer_1.5s_ease-in-out_infinite]", {
   variants: {
     variant: {
       text: "rounded-md w-full h-4",

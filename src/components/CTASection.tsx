@@ -54,10 +54,10 @@ const CTASection = forwardRef<HTMLElement, CTASectionProps>(
           {isSplit ? (
             <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6 md:gap-12">
               <div className="flex-1">
-                <h2 className="text-white text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight">
+                <h2 className="text-text-loud text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight">
                   {title}
                 </h2>
-                <p className="text-white/70 text-base md:text-lg mt-3 md:mt-4 max-w-xl">
+                <p className="text-fg-200 text-base md:text-lg mt-3 md:mt-4 max-w-xl">
                   {description}
                 </p>
               </div>
@@ -67,12 +67,12 @@ const CTASection = forwardRef<HTMLElement, CTASectionProps>(
             </div>
           ) : (
             <div className={cn(isCentered && "text-center")}>
-              <h2 className="text-white text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight">
+              <h2 className="text-text-loud text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight">
                 {title}
               </h2>
               <p
                 className={cn(
-                  "text-white/70 text-base md:text-lg mt-3 md:mt-4 max-w-2xl",
+                  "text-fg-200 text-base md:text-lg mt-3 md:mt-4 max-w-2xl",
                   isCentered && "mx-auto"
                 )}
               >

@@ -154,9 +154,9 @@ function ToolbarButton({
       onClick={() => item.action(editor)}
       className={cn(
         "inline-flex items-center justify-center rounded-md p-1.5 transition-colors",
-        "text-white/70 hover:text-white hover:bg-white/10",
-        "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/20",
-        isActive && "bg-white/10 text-white"
+        "text-fg-200 hover:text-text-loud hover:bg-bg-subtle-hover",
+        "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-border-hover",
+        isActive && "bg-bg-subtle-hover text-text-loud"
       )}
       title={item.label}
       aria-label={item.label}
@@ -185,7 +185,7 @@ const RichTextEditorToolbar = forwardRef<HTMLDivElement, RichTextEditorToolbarPr
         role="toolbar"
         aria-label="Text formatting"
         className={cn(
-          "flex flex-wrap items-center gap-0.5 border-b border-white/[0.06] px-2 py-1.5",
+          "flex flex-wrap items-center gap-0.5 border-b border-border px-2 py-1.5",
           className
         )}
         {...props}
@@ -193,7 +193,7 @@ const RichTextEditorToolbar = forwardRef<HTMLDivElement, RichTextEditorToolbarPr
         {resolvedGroups.map((section, idx) => (
           <div key={section.group} className="flex items-center">
             {idx > 0 && (
-              <div className="mx-1 h-5 w-px bg-white/10" aria-hidden="true" />
+              <div className="mx-1 h-5 w-px bg-border-strong" aria-hidden="true" />
             )}
             {section.items.map((item) => (
               <ToolbarButton key={item.key} item={item} editor={editor} />
@@ -248,7 +248,7 @@ const RichTextEditorBubbleMenu = forwardRef<HTMLDivElement, RichTextEditorBubble
         <div
           ref={ref}
           className={cn(
-            "flex items-center gap-0.5 rounded-lg border border-white/[0.06] bg-surface-elevated p-1 shadow-lg",
+            "flex items-center gap-0.5 rounded-lg border border-border bg-surface-elevated p-1 shadow-lg",
             className
           )}
           {...props}
@@ -256,7 +256,7 @@ const RichTextEditorBubbleMenu = forwardRef<HTMLDivElement, RichTextEditorBubble
           {resolvedGroups.map((section, idx) => (
             <div key={section.group} className="flex items-center">
               {idx > 0 && (
-                <div className="mx-0.5 h-4 w-px bg-white/10" aria-hidden="true" />
+                <div className="mx-0.5 h-4 w-px bg-border-strong" aria-hidden="true" />
               )}
               {section.items.map((item) => (
                 <ToolbarButton key={item.key} item={item} editor={editor} />

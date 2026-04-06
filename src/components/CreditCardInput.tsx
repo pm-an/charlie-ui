@@ -508,7 +508,7 @@ const CreditCardInput = forwardRef<HTMLDivElement, CreditCardInputProps>(
                 "absolute inset-0 rounded-xl overflow-hidden",
                 "bg-gradient-to-br",
                 theme.gradient,
-                "border border-white/10",
+                "border border-border-strong",
                 "p-5 flex flex-col justify-between",
               )}
               style={{
@@ -629,7 +629,7 @@ const CreditCardInput = forwardRef<HTMLDivElement, CreditCardInputProps>(
                 "absolute inset-0 rounded-xl overflow-hidden",
                 "bg-gradient-to-br",
                 theme.gradient,
-                "border border-white/10",
+                "border border-border-strong",
                 "flex flex-col",
               )}
               style={{
@@ -732,7 +732,7 @@ const CreditCardInput = forwardRef<HTMLDivElement, CreditCardInputProps>(
           <div className="flex flex-col gap-1.5">
             <label
               htmlFor={`${uid}-number`}
-              className="text-sm font-medium text-white/80"
+              className="text-sm font-medium text-fg-200"
             >
               Card Number
             </label>
@@ -751,10 +751,10 @@ const CreditCardInput = forwardRef<HTMLDivElement, CreditCardInputProps>(
               aria-label="Card number"
               aria-invalid={touched.number && !!errors.number || undefined}
               className={cn(
-                "w-full bg-white/5 border border-white/6 rounded-md h-10 px-3 text-sm text-white font-mono tracking-widest",
-                "placeholder:text-white/25",
+                "w-full bg-bg-subtle border border-border rounded-md h-10 px-3 text-sm text-text-loud font-mono tracking-widest",
+                "placeholder:text-text-faint",
                 "outline-none transition-all duration-200",
-                "focus:ring-1 focus:ring-white/15 focus:border-white/15",
+                "focus:ring-1 focus:ring-border-hover focus:border-border-hover",
                 "disabled:opacity-50 disabled:cursor-not-allowed",
                 touched.number && errors.number && "border-red/50 focus:ring-red/30 focus:border-red/50",
               )}
@@ -776,7 +776,7 @@ const CreditCardInput = forwardRef<HTMLDivElement, CreditCardInputProps>(
           <div className="flex flex-col gap-1.5">
             <label
               htmlFor={`${uid}-name`}
-              className="text-sm font-medium text-white/80"
+              className="text-sm font-medium text-fg-200"
             >
               Cardholder Name
             </label>
@@ -794,10 +794,10 @@ const CreditCardInput = forwardRef<HTMLDivElement, CreditCardInputProps>(
               aria-label="Cardholder name"
               aria-invalid={touched.name && !!errors.name || undefined}
               className={cn(
-                "w-full bg-white/5 border border-white/6 rounded-md h-10 px-3 text-sm text-white uppercase tracking-wider",
-                "placeholder:text-white/25 placeholder:normal-case",
+                "w-full bg-bg-subtle border border-border rounded-md h-10 px-3 text-sm text-text-loud uppercase tracking-wider",
+                "placeholder:text-text-faint placeholder:normal-case",
                 "outline-none transition-all duration-200",
-                "focus:ring-1 focus:ring-white/15 focus:border-white/15",
+                "focus:ring-1 focus:ring-border-hover focus:border-border-hover",
                 "disabled:opacity-50 disabled:cursor-not-allowed",
                 touched.name && errors.name && "border-red/50 focus:ring-red/30 focus:border-red/50",
               )}
@@ -820,7 +820,7 @@ const CreditCardInput = forwardRef<HTMLDivElement, CreditCardInputProps>(
             <div className="flex flex-col gap-1.5">
               <label
                 htmlFor={`${uid}-expiry`}
-                className="text-sm font-medium text-white/80"
+                className="text-sm font-medium text-fg-200"
               >
                 Expiry Date
               </label>
@@ -839,10 +839,10 @@ const CreditCardInput = forwardRef<HTMLDivElement, CreditCardInputProps>(
                 aria-label="Expiry date"
                 aria-invalid={touched.expiry && !!errors.expiry || undefined}
                 className={cn(
-                  "w-full bg-white/5 border border-white/6 rounded-md h-10 px-3 text-sm text-white font-mono tracking-widest",
-                  "placeholder:text-white/25",
+                  "w-full bg-bg-subtle border border-border rounded-md h-10 px-3 text-sm text-text-loud font-mono tracking-widest",
+                  "placeholder:text-text-faint",
                   "outline-none transition-all duration-200",
-                  "focus:ring-1 focus:ring-white/15 focus:border-white/15",
+                  "focus:ring-1 focus:ring-border-hover focus:border-border-hover",
                   "disabled:opacity-50 disabled:cursor-not-allowed",
                   touched.expiry && errors.expiry && "border-red/50 focus:ring-red/30 focus:border-red/50",
                 )}
@@ -862,7 +862,7 @@ const CreditCardInput = forwardRef<HTMLDivElement, CreditCardInputProps>(
             <div className="flex flex-col gap-1.5">
               <label
                 htmlFor={`${uid}-cvc`}
-                className="text-sm font-medium text-white/80"
+                className="text-sm font-medium text-fg-200"
               >
                 Security Code
               </label>
@@ -881,10 +881,10 @@ const CreditCardInput = forwardRef<HTMLDivElement, CreditCardInputProps>(
                 aria-label="Security code"
                 aria-invalid={touched.cvc && !!errors.cvc || undefined}
                 className={cn(
-                  "w-full bg-white/5 border border-white/6 rounded-md h-10 px-3 text-sm text-white font-mono tracking-widest",
-                  "placeholder:text-white/25",
+                  "w-full bg-bg-subtle border border-border rounded-md h-10 px-3 text-sm text-text-loud font-mono tracking-widest",
+                  "placeholder:text-text-faint",
                   "outline-none transition-all duration-200",
-                  "focus:ring-1 focus:ring-white/15 focus:border-white/15",
+                  "focus:ring-1 focus:ring-border-hover focus:border-border-hover",
                   "disabled:opacity-50 disabled:cursor-not-allowed",
                   touched.cvc && errors.cvc && "border-red/50 focus:ring-red/30 focus:border-red/50",
                 )}

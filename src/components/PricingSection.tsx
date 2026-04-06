@@ -52,7 +52,7 @@ const PricingSection = forwardRef<HTMLElement, PricingSectionProps>(
             <span
               className={cn(
                 "text-sm font-medium transition-colors",
-                billing === "monthly" ? "text-white" : "text-white/70"
+                billing === "monthly" ? "text-text-loud" : "text-fg-200"
               )}
             >
               {billingLabel.monthly}
@@ -66,13 +66,13 @@ const PricingSection = forwardRef<HTMLElement, PricingSectionProps>(
                 setBilling((b) => (b === "monthly" ? "annual" : "monthly"))
               }
               className={cn(
-                "relative inline-flex h-6 w-11 shrink-0 cursor-pointer items-center rounded-full border border-white/10 transition-colors",
-                billing === "annual" ? "bg-white/20" : "bg-white/5"
+                "relative inline-flex h-6 w-11 shrink-0 cursor-pointer items-center rounded-full border border-border-strong transition-colors",
+                billing === "annual" ? "bg-bg-subtle-hover" : "bg-bg-subtle"
               )}
             >
               <span
                 className={cn(
-                  "pointer-events-none block h-4 w-4 rounded-full bg-white shadow-sm transition-transform",
+                  "pointer-events-none block h-4 w-4 rounded-full bg-text-loud shadow-sm transition-transform",
                   billing === "annual" ? "translate-x-6" : "translate-x-1"
                 )}
               />
@@ -80,7 +80,7 @@ const PricingSection = forwardRef<HTMLElement, PricingSectionProps>(
             <span
               className={cn(
                 "text-sm font-medium transition-colors",
-                billing === "annual" ? "text-white" : "text-white/70"
+                billing === "annual" ? "text-text-loud" : "text-fg-200"
               )}
             >
               {billingLabel.annual}

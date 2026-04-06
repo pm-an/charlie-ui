@@ -48,16 +48,16 @@ const ChatInterface = forwardRef<HTMLDivElement, ChatInterfaceProps>(
         ref={ref}
         data-slot="chat-interface"
         className={cn(
-          "rounded-xl border border-white/[0.06] overflow-hidden flex flex-col h-[500px] bg-[#0a0a0b]",
+          "rounded-xl border border-border overflow-hidden flex flex-col h-[500px] bg-[#0a0a0b]",
           className
         )}
         {...props}
       >
         {/* Header */}
-        <div className="px-4 py-3 border-b border-white/[0.06] flex items-center gap-3">
+        <div className="px-4 py-3 border-b border-border flex items-center gap-3">
           <div className="h-2 w-2 rounded-full bg-green" />
-          <h3 className="text-sm font-semibold text-white">{title}</h3>
-          <span className="text-xs text-white/70">
+          <h3 className="text-sm font-semibold text-text-loud">{title}</h3>
+          <span className="text-xs text-fg-200">
             {messages.length} {messages.length === 1 ? "message" : "messages"}
           </span>
         </div>
@@ -66,7 +66,7 @@ const ChatInterface = forwardRef<HTMLDivElement, ChatInterfaceProps>(
         <div className="flex-1 overflow-y-auto p-4 space-y-4" tabIndex={0} role="log" aria-label="Chat messages">
           {messages.length === 0 && (
             <div className="flex-1 flex items-center justify-center h-full">
-              <p className="text-sm text-white/70">No messages yet. Start a conversation.</p>
+              <p className="text-sm text-fg-200">No messages yet. Start a conversation.</p>
             </div>
           )}
           {messages.map((message) => {
@@ -80,7 +80,7 @@ const ChatInterface = forwardRef<HTMLDivElement, ChatInterfaceProps>(
                 )}
               >
                 {/* Avatar */}
-                <div className="h-8 w-8 rounded-full bg-white/10 shrink-0 flex items-center justify-center overflow-hidden">
+                <div className="h-8 w-8 rounded-full bg-bg-subtle-hover shrink-0 flex items-center justify-center overflow-hidden">
                   {message.avatar ? (
                     <img
                       src={message.avatar}
@@ -88,7 +88,7 @@ const ChatInterface = forwardRef<HTMLDivElement, ChatInterfaceProps>(
                       className="h-full w-full object-cover"
                     />
                   ) : (
-                    <span className="text-xs font-medium text-white/70">
+                    <span className="text-xs font-medium text-fg-200">
                       {message.sender.charAt(0).toUpperCase()}
                     </span>
                   )}
@@ -101,18 +101,18 @@ const ChatInterface = forwardRef<HTMLDivElement, ChatInterfaceProps>(
                     isMe ? "items-end" : "items-start"
                   )}
                 >
-                  <span className="text-xs text-white/70 mb-1">{message.sender}</span>
+                  <span className="text-xs text-fg-200 mb-1">{message.sender}</span>
                   <div
                     className={cn(
-                      "px-3 py-2 text-sm text-white",
+                      "px-3 py-2 text-sm text-text-loud",
                       isMe
-                        ? "bg-white/10 rounded-2xl rounded-br-md"
-                        : "bg-white/5 rounded-2xl rounded-bl-md"
+                        ? "bg-bg-subtle-hover rounded-2xl rounded-br-md"
+                        : "bg-bg-subtle rounded-2xl rounded-bl-md"
                     )}
                   >
                     {message.content}
                   </div>
-                  <span className="text-xs text-white/70 mt-1">{message.timestamp}</span>
+                  <span className="text-xs text-fg-200 mt-1">{message.timestamp}</span>
                 </div>
               </div>
             );
@@ -122,18 +122,18 @@ const ChatInterface = forwardRef<HTMLDivElement, ChatInterfaceProps>(
         {/* Input area */}
         <form
           onSubmit={handleSubmit}
-          className="border-t border-white/[0.06] p-3 flex gap-2"
+          className="border-t border-border p-3 flex gap-2"
         >
           <input
             type="text"
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
             placeholder={placeholder}
-            className="flex-1 bg-white/5 border border-white/[0.06] rounded-lg px-3 py-2 text-sm text-white placeholder:text-white/70 outline-none focus:border-white/15 transition-colors"
+            className="flex-1 bg-bg-subtle border border-border rounded-lg px-3 py-2 text-sm text-text-loud placeholder:text-fg-200 outline-none focus:border-border-hover transition-colors"
           />
           <button
             type="submit"
-            className="bg-white/10 rounded-lg p-2 hover:bg-white/15 transition-colors text-white/70 hover:text-white"
+            className="bg-bg-subtle-hover rounded-lg p-2 hover:bg-bg-subtle-hover transition-colors text-fg-200 hover:text-text-loud"
             aria-label="Send message"
           >
             <Send className="h-4 w-4" />

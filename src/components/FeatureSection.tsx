@@ -76,7 +76,7 @@ const FeatureSection = forwardRef<HTMLElement, FeatureSectionProps>(
                   )}
                 >
                   {/* Image */}
-                  <div className="aspect-video w-full overflow-hidden rounded-xl border border-white/[0.06] bg-white/[0.03]">
+                  <div className="aspect-video w-full overflow-hidden rounded-xl border border-border bg-bg-subtle">
                     {feature.image ? (
                       <img
                         src={feature.image}
@@ -85,7 +85,7 @@ const FeatureSection = forwardRef<HTMLElement, FeatureSectionProps>(
                       />
                     ) : (
                       <div className="flex h-full w-full items-center justify-center">
-                        <span className="text-white/70 text-sm">
+                        <span className="text-fg-200 text-sm">
                           Feature image
                         </span>
                       </div>
@@ -94,13 +94,13 @@ const FeatureSection = forwardRef<HTMLElement, FeatureSectionProps>(
 
                   {/* Content */}
                   <div>
-                    <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-lg bg-white/5">
-                      <span className="text-white/80">{feature.icon}</span>
+                    <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-lg bg-bg-subtle">
+                      <span className="text-fg-200">{feature.icon}</span>
                     </div>
-                    <h3 className="mb-3 text-xl font-semibold text-white md:text-2xl">
+                    <h3 className="mb-3 text-xl font-semibold text-text-loud md:text-2xl">
                       {feature.title}
                     </h3>
-                    <p className="text-sm leading-relaxed text-white/70 md:text-base">
+                    <p className="text-sm leading-relaxed text-fg-200 md:text-base">
                       {feature.description}
                     </p>
                     {feature.href && (

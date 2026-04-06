@@ -53,15 +53,15 @@ const ShoppingCart = forwardRef<HTMLDivElement, ShoppingCartProps>(
         ref={ref}
         data-slot="shopping-cart"
         className={cn(
-          "overflow-hidden rounded-xl border border-white/[0.06] bg-card-gradient",
+          "overflow-hidden rounded-xl border border-border bg-card-gradient",
           className
         )}
         {...props}
       >
         {/* Header */}
-        <div className="flex items-center justify-between border-b border-white/[0.06] px-6 py-4">
-          <h2 className="text-lg font-semibold text-white">Shopping Cart</h2>
-          <span className="text-sm text-white/70">
+        <div className="flex items-center justify-between border-b border-border px-6 py-4">
+          <h2 className="text-lg font-semibold text-text-loud">Shopping Cart</h2>
+          <span className="text-sm text-fg-200">
             {itemCount} {itemCount === 1 ? "item" : "items"}
           </span>
         </div>
@@ -69,8 +69,8 @@ const ShoppingCart = forwardRef<HTMLDivElement, ShoppingCartProps>(
         {items.length === 0 ? (
           /* Empty state */
           <div className="flex flex-col items-center justify-center px-6 py-12">
-            <ShoppingBag className="h-10 w-10 text-white/70" />
-            <p className="mt-3 text-sm text-white/70">Your cart is empty</p>
+            <ShoppingBag className="h-10 w-10 text-fg-200" />
+            <p className="mt-3 text-sm text-fg-200">Your cart is empty</p>
           </div>
         ) : (
           <>
@@ -79,10 +79,10 @@ const ShoppingCart = forwardRef<HTMLDivElement, ShoppingCartProps>(
               {items.map((item) => (
                 <div
                   key={item.id}
-                  className="flex items-center gap-4 border-b border-white/[0.06] px-6 py-4"
+                  className="flex items-center gap-4 border-b border-border px-6 py-4"
                 >
                   {/* Image */}
-                  <div className="h-16 w-16 shrink-0 overflow-hidden rounded-lg bg-white/[0.03]">
+                  <div className="h-16 w-16 shrink-0 overflow-hidden rounded-lg bg-bg-subtle">
                     {item.image && (
                       <img
                         src={item.image}
@@ -94,11 +94,11 @@ const ShoppingCart = forwardRef<HTMLDivElement, ShoppingCartProps>(
 
                   {/* Details */}
                   <div className="min-w-0 flex-1">
-                    <p className="text-sm font-medium text-white truncate">
+                    <p className="text-sm font-medium text-text-loud truncate">
                       {item.name}
                     </p>
                     {item.variant && (
-                      <p className="text-xs text-white/70">{item.variant}</p>
+                      <p className="text-xs text-fg-200">{item.variant}</p>
                     )}
                   </div>
 
@@ -112,12 +112,12 @@ const ShoppingCart = forwardRef<HTMLDivElement, ShoppingCartProps>(
                           Math.max(1, item.quantity - 1)
                         )
                       }
-                      className="flex h-7 w-7 items-center justify-center rounded-md border border-white/[0.06] bg-white/5 text-white/70 transition-colors hover:bg-white/10 hover:text-white"
+                      className="flex h-7 w-7 items-center justify-center rounded-md border border-border bg-bg-subtle text-fg-200 transition-colors hover:bg-bg-subtle-hover hover:text-text-loud"
                       aria-label={`Decrease quantity of ${item.name}`}
                     >
                       <Minus className="h-3 w-3" />
                     </button>
-                    <span className="w-8 text-center text-sm font-medium text-white">
+                    <span className="w-8 text-center text-sm font-medium text-text-loud">
                       {item.quantity}
                     </span>
                     <button
@@ -125,7 +125,7 @@ const ShoppingCart = forwardRef<HTMLDivElement, ShoppingCartProps>(
                       onClick={() =>
                         onUpdateQuantity?.(item.id, item.quantity + 1)
                       }
-                      className="flex h-7 w-7 items-center justify-center rounded-md border border-white/[0.06] bg-white/5 text-white/70 transition-colors hover:bg-white/10 hover:text-white"
+                      className="flex h-7 w-7 items-center justify-center rounded-md border border-border bg-bg-subtle text-fg-200 transition-colors hover:bg-bg-subtle-hover hover:text-text-loud"
                       aria-label={`Increase quantity of ${item.name}`}
                     >
                       <Plus className="h-3 w-3" />
@@ -133,7 +133,7 @@ const ShoppingCart = forwardRef<HTMLDivElement, ShoppingCartProps>(
                   </div>
 
                   {/* Price */}
-                  <span className="shrink-0 text-sm font-medium text-white">
+                  <span className="shrink-0 text-sm font-medium text-text-loud">
                     {formatPrice(item.price * item.quantity)}
                   </span>
 
@@ -142,7 +142,7 @@ const ShoppingCart = forwardRef<HTMLDivElement, ShoppingCartProps>(
                     <button
                       type="button"
                       onClick={() => onRemoveItem(item.id)}
-                      className="shrink-0 text-white/70 transition-colors hover:text-white"
+                      className="shrink-0 text-fg-200 transition-colors hover:text-text-loud"
                       aria-label={`Remove ${item.name}`}
                     >
                       <X className="h-4 w-4" />
@@ -155,14 +155,14 @@ const ShoppingCart = forwardRef<HTMLDivElement, ShoppingCartProps>(
             {/* Summary */}
             <div className="px-6 py-4">
               <div className="flex justify-between text-sm">
-                <span className="text-white/70">Subtotal</span>
-                <span className="text-white">{formatPrice(subtotal)}</span>
+                <span className="text-fg-200">Subtotal</span>
+                <span className="text-text-loud">{formatPrice(subtotal)}</span>
               </div>
 
               {shipping !== undefined && (
                 <div className="mt-2 flex justify-between text-sm">
-                  <span className="text-white/70">Shipping</span>
-                  <span className="text-white">
+                  <span className="text-fg-200">Shipping</span>
+                  <span className="text-text-loud">
                     {shipping === 0 ? "Free" : formatPrice(shipping)}
                   </span>
                 </div>
@@ -170,16 +170,16 @@ const ShoppingCart = forwardRef<HTMLDivElement, ShoppingCartProps>(
 
               {tax !== undefined && (
                 <div className="mt-2 flex justify-between text-sm">
-                  <span className="text-white/70">Tax</span>
-                  <span className="text-white">{formatPrice(tax)}</span>
+                  <span className="text-fg-200">Tax</span>
+                  <span className="text-text-loud">{formatPrice(tax)}</span>
                 </div>
               )}
 
-              <div className="my-4 border-t border-white/[0.06]" />
+              <div className="my-4 border-t border-border" />
 
               <div className="flex justify-between">
-                <span className="text-lg font-semibold text-white">Total</span>
-                <span className="text-lg font-semibold text-white">
+                <span className="text-lg font-semibold text-text-loud">Total</span>
+                <span className="text-lg font-semibold text-text-loud">
                   {formatPrice(total)}
                 </span>
               </div>

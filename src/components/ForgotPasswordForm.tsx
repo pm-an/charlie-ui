@@ -49,7 +49,7 @@ const ForgotPasswordForm = forwardRef<HTMLDivElement, ForgotPasswordFormProps>(
         ref={ref}
         data-slot="forgot-password-form"
         className={cn(
-          "bg-card-gradient rounded-xl border border-white/[0.06] p-8 w-full max-w-md",
+          "bg-card-gradient rounded-xl border border-border p-8 w-full max-w-md",
           className
         )}
         {...props}
@@ -59,8 +59,8 @@ const ForgotPasswordForm = forwardRef<HTMLDivElement, ForgotPasswordFormProps>(
         )}
 
         <div className="mb-6">
-          <h2 className="text-xl font-semibold text-white">{title}</h2>
-          <p className="mt-1 text-sm text-white/70">{description}</p>
+          <h2 className="text-xl font-semibold text-text-loud">{title}</h2>
+          <p className="mt-1 text-sm text-fg-200">{description}</p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -80,10 +80,10 @@ const ForgotPasswordForm = forwardRef<HTMLDivElement, ForgotPasswordFormProps>(
         </form>
 
         {loginHref && (
-          <p className="mt-6 text-center text-sm text-white/70">
+          <p className="mt-6 text-center text-sm text-fg-200">
             <a
               href={loginHref}
-              className="text-white/70 hover:text-white transition-colors duration-200"
+              className="text-fg-200 hover:text-text-loud transition-colors duration-200"
             >
               {loginLabel}
             </a>

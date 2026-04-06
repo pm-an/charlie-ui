@@ -149,10 +149,10 @@ describe("FileManager", () => {
 
     it("highlights active view button", () => {
       const { rerender } = render(<FileManager files={sampleFiles} view="list" />);
-      expect(screen.getByLabelText("List view")).toHaveClass("bg-white/10");
+      expect(screen.getByLabelText("List view")).toHaveClass("bg-bg-subtle-hover");
 
       rerender(<FileManager files={sampleFiles} view="grid" />);
-      expect(screen.getByLabelText("Grid view")).toHaveClass("bg-white/10");
+      expect(screen.getByLabelText("Grid view")).toHaveClass("bg-bg-subtle-hover");
     });
   });
 

@@ -20,7 +20,7 @@ import { useFieldAware } from "../hooks/useFieldAware";
 const slotVariants = cva(
   [
     "relative flex items-center justify-center rounded-md border",
-    "bg-white/5 text-center font-mono font-semibold text-white",
+    "bg-bg-subtle text-center font-mono font-semibold text-text-loud",
     "transition-all duration-200",
   ],
   {
@@ -164,16 +164,16 @@ function OTPInput({
         data-testid={`otp-slot-${i}`}
         className={cn(
           slotVariants({ size }),
-          "border-white/6",
-          isActive && "border-white/15 ring-1 ring-white/15",
-          isFilled && "border-white/10",
+          "border-border",
+          isActive && "border-border-hover ring-1 ring-border-hover",
+          isFilled && "border-border-strong",
           resolvedError && "border-red/50",
           resolvedDisabled && "opacity-50 cursor-not-allowed",
         )}
       >
         {char}
         {isActive && (
-          <span className="animate-blink absolute h-5 w-0.5 bg-white/80" />
+          <span className="animate-blink absolute h-5 w-0.5 bg-fg-200" />
         )}
       </div>,
     );
@@ -184,7 +184,7 @@ function OTPInput({
         <span
           key={`sep-${i}`}
           data-testid={`otp-separator-${i}`}
-          className="px-1 text-lg text-white/70"
+          className="px-1 text-lg text-fg-200"
         >
           -
         </span>,
@@ -195,7 +195,7 @@ function OTPInput({
   return (
     <div data-slot="otp-input" className={cn(className)} {...props}>
       {!insideField && label && (
-        <label className="mb-1.5 block text-sm font-medium text-white/80">
+        <label className="mb-1.5 block text-sm font-medium text-fg-200">
           {label}
         </label>
       )}

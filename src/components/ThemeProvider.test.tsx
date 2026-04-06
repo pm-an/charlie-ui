@@ -1,6 +1,24 @@
 import { render, screen } from "@testing-library/react";
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, vi, beforeAll } from "vitest";
 import { ThemeProvider, useTheme } from "./ThemeProvider";
+
+beforeAll(() => {
+  if (!window.matchMedia) {
+    Object.defineProperty(window, "matchMedia", {
+      writable: true,
+      value: vi.fn((query: string) => ({
+        matches: query === "(prefers-color-scheme: dark)",
+        media: query,
+        addEventListener: vi.fn(),
+        removeEventListener: vi.fn(),
+        onchange: null,
+        addListener: vi.fn(),
+        removeListener: vi.fn(),
+        dispatchEvent: vi.fn(),
+      })),
+    });
+  }
+});
 
 function ThemeConsumer() {
   const theme = useTheme();

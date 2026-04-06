@@ -69,12 +69,12 @@ const ProductGrid = forwardRef<HTMLDivElement, ProductGridProps>(
         {(title || description) && (
           <div className="mb-6">
             {title && (
-              <h2 className="text-2xl font-bold text-white md:text-3xl">
+              <h2 className="text-2xl font-bold text-text-loud md:text-3xl">
                 {title}
               </h2>
             )}
             {description && (
-              <p className="mt-2 text-sm text-white/70 md:text-base">
+              <p className="mt-2 text-sm text-fg-200 md:text-base">
                 {description}
               </p>
             )}
@@ -92,8 +92,8 @@ const ProductGrid = forwardRef<HTMLDivElement, ProductGridProps>(
               className={cn(
                 "shrink-0 rounded-full px-4 py-1.5 text-sm font-medium transition-all duration-200",
                 activeCategory === null
-                  ? "bg-white/15 text-white"
-                  : "bg-white/5 text-white/70 hover:bg-white/10 hover:text-white"
+                  ? "bg-bg-subtle-hover text-text-loud"
+                  : "bg-bg-subtle text-fg-200 hover:bg-bg-subtle-hover hover:text-text-loud"
               )}
             >
               All
@@ -108,8 +108,8 @@ const ProductGrid = forwardRef<HTMLDivElement, ProductGridProps>(
                 className={cn(
                   "shrink-0 rounded-full px-4 py-1.5 text-sm font-medium transition-all duration-200",
                   activeCategory === category
-                    ? "bg-white/15 text-white"
-                    : "bg-white/5 text-white/70 hover:bg-white/10 hover:text-white"
+                    ? "bg-bg-subtle-hover text-text-loud"
+                    : "bg-bg-subtle text-fg-200 hover:bg-bg-subtle-hover hover:text-text-loud"
                 )}
               >
                 {category}

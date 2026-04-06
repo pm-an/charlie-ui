@@ -251,7 +251,7 @@ const DropdownMenuContent = ({ children, className, align = "start" }: DropdownM
           exit={{ opacity: 0, scale: 0.95 }}
           transition={{ duration: 0.2, ease: "easeOut" }}
           className={cn(
-            "absolute top-full mt-1 z-50 min-w-[180px] rounded-lg border border-white/10 bg-grey-700/95 p-1 shadow-elevated backdrop-blur-xl",
+            "absolute top-full mt-1 z-50 min-w-[180px] rounded-lg border border-border-strong bg-grey-700/95 p-1 shadow-elevated backdrop-blur-xl",
             alignClass,
             className
           )}
@@ -309,14 +309,14 @@ const DropdownMenuItem = ({
         "flex items-center gap-2 rounded-md px-2 py-1.5 text-sm outline-none transition-colors cursor-pointer",
         destructive
           ? "text-red-400 hover:bg-red-500/10 focus:bg-red-500/10"
-          : "text-white/80 hover:bg-white/[0.06] focus:bg-white/[0.06]",
+          : "text-fg-200 hover:bg-bg-subtle focus:bg-bg-subtle",
         disabled && "opacity-40 cursor-not-allowed pointer-events-none",
         className
       )}
       onClick={handleClick}
       {...props}
     >
-      {icon && <span className="h-4 w-4 shrink-0 text-white/70 flex items-center justify-center [&>svg]:h-4 [&>svg]:w-4">{icon}</span>}
+      {icon && <span className="h-4 w-4 shrink-0 text-fg-200 flex items-center justify-center [&>svg]:h-4 [&>svg]:w-4">{icon}</span>}
       <span className="flex-1">{children}</span>
       {shortcut && <DropdownMenuShortcut>{shortcut}</DropdownMenuShortcut>}
     </div>
@@ -361,7 +361,7 @@ const DropdownMenuCheckboxItem = ({
       data-disabled={disabled || undefined}
       aria-disabled={disabled || undefined}
       className={cn(
-        "flex items-center gap-2 rounded-md px-2 py-1.5 text-sm text-white/80 outline-none transition-colors cursor-pointer hover:bg-white/[0.06] focus:bg-white/[0.06]",
+        "flex items-center gap-2 rounded-md px-2 py-1.5 text-sm text-fg-200 outline-none transition-colors cursor-pointer hover:bg-bg-subtle focus:bg-bg-subtle",
         disabled && "opacity-40 cursor-not-allowed pointer-events-none",
         className
       )}
@@ -369,7 +369,7 @@ const DropdownMenuCheckboxItem = ({
       {...props}
     >
       <span className="flex h-4 w-4 shrink-0 items-center justify-center">
-        {checked && <Check className="h-4 w-4 text-white/80" />}
+        {checked && <Check className="h-4 w-4 text-fg-200" />}
       </span>
       <span className="flex-1">{children}</span>
       {shortcut && <DropdownMenuShortcut>{shortcut}</DropdownMenuShortcut>}
@@ -434,7 +434,7 @@ const DropdownMenuRadioItem = ({
       data-disabled={disabled || undefined}
       aria-disabled={disabled || undefined}
       className={cn(
-        "flex items-center gap-2 rounded-md px-2 py-1.5 text-sm text-white/80 outline-none transition-colors cursor-pointer hover:bg-white/[0.06] focus:bg-white/[0.06]",
+        "flex items-center gap-2 rounded-md px-2 py-1.5 text-sm text-fg-200 outline-none transition-colors cursor-pointer hover:bg-bg-subtle focus:bg-bg-subtle",
         disabled && "opacity-40 cursor-not-allowed pointer-events-none",
         className
       )}
@@ -442,7 +442,7 @@ const DropdownMenuRadioItem = ({
       {...props}
     >
       <span className="flex h-4 w-4 shrink-0 items-center justify-center">
-        {isSelected && <Circle className="h-2 w-2 fill-white/80 text-white/80" />}
+        {isSelected && <Circle className="h-2 w-2 fill-fg-200 text-fg-200" />}
       </span>
       <span className="flex-1">{children}</span>
       {shortcut && <DropdownMenuShortcut>{shortcut}</DropdownMenuShortcut>}
@@ -460,7 +460,7 @@ export type DropdownMenuLabelProps = HTMLAttributes<HTMLDivElement> & {
 const DropdownMenuLabel = ({ children, className, ...props }: DropdownMenuLabelProps) => {
   return (
     <div
-      className={cn("select-none px-2 py-1.5 text-xs font-medium text-white/70", className)}
+      className={cn("select-none px-2 py-1.5 text-xs font-medium text-fg-200", className)}
       {...props}
     >
       {children}
@@ -477,7 +477,7 @@ const DropdownMenuSeparator = ({ className, ...props }: DropdownMenuSeparatorPro
   return (
     <div
       role="separator"
-      className={cn("-mx-1 my-1 h-px bg-white/6", className)}
+      className={cn("-mx-1 my-1 h-px bg-bg-subtle", className)}
       {...props}
     />
   );
@@ -492,7 +492,7 @@ export type DropdownMenuShortcutProps = HTMLAttributes<HTMLSpanElement> & {
 
 const DropdownMenuShortcut = ({ children, className, ...props }: DropdownMenuShortcutProps) => {
   return (
-    <span className={cn("ml-auto text-xs text-white/70", className)} {...props}>
+    <span className={cn("ml-auto text-xs text-fg-200", className)} {...props}>
       {children}
     </span>
   );

@@ -44,7 +44,7 @@ const ProfileSection = forwardRef<HTMLDivElement, ProfileSectionProps>(
           className={cn(
             "h-32 md:h-48 w-full relative",
             !coverImage &&
-              "bg-gradient-to-r from-white/5 to-white/[0.02]"
+              "bg-gradient-to-r from-bg-subtle to-bg-subtle"
           )}
         >
           {coverImage && (
@@ -72,7 +72,7 @@ const ProfileSection = forwardRef<HTMLDivElement, ProfileSectionProps>(
           <div className="-mt-12 mb-4 flex items-end gap-4">
             <div
               data-slot="profile-avatar"
-              className="h-24 w-24 rounded-full border-4 border-[#0a0a0b] bg-white/10 shrink-0 overflow-hidden flex items-center justify-center"
+              className="h-24 w-24 rounded-full border-4 border-[#0a0a0b] bg-bg-subtle-hover shrink-0 overflow-hidden flex items-center justify-center"
             >
               {avatar ? (
                 <img
@@ -81,7 +81,7 @@ const ProfileSection = forwardRef<HTMLDivElement, ProfileSectionProps>(
                   className="h-full w-full object-cover"
                 />
               ) : (
-                <span className="text-2xl font-bold text-white/70">
+                <span className="text-2xl font-bold text-fg-200">
                   {name
                     .split(" ")
                     .map((n) => n[0])
@@ -97,12 +97,12 @@ const ProfileSection = forwardRef<HTMLDivElement, ProfileSectionProps>(
           <div>
             <h2
               data-slot="profile-name"
-              className="text-xl font-bold text-white"
+              className="text-xl font-bold text-text-loud"
             >
               {name}
             </h2>
             {role && (
-              <p data-slot="profile-role" className="text-sm text-white/70">
+              <p data-slot="profile-role" className="text-sm text-fg-200">
                 {role}
               </p>
             )}
@@ -112,7 +112,7 @@ const ProfileSection = forwardRef<HTMLDivElement, ProfileSectionProps>(
           {bio && (
             <p
               data-slot="profile-bio"
-              className="text-sm text-white/70 mt-2 max-w-xl"
+              className="text-sm text-fg-200 mt-2 max-w-xl"
             >
               {bio}
             </p>
@@ -133,10 +133,10 @@ const ProfileSection = forwardRef<HTMLDivElement, ProfileSectionProps>(
             <div data-slot="profile-stats" className="flex gap-6 mt-6">
               {stats.map((stat) => (
                 <div key={stat.label} className="flex flex-col">
-                  <span className="text-lg font-semibold text-white">
+                  <span className="text-lg font-semibold text-text-loud">
                     {stat.value}
                   </span>
-                  <span className="text-xs text-white/70">{stat.label}</span>
+                  <span className="text-xs text-fg-200">{stat.label}</span>
                 </div>
               ))}
             </div>

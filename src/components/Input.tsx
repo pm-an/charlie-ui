@@ -57,7 +57,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
     const inputElement = (
       <div className="relative flex items-center">
         {leftIcon && (
-          <span className="absolute left-3 text-white/70 pointer-events-none">
+          <span className="absolute left-3 text-fg-200 pointer-events-none">
             {leftIcon}
           </span>
         )}
@@ -70,10 +70,10 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           disabled={disabled}
           required={required}
           className={cn(
-            "w-full bg-white/5 border border-white/[0.08] rounded-lg h-9 px-3 text-sm text-white",
-            "shadow-input placeholder:text-white/40",
+            "w-full bg-bg-subtle border border-border rounded-lg h-9 px-3 text-sm text-text-loud",
+            "shadow-input placeholder:text-text-muted",
             "outline-none transition-shadow duration-200",
-            "focus:shadow-input-focus focus:border-white/12",
+            "focus:shadow-input-focus focus:border-border-hover",
             "[&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none [-moz-appearance:textfield]",
             error && "border-red/50 focus:ring-red/30 focus:border-red/50",
             leftIcon && "pl-10",
@@ -83,7 +83,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           {...props}
         />
         {rightIcon && (
-          <span className="absolute right-3 text-white/70 pointer-events-none">
+          <span className="absolute right-3 text-fg-200 pointer-events-none">
             {rightIcon}
           </span>
         )}
@@ -101,14 +101,14 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         {label && (
           <label
             htmlFor={controlId}
-            className="text-sm font-medium text-white/80"
+            className="text-sm font-medium text-fg-200"
           >
             {label}
           </label>
         )}
         {inputElement}
         {resolvedDescription && !error && (
-          <p id={`${controlId}-description`} className="text-xs text-white/70">{resolvedDescription}</p>
+          <p id={`${controlId}-description`} className="text-xs text-fg-200">{resolvedDescription}</p>
         )}
         {error && errorMessage && (
           <p id={`${controlId}-error`} className="text-xs text-red">{errorMessage}</p>

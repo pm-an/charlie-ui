@@ -9,7 +9,7 @@ const meta: Meta<typeof EmptyState> = {
   tags: ["autodocs"],
   decorators: [
     (Story) => (
-      <div className="bg-[#0a0a0b] p-8 md:p-12 max-w-lg mx-auto">
+      <div className="bg-bg p-8 md:p-12 max-w-lg mx-auto">
         <Story />
       </div>
     ),

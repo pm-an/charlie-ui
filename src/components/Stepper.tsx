@@ -48,11 +48,11 @@ function getStepStatus(index: number, activeStep: number): StepStatus {
 function getCircleClasses(status: StepStatus): string {
   switch (status) {
     case "completed":
-      return "bg-green text-white";
+      return "bg-green text-fg-on-accent";
     case "active":
-      return "bg-accent text-white ring-2 ring-accent/30";
+      return "bg-accent-dim text-fg-on-accent ring-2 ring-accent/30";
     case "upcoming":
-      return "bg-white/5 border border-white/10 text-white/70";
+      return "bg-bg-subtle border border-border-strong text-fg-200";
     case "error":
       return "bg-red/20 border border-red/50 text-red";
   }
@@ -61,11 +61,11 @@ function getCircleClasses(status: StepStatus): string {
 function getLabelClasses(status: StepStatus): string {
   switch (status) {
     case "completed":
-      return "text-white/80";
+      return "text-fg-200";
     case "active":
-      return "text-white";
+      return "text-text-loud";
     case "upcoming":
-      return "text-white/70";
+      return "text-fg-200";
     case "error":
       return "text-red";
   }
@@ -78,7 +78,7 @@ function getVerticalConnectorClasses(
   if (fromStatus === "completed" && toStatus === "completed") return "bg-green";
   if (fromStatus === "completed" && toStatus === "active")
     return "bg-gradient-to-b from-green to-accent";
-  return "bg-white/10";
+  return "bg-bg-subtle-hover";
 }
 
 function StepCircle({
@@ -152,7 +152,7 @@ function StepCircle({
 function getHorizontalHalfConnectorColor(
   adjacentStatus: StepStatus
 ): string {
-  return adjacentStatus === "completed" ? "bg-green" : "bg-white/10";
+  return adjacentStatus === "completed" ? "bg-green" : "bg-bg-subtle-hover";
 }
 
 function Stepper({
@@ -273,11 +273,11 @@ function Stepper({
               >
                 {step.label}
                 {step.optional && (
-                  <span className="text-white/70"> (Optional)</span>
+                  <span className="text-fg-200"> (Optional)</span>
                 )}
               </span>
               {step.description && (
-                <span className="text-xs text-white/70">
+                <span className="text-xs text-fg-200">
                   {step.description}
                 </span>
               )}
@@ -338,11 +338,11 @@ function Stepper({
               >
                 {step.label}
                 {step.optional && (
-                  <span className="text-white/70"> (Optional)</span>
+                  <span className="text-fg-200"> (Optional)</span>
                 )}
               </span>
               {step.description && (
-                <span className="text-xs text-white/70">
+                <span className="text-xs text-fg-200">
                   {step.description}
                 </span>
               )}

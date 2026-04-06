@@ -234,7 +234,7 @@ function PopoverContent({
           ref={contentRef}
           className={cn(
             "absolute z-50 min-w-[220px]",
-            "bg-grey-700/95 border border-white/[0.08] rounded-xl shadow-elevated backdrop-blur-xl p-4",
+            "bg-grey-700/95 border border-border rounded-xl shadow-elevated backdrop-blur-xl p-4",
             sideClasses,
             alignClasses[align],
             className

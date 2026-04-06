@@ -20,7 +20,7 @@ const emptyStateVariants = cva(
 );
 
 const iconContainerVariants = cva(
-  "rounded-full bg-white/5 flex items-center justify-center",
+  "rounded-full bg-bg-subtle flex items-center justify-center",
   {
     variants: {
       size: {
@@ -35,7 +35,7 @@ const iconContainerVariants = cva(
   }
 );
 
-const iconVariants = cva("text-white/70", {
+const iconVariants = cva("text-fg-200", {
   variants: {
     size: {
       sm: "h-8 w-8",
@@ -48,7 +48,7 @@ const iconVariants = cva("text-white/70", {
   },
 });
 
-const titleVariants = cva("font-medium text-white mt-4", {
+const titleVariants = cva("font-medium text-text-loud mt-4", {
   variants: {
     size: {
       sm: "text-sm",
@@ -61,7 +61,7 @@ const titleVariants = cva("font-medium text-white mt-4", {
   },
 });
 
-const descriptionVariants = cva("text-white/70 mt-1", {
+const descriptionVariants = cva("text-fg-200 mt-1", {
   variants: {
     size: {
       sm: "text-xs",

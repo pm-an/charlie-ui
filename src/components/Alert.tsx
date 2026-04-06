@@ -14,7 +14,7 @@ const alertVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-white/5 border-white/[0.06] text-white/80",
+        default: "bg-bg-subtle border-border text-fg-200",
         info: "bg-blue-muted border-blue/20 text-blue",
         success: "bg-green-muted border-green/20 text-green",
         warning: "bg-yellow-muted border-yellow/20 text-yellow",

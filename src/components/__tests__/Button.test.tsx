@@ -35,7 +35,7 @@ describe("Button", () => {
   describe("variants", () => {
     it("renders primary variant by default", () => {
       const { container } = render(<Button>Test</Button>);
-      expect(container.firstChild).toHaveClass("bg-accent");
+      expect(container.firstChild).toHaveClass("bg-accent-dim");
     });
 
     it("renders each variant without errors", () => {

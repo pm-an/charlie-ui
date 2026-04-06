@@ -75,12 +75,12 @@ const TeamSection = forwardRef<HTMLElement, TeamSectionProps>(
                 </p>
               )}
               {title && (
-                <h2 className="text-white text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight">
+                <h2 className="text-text-loud text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight">
                   {title}
                 </h2>
               )}
               {description && (
-                <p className="text-white/70 text-base md:text-lg mt-3 md:mt-4 max-w-2xl mx-auto">
+                <p className="text-fg-200 text-base md:text-lg mt-3 md:mt-4 max-w-2xl mx-auto">
                   {description}
                 </p>
               )}
@@ -96,7 +96,7 @@ const TeamSection = forwardRef<HTMLElement, TeamSectionProps>(
             {members.map((member) => (
               <div
                 key={member.name}
-                className="bg-card-gradient rounded-xl border border-white/[0.06] p-6 flex flex-col items-center text-center"
+                className="bg-card-gradient rounded-xl border border-border p-6 flex flex-col items-center text-center"
               >
                 {member.image ? (
                   <img
@@ -105,8 +105,8 @@ const TeamSection = forwardRef<HTMLElement, TeamSectionProps>(
                     className="h-16 w-16 rounded-full object-cover"
                   />
                 ) : (
-                  <div className="h-16 w-16 rounded-full bg-white/10 flex items-center justify-center">
-                    <span className="text-white/70 text-lg font-semibold">
+                  <div className="h-16 w-16 rounded-full bg-bg-subtle-hover flex items-center justify-center">
+                    <span className="text-fg-200 text-lg font-semibold">
                       {member.name
                         .split(" ")
                         .map((n) => n[0])
@@ -115,11 +115,11 @@ const TeamSection = forwardRef<HTMLElement, TeamSectionProps>(
                   </div>
                 )}
 
-                <h3 className="mt-4 text-white font-semibold">{member.name}</h3>
-                <p className="text-white/70 text-sm">{member.role}</p>
+                <h3 className="mt-4 text-text-loud font-semibold">{member.name}</h3>
+                <p className="text-fg-200 text-sm">{member.role}</p>
 
                 {member.bio && (
-                  <p className="mt-2 text-white/70 text-sm line-clamp-2">
+                  <p className="mt-2 text-fg-200 text-sm line-clamp-2">
                     {member.bio}
                   </p>
                 )}
@@ -132,7 +132,7 @@ const TeamSection = forwardRef<HTMLElement, TeamSectionProps>(
                         href={social.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-white/70 hover:text-white transition-colors duration-200"
+                        className="text-fg-200 hover:text-text-loud transition-colors duration-200"
                         aria-label={`${member.name} on ${social.platform}`}
                       >
                         {socialIcons[social.platform.toLowerCase()] ?? (

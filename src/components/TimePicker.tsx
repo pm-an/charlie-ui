@@ -79,9 +79,9 @@ export type TimePickerProps = Omit<
 
 const triggerVariants = cva(
   [
-    "w-full bg-white/5 border rounded-md text-white",
+    "w-full bg-bg-subtle border rounded-md text-text-loud",
     "flex items-center gap-2 outline-none transition-all duration-200",
-    "focus:ring-1 focus:ring-white/15 focus:border-white/15",
+    "focus:ring-1 focus:ring-border-hover focus:border-border-hover",
     "disabled:opacity-50 disabled:cursor-not-allowed",
   ],
   {
@@ -93,7 +93,7 @@ const triggerVariants = cva(
       },
       error: {
         true: "border-red/50 focus:ring-red/30 focus:border-red/50",
-        false: "border-white/6",
+        false: "border-border",
       },
     },
     defaultVariants: {
@@ -229,7 +229,7 @@ function TimeColumn({
 
   return (
     <div className="flex flex-col w-16" role="listbox" aria-label={label}>
-      <div className="text-xs text-white/70 font-medium text-center pb-1 sticky top-0 bg-bg-200 z-10">
+      <div className="text-xs text-fg-200 font-medium text-center pb-1 sticky top-0 bg-bg-200 z-10">
         {label}
       </div>
       <div
@@ -237,7 +237,7 @@ function TimeColumn({
         className={cn(
           "max-h-[200px] overflow-y-auto",
           "[&::-webkit-scrollbar]:w-1.5",
-          "[&::-webkit-scrollbar-thumb]:bg-white/10",
+          "[&::-webkit-scrollbar-thumb]:bg-bg-subtle-hover",
           "[&::-webkit-scrollbar-thumb]:rounded-full"
         )}
       >
@@ -255,9 +255,9 @@ function TimeColumn({
               className={cn(
                 "h-8 w-full flex items-center justify-center text-sm rounded-md transition-colors",
                 v === selected
-                  ? "bg-accent text-white"
-                  : "text-white/70 hover:bg-white/5 hover:text-white",
-                disabled && "text-white/10 cursor-not-allowed hover:bg-transparent hover:text-white/10"
+                  ? "bg-accent-dim text-fg-on-accent"
+                  : "text-fg-200 hover:bg-bg-subtle hover:text-text-loud",
+                disabled && "text-text-faint cursor-not-allowed hover:bg-transparent hover:text-text-faint"
               )}
               onClick={() => {
                 if (!disabled) onChange(v);
@@ -284,7 +284,7 @@ type PeriodColumnProps = {
 function PeriodColumn({ value, onChange }: PeriodColumnProps) {
   return (
     <div className="flex flex-col w-16" role="listbox" aria-label="Period">
-      <div className="text-xs text-white/70 font-medium text-center pb-1 sticky top-0 bg-bg-200 z-10">
+      <div className="text-xs text-fg-200 font-medium text-center pb-1 sticky top-0 bg-bg-200 z-10">
         &nbsp;
       </div>
       <div className="flex flex-col gap-1 pt-1">
@@ -297,8 +297,8 @@ function PeriodColumn({ value, onChange }: PeriodColumnProps) {
             className={cn(
               "h-10 w-full flex items-center justify-center text-xs font-medium rounded-md transition-colors",
               value === period
-                ? "bg-accent text-white"
-                : "text-white/70 hover:bg-white/5 hover:text-white"
+                ? "bg-accent-dim text-fg-on-accent"
+                : "text-fg-200 hover:bg-bg-subtle hover:text-text-loud"
             )}
             onClick={() => onChange(period)}
           >
@@ -530,14 +530,14 @@ function TimePicker({
     >
       <Clock
         className={cn(
-          "shrink-0 text-white/70",
+          "shrink-0 text-fg-200",
           size === "sm" ? "h-3.5 w-3.5" : size === "lg" ? "h-5 w-5" : "h-4 w-4"
         )}
       />
       <span
         className={cn(
           "flex-1 text-left",
-          !hasValue && "text-white/70"
+          !hasValue && "text-fg-200"
         )}
       >
         {displayText ?? placeholder ?? "Select time"}
@@ -567,7 +567,7 @@ function TimePicker({
           data-testid="timepicker-popover"
           className={cn(
             "absolute top-full left-0 z-50 mt-1",
-            "bg-bg-200 border border-white/10 rounded-lg shadow-xl p-2"
+            "bg-bg-200 border border-border-strong rounded-lg shadow-xl p-2"
           )}
         >
           <div id={`${controlId}-listbox`} className="flex" role="group" aria-label="Time selection">
@@ -595,7 +595,7 @@ function TimePicker({
               }
             />
 
-            <div className="w-px bg-white/6 mx-1" />
+            <div className="w-px bg-border mx-1" />
 
             {/* Minutes column */}
             <TimeColumn
@@ -613,7 +613,7 @@ function TimePicker({
             {/* Seconds column */}
             {showSeconds && (
               <>
-                <div className="w-px bg-white/6 mx-1" />
+                <div className="w-px bg-border mx-1" />
                 <TimeColumn
                   label="Sec"
                   values={secondValues}
@@ -638,14 +638,14 @@ function TimePicker({
             {/* AM/PM column */}
             {use12Hour && (
               <>
-                <div className="w-px bg-white/6 mx-1" />
+                <div className="w-px bg-border mx-1" />
                 <PeriodColumn value={period} onChange={handlePeriodChange} />
               </>
             )}
           </div>
 
           {/* Now button */}
-          <div className="border-t border-white/6 mt-2 pt-2 flex justify-center">
+          <div className="border-t border-border mt-2 pt-2 flex justify-center">
             <button
               type="button"
               className="text-xs text-red hover:text-red/80 cursor-pointer transition-colors"
@@ -685,7 +685,7 @@ function TimePicker({
     >
       {/* Label */}
       {label && (
-        <label id={labelId} className="text-sm font-medium text-white/80">
+        <label id={labelId} className="text-sm font-medium text-fg-200">
           {label}
           {required && (
             <span className="text-red ml-0.5" aria-hidden="true">
@@ -701,7 +701,7 @@ function TimePicker({
 
       {/* Helper / Error text */}
       {resolvedDescription && !error && (
-        <p id={`${controlId}-description`} className="text-xs text-white/70">
+        <p id={`${controlId}-description`} className="text-xs text-fg-200">
           {resolvedDescription}
         </p>
       )}

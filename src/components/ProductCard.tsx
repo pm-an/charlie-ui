@@ -50,14 +50,14 @@ const ProductCard = forwardRef<HTMLDivElement, ProductCardProps>(
             "h-3 w-3",
             i < Math.round(value)
               ? "fill-yellow text-yellow"
-              : "fill-transparent text-white/70"
+              : "fill-transparent text-fg-200"
           )}
         />
       ));
     };
 
     const imageContent = (
-      <div className="relative aspect-square bg-white/[0.03]">
+      <div className="relative aspect-square bg-bg-subtle">
         {image && (
           <img
             src={image}
@@ -67,7 +67,7 @@ const ProductCard = forwardRef<HTMLDivElement, ProductCardProps>(
         )}
 
         {badge && (
-          <span className="absolute top-2 left-2 rounded-md bg-accent px-2 py-0.5 text-xs font-medium text-white">
+          <span className="absolute top-2 left-2 rounded-md bg-accent-dim px-2 py-0.5 text-xs font-medium text-fg-on-accent">
             {badge}
           </span>
         )}
@@ -80,16 +80,16 @@ const ProductCard = forwardRef<HTMLDivElement, ProductCardProps>(
               e.stopPropagation();
               onQuickView();
             }}
-            className="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 transition-opacity group-hover:opacity-100"
+            className="absolute inset-0 flex items-center justify-center bg-overlay opacity-0 transition-opacity group-hover:opacity-100"
             aria-label="Quick view"
           >
-            <Eye className="h-5 w-5 text-white" />
+            <Eye className="h-5 w-5 text-text-loud" />
           </button>
         )}
 
         {!inStock && (
-          <div className="absolute inset-0 flex items-center justify-center bg-black/60">
-            <span className="text-sm font-medium text-white/80">
+          <div className="absolute inset-0 flex items-center justify-center bg-overlay">
+            <span className="text-sm font-medium text-text-loud">
               Out of Stock
             </span>
           </div>
@@ -102,7 +102,7 @@ const ProductCard = forwardRef<HTMLDivElement, ProductCardProps>(
         {imageContent}
 
         <div className="p-4">
-          <h3 className="text-sm font-medium text-white line-clamp-1">
+          <h3 className="text-sm font-medium text-text-loud line-clamp-1">
             {name}
           </h3>
 
@@ -112,17 +112,17 @@ const ProductCard = forwardRef<HTMLDivElement, ProductCardProps>(
                 {renderStars(rating)}
               </div>
               {reviewCount !== undefined && (
-                <span className="text-xs text-white/70">({reviewCount})</span>
+                <span className="text-xs text-fg-200">({reviewCount})</span>
               )}
             </div>
           )}
 
           <div className="mt-2 flex items-baseline gap-2">
-            <span className="text-lg font-bold text-white">
+            <span className="text-lg font-bold text-text-loud">
               {formattedPrice}
             </span>
             {formattedOriginalPrice && (
-              <span className="text-sm text-white/70 line-through">
+              <span className="text-sm text-fg-200 line-through">
                 {formattedOriginalPrice}
               </span>
             )}
@@ -141,7 +141,7 @@ const ProductCard = forwardRef<HTMLDivElement, ProductCardProps>(
                 "mt-3 flex w-full items-center justify-center gap-2 rounded-md px-4 py-2 text-sm font-medium transition-all duration-200 active:scale-[0.98]",
                 inStock
                   ? "bg-white/80 hover:bg-white text-[#18191a]"
-                  : "bg-white/5 text-white/70 cursor-not-allowed active:scale-100"
+                  : "bg-bg-subtle text-fg-200 cursor-not-allowed active:scale-100"
               )}
             >
               <ShoppingCart className="h-4 w-4" />
@@ -153,7 +153,7 @@ const ProductCard = forwardRef<HTMLDivElement, ProductCardProps>(
     );
 
     const cardClasses = cn(
-      "group overflow-hidden rounded-xl border border-white/[0.06] bg-card-gradient",
+      "group overflow-hidden rounded-xl border border-border bg-card-gradient",
       className
     );
 

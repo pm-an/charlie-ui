@@ -258,13 +258,13 @@ describe("VirtualList", () => {
       "[&::-webkit-scrollbar-track]:bg-transparent"
     );
     expect(scrollContainer).toHaveClass(
-      "[&::-webkit-scrollbar-thumb]:bg-white/10"
+      "[&::-webkit-scrollbar-thumb]:bg-bg-subtle-hover"
     );
     expect(scrollContainer).toHaveClass(
       "[&::-webkit-scrollbar-thumb]:rounded-full"
     );
     expect(scrollContainer).toHaveClass(
-      "[&::-webkit-scrollbar-thumb:hover]:bg-white/20"
+      "[&::-webkit-scrollbar-thumb:hover]:bg-border-hover"
     );
   });
 

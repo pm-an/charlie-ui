@@ -59,10 +59,49 @@ const TimelineRoot = forwardRef<HTMLDivElement, TimelineProps>(
 );
 TimelineRoot.displayName = "Timeline";
 
-/* ─── Color Map ─────────────────────────────── */
+/* ─── Size + Color Maps ────────────────────── */
+
+const sizeConfig = {
+  sm: {
+    icon: "h-8 w-8",
+    iconAlign: "h-8",
+    dot: "h-3 w-3",
+    dotAlign: "mt-1 h-3",
+    connectorIcon: "ml-[15px]",
+    connectorDot: "ml-[5px]",
+    title: "text-sm",
+    description: "text-sm",
+    gap: "gap-3",
+    contentPb: "pb-6",
+  },
+  md: {
+    icon: "h-10 w-10",
+    iconAlign: "h-10",
+    dot: "h-4 w-4",
+    dotAlign: "mt-1 h-4",
+    connectorIcon: "ml-[19px]",
+    connectorDot: "ml-[7px]",
+    title: "text-base",
+    description: "text-sm",
+    gap: "gap-4",
+    contentPb: "pb-8",
+  },
+  lg: {
+    icon: "h-12 w-12",
+    iconAlign: "h-12",
+    dot: "h-5 w-5",
+    dotAlign: "mt-1 h-5",
+    connectorIcon: "ml-[23px]",
+    connectorDot: "ml-[9px]",
+    title: "text-lg",
+    description: "text-base",
+    gap: "gap-4",
+    contentPb: "pb-10",
+  },
+};
 
 const dotColors = {
-  default: "border-white/20 bg-white/10",
+  default: "border-border-hover bg-bg-subtle-hover",
   accent: "border-accent bg-accent/20",
   green: "border-green bg-green/20",
   blue: "border-blue bg-blue/20",
@@ -70,7 +109,7 @@ const dotColors = {
 };
 
 const iconBgColors = {
-  default: "bg-white/10 text-white/80",
+  default: "bg-bg-subtle-hover text-fg-200",
   accent: "bg-accent/20 text-accent",
   green: "bg-green/20 text-green",
   blue: "bg-blue/20 text-blue",
@@ -85,6 +124,7 @@ export type TimelineItemProps = HTMLAttributes<HTMLDivElement> & {
   timestamp?: string;
   icon?: ReactNode;
   color?: "default" | "accent" | "green" | "blue" | "yellow";
+  size?: "sm" | "md" | "lg";
   active?: boolean;
   children?: ReactNode;
   /** @internal injected by Timeline */
@@ -102,6 +142,7 @@ const TimelineItem = forwardRef<HTMLDivElement, TimelineItemProps>(
       timestamp,
       icon,
       color = "default",
+      size = "sm",
       active = false,
       children,
       _index = 0,
@@ -111,6 +152,7 @@ const TimelineItem = forwardRef<HTMLDivElement, TimelineItemProps>(
     ref
   ) => {
     const { orientation } = useTimeline();
+    const s = sizeConfig[size];
 
     const isRight =
       orientation === "right" ||
@@ -121,7 +163,8 @@ const TimelineItem = forwardRef<HTMLDivElement, TimelineItemProps>(
     const dot = hasIcon ? (
       <div
         className={cn(
-          "flex h-8 w-8 shrink-0 items-center justify-center rounded-full",
+          "flex shrink-0 items-center justify-center rounded-full",
+          s.icon,
           iconBgColors[color],
           active && "ring-2 ring-accent/30"
         )}
@@ -131,7 +174,8 @@ const TimelineItem = forwardRef<HTMLDivElement, TimelineItemProps>(
     ) : (
       <div
         className={cn(
-          "h-3 w-3 shrink-0 rounded-full border-2",
+          "shrink-0 rounded-full border-2",
+          s.dot,
           dotColors[color],
           active && "ring-2 ring-accent/30"
         )}
@@ -141,30 +185,30 @@ const TimelineItem = forwardRef<HTMLDivElement, TimelineItemProps>(
     const connector = !_isLast && (
       <div
         className={cn(
-          "flex-1 self-stretch",
-          hasIcon ? "ml-[15px] w-0.5 bg-white/10" : "ml-[5px] w-0.5 bg-white/10"
+          "flex-1 self-stretch w-0.5 bg-bg-subtle-hover",
+          hasIcon ? s.connectorIcon : s.connectorDot
         )}
         data-testid="timeline-connector"
       />
     );
 
     const content = (
-      <div className="min-w-0 flex-1 pb-6">
+      <div className={cn("min-w-0 flex-1", s.contentPb)}>
         <div className="flex items-center justify-between gap-2">
           <h4
             className={cn(
-              "text-sm",
-              active ? "font-medium text-white" : "font-medium text-white/80"
+              s.title,
+              active ? "font-semibold text-text-loud" : "font-semibold text-fg-200"
             )}
           >
             {title}
           </h4>
           {timestamp && (
-            <time className="shrink-0 text-xs text-white/70" dateTime={timestamp}>{timestamp}</time>
+            <time className="shrink-0 text-xs text-fg-200" dateTime={timestamp}>{timestamp}</time>
           )}
         </div>
         {description && (
-          <p className="mt-0.5 text-sm text-white/70">{description}</p>
+          <p className={cn("mt-1", s.description, "text-fg-300")}>{description}</p>
         )}
         {children && <div className="mt-2">{children}</div>}
       </div>
@@ -174,14 +218,15 @@ const TimelineItem = forwardRef<HTMLDivElement, TimelineItemProps>(
       <div
         ref={ref}
         className={cn(
-          "flex gap-3",
+          "flex",
+          s.gap,
           isRight && "flex-row-reverse text-right",
           className
         )}
         {...props}
       >
         <div className="flex flex-col items-center">
-          <div className={cn("flex items-center", hasIcon ? "h-8" : "mt-1 h-3")}>
+          <div className={cn("flex items-center", hasIcon ? s.iconAlign : s.dotAlign)}>
             {dot}
           </div>
           {connector}

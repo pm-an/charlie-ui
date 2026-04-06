@@ -131,7 +131,7 @@ function DropdownItem({
         "flex items-center gap-2 rounded-lg px-3 py-2 text-sm cursor-pointer transition-colors",
         destructive
           ? "text-red hover:bg-red-muted"
-          : "text-white/80 hover:bg-white/5",
+          : "text-fg-200 hover:bg-bg-subtle",
         disabled && "opacity-50 cursor-not-allowed pointer-events-none",
         className
       )}
@@ -150,7 +150,7 @@ DropdownItem.displayName = "Dropdown.Item";
 /* ─── Dropdown.Separator ────────────────── */
 
 function DropdownSeparator() {
-  return <DropdownMenuSeparator className="h-px bg-white/[0.06] my-1 mx-2" />;
+  return <DropdownMenuSeparator className="h-px bg-bg-subtle my-1 mx-2" />;
 }
 
 DropdownSeparator.displayName = "Dropdown.Separator";
@@ -166,7 +166,7 @@ function DropdownLabel({ children, className }: DropdownLabelProps) {
   return (
     <DropdownMenuLabel
       className={cn(
-        "px-3 py-2 text-xs font-medium uppercase tracking-wider text-white/70",
+        "px-3 py-2 text-xs font-medium uppercase tracking-wider text-fg-200",
         className
       )}
     >

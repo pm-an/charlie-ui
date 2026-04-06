@@ -565,17 +565,17 @@ describe("Select", () => {
 
     it("applies sm size class", () => {
       render(<Select options={options} size="sm" />);
-      expect(screen.getByRole("combobox")).toHaveClass("h-8");
+      expect(screen.getByRole("combobox")).toHaveClass("h-7");
     });
 
     it("applies md size class by default", () => {
       render(<Select options={options} />);
-      expect(screen.getByRole("combobox")).toHaveClass("h-10");
+      expect(screen.getByRole("combobox")).toHaveClass("h-9");
     });
 
     it("applies lg size class", () => {
       render(<Select options={options} size="lg" />);
-      expect(screen.getByRole("combobox")).toHaveClass("h-12");
+      expect(screen.getByRole("combobox")).toHaveClass("h-11");
     });
   });
 

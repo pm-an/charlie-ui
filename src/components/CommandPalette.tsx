@@ -156,7 +156,7 @@ function CommandPalette({
           >
             {/* Backdrop */}
             <motion.div
-              className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+              className="absolute inset-0 bg-overlay backdrop-blur-sm"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -166,7 +166,7 @@ function CommandPalette({
             {/* Dialog */}
             <motion.div
               data-slot="command-palette"
-              className="relative w-[calc(100%-32px)] md:w-full max-w-[640px] overflow-hidden rounded-xl border border-white/[0.06] bg-grey-700 shadow-window"
+              className="relative w-[calc(100%-32px)] md:w-full max-w-[640px] overflow-hidden rounded-xl border border-border bg-grey-700 shadow-window"
               data-state={open ? "open" : "closed"}
               initial={{ opacity: 1, scale: 0.96, y: -8 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -176,11 +176,11 @@ function CommandPalette({
               aria-label="Command palette"
             >
               {/* Search Input */}
-              <div className="flex h-14 items-center gap-3 border-b border-white/[0.06] px-4">
+              <div className="flex h-14 items-center gap-3 border-b border-border px-4">
                 {loading ? (
                   <Spinner size="sm" color="rgba(255,255,255,0.4)" />
                 ) : (
-                  <Search className="h-5 w-5 shrink-0 text-white/70" />
+                  <Search className="h-5 w-5 shrink-0 text-fg-200" />
                 )}
                 <input
                   ref={inputRef}
@@ -188,7 +188,7 @@ function CommandPalette({
                   placeholder={placeholder}
                   value={search}
                   onChange={(e) => handleSearchChange(e.target.value)}
-                  className="h-full flex-1 bg-transparent text-base text-white placeholder:text-white/70 outline-none"
+                  className="h-full flex-1 bg-transparent text-base text-text-loud placeholder:text-fg-200 outline-none"
                   autoFocus
                   role="combobox"
                   aria-expanded={true}
@@ -202,7 +202,7 @@ function CommandPalette({
               <div id="command-palette-listbox" className="max-h-[360px] overflow-y-auto py-2" role="listbox" aria-label="Results">
                 {children}
                 {filter && search && !hasVisibleChildren(children, search) && (
-                  <div className="px-4 py-8 text-center text-sm text-white/70">
+                  <div className="px-4 py-8 text-center text-sm text-fg-200">
                     {emptyMessage}
                   </div>
                 )}
@@ -269,7 +269,7 @@ function CommandGroup({ className, label, children, ...props }: CommandGroupProp
   return (
     <div className={cn("", className)} {...props}>
       {label && (
-        <div className="px-4 py-2 text-xs font-medium uppercase tracking-wider text-white/70">
+        <div className="px-4 py-2 text-xs font-medium uppercase tracking-wider text-fg-200">
           {label}
         </div>
       )}
@@ -325,8 +325,8 @@ function CommandItem({
       data-command-item=""
       data-active={isActive}
       className={cn(
-        "mx-2 flex min-h-[44px] cursor-pointer items-center gap-3 rounded-md px-4 text-sm text-white/80 transition-colors",
-        isActive ? "bg-white/5" : "hover:bg-white/5",
+        "mx-2 flex min-h-[44px] cursor-pointer items-center gap-3 rounded-md px-4 text-sm text-fg-200 transition-colors",
+        isActive ? "bg-bg-subtle" : "hover:bg-bg-subtle",
         disabled && "opacity-40 cursor-not-allowed",
         className
       )}
@@ -336,10 +336,10 @@ function CommandItem({
       aria-disabled={disabled || undefined}
       {...props}
     >
-      {Icon && <Icon className="h-4 w-4 shrink-0 text-white/70" />}
+      {Icon && <Icon className="h-4 w-4 shrink-0 text-fg-200" />}
       <span className="flex-1 truncate">{children}</span>
       {shortcut && (
-        <span className="ml-auto text-xs text-white/70 shrink-0">{shortcut}</span>
+        <span className="ml-auto text-xs text-fg-200 shrink-0">{shortcut}</span>
       )}
     </div>
   );

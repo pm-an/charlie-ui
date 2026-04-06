@@ -226,7 +226,7 @@ const ContextMenuContent = ({ children, className }: ContextMenuContentProps) =>
           transition={{ duration: 0.2, ease: "easeOut" }}
           style={{ position: "fixed", top: position.y, left: position.x }}
           className={cn(
-            "z-50 min-w-[180px] rounded-lg border border-white/10 bg-[var(--charlie-bg-200,#1a1a1a)] p-1 shadow-xl",
+            "z-50 min-w-[180px] rounded-lg border border-border-strong bg-[var(--charlie-bg-200,#1a1a1a)] p-1 shadow-xl",
             className
           )}
         >

@@ -164,7 +164,7 @@ describe("ProductGrid", () => {
         />
       );
       const audioTab = screen.getByText("Audio");
-      expect(audioTab).toHaveClass("bg-white/15");
+      expect(audioTab).toHaveClass("bg-bg-subtle-hover");
     });
 
     it("highlights All when no category is active", () => {
@@ -177,7 +177,7 @@ describe("ProductGrid", () => {
         />
       );
       const allTab = screen.getByText("All");
-      expect(allTab).toHaveClass("bg-white/15");
+      expect(allTab).toHaveClass("bg-bg-subtle-hover");
     });
 
     it("uses aria-selected on filter tabs", () => {

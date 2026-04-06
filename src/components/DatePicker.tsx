@@ -94,38 +94,38 @@ const calendarClassNames = {
   months: "relative",
   month: "",
   month_caption: "flex items-center justify-center h-7 mb-2",
-  caption_label: "text-sm font-medium text-white",
+  caption_label: "text-sm font-medium text-text-loud",
   nav: "absolute top-0 inset-x-0 flex items-center justify-between z-10",
   button_previous:
-    "inline-flex items-center justify-center h-7 w-7 rounded-md hover:bg-white/5 text-white/70 hover:text-white transition-colors",
+    "inline-flex items-center justify-center h-7 w-7 rounded-md hover:bg-bg-subtle text-fg-200 hover:text-text-loud transition-colors",
   button_next:
-    "inline-flex items-center justify-center h-7 w-7 rounded-md hover:bg-white/5 text-white/70 hover:text-white transition-colors",
+    "inline-flex items-center justify-center h-7 w-7 rounded-md hover:bg-bg-subtle text-fg-200 hover:text-text-loud transition-colors",
   chevron: "h-4 w-4",
 
   // Grid
   month_grid: "w-full border-collapse",
   weekdays: "",
   weekday:
-    "text-xs text-white/70 font-normal w-9 pb-2 text-center",
+    "text-xs text-fg-200 font-normal w-9 pb-2 text-center",
 
   // Weeks / Days
   weeks: "",
   week: "",
   day: "p-0 text-center",
   day_button:
-    "inline-flex items-center justify-center h-9 w-9 rounded-md text-sm text-white/80 hover:bg-white/5 transition-colors cursor-pointer",
+    "inline-flex items-center justify-center h-9 w-9 rounded-md text-sm text-fg-200 hover:bg-bg-subtle transition-colors cursor-pointer",
 
   // Flags
-  today: "border border-white/10 rounded-md",
-  outside: "text-white/70",
-  disabled: "text-white/10 cursor-not-allowed hover:bg-transparent",
+  today: "border border-border-strong rounded-md",
+  outside: "text-fg-200",
+  disabled: "text-text-faint cursor-not-allowed hover:bg-transparent",
   hidden: "invisible !border-transparent",
-  focused: "ring-1 ring-white/20",
+  focused: "ring-1 ring-border-hover",
 
   // Selection
-  selected: "!bg-accent !text-white hover:!bg-accent rounded-md",
-  range_start: "!bg-accent !text-white rounded-md",
-  range_end: "!bg-accent !text-white rounded-md",
+  selected: "!bg-accent-dim !text-fg-on-accent hover:!bg-accent-dim rounded-md",
+  range_start: "!bg-accent-dim !text-fg-on-accent rounded-md",
+  range_end: "!bg-accent-dim !text-fg-on-accent rounded-md",
   range_middle: "!bg-accent/10 rounded-none",
 };
 
@@ -143,12 +143,12 @@ function PresetsSidebar({
   onSelectRange?: (range: { from: Date; to: Date }) => void;
 }) {
   return (
-    <div className="flex flex-col gap-0.5 border-r border-white/10 pr-3 mr-3 min-w-[140px]">
+    <div className="flex flex-col gap-0.5 border-r border-border-strong pr-3 mr-3 min-w-[140px]">
       {presets.map((preset) => (
         <button
           key={preset.label}
           type="button"
-          className="text-sm text-white/70 hover:text-white hover:bg-white/5 px-3 py-1.5 rounded-md cursor-pointer text-left transition-colors"
+          className="text-sm text-fg-200 hover:text-text-loud hover:bg-bg-subtle px-3 py-1.5 rounded-md cursor-pointer text-left transition-colors"
           onClick={() => {
             if (isSinglePreset(preset)) {
               onSelectSingle?.(preset.date);
@@ -217,11 +217,11 @@ function TriggerContent({
 }) {
   return (
     <>
-      <Calendar className="h-4 w-4 text-white/70 mr-2 shrink-0" />
+      <Calendar className="h-4 w-4 text-fg-200 mr-2 shrink-0" />
       <span
         className={cn(
           "flex-1 text-left truncate",
-          displayValue ? "text-white" : "text-white/70"
+          displayValue ? "text-text-loud" : "text-fg-200"
         )}
       >
         {displayValue || placeholder}
@@ -231,7 +231,7 @@ function TriggerContent({
           role="button"
           tabIndex={0}
           aria-label="Clear date"
-          className="text-white/70 hover:text-white/70 ml-2 shrink-0 cursor-pointer"
+          className="text-fg-200 hover:text-fg-200 ml-2 shrink-0 cursor-pointer"
           onClick={onClear}
           onKeyDown={(e) => {
             if (e.key === "Enter" || e.key === " ") {
@@ -414,9 +414,9 @@ function DatePicker({
   const hiddenMatcher = buildHiddenMatcher(minDate, maxDate);
 
   const triggerClasses = cn(
-    "flex items-center w-full bg-white/5 border border-white/6 rounded-md h-10 px-3 text-sm text-white",
+    "flex items-center w-full bg-bg-subtle border border-border rounded-md h-10 px-3 text-sm text-text-loud",
     "outline-none transition-all duration-200 cursor-pointer",
-    "focus:ring-1 focus:ring-white/15 focus:border-white/15",
+    "focus:ring-1 focus:ring-border-hover focus:border-border-hover",
     error && "border-red/50 focus:ring-red/30 focus:border-red/50",
     disabled && "opacity-50 cursor-not-allowed",
     className
@@ -438,7 +438,7 @@ function DatePicker({
   ) : null;
 
   const labelEl = !insideField && label ? (
-    <label htmlFor={controlId} className="text-sm font-medium text-white/80 mb-1.5 block">
+    <label htmlFor={controlId} className="text-sm font-medium text-fg-200 mb-1.5 block">
       {label}
       {required && <span className="text-red ml-0.5">*</span>}
     </label>
@@ -447,7 +447,7 @@ function DatePicker({
   const footerEls = !insideField ? (
     <>
       {resolvedDescription && !error && (
-        <p id={`${controlId}-description`} className="text-xs text-white/70 mt-1.5">{resolvedDescription}</p>
+        <p id={`${controlId}-description`} className="text-xs text-fg-200 mt-1.5">{resolvedDescription}</p>
       )}
       {error && errorMessage && (
         <p id={`${controlId}-error`} className="text-xs text-red mt-1.5">{errorMessage}</p>
@@ -520,10 +520,10 @@ function DatePicker({
               </div>
 
               {/* Done button — the ONLY way to close */}
-              <div className="flex justify-end border-t border-white/10 mt-3 pt-3">
+              <div className="flex justify-end border-t border-border-strong mt-3 pt-3">
                 <button
                   type="button"
-                  className="px-3 py-1.5 text-sm font-medium rounded-md bg-accent text-white hover:bg-accent/90 transition-colors cursor-pointer"
+                  className="px-3 py-1.5 text-sm font-medium rounded-md bg-accent-dim text-fg-on-accent hover:bg-accent-dim/90 transition-colors cursor-pointer"
                   onClick={() => setOpen(false)}
                   data-testid="datepicker-done"
                 >
@@ -596,7 +596,7 @@ function DatePicker({
             )}
             data-testid="datepicker-popover"
           >
-            <div className="bg-bg-200 border border-white/10 rounded-lg shadow-xl p-3">
+            <div className="bg-bg-200 border border-border-strong rounded-lg shadow-xl p-3">
               <div className="flex">
                 {presets && presets.length > 0 && (
                   <PresetsSidebar

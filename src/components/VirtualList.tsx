@@ -13,9 +13,9 @@ import { Spinner } from "./Spinner";
 const scrollbarClasses = [
   "[&::-webkit-scrollbar]:w-1.5",
   "[&::-webkit-scrollbar-track]:bg-transparent",
-  "[&::-webkit-scrollbar-thumb]:bg-white/10",
+  "[&::-webkit-scrollbar-thumb]:bg-bg-subtle-hover",
   "[&::-webkit-scrollbar-thumb]:rounded-full",
-  "[&::-webkit-scrollbar-thumb:hover]:bg-white/20",
+  "[&::-webkit-scrollbar-thumb:hover]:bg-border-hover",
 ];
 
 type VirtualListProps<T> = Omit<HTMLAttributes<HTMLDivElement>, "children"> & {
@@ -94,7 +94,7 @@ function VirtualList<T>({
       <div
         data-slot="virtual-list"
         className={cn(
-          "flex items-center justify-center text-white/70",
+          "flex items-center justify-center text-fg-200",
           className
         )}
         style={{ height, ...style }}
@@ -115,7 +115,7 @@ function VirtualList<T>({
         tabIndex={0}
         className={cn(
           "overflow-auto",
-          "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/20 focus-visible:ring-offset-1 focus-visible:ring-offset-transparent",
+          "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-border-hover focus-visible:ring-offset-1 focus-visible:ring-offset-transparent",
           scrollbarClasses,
           className,
         )}

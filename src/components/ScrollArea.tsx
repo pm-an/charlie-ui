@@ -54,7 +54,7 @@ const ScrollArea = forwardRef<HTMLDivElement, ScrollAreaProps>(
         aria-label={label}
         className={cn(
           "relative",
-          "outline-none focus-visible:ring-2 focus-visible:ring-white/20 focus-visible:ring-offset-1 focus-visible:ring-offset-transparent rounded-sm",
+          "outline-none focus-visible:ring-2 focus-visible:ring-border-hover focus-visible:ring-offset-1 focus-visible:ring-offset-transparent rounded-sm",
           orientation === "vertical" && "overflow-y-auto overflow-x-hidden",
           orientation === "horizontal" && "overflow-x-auto overflow-y-hidden",
           orientation === "both" && "overflow-auto",
@@ -63,19 +63,19 @@ const ScrollArea = forwardRef<HTMLDivElement, ScrollAreaProps>(
               "[&::-webkit-scrollbar]:w-1.5",
               "[&::-webkit-scrollbar]:h-1.5",
               "[&::-webkit-scrollbar-track]:bg-transparent",
-              "[&::-webkit-scrollbar-thumb]:bg-white/10",
+              "[&::-webkit-scrollbar-thumb]:bg-bg-subtle-hover",
               "[&::-webkit-scrollbar-thumb]:rounded-full",
-              "[&::-webkit-scrollbar-thumb:hover]:bg-white/20",
+              "[&::-webkit-scrollbar-thumb:hover]:bg-bg-subtle-hover",
             ],
           !hideScrollbar &&
             scrollbarSize === "default" && [
               "[&::-webkit-scrollbar]:w-2.5",
               "[&::-webkit-scrollbar]:h-2.5",
-              "[&::-webkit-scrollbar-track]:bg-white/5",
+              "[&::-webkit-scrollbar-track]:bg-bg-subtle",
               "[&::-webkit-scrollbar-track]:rounded-full",
-              "[&::-webkit-scrollbar-thumb]:bg-white/15",
+              "[&::-webkit-scrollbar-thumb]:bg-bg-subtle-hover",
               "[&::-webkit-scrollbar-thumb]:rounded-full",
-              "[&::-webkit-scrollbar-thumb:hover]:bg-white/25",
+              "[&::-webkit-scrollbar-thumb:hover]:bg-bg-subtle-hover",
             ],
           hideScrollbar && ["scrollbar-none", "[&::-webkit-scrollbar]:hidden"],
           className

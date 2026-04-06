@@ -12,7 +12,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "../utils/cn";
 import { useFieldAware } from "../hooks/useFieldAware";
 
-const sliderTrackVariants = cva("w-full rounded-full bg-white/[0.06] shadow-xs", {
+const sliderTrackVariants = cva("w-full rounded-full bg-bg-subtle shadow-xs", {
   variants: {
     size: {
       sm: "h-1",
@@ -203,12 +203,12 @@ const Slider = forwardRef<HTMLDivElement, SliderProps>(
         {((!insideField && label) || showValue) && (
           <div className="flex items-center justify-between">
             {!insideField && label && (
-              <span className="text-sm font-medium text-white/80">
+              <span className="text-sm font-medium text-fg-200">
                 {label}
               </span>
             )}
             {showValue && (
-              <span className="text-sm tabular-nums text-white/70">
+              <span className="text-sm tabular-nums text-fg-200">
                 {value}
               </span>
             )}
@@ -257,7 +257,7 @@ const Slider = forwardRef<HTMLDivElement, SliderProps>(
               return (
                 <span
                   key={mark.value}
-                  className="absolute -translate-x-1/2 text-xs text-white/70"
+                  className="absolute -translate-x-1/2 text-xs text-fg-200"
                   style={{ left: `${markPercent}%` }}
                 >
                   {mark.label}

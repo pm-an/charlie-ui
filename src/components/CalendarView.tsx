@@ -146,21 +146,21 @@ const CalendarView = forwardRef<HTMLDivElement, CalendarViewProps>(
         ref={ref}
         data-slot="calendar-view"
         className={cn(
-          "rounded-xl border border-white/[0.06] overflow-hidden bg-bg",
+          "rounded-xl border border-border overflow-hidden bg-bg",
           className
         )}
         {...props}
       >
         {/* Header */}
-        <div className="flex justify-between items-center px-4 py-3 border-b border-white/[0.06]">
-          <h3 className="text-sm font-semibold text-white">
+        <div className="flex justify-between items-center px-4 py-3 border-b border-border">
+          <h3 className="text-sm font-semibold text-text-loud">
             {MONTH_NAMES[month]} {year}
           </h3>
           <div className="flex items-center gap-1">
             <button
               type="button"
               onClick={handlePrevMonth}
-              className="p-1.5 text-white/70 hover:text-white hover:bg-white/5 rounded transition-colors"
+              className="p-1.5 text-fg-200 hover:text-text-loud hover:bg-bg-subtle rounded transition-colors"
               aria-label="Previous month"
             >
               <ChevronLeft className="h-4 w-4" />
@@ -168,7 +168,7 @@ const CalendarView = forwardRef<HTMLDivElement, CalendarViewProps>(
             <button
               type="button"
               onClick={handleNextMonth}
-              className="p-1.5 text-white/70 hover:text-white hover:bg-white/5 rounded transition-colors"
+              className="p-1.5 text-fg-200 hover:text-text-loud hover:bg-bg-subtle rounded transition-colors"
               aria-label="Next month"
             >
               <ChevronRight className="h-4 w-4" />
@@ -177,9 +177,9 @@ const CalendarView = forwardRef<HTMLDivElement, CalendarViewProps>(
         </div>
 
         {/* Day headers */}
-        <div className="grid grid-cols-7 text-center border-b border-white/[0.06]">
+        <div className="grid grid-cols-7 text-center border-b border-border">
           {DAYS_OF_WEEK.map((day) => (
-            <div key={day} className="text-xs text-white/70 py-2 font-medium">
+            <div key={day} className="text-xs text-fg-200 py-2 font-medium">
               {day}
             </div>
           ))}
@@ -212,10 +212,10 @@ const CalendarView = forwardRef<HTMLDivElement, CalendarViewProps>(
                   }
                 }}
                 className={cn(
-                  "min-h-[80px] border-b border-r border-white/[0.04] p-1",
+                  "min-h-[80px] border-b border-r border-border p-1",
                   day.currentMonth
-                    ? "hover:bg-white/[0.02] transition-colors"
-                    : "opacity-30",
+                    ? "hover:bg-bg-subtle transition-colors"
+                    : "opacity-60",
                   onDateClick && day.currentMonth && "cursor-pointer"
                 )}
               >
@@ -225,8 +225,8 @@ const CalendarView = forwardRef<HTMLDivElement, CalendarViewProps>(
                     className={cn(
                       "text-xs inline-flex items-center justify-center",
                       isToday
-                        ? "bg-accent text-white rounded-full h-6 w-6 font-medium"
-                        : "text-white/70 h-6 w-6"
+                        ? "bg-accent-dim text-fg-on-accent rounded-full h-6 w-6 font-medium"
+                        : "text-fg-200 h-6 w-6"
                     )}
                   >
                     {day.date.getDate()}
@@ -259,7 +259,7 @@ const CalendarView = forwardRef<HTMLDivElement, CalendarViewProps>(
                       }}
                       className={cn(
                         "flex items-center gap-1 px-1 rounded text-[10px] truncate",
-                        onEventClick && "cursor-pointer hover:bg-white/5"
+                        onEventClick && "cursor-pointer hover:bg-bg-subtle"
                       )}
                       title={
                         event.startTime
@@ -272,16 +272,16 @@ const CalendarView = forwardRef<HTMLDivElement, CalendarViewProps>(
                           "h-1.5 w-1.5 rounded-full shrink-0",
                           event.color && eventDotColors[event.color]
                             ? eventDotColors[event.color]
-                            : "bg-white/40"
+                            : "bg-text-muted"
                         )}
                       />
-                      <span className="text-white/70 truncate">
+                      <span className="text-fg-200 truncate">
                         {event.title}
                       </span>
                     </div>
                   ))}
                   {dayEvents.length > 3 && (
-                    <div className="text-[10px] text-white/70 px-1">
+                    <div className="text-[10px] text-fg-200 px-1">
                       +{dayEvents.length - 3} more
                     </div>
                   )}

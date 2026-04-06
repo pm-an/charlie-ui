@@ -66,7 +66,7 @@ describe("StatCard", () => {
     const { container } = render(
       <StatCard label="Users" value={100} change={-5} />
     );
-    const changeEl = container.querySelector(".text-\\[\\#f87171\\]");
+    const changeEl = container.querySelector(".text-red");
     expect(changeEl).toBeInTheDocument();
   });
 
@@ -74,7 +74,7 @@ describe("StatCard", () => {
     const { container } = render(
       <StatCard label="Users" value={100} change={0} />
     );
-    const changeEl = container.querySelector(".text-white\\/70");
+    const changeEl = container.querySelector(".text-fg-200");
     expect(changeEl).toBeInTheDocument();
   });
 
@@ -82,7 +82,7 @@ describe("StatCard", () => {
     const { container } = render(
       <StatCard label="Users" value={100} change={5} trend="down" />
     );
-    const changeEl = container.querySelector(".text-\\[\\#f87171\\]");
+    const changeEl = container.querySelector(".text-red");
     expect(changeEl).toBeInTheDocument();
   });
 
@@ -124,7 +124,7 @@ describe("StatCard", () => {
       <StatCard label="Revenue" value="100" />
     );
     expect(container.querySelector(".text-green")).not.toBeInTheDocument();
-    expect(container.querySelector(".text-\\[\\#f87171\\]")).not.toBeInTheDocument();
+    expect(container.querySelector(".text-red")).not.toBeInTheDocument();
   });
 
   it("merges custom className", () => {

@@ -71,17 +71,17 @@ const ErrorPage = forwardRef<HTMLDivElement, ErrorPageProps>(
         <div className="text-center max-w-md">
           <div className="mb-6 flex justify-center">
             {isNumericCode ? (
-              <span className="text-7xl font-bold text-white/40" aria-hidden="true">{code}</span>
+              <span className="text-7xl font-bold text-text-muted" aria-hidden="true">{code}</span>
             ) : (
-              <div className="flex h-16 w-16 items-center justify-center rounded-full bg-white/5 text-white/70">
+              <div className="flex h-16 w-16 items-center justify-center rounded-full bg-bg-subtle text-fg-200">
                 {displayIcon}
               </div>
             )}
           </div>
 
-          <h1 className="text-2xl font-bold text-white">{displayTitle}</h1>
+          <h1 className="text-2xl font-bold text-text-loud">{displayTitle}</h1>
 
-          <p className="mt-2 text-white/70">{displayDescription}</p>
+          <p className="mt-2 text-fg-200">{displayDescription}</p>
 
           {(action || backHref) && (
             <div className="mt-6 flex items-center justify-center gap-3">
@@ -89,7 +89,7 @@ const ErrorPage = forwardRef<HTMLDivElement, ErrorPageProps>(
               {backHref && (
                 <a
                   href={backHref}
-                  className="inline-flex items-center rounded-md border border-white/10 bg-transparent px-4 py-2.5 text-sm font-medium text-white transition-all duration-200 hover:border-white/15 active:scale-[0.98]"
+                  className="inline-flex items-center rounded-md border border-border-strong bg-transparent px-4 py-2.5 text-sm font-medium text-text-loud transition-all duration-200 hover:border-border-hover active:scale-[0.98]"
                 >
                   Go home
                 </a>

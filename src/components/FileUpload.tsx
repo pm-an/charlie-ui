@@ -248,7 +248,7 @@ function FileUpload({
 
   const isImage = (file: File) => file.type.startsWith("image/");
 
-  const uploadIcon = icon ?? <Upload className="h-10 w-10 text-white/70" />;
+  const uploadIcon = icon ?? <Upload className="h-10 w-10 text-fg-200" />;
 
   return (
     <div data-slot="file-upload" className={cn("w-full", className)} {...props}>
@@ -272,10 +272,10 @@ function FileUpload({
           disabled={resolvedDisabled}
           className={cn(
             "inline-flex items-center gap-2",
-            "border border-white/10 bg-white/5 hover:bg-white/10",
-            "rounded-md px-4 py-2 text-sm text-white/70",
+            "border border-border-strong bg-bg-subtle hover:bg-bg-subtle-hover",
+            "rounded-md px-4 py-2 text-sm text-fg-200",
             "transition-colors duration-200",
-            resolvedDisabled && "opacity-70 cursor-not-allowed hover:bg-white/5",
+            resolvedDisabled && "opacity-70 cursor-not-allowed hover:bg-bg-subtle",
             resolvedError && "border-red/50"
           )}
           aria-describedby={ariaDescribedBy}
@@ -305,7 +305,7 @@ function FileUpload({
           onDrop={handleDrop}
           className={cn(
             "flex flex-col items-center justify-center px-6",
-            "border-2 border-dashed border-white/10 rounded-lg bg-white/[0.02]",
+            "border-2 border-dashed border-border-strong rounded-lg bg-bg-subtle",
             "cursor-pointer",
             fileUploadVariants({ size }),
             isDragOver && "border-accent/50 bg-accent/5",
@@ -320,12 +320,12 @@ function FileUpload({
         >
           <div className="mb-3">{uploadIcon}</div>
           {!insideField && (
-            <p className="text-sm font-medium text-white/70">
+            <p className="text-sm font-medium text-fg-200">
               {label ?? defaultLabel}
             </p>
           )}
           {!insideField && description && (
-            <p className="text-xs text-white/70 mt-1">{description}</p>
+            <p className="text-xs text-fg-200 mt-1">{description}</p>
           )}
         </div>
       )}
@@ -342,7 +342,7 @@ function FileUpload({
                 transition={{ duration: 0.2 }}
                 className="overflow-hidden"
               >
-                <div className="flex items-center gap-3 px-3 py-2 rounded-md bg-white/[0.02] border border-white/6">
+                <div className="flex items-center gap-3 px-3 py-2 rounded-md bg-bg-subtle border border-border">
                   {fileItem.preview && isImage(fileItem.file) ? (
                     <img
                       src={fileItem.preview}
@@ -350,22 +350,22 @@ function FileUpload({
                       className="h-8 w-8 rounded object-cover shrink-0"
                     />
                   ) : (
-                    <FileIcon className="h-5 w-5 text-white/70 shrink-0" />
+                    <FileIcon className="h-5 w-5 text-fg-200 shrink-0" />
                   )}
 
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2">
-                      <span className="text-sm text-white/80 truncate">
+                      <span className="text-sm text-fg-200 truncate">
                         {fileItem.file.name}
                       </span>
-                      <span className="text-xs text-white/70 shrink-0">
+                      <span className="text-xs text-fg-200 shrink-0">
                         {formatFileSize(fileItem.file.size)}
                       </span>
                     </div>
 
                     {fileItem.status === "uploading" && (
                       <div
-                        className="h-1 bg-white/10 rounded-full overflow-hidden mt-1"
+                        className="h-1 bg-bg-subtle-hover rounded-full overflow-hidden mt-1"
                         role="progressbar"
                         aria-label={`Uploading ${fileItem.file.name}`}
                         aria-valuenow={fileItem.progress}
@@ -404,7 +404,7 @@ function FileUpload({
                           e.stopPropagation();
                           onRemove(fileItem.id);
                         }}
-                        className="p-1 text-white/70 hover:text-white/70 transition-colors"
+                        className="p-1 text-fg-200 hover:text-fg-200 transition-colors"
                         aria-label={`Remove ${fileItem.file.name}`}
                       >
                         <X className="h-4 w-4" />

@@ -48,12 +48,12 @@ const ComparisonTable = forwardRef<HTMLDivElement, ComparisonTableProps>(
         {(title || description) && (
           <div className="mb-8 text-center">
             {title && (
-              <h2 className="text-2xl font-bold text-white md:text-3xl">
+              <h2 className="text-2xl font-bold text-text-loud md:text-3xl">
                 {title}
               </h2>
             )}
             {description && (
-              <p className="mt-2 text-white/70">{description}</p>
+              <p className="mt-2 text-fg-200">{description}</p>
             )}
           </div>
         )}
@@ -72,19 +72,19 @@ const ComparisonTable = forwardRef<HTMLDivElement, ComparisonTableProps>(
                     className={cn(
                       "p-4 text-center",
                       plan.highlighted &&
-                        "border-x border-t border-white/15 bg-white/[0.02] rounded-t-lg"
+                        "border-x border-t border-border-hover bg-bg-subtle rounded-t-lg"
                     )}
                   >
-                    <div className="text-base font-semibold text-white">
+                    <div className="text-base font-semibold text-text-loud">
                       {plan.name}
                     </div>
                     {plan.price && (
                       <div className="mt-1 flex items-baseline justify-center gap-1">
-                        <span className="text-2xl font-bold text-white">
+                        <span className="text-2xl font-bold text-text-loud">
                           {plan.price}
                         </span>
                         {plan.period && (
-                          <span className="text-sm text-white/70">
+                          <span className="text-sm text-fg-200">
                             / {plan.period}
                           </span>
                         )}
@@ -108,7 +108,7 @@ const ComparisonTable = forwardRef<HTMLDivElement, ComparisonTableProps>(
                     className={cn(
                       "p-4 text-center",
                       plan.highlighted &&
-                        "border-x border-b border-white/15 bg-white/[0.02] rounded-b-lg"
+                        "border-x border-b border-border-hover bg-bg-subtle rounded-b-lg"
                     )}
                   >
                     {plan.cta && (
@@ -119,7 +119,7 @@ const ComparisonTable = forwardRef<HTMLDivElement, ComparisonTableProps>(
                           "w-full rounded-md px-4 py-2.5 text-sm font-medium transition-all duration-200 active:scale-[0.98]",
                           plan.highlighted
                             ? "bg-white/80 hover:bg-white text-[#18191a]"
-                            : "border border-white/10 hover:border-white/15 bg-transparent text-white"
+                            : "border border-border-strong hover:border-border-hover bg-transparent text-text-loud"
                         )}
                       >
                         {plan.cta}
@@ -149,7 +149,7 @@ function FeatureGroup({
         <tr>
           <td
             colSpan={plans.length + 1}
-            className="px-4 pb-2 pt-6 text-sm font-medium uppercase tracking-wider text-white/70"
+            className="px-4 pb-2 pt-6 text-sm font-medium uppercase tracking-wider text-fg-200"
           >
             {group.category}
           </td>
@@ -158,16 +158,16 @@ function FeatureGroup({
       {group.features.map((feature) => (
         <tr
           key={feature.name}
-          className="border-b border-white/[0.06]"
+          className="border-b border-border"
         >
-          <th scope="row" className="p-4 text-sm text-white text-left font-normal">{feature.name}</th>
+          <th scope="row" className="p-4 text-sm text-text-loud text-left font-normal">{feature.name}</th>
           {feature.values.map((value, vi) => (
             <td
               key={vi}
               className={cn(
                 "p-4 text-center",
                 plans[vi]?.highlighted &&
-                  "border-x border-white/15 bg-white/[0.02]"
+                  "border-x border-border-hover bg-bg-subtle"
               )}
             >
               {typeof value === "boolean" ? (
@@ -178,12 +178,12 @@ function FeatureGroup({
                   />
                 ) : (
                   <X
-                    className="mx-auto h-5 w-5 text-white/70"
+                    className="mx-auto h-5 w-5 text-fg-200"
                     aria-label="Not included"
                   />
                 )
               ) : (
-                <span className="text-sm text-white/70">{value}</span>
+                <span className="text-sm text-fg-200">{value}</span>
               )}
             </td>
           ))}

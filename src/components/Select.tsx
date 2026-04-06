@@ -84,9 +84,9 @@ export type SelectProps = VariantProps<typeof selectTriggerVariants> & {
 const selectTriggerVariants = cva(
   [
     "w-full flex items-center justify-between gap-2",
-    "bg-white/5 border border-white/[0.08] rounded-lg text-sm text-white",
+    "bg-bg-subtle border border-border rounded-lg text-sm text-text-loud",
     "shadow-input outline-none transition-shadow duration-200 cursor-pointer",
-    "focus:shadow-input-focus focus:border-white/12",
+    "focus:shadow-input-focus focus:border-border-hover",
   ],
   {
     variants: {
@@ -451,7 +451,7 @@ function Select({
       <span
         className={cn(
           "truncate text-left flex-1",
-          !selectedOption && "text-white/70"
+          !selectedOption && "text-fg-200"
         )}
       >
         {selectedOption ? selectedOption.label : placeholder}
@@ -461,7 +461,7 @@ function Select({
       ) : (
         <ChevronDown
           className={cn(
-            "h-4 w-4 shrink-0 text-white/70 transition-transform duration-200",
+            "h-4 w-4 shrink-0 text-fg-200 transition-transform duration-200",
             open && "rotate-180"
           )}
         />
@@ -476,7 +476,7 @@ function Select({
         <motion.div
           className={cn(
             "absolute z-50 left-0 right-0 top-full mt-1",
-            "bg-grey-700 border border-white/[0.08] rounded-lg shadow-elevated backdrop-blur-xl overflow-hidden"
+            "bg-grey-700 border border-border rounded-lg shadow-elevated backdrop-blur-xl overflow-hidden"
           )}
           initial={{ opacity: 1, y: -4 }}
           animate={{ opacity: 1, y: 0 }}
@@ -486,12 +486,12 @@ function Select({
         >
           {/* Search input */}
           {searchable && (
-            <div className="flex items-center gap-2 border-b border-white/[0.06] px-3 py-2">
-              <Search className="h-4 w-4 shrink-0 text-white/70" />
+            <div className="flex items-center gap-2 border-b border-border px-3 py-2">
+              <Search className="h-4 w-4 shrink-0 text-fg-200" />
               <input
                 ref={searchInputRef}
                 type="text"
-                className="flex-1 bg-transparent text-sm text-white placeholder:text-white/70 outline-none"
+                className="flex-1 bg-transparent text-sm text-text-loud placeholder:text-fg-200 outline-none"
                 placeholder={searchPlaceholder}
                 value={searchQuery}
                 onChange={handleSearchChange}
@@ -510,7 +510,7 @@ function Select({
             className="max-h-[240px] overflow-y-auto py-1"
           >
             {filteredOptions.length === 0 ? (
-              <div className="px-3 py-6 text-center text-sm text-white/70">
+              <div className="px-3 py-6 text-center text-sm text-fg-200">
                 {emptyMessage}
               </div>
             ) : (
@@ -551,9 +551,9 @@ function Select({
                     data-index={index}
                     className={cn(
                       "flex items-center gap-2 mx-1 px-3 py-2 text-sm rounded-md cursor-pointer transition-colors",
-                      isHighlighted && "bg-white/[0.06]",
-                      isSelected && "text-white",
-                      !isSelected && "text-white/80",
+                      isHighlighted && "bg-bg-subtle",
+                      isSelected && "text-text-loud",
+                      !isSelected && "text-fg-200",
                       option.disabled &&
                         "opacity-50 cursor-not-allowed pointer-events-none"
                     )}
@@ -573,7 +573,7 @@ function Select({
                         {option.label}
                       </span>
                       {option.description && (
-                        <span className="block text-xs text-white/70 truncate">
+                        <span className="block text-xs text-fg-200 truncate">
                           {option.description}
                         </span>
                       )}
@@ -581,7 +581,7 @@ function Select({
 
                     {/* Check icon for selected */}
                     {isSelected && (
-                      <Check className="h-4 w-4 shrink-0 text-white" />
+                      <Check className="h-4 w-4 shrink-0 text-text-loud" />
                     )}
                   </div>
                 );
@@ -627,7 +627,7 @@ function Select({
         <label
           id={labelId}
           className={cn(
-            "text-sm font-medium text-white/80",
+            "text-sm font-medium text-fg-200",
             required &&
               "after:content-['*'] after:ml-0.5 after:text-red"
           )}
@@ -647,7 +647,7 @@ function Select({
 
       {/* Helper text */}
       {resolvedDescription && !error && (
-        <p id={`${controlId}-description`} className="text-xs text-white/70">{resolvedDescription}</p>
+        <p id={`${controlId}-description`} className="text-xs text-fg-200">{resolvedDescription}</p>
       )}
 
       {/* Error message */}

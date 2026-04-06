@@ -13,7 +13,7 @@ export type BlogCardProps = Omit<HTMLAttributes<HTMLDivElement>, "title"> & {
 const BlogCard = forwardRef<HTMLDivElement, BlogCardProps>(
   ({ className, title, excerpt, date, image, tag, href, ...props }, ref) => {
     const cardClasses = cn(
-      "group block overflow-hidden rounded-xl border border-white/[0.06] bg-card-gradient no-underline",
+      "group block overflow-hidden rounded-xl border border-border bg-card-gradient no-underline",
       className
     );
 
@@ -37,11 +37,11 @@ const BlogCard = forwardRef<HTMLDivElement, BlogCardProps>(
               {tag}
             </span>
           )}
-          <h3 className="mb-2 text-lg font-semibold text-white transition-colors group-hover:text-accent">
+          <h3 className="mb-2 text-lg font-semibold text-text-loud transition-colors group-hover:text-accent">
             {title}
           </h3>
-          <p className="line-clamp-2 text-sm text-white/70">{excerpt}</p>
-          <time className="mt-3 block text-xs text-white/70">{date}</time>
+          <p className="line-clamp-2 text-sm text-fg-200">{excerpt}</p>
+          <time className="mt-3 block text-xs text-fg-200">{date}</time>
         </div>
       </>
     );

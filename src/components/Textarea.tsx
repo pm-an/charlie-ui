@@ -109,10 +109,10 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
         disabled={disabled}
         required={required}
         className={cn(
-          "w-full bg-white/5 border border-white/[0.08] rounded-lg px-3 py-2 text-sm text-white shadow-input",
-          "placeholder:text-white/40",
+          "w-full bg-bg-subtle border border-border rounded-lg px-3 py-2 text-sm text-text-loud shadow-input",
+          "placeholder:text-text-muted",
           "outline-none transition-shadow duration-200",
-          "focus:shadow-input-focus focus:border-white/12",
+          "focus:shadow-input-focus focus:border-border-hover",
           "min-h-[80px]",
           error && "border-red/50 focus:ring-red/30 focus:border-red/50",
           className
@@ -134,14 +134,14 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
         {label && (
           <label
             htmlFor={controlId}
-            className="text-sm font-medium text-white/80"
+            className="text-sm font-medium text-fg-200"
           >
             {label}
           </label>
         )}
         {textareaElement}
         {resolvedDescription && !error && (
-          <p id={`${controlId}-description`} className="text-xs text-white/70">{resolvedDescription}</p>
+          <p id={`${controlId}-description`} className="text-xs text-fg-200">{resolvedDescription}</p>
         )}
         {error && errorMessage && (
           <p id={`${controlId}-error`} className="text-xs text-red">{errorMessage}</p>

@@ -74,7 +74,7 @@ function ToggleGroup({
     <LayoutGroup id={id}>
       <div
         ref={containerRef}
-        className={cn("inline-flex rounded-full bg-white/5 p-1", className)}
+        className={cn("inline-flex rounded-full bg-bg-subtle p-1", className)}
         role="radiogroup"
         data-slot="toggle-group"
         aria-describedby={ariaDescribedBy}
@@ -101,9 +101,10 @@ function ToggleGroup({
                 isDisabled
                   ? "cursor-not-allowed opacity-40"
                   : isActive
-                    ? "text-[#18191a] bg-white"
-                    : "text-white/70 hover:text-white"
+                    ? "bg-white"
+                    : "bg-transparent text-text-default hover:text-text-loud"
               )}
+              style={isActive && !isDisabled ? { color: "#111827" } : undefined}
               onClick={() => {
                 if (!isDisabled) setValue(option.value);
               }}

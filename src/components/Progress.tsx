@@ -147,7 +147,7 @@ const Progress = forwardRef<HTMLDivElement, ProgressProps>(
             {showValue && !indeterminate && (
               <span
                 className={cn(
-                  "absolute inset-0 flex items-center justify-center font-medium text-white/80",
+                  "absolute inset-0 flex items-center justify-center font-medium text-fg-200",
                   valueFontSizes[resolvedSize]
                 )}
               >
@@ -156,7 +156,7 @@ const Progress = forwardRef<HTMLDivElement, ProgressProps>(
             )}
           </div>
           {label && (
-            <span className="text-xs text-white/70">{label}</span>
+            <span className="text-xs text-fg-200">{label}</span>
           )}
         </div>
       );
@@ -174,7 +174,7 @@ const Progress = forwardRef<HTMLDivElement, ProgressProps>(
         <div className="flex items-center gap-3">
           <div
             className={cn(
-              "flex-1 bg-white/[0.06] rounded-full overflow-hidden",
+              "flex-1 bg-bg-subtle rounded-full overflow-hidden",
               trackSizeClasses[resolvedSize]
             )}
           >
@@ -192,13 +192,13 @@ const Progress = forwardRef<HTMLDivElement, ProgressProps>(
             />
           </div>
           {showValue && !indeterminate && (
-            <span className="text-xs font-medium text-white/70 tabular-nums">
+            <span className="text-xs font-medium text-fg-200 tabular-nums">
               {Math.round(clampedValue)}%
             </span>
           )}
         </div>
         {label && (
-          <span className="mt-1 block text-xs text-white/70">{label}</span>
+          <span className="mt-1 block text-xs text-fg-200">{label}</span>
         )}
       </div>
     );

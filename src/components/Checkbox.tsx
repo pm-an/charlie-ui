@@ -114,8 +114,8 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
           className={cn(
             checkboxVariants({ size }),
             isCheckedOrIndeterminate
-              ? "bg-accent border-accent shadow-button"
-              : "bg-white/[0.04] border-white/[0.08] shadow-xs",
+              ? "bg-accent-dim border-accent-dim shadow-button"
+              : "bg-bg-subtle border-border shadow-xs",
             resolvedError && !isCheckedOrIndeterminate && "border-red/50"
           )}
           aria-hidden="true"
@@ -133,7 +133,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
                 height={iconSize}
                 viewBox="0 0 12 12"
                 fill="none"
-                className="text-white"
+                className="text-fg-on-accent"
               >
                 <path
                   d="M2.5 6L5 8.5L9.5 3.5"
@@ -155,7 +155,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
                 height={iconSize}
                 viewBox="0 0 12 12"
                 fill="none"
-                className="text-white"
+                className="text-fg-on-accent"
               >
                 <path
                   d="M3 6H9"
@@ -171,20 +171,20 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
           <span className="flex flex-col">
             {label && (
               <span className={cn(
-                "text-sm font-medium text-white/70",
+                "text-sm font-medium text-fg-200",
                 resolvedRequired && "after:content-['*'] after:ml-0.5 after:text-red"
               )}>
                 {label}
               </span>
             )}
             {description && (
-              <span className="text-xs text-white/70">{description}</span>
+              <span className="text-xs text-fg-200">{description}</span>
             )}
           </span>
         )}
         {insideField && label && (
           <span className={cn(
-            "text-sm font-medium text-white/70",
+            "text-sm font-medium text-fg-200",
             resolvedRequired && "after:content-['*'] after:ml-0.5 after:text-red"
           )}>
             {label}

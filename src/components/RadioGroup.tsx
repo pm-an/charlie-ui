@@ -91,7 +91,7 @@ const RadioGroupRoot = forwardRef<HTMLDivElement, RadioGroupProps>(
           {...props}
         >
           {!insideField && label && (
-            <span className="text-sm font-medium text-white/80 mb-1">
+            <span className="text-sm font-medium text-fg-200 mb-1">
               {label}
             </span>
           )}
@@ -165,7 +165,7 @@ const RadioGroupItem = forwardRef<HTMLLabelElement, RadioGroupItemProps>(
             "relative mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full border transition-colors duration-150",
             isSelected
               ? "border-accent bg-transparent"
-              : "border-white/10 bg-white/5"
+              : "border-border-strong bg-bg-subtle"
           )}
           aria-hidden="true"
         >
@@ -185,12 +185,12 @@ const RadioGroupItem = forwardRef<HTMLLabelElement, RadioGroupItemProps>(
         {(label || description) && (
           <span className="flex flex-col">
             {label && (
-              <span className="text-sm font-medium text-white/80">
+              <span className="text-sm font-medium text-fg-200">
                 {label}
               </span>
             )}
             {description && (
-              <span className="text-xs text-white/70">{description}</span>
+              <span className="text-xs text-fg-200">{description}</span>
             )}
           </span>
         )}

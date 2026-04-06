@@ -1,7 +1,8 @@
 "use client";
 
-import { createContext, useContext, useMemo, type ReactNode } from "react";
+import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
 import { cn } from "../utils/cn";
+import { lightThemeBase } from "../themes/presets";
 
 /**
  * Charlie UI theme configuration.
@@ -81,13 +82,58 @@ export interface CharlieTheme {
   durationNormal?: string;
   durationModerate?: string;
   durationSlow?: string;
+
+  /** Additional semantic colors */
+  bgSubtle?: string;
+  bgSubtleHover?: string;
+  fgOnAccent?: string;
+  overlay?: string;
+
+  /** Shadow overrides */
+  shadowXs?: string;
+  shadowSoft?: string;
+  shadowCard?: string;
+  shadowCardHover?: string;
+  shadowElevated?: string;
+  shadowFloat?: string;
+  shadowButton?: string;
+  shadowButtonHover?: string;
+  shadowInput?: string;
+  shadowInputFocus?: string;
 }
 
+export type ColorMode = "dark" | "light" | "system";
+export type ResolvedColorMode = "dark" | "light";
+
 const ThemeContext = createContext<CharlieTheme>({});
+const ColorModeContext = createContext<ResolvedColorMode>("dark");
 
 /** Access the current Charlie UI theme */
 export function useTheme(): CharlieTheme {
   return useContext(ThemeContext);
+}
+
+/** Returns the resolved color mode ("dark" or "light") */
+export function useColorMode(): ResolvedColorMode {
+  return useContext(ColorModeContext);
+}
+
+const COLOR_SCHEME_QUERY = "(prefers-color-scheme: dark)";
+
+function useSystemColorScheme(): ResolvedColorMode {
+  const [isDark, setIsDark] = useState(() => {
+    if (typeof window === "undefined") return true;
+    return window.matchMedia(COLOR_SCHEME_QUERY).matches;
+  });
+
+  useEffect(() => {
+    const mql = window.matchMedia(COLOR_SCHEME_QUERY);
+    const handler = (e: MediaQueryListEvent) => setIsDark(e.matches);
+    mql.addEventListener("change", handler);
+    return () => mql.removeEventListener("change", handler);
+  }, []);
+
+  return isDark ? "dark" : "light";
 }
 
 /** Map a CharlieTheme object to CSS custom property declarations */
@@ -148,6 +194,20 @@ function themeToCSS(theme: CharlieTheme): Record<string, string> {
     durationNormal: "--charlie-duration-normal",
     durationModerate: "--charlie-duration-moderate",
     durationSlow: "--charlie-duration-slow",
+    bgSubtle: "--charlie-bg-subtle",
+    bgSubtleHover: "--charlie-bg-subtle-hover",
+    fgOnAccent: "--charlie-fg-on-accent",
+    overlay: "--charlie-overlay",
+    shadowXs: "--charlie-shadow-xs",
+    shadowSoft: "--charlie-shadow-soft",
+    shadowCard: "--charlie-shadow-card",
+    shadowCardHover: "--charlie-shadow-card-hover",
+    shadowElevated: "--charlie-shadow-elevated",
+    shadowFloat: "--charlie-shadow-float",
+    shadowButton: "--charlie-shadow-button",
+    shadowButtonHover: "--charlie-shadow-button-hover",
+    shadowInput: "--charlie-shadow-input",
+    shadowInputFocus: "--charlie-shadow-input-focus",
   };
 
   const styles: Record<string, string> = {};
@@ -163,6 +223,8 @@ function themeToCSS(theme: CharlieTheme): Record<string, string> {
 export interface ThemeProviderProps {
   /** Theme overrides */
   theme?: CharlieTheme;
+  /** Color mode: "dark" (default), "light", or "system" (auto-detect) */
+  mode?: ColorMode;
   /** Scoped to this provider's children only (uses a wrapper div) */
   children: ReactNode;
   /** Additional className for the wrapper div */
@@ -179,26 +241,52 @@ export interface ThemeProviderProps {
  * </ThemeProvider>
  * ```
  *
+ * Light mode:
+ * ```tsx
+ * <ThemeProvider mode="light">
+ *   <App />
+ * </ThemeProvider>
+ * ```
+ *
  * You can also nest ThemeProviders for scoped theming:
  * ```tsx
  * <ThemeProvider theme={{ accent: "#ff6363" }}>
  *   <Sidebar />
- *   <ThemeProvider theme={{ accent: "#59d499" }}>
+ *   <ThemeProvider mode="light" theme={{ accent: "#59d499" }}>
  *     <SpecialSection />
  *   </ThemeProvider>
  * </ThemeProvider>
  * ```
  */
-export function ThemeProvider({ theme = {}, children, className }: ThemeProviderProps) {
+export function ThemeProvider({ theme = {}, mode = "dark", children, className }: ThemeProviderProps) {
   const parentTheme = useTheme();
-  const mergedTheme = useMemo(() => ({ ...parentTheme, ...theme }), [parentTheme, theme]);
+  const systemMode = useSystemColorScheme();
+
+  const resolvedMode: ResolvedColorMode = useMemo(() => {
+    if (mode === "system") return systemMode;
+    return mode;
+  }, [mode, systemMode]);
+
+  const mergedTheme = useMemo(() => {
+    if (resolvedMode === "light") {
+      return { ...parentTheme, ...lightThemeBase, ...theme };
+    }
+    return { ...parentTheme, ...theme };
+  }, [parentTheme, theme, resolvedMode]);
+
   const cssVars = useMemo(() => themeToCSS(mergedTheme), [mergedTheme]);
 
   return (
-    <ThemeContext.Provider value={mergedTheme}>
-      <div className={cn("contents", className)} style={cssVars as React.CSSProperties}>
-        {children}
-      </div>
-    </ThemeContext.Provider>
+    <ColorModeContext.Provider value={resolvedMode}>
+      <ThemeContext.Provider value={mergedTheme}>
+        <div
+          className={cn("contents", className)}
+          style={cssVars as React.CSSProperties}
+          data-charlie-mode={resolvedMode}
+        >
+          {children}
+        </div>
+      </ThemeContext.Provider>
+    </ColorModeContext.Provider>
   );
 }

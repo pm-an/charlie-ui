@@ -38,10 +38,10 @@ const drawerVariants = cva("fixed z-50 flex flex-col bg-bg-200 shadow-xl", {
       full: "",
     },
     side: {
-      right: "right-0 top-0 h-full border-l border-white/10",
-      left: "left-0 top-0 h-full border-r border-white/10",
-      top: "top-0 left-0 w-full border-b border-white/10",
-      bottom: "bottom-0 left-0 w-full border-t border-white/10",
+      right: "right-0 top-0 h-full border-l border-border-strong",
+      left: "left-0 top-0 h-full border-r border-border-strong",
+      top: "top-0 left-0 w-full border-b border-border-strong",
+      bottom: "bottom-0 left-0 w-full border-t border-border-strong",
     },
   },
   compoundVariants: [
@@ -116,7 +116,7 @@ function Drawer({
           {/* Backdrop */}
           {overlay && (
             <motion.div
-              className="absolute inset-0 bg-black/60"
+              className="absolute inset-0 bg-overlay"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -146,12 +146,12 @@ function Drawer({
           >
             {/* Header */}
             {(title || showClose) && (
-              <div className="flex items-center justify-between px-6 py-4 border-b border-white/10">
+              <div className="flex items-center justify-between px-6 py-4 border-b border-border-strong">
                 <div className="min-w-0">
                   {title && (
                     <h2
                       id={titleId}
-                      className="text-lg font-semibold text-white"
+                      className="text-lg font-semibold text-text-loud"
                     >
                       {title}
                     </h2>
@@ -159,7 +159,7 @@ function Drawer({
                   {description && (
                     <p
                       id={descriptionId}
-                      className="text-sm text-white/70 mt-1"
+                      className="text-sm text-fg-200 mt-1"
                     >
                       {description}
                     </p>
@@ -169,7 +169,7 @@ function Drawer({
                 {showClose && (
                   <button
                     type="button"
-                    className="shrink-0 rounded-md p-1 text-white/70 transition-colors hover:bg-white/5 hover:text-white"
+                    className="shrink-0 rounded-md p-1 text-fg-200 transition-colors hover:bg-bg-subtle hover:text-text-loud"
                     onClick={onClose}
                     aria-label="Close"
                   >

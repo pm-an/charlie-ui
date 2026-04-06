@@ -36,7 +36,7 @@ describe("ScrollArea", () => {
       "[&::-webkit-scrollbar]:w-1.5"
     );
     expect(container.firstChild).toHaveClass(
-      "[&::-webkit-scrollbar-thumb]:bg-white/10"
+      "[&::-webkit-scrollbar-thumb]:bg-bg-subtle-hover"
     );
     expect(container.firstChild).toHaveClass(
       "[&::-webkit-scrollbar-thumb]:rounded-full"
@@ -51,10 +51,10 @@ describe("ScrollArea", () => {
       "[&::-webkit-scrollbar]:w-2.5"
     );
     expect(container.firstChild).toHaveClass(
-      "[&::-webkit-scrollbar-track]:bg-white/5"
+      "[&::-webkit-scrollbar-track]:bg-bg-subtle"
     );
     expect(container.firstChild).toHaveClass(
-      "[&::-webkit-scrollbar-thumb]:bg-white/15"
+      "[&::-webkit-scrollbar-thumb]:bg-bg-subtle-hover"
     );
   });
 

@@ -105,7 +105,7 @@ describe("SettingsPage", () => {
         </SettingsPage>
       );
       const activeButton = screen.getByText("Notifications").closest("button");
-      expect(activeButton).toHaveClass("text-white");
+      expect(activeButton).toHaveClass("text-text-loud");
       expect(activeButton).toHaveClass("font-medium");
     });
 

@@ -66,7 +66,7 @@ describe("AnnouncementBar", () => {
       const { container } = render(
         <AnnouncementBar message="Test" variant="default" />
       );
-      expect(container.firstChild).toHaveClass("bg-white/5");
+      expect(container.firstChild).toHaveClass("bg-bg-subtle");
     });
 
     it("renders info variant", () => {
@@ -94,7 +94,7 @@ describe("AnnouncementBar", () => {
       const { container } = render(
         <AnnouncementBar message="Test" variant="accent" />
       );
-      expect(container.firstChild).toHaveClass("bg-red/10");
+      expect(container.firstChild).toHaveClass("bg-accent/10");
     });
   });
 

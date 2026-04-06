@@ -15,7 +15,7 @@ import { cn } from "../utils/cn";
 
 const paginationButtonVariants = cva(
   [
-    "rounded-md text-white/70 hover:bg-white/5 hover:text-white",
+    "rounded-md text-fg-200 hover:bg-bg-subtle hover:text-text-loud",
     "transition-colors inline-flex items-center justify-center",
     "disabled:opacity-40 disabled:cursor-not-allowed disabled:pointer-events-none",
   ],
@@ -160,7 +160,7 @@ const Pagination = forwardRef<HTMLElement, PaginationProps>(
                 key={`ellipsis-${index}`}
                 className={cn(
                   paginationButtonVariants({ size }),
-                  "text-white/70 cursor-default hover:bg-transparent hover:text-white/70"
+                  "text-fg-200 cursor-default hover:bg-transparent hover:text-fg-200"
                 )}
                 role="presentation"
               >
@@ -175,7 +175,7 @@ const Pagination = forwardRef<HTMLElement, PaginationProps>(
               key={page}
               type="button"
               className={buttonBase(
-                isActive ? "bg-white/10 text-white font-medium" : undefined
+                isActive ? "bg-bg-subtle-hover text-text-loud font-medium" : undefined
               )}
               onClick={() => onPageChange(page)}
               disabled={disabled}

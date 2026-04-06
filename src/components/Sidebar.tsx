@@ -79,8 +79,8 @@ const SidebarRoot = forwardRef<HTMLElement, SidebarProps>(
           className={cn(
             "fixed top-0 h-screen z-40 flex flex-col bg-bg-100 overflow-hidden",
             side === "left"
-              ? "left-0 border-r border-white/6"
-              : "right-0 border-l border-white/6",
+              ? "left-0 border-r border-border"
+              : "right-0 border-l border-border",
             className
           )}
           {...(props as Record<string, unknown>)}
@@ -105,7 +105,7 @@ const SidebarHeader = forwardRef<HTMLDivElement, SidebarHeaderProps>(
       <div
         ref={ref}
         className={cn(
-          "px-4 py-4 border-b border-white/6",
+          "px-4 py-4 border-b border-border",
           collapsed && "flex items-center justify-center",
           className
         )}
@@ -131,7 +131,7 @@ const SidebarContent = forwardRef<HTMLDivElement, SidebarContentProps>(
           "flex-1 overflow-y-auto py-2",
           "[&::-webkit-scrollbar]:w-1.5",
           "[&::-webkit-scrollbar-track]:bg-transparent",
-          "[&::-webkit-scrollbar-thumb]:bg-white/10",
+          "[&::-webkit-scrollbar-thumb]:bg-bg-subtle-hover",
           "[&::-webkit-scrollbar-thumb]:rounded-full",
           className
         )}
@@ -153,7 +153,7 @@ const SidebarFooter = forwardRef<HTMLDivElement, SidebarFooterProps>(
     return (
       <div
         ref={ref}
-        className={cn("px-4 py-4 border-t border-white/6", className)}
+        className={cn("px-4 py-4 border-t border-border", className)}
         {...props}
       >
         {children}
@@ -176,7 +176,7 @@ const SidebarGroup = forwardRef<HTMLDivElement, SidebarGroupProps>(
     return (
       <div ref={ref} className={cn("px-3 py-2", className)} {...props}>
         {label && !collapsed && (
-          <div className="text-xs font-medium text-white/70 uppercase tracking-wider px-3 mb-1">
+          <div className="text-xs font-medium text-fg-200 uppercase tracking-wider px-3 mb-1">
             {label}
           </div>
         )}
@@ -219,8 +219,8 @@ const SidebarItem = forwardRef<HTMLButtonElement, SidebarItemProps>(
     const itemClasses = cn(
       "flex items-center gap-3 px-3 py-2 text-sm transition-colors w-full",
       active
-        ? "bg-white/5 text-white font-medium border-l-2 border-accent rounded-r-md"
-        : "text-white/70 hover:bg-white/5 hover:text-white rounded-md",
+        ? "bg-bg-subtle text-text-loud font-medium border-l-2 border-accent rounded-r-md"
+        : "text-fg-200 hover:bg-bg-subtle hover:text-text-loud rounded-md",
       disabled && "opacity-40 cursor-not-allowed pointer-events-none",
       collapsed && "justify-center px-0",
       className
@@ -235,7 +235,7 @@ const SidebarItem = forwardRef<HTMLButtonElement, SidebarItemProps>(
         )}
         {!collapsed && <span className="truncate">{label}</span>}
         {!collapsed && badge !== undefined && badge !== null && (
-          <span className="ml-auto text-xs bg-accent text-white px-1.5 py-0.5 rounded-full min-w-[20px] text-center">
+          <span className="ml-auto text-xs bg-accent-dim text-fg-on-accent px-1.5 py-0.5 rounded-full min-w-[20px] text-center">
             {badge}
           </span>
         )}
@@ -284,7 +284,7 @@ const SidebarSeparator = forwardRef<HTMLDivElement, SidebarSeparatorProps>(
       <div
         ref={ref}
         role="separator"
-        className={cn("h-px mx-3 my-2 bg-white/6", className)}
+        className={cn("h-px mx-3 my-2 bg-border", className)}
         {...props}
       />
     );

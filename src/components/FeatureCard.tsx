@@ -4,8 +4,8 @@ import { cn } from "../utils/cn";
 
 const featureCardVariants = cva(
   [
-    "bg-card-gradient rounded-xl border border-white/[0.06]",
-    "hover:border-white/10 transition-all duration-300 ease-[cubic-bezier(0.23,1,0.32,1)]",
+    "bg-card-gradient rounded-xl border border-border",
+    "hover:border-border-strong transition-all duration-300 ease-[cubic-bezier(0.23,1,0.32,1)]",
     "transform-gpu hover:-translate-y-0.5 shadow-card hover:shadow-card-hover",
   ],
   {
@@ -60,14 +60,14 @@ const FeatureCard = forwardRef<HTMLDivElement, FeatureCardProps>(
           textAlign === "right" && "text-right",
         )}>
           <div className={cn(
-            "mb-4 flex h-10 w-10 items-center justify-center rounded-lg bg-white/5",
+            "mb-4 flex h-10 w-10 items-center justify-center rounded-lg bg-bg-subtle",
             iconAlign === "center" && "mx-auto",
             iconAlign === "right" && "ml-auto",
           )}>
-            <span className="text-white/80">{icon}</span>
+            <span className="text-fg-200">{icon}</span>
           </div>
-          <h3 className="mb-2 text-base font-semibold text-white">{title}</h3>
-          <p className="text-sm leading-relaxed text-white/70">{description}</p>
+          <h3 className="mb-2 text-base font-semibold text-text-loud">{title}</h3>
+          <p className="text-sm leading-relaxed text-fg-200">{description}</p>
         </div>
       </>
     );

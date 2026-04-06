@@ -136,8 +136,8 @@ const Switch = forwardRef<HTMLInputElement, SwitchProps>(
           data-state={checked ? "checked" : "unchecked"}
           className={cn(
             switchVariants({ size }),
-            checked ? "bg-accent shadow-[inset_0_1px_1px_rgba(0,0,0,0.1)]" : "bg-white/[0.08] shadow-xs",
-            "border border-white/[0.04]",
+            checked ? "bg-accent shadow-[inset_0_1px_1px_rgba(0,0,0,0.1)]" : "bg-bg-subtle-hover shadow-xs",
+            "border border-border",
             resolvedDisabled && "opacity-65 cursor-not-allowed",
             className
           )}
@@ -161,7 +161,7 @@ const Switch = forwardRef<HTMLInputElement, SwitchProps>(
             {label && (
               <span
                 id={labelId}
-                className="text-sm font-medium text-white/70 select-none"
+                className="text-sm font-medium text-fg-200 select-none"
               >
                 {label}
               </span>
@@ -169,7 +169,7 @@ const Switch = forwardRef<HTMLInputElement, SwitchProps>(
             {description && (
               <span
                 id={descriptionId}
-                className="text-xs text-white/70 select-none"
+                className="text-xs text-fg-200 select-none"
               >
                 {description}
               </span>

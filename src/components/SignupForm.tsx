@@ -68,7 +68,7 @@ const SignupForm = forwardRef<HTMLDivElement, SignupFormProps>(
         ref={ref}
         data-slot="signup-form"
         className={cn(
-          "bg-card-gradient rounded-xl border border-white/[0.06] p-8 w-full max-w-md",
+          "bg-card-gradient rounded-xl border border-border p-8 w-full max-w-md",
           className
         )}
         {...props}
@@ -78,8 +78,8 @@ const SignupForm = forwardRef<HTMLDivElement, SignupFormProps>(
         )}
 
         <div className="mb-6">
-          <h2 className="text-xl font-semibold text-white">{title}</h2>
-          <p className="mt-1 text-sm text-white/70">{description}</p>
+          <h2 className="text-xl font-semibold text-text-loud">{title}</h2>
+          <p className="mt-1 text-sm text-fg-200">{description}</p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -123,18 +123,18 @@ const SignupForm = forwardRef<HTMLDivElement, SignupFormProps>(
                 className="mt-0.5"
                 aria-label="I agree to the Terms of Service and Privacy Policy"
               />
-              <span className="text-sm text-white/70">
+              <span className="text-sm text-fg-200">
                 I agree to the{" "}
                 <a
                   href={termsHref}
-                  className="text-white/80 hover:text-white transition-colors duration-200 underline"
+                  className="text-fg-200 hover:text-text-loud transition-colors duration-200 underline"
                 >
                   Terms of Service
                 </a>{" "}
                 and{" "}
                 <a
                   href={privacyHref}
-                  className="text-white/80 hover:text-white transition-colors duration-200 underline"
+                  className="text-fg-200 hover:text-text-loud transition-colors duration-200 underline"
                 >
                   Privacy Policy
                 </a>
@@ -150,9 +150,9 @@ const SignupForm = forwardRef<HTMLDivElement, SignupFormProps>(
         {socialProviders && socialProviders.length > 0 && (
           <>
             <div className="flex items-center gap-3 w-full my-6">
-              <div className="flex-1 h-px bg-white/6" />
-              <span className="text-xs text-white/70 shrink-0">or</span>
-              <div className="flex-1 h-px bg-white/6" />
+              <div className="flex-1 h-px bg-border" />
+              <span className="text-xs text-fg-200 shrink-0">or</span>
+              <div className="flex-1 h-px bg-border" />
             </div>
 
             <div className="space-y-3">
@@ -173,11 +173,11 @@ const SignupForm = forwardRef<HTMLDivElement, SignupFormProps>(
         )}
 
         {loginHref && (
-          <p className="mt-6 text-center text-sm text-white/70">
+          <p className="mt-6 text-center text-sm text-fg-200">
             {loginLabel}{" "}
             <a
               href={loginHref}
-              className="text-white/70 hover:text-white transition-colors duration-200"
+              className="text-fg-200 hover:text-text-loud transition-colors duration-200"
             >
               Sign in
             </a>

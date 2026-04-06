@@ -33,14 +33,14 @@ function CodeBlock({
       {(language || showCopy) && (
         <div className="absolute top-3 right-3 flex items-center gap-2">
           {language && (
-            <span className="text-xs text-white/70">{language}</span>
+            <span className="text-xs text-fg-200">{language}</span>
           )}
           {showCopy && (
             <button
               type="button"
               onClick={handleCopy}
               className={cn(
-                "p-1 rounded text-white/70 hover:text-white/70",
+                "p-1 rounded text-fg-200 hover:text-fg-200",
                 "transition-colors duration-200",
                 "opacity-0 group-hover:opacity-100"
               )}
@@ -57,8 +57,8 @@ function CodeBlock({
       )}
       <pre
         className={cn(
-          "bg-grey-800 border border-white/6 rounded-lg p-4",
-          "font-mono text-sm text-white/80",
+          "bg-grey-800 border border-border rounded-lg p-4",
+          "font-mono text-sm text-text-loud",
           "whitespace-pre-wrap overflow-x-auto",
           className
         )}

@@ -25,12 +25,12 @@ function Newsletter({ title, description, onSubmit, className }: NewsletterProps
     <div
       data-slot="newsletter"
       className={cn(
-        "bg-card-gradient rounded-xl border border-white/[0.06] p-5 md:p-8 text-center",
+        "bg-card-gradient rounded-xl border border-border p-5 md:p-8 text-center",
         className
       )}
     >
-      <h3 className="text-white font-semibold text-xl mb-2">{title}</h3>
-      <p className="text-white/70 text-sm mb-6">{description}</p>
+      <h3 className="text-text-loud font-semibold text-xl mb-2">{title}</h3>
+      <p className="text-fg-200 text-sm mb-6">{description}</p>
       <form onSubmit={handleSubmit} className="flex flex-col md:flex-row gap-3">
         <label htmlFor="newsletter-email" className="sr-only">Email address</label>
         <input
@@ -40,7 +40,7 @@ function Newsletter({ title, description, onSubmit, className }: NewsletterProps
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="Enter your email"
-          className="w-full md:flex-1 bg-white/5 border border-white/[0.06] rounded-md h-11 px-3 text-sm text-white placeholder-white/60 outline-none focus:border-white/15 transition-colors"
+          className="w-full md:flex-1 bg-bg-subtle border border-border rounded-md h-11 px-3 text-sm text-text-loud placeholder-text-muted outline-none focus:border-border-hover transition-colors"
         />
         <button
           type="submit"

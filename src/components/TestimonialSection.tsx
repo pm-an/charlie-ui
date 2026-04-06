@@ -66,18 +66,18 @@ const TestimonialSection = forwardRef<HTMLElement, TestimonialSectionProps>(
           <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
             {/* Featured testimonial (first item) */}
             {testimonials.length > 0 && (
-              <div className="bg-card-gradient rounded-xl border border-white/[0.06] p-8 flex flex-col justify-center">
+              <div className="bg-card-gradient rounded-xl border border-border p-8 flex flex-col justify-center">
                 <span
                   aria-hidden="true"
-                  className="mb-4 block select-none text-4xl leading-none text-white/70"
+                  className="mb-4 block select-none text-4xl leading-none text-fg-200"
                 >
                   &ldquo;
                 </span>
-                <blockquote className="text-lg italic leading-relaxed text-white/80 md:text-xl">
+                <blockquote className="text-lg italic leading-relaxed text-fg-200 md:text-xl">
                   {testimonials[0].quote}
                 </blockquote>
                 <div className="mt-6 flex items-center gap-3">
-                  <div className="h-12 w-12 shrink-0 overflow-hidden rounded-full bg-white/10">
+                  <div className="h-12 w-12 shrink-0 overflow-hidden rounded-full bg-bg-subtle-hover">
                     {testimonials[0].avatar && (
                       <img
                         src={testimonials[0].avatar}
@@ -87,10 +87,10 @@ const TestimonialSection = forwardRef<HTMLElement, TestimonialSectionProps>(
                     )}
                   </div>
                   <div className="min-w-0">
-                    <p className="text-base font-medium text-white">
+                    <p className="text-base font-medium text-text-loud">
                       {testimonials[0].author}
                     </p>
-                    <p className="text-sm text-white/70">
+                    <p className="text-sm text-fg-200">
                       {testimonials[0].role}
                       {testimonials[0].company && (
                         <>, {testimonials[0].company}</>

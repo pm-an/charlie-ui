@@ -263,7 +263,7 @@ function Spinner({
       {spinnerVisual}
       <span
         className={
-          showLabel ? "text-sm text-white/70 mt-2" : "sr-only"
+          showLabel ? "text-sm text-fg-200 mt-2" : "sr-only"
         }
       >
         {label}

@@ -120,7 +120,7 @@ function Toast({
           data-position={resolvedPosition}
           className={cn(
             positionClasses[resolvedPosition],
-            "rounded-xl border border-white/10 bg-grey-700/95 p-4 shadow-float backdrop-blur-xl",
+            "rounded-xl border border-border-strong bg-grey-700/95 p-4 shadow-float backdrop-blur-xl",
             className
           )}
           initial={anim.initial}
@@ -132,16 +132,16 @@ function Toast({
           <div className="flex gap-3">
             <Icon className={cn("mt-0.5 h-5 w-5 shrink-0", iconColor)} />
             <div className="flex-1 min-w-0">
-              <p className="text-sm font-medium text-white">{title}</p>
+              <p className="text-sm font-medium text-text-loud">{title}</p>
               {description && (
-                <p className="mt-0.5 text-xs text-white/70">{description}</p>
+                <p className="mt-0.5 text-xs text-fg-200">{description}</p>
               )}
               {action && <div className="mt-2">{action}</div>}
             </div>
             {onClose && (
               <button
                 type="button"
-                className="shrink-0 -mt-1 -mr-1 p-1 rounded-md text-white/50 transition-colors hover:text-white hover:bg-white/5"
+                className="shrink-0 -mt-1 -mr-1 p-1 rounded-md text-text-muted transition-colors hover:text-text-loud hover:bg-bg-subtle"
                 onClick={onClose}
                 aria-label="Close"
               >

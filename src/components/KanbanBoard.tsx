@@ -71,12 +71,12 @@ const KanbanBoard = forwardRef<HTMLDivElement, KanbanBoardProps>(
                   <div
                     className={cn(
                       "h-2 w-2 rounded-full",
-                      columnDotColors[column.color] || "bg-white/40"
+                      columnDotColors[column.color] || "bg-text-muted"
                     )}
                   />
                 )}
-                <h3 className="text-sm font-medium text-white">{column.title}</h3>
-                <span className="inline-flex items-center rounded-md bg-white/5 px-1.5 py-0.5 text-[10px] font-medium text-white/70">
+                <h3 className="text-sm font-medium text-text-loud">{column.title}</h3>
+                <span className="inline-flex items-center rounded-md bg-bg-subtle px-1.5 py-0.5 text-[10px] font-medium text-fg-200">
                   {column.cards.length}
                 </span>
               </div>
@@ -84,7 +84,7 @@ const KanbanBoard = forwardRef<HTMLDivElement, KanbanBoardProps>(
                 <button
                   type="button"
                   onClick={() => onAddCard(column.id)}
-                  className="p-1 text-white/70 hover:text-white/80 transition-colors rounded hover:bg-white/5"
+                  className="p-1 text-fg-200 hover:text-fg-200 transition-colors rounded hover:bg-bg-subtle"
                   aria-label={`Add card to ${column.title}`}
                 >
                   <Plus className="h-4 w-4" />
@@ -107,13 +107,13 @@ const KanbanBoard = forwardRef<HTMLDivElement, KanbanBoardProps>(
                     }
                   }}
                   className={cn(
-                    "bg-card-gradient rounded-lg border border-white/[0.06] p-3 transition-colors",
-                    onCardClick && "cursor-pointer hover:border-white/15"
+                    "bg-card-gradient rounded-lg border border-border p-3 transition-colors",
+                    onCardClick && "cursor-pointer hover:border-border-hover"
                   )}
                 >
-                  <p className="text-sm font-medium text-white">{card.title}</p>
+                  <p className="text-sm font-medium text-text-loud">{card.title}</p>
                   {card.description && (
-                    <p className="text-xs text-white/70 mt-1 line-clamp-2">
+                    <p className="text-xs text-fg-200 mt-1 line-clamp-2">
                       {card.description}
                     </p>
                   )}
@@ -128,7 +128,7 @@ const KanbanBoard = forwardRef<HTMLDivElement, KanbanBoardProps>(
                               "inline-flex items-center rounded px-1.5 py-0.5 text-[10px] font-medium",
                               tag.color && tagColors[tag.color]
                                 ? tagColors[tag.color]
-                                : "bg-white/5 text-white/70"
+                                : "bg-bg-subtle text-fg-200"
                             )}
                           >
                             {tag.label}
@@ -136,7 +136,7 @@ const KanbanBoard = forwardRef<HTMLDivElement, KanbanBoardProps>(
                         ))}
                       </div>
                       {card.assignee && (
-                        <div className="h-6 w-6 rounded-full bg-white/10 shrink-0 flex items-center justify-center overflow-hidden" title={card.assignee.name}>
+                        <div className="h-6 w-6 rounded-full bg-bg-subtle-hover shrink-0 flex items-center justify-center overflow-hidden" title={card.assignee.name}>
                           {card.assignee.avatar ? (
                             <img
                               src={card.assignee.avatar}
@@ -144,7 +144,7 @@ const KanbanBoard = forwardRef<HTMLDivElement, KanbanBoardProps>(
                               className="h-full w-full object-cover"
                             />
                           ) : (
-                            <span className="text-[10px] font-medium text-white/70">
+                            <span className="text-[10px] font-medium text-fg-200">
                               {card.assignee.name.charAt(0).toUpperCase()}
                             </span>
                           )}

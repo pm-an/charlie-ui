@@ -223,7 +223,7 @@ describe("Switch", () => {
 
     it("has muted background when unchecked", () => {
       render(<Switch checked={false} />);
-      expect(screen.getByRole("switch")).toHaveClass("bg-white/10");
+      expect(screen.getByRole("switch")).toHaveClass("bg-bg-subtle-hover");
     });
 
     it("has opacity and cursor styles when disabled", () => {

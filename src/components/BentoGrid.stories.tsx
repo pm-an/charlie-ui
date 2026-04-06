@@ -9,7 +9,7 @@ const meta: Meta<typeof BentoGrid> = {
   parameters: { layout: "fullscreen" },
   decorators: [
     (Story) => (
-      <div className="bg-[#0a0a0b] p-8 md:p-12">
+      <div className="bg-bg p-8 md:p-12">
         <Story />
       </div>
     ),

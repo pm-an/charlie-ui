@@ -140,7 +140,7 @@ describe("CopyButton", () => {
   describe("variants", () => {
     it("renders default variant", () => {
       render(<CopyButton value="test" variant="default" />);
-      expect(screen.getByRole("button")).toHaveClass("bg-white/5");
+      expect(screen.getByRole("button")).toHaveClass("bg-bg-subtle");
     });
 
     it("renders ghost variant", () => {

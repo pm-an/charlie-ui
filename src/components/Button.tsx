@@ -15,22 +15,22 @@ const buttonVariants = cva(
     variants: {
       variant: {
         primary: [
-          "bg-accent hover:bg-accent/90 text-white",
+          "bg-accent-dim hover:bg-accent-dim/90 text-fg-on-accent",
         ],
         neutral: [
           "bg-button-bg hover:bg-button-bg-hover text-button-fg",
-          "shadow-[inset_0_0.5px_0_0_rgba(255,255,255,0.3)]",
+          "shadow-soft",
         ],
         secondary: [
-          "border border-white/10 hover:border-white/15",
-          "bg-transparent text-white",
+          "border border-border-strong hover:border-border-hover",
+          "bg-transparent text-text-loud",
         ],
         ghost: [
-          "bg-transparent hover:bg-white/5",
-          "text-white/70 hover:text-white",
+          "bg-transparent hover:bg-bg-subtle",
+          "text-fg-200 hover:text-text-loud",
         ],
         danger: [
-          "bg-red hover:bg-red/90 text-white",
+          "bg-red-dim hover:bg-red-dim/90 text-fg-on-accent",
         ],
       },
       size: {
@@ -55,6 +55,10 @@ export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> &
     rightIcon?: ReactNode;
     loading?: boolean;
     asChild?: boolean;
+    /** Small badge rendered at a corner of the button */
+    badge?: ReactNode;
+    /** Which corner to place the badge */
+    badgePosition?: "top-left" | "top-right" | "bottom-left" | "bottom-right";
   };
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
@@ -69,16 +73,34 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       disabled,
       children,
       asChild = false,
+      badge,
+      badgePosition = "top-right",
       ...props
     },
     ref
   ) => {
+    const badgePositionClasses = {
+      "top-left": "-top-2 -left-2",
+      "top-right": "-top-2 -right-2",
+      "bottom-left": "-bottom-2 -left-2",
+      "bottom-right": "-bottom-2 -right-2",
+    };
+
+    const badgeEl = badge != null && (
+      <span className={cn(
+        "absolute flex items-center justify-center rounded-full bg-green/20 backdrop-blur-sm border border-green/30 px-1.5 py-0.5 text-[10px] font-bold leading-none text-green shadow-sm",
+        badgePositionClasses[badgePosition]
+      )}>
+        {badge}
+      </span>
+    );
+
     if (asChild) {
       return (
         <Slot
           ref={ref as React.Ref<HTMLElement>}
           data-slot="button"
-          className={cn(buttonVariants({ variant, size }), className)}
+          className={cn(buttonVariants({ variant, size }), badge != null && "relative", className)}
           {...props}
         >
           {children as React.ReactElement}
@@ -90,7 +112,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       <button
         ref={ref}
         data-slot="button"
-        className={cn(buttonVariants({ variant, size }), className)}
+        className={cn(buttonVariants({ variant, size }), badge != null && "relative", className)}
         disabled={disabled || loading}
         {...props}
       >
@@ -105,6 +127,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
             {rightIcon}
           </span>
         )}
+        {badgeEl}
       </button>
     );
   }

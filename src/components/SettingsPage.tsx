@@ -64,11 +64,11 @@ const SettingsPageRoot = forwardRef<HTMLDivElement, SettingsPageProps>(
           {/* Page header */}
           <div
             data-slot="settings-page-header"
-            className="border-b border-white/[0.06] px-6 py-8"
+            className="border-b border-border px-6 py-8"
           >
-            <h1 className="text-2xl font-bold text-white">{title}</h1>
+            <h1 className="text-2xl font-bold text-text-loud">{title}</h1>
             {description && (
-              <p className="mt-1 text-sm text-white/70">{description}</p>
+              <p className="mt-1 text-sm text-fg-200">{description}</p>
             )}
           </div>
 
@@ -82,7 +82,7 @@ const SettingsPageRoot = forwardRef<HTMLDivElement, SettingsPageProps>(
                   // Mobile: horizontal scroll tabs
                   "flex md:flex-col",
                   "overflow-x-auto md:overflow-x-visible",
-                  "border-b md:border-b-0 md:border-r border-white/[0.06]",
+                  "border-b md:border-b-0 md:border-r border-border",
                   "w-full md:w-48 shrink-0",
                   "px-2 md:px-0 md:py-4"
                 )}
@@ -97,8 +97,8 @@ const SettingsPageRoot = forwardRef<HTMLDivElement, SettingsPageProps>(
                       "flex items-center gap-2 px-4 py-2 text-sm whitespace-nowrap transition-colors",
                       "rounded-md md:rounded-none md:rounded-r-md",
                       activeSection === section.id
-                        ? "text-white bg-white/5 font-medium md:border-l-2 md:border-accent"
-                        : "text-white/70 hover:text-white hover:bg-white/5"
+                        ? "text-text-loud bg-bg-subtle font-medium md:border-l-2 md:border-accent"
+                        : "text-fg-200 hover:text-text-loud hover:bg-bg-subtle"
                     )}
                   >
                     {section.icon && (
@@ -143,14 +143,14 @@ const SettingsSection = forwardRef<HTMLDivElement, SettingsSectionProps>(
         id={`settings-section-${id}`}
         data-slot="settings-section"
         className={cn(
-          "border-b border-white/[0.06] pb-8 mb-8 last:border-b-0 last:mb-0",
+          "border-b border-border pb-8 mb-8 last:border-b-0 last:mb-0",
           className
         )}
         {...props}
       >
-        <h2 className="text-lg font-semibold text-white">{title}</h2>
+        <h2 className="text-lg font-semibold text-text-loud">{title}</h2>
         {description && (
-          <p className="mt-1 text-sm text-white/70">{description}</p>
+          <p className="mt-1 text-sm text-fg-200">{description}</p>
         )}
         <div className="mt-6">{children}</div>
       </div>

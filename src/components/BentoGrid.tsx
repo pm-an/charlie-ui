@@ -31,7 +31,7 @@ const BentoGridItem = forwardRef<HTMLDivElement, BentoGridItemProps>(
         ref={ref}
         data-slot="bento-grid-item"
         className={cn(
-          "bg-card-gradient rounded-xl border border-white/[0.06] p-6 overflow-hidden relative",
+          "bg-card-gradient rounded-xl border border-border p-6 overflow-hidden relative",
           colSpan === 2 && "md:col-span-2",
           rowSpan === 2 && "md:row-span-2",
           image && "p-0",
@@ -50,10 +50,10 @@ const BentoGridItem = forwardRef<HTMLDivElement, BentoGridItemProps>(
             {(title || description) && (
               <div className="relative z-10 flex h-full flex-col justify-end p-6">
                 {title && (
-                  <h3 className="text-lg font-semibold text-white">{title}</h3>
+                  <h3 className="text-lg font-semibold text-text-loud">{title}</h3>
                 )}
                 {description && (
-                  <p className="mt-1 text-sm text-white/70">{description}</p>
+                  <p className="mt-1 text-sm text-fg-200">{description}</p>
                 )}
               </div>
             )}
@@ -63,15 +63,15 @@ const BentoGridItem = forwardRef<HTMLDivElement, BentoGridItemProps>(
         ) : (
           <>
             {icon && (
-              <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-lg bg-white/5">
-                <span className="text-white/80">{icon}</span>
+              <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-lg bg-bg-subtle">
+                <span className="text-fg-200">{icon}</span>
               </div>
             )}
             {title && (
-              <h3 className="text-base font-semibold text-white">{title}</h3>
+              <h3 className="text-base font-semibold text-text-loud">{title}</h3>
             )}
             {description && (
-              <p className="mt-1 text-sm leading-relaxed text-white/70">
+              <p className="mt-1 text-sm leading-relaxed text-fg-200">
                 {description}
               </p>
             )}

@@ -15,7 +15,7 @@ const announcementBarVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-white/5",
+        default: "bg-bg-subtle",
         info: "bg-blue/10",
         warning: "bg-yellow/10",
         success: "bg-green/10",
@@ -66,7 +66,7 @@ const AnnouncementBar = forwardRef<HTMLDivElement, AnnouncementBarProps>(
     };
 
     const messageContent = (
-      <span className="text-sm text-white/80">{message}</span>
+      <span className="text-sm text-fg-200">{message}</span>
     );
 
     return (
@@ -77,11 +77,11 @@ const AnnouncementBar = forwardRef<HTMLDivElement, AnnouncementBarProps>(
         role="banner"
         {...props}
       >
-        {icon && <span className="flex-shrink-0 text-white/70">{icon}</span>}
+        {icon && <span className="flex-shrink-0 text-fg-200">{icon}</span>}
 
         <div className="flex items-center gap-2 min-w-0">
           {href ? (
-            <a href={href} className="text-sm text-white/80 hover:text-white transition-colors duration-200">
+            <a href={href} className="text-sm text-fg-200 hover:text-text-loud transition-colors duration-200">
               {message}
             </a>
           ) : (
@@ -91,14 +91,14 @@ const AnnouncementBar = forwardRef<HTMLDivElement, AnnouncementBarProps>(
           {linkText && href && (
             <a
               href={href}
-              className="text-sm font-medium text-white underline hover:text-white/80 transition-colors duration-200 flex-shrink-0"
+              className="text-sm font-medium text-text-loud underline hover:text-fg-200 transition-colors duration-200 flex-shrink-0"
             >
               {linkText}
             </a>
           )}
 
           {linkText && !href && (
-            <span className="text-sm font-medium text-white underline flex-shrink-0">
+            <span className="text-sm font-medium text-text-loud underline flex-shrink-0">
               {linkText}
             </span>
           )}
@@ -108,7 +108,7 @@ const AnnouncementBar = forwardRef<HTMLDivElement, AnnouncementBarProps>(
           <button
             type="button"
             onClick={handleDismiss}
-            className="absolute right-3 p-1 text-white/70 hover:text-white transition-colors duration-200 rounded-md hover:bg-white/5"
+            className="absolute right-3 p-1 text-fg-200 hover:text-text-loud transition-colors duration-200 rounded-md hover:bg-bg-subtle"
             aria-label="Dismiss announcement"
           >
             <X className="h-4 w-4" />

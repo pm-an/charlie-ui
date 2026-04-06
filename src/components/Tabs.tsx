@@ -17,9 +17,9 @@ import { useRovingTabIndex } from "../hooks/useRovingTabIndex";
 const tabsContainerVariants = cva("relative flex overflow-x-auto", {
   variants: {
     variant: {
-      pills: "bg-white/[0.04] rounded-full p-1 shadow-xs",
-      underline: "border-b border-white/10",
-      segment: "bg-white/[0.04] rounded-lg p-0.5 shadow-xs",
+      pills: "bg-bg-subtle rounded-full p-1 shadow-xs",
+      underline: "border-b border-border-strong",
+      segment: "bg-bg-subtle rounded-lg p-0.5 shadow-xs",
     },
   },
   defaultVariants: {
@@ -43,11 +43,11 @@ const tabItemVariants = cva(
     },
     compoundVariants: [
       { variant: "pills", active: true, class: "text-[#18191a] bg-white" },
-      { variant: "pills", active: false, class: "text-white/70 hover:text-white" },
-      { variant: "underline", active: true, class: "text-white" },
-      { variant: "underline", active: false, class: "text-white/70 hover:text-white" },
-      { variant: "segment", active: true, class: "text-white" },
-      { variant: "segment", active: false, class: "text-white/70 hover:text-white" },
+      { variant: "pills", active: false, class: "text-fg-200 hover:text-text-loud" },
+      { variant: "underline", active: true, class: "text-text-loud" },
+      { variant: "underline", active: false, class: "text-fg-200 hover:text-text-loud" },
+      { variant: "segment", active: true, class: "text-text-loud" },
+      { variant: "segment", active: false, class: "text-fg-200 hover:text-text-loud" },
     ],
     defaultVariants: {
       variant: "pills",
@@ -206,13 +206,13 @@ function TabsRoot({
                 {isActive && variant === "segment" && (
                   <motion.span
                     layoutId="tabs-segment"
-                    className="absolute inset-0 rounded-md bg-white/10 shadow-soft"
+                    className="absolute inset-0 rounded-md bg-bg-subtle-hover shadow-soft"
                     transition={{ type: "spring", stiffness: 500, damping: 35 }}
                   />
                 )}
                 <span className="relative z-10">{item.label}</span>
                 {item.badge && (
-                  <span className="relative z-10 ml-2 inline-flex items-center rounded-md bg-white/5 px-1.5 py-0.5 text-[10px] text-white/70">
+                  <span className="relative z-10 ml-2 inline-flex items-center rounded-md bg-surface px-1.5 py-0.5 text-[10px] text-fg-200">
                     {item.badge}
                   </span>
                 )}

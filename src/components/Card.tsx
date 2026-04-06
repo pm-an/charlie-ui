@@ -15,20 +15,20 @@ const cardVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-card-gradient border border-white/[0.06]",
+        default: "bg-card-gradient border border-border",
         translucent:
-          "bg-card-gradient-translucent backdrop-blur-xl border border-white/[0.06]",
-        outline: "bg-transparent border border-white/10",
+          "bg-card-gradient-translucent backdrop-blur-xl border border-border",
+        outline: "bg-transparent border border-border-strong",
         featured: [
-          "bg-card-gradient border border-white/[0.06]",
+          "bg-card-gradient border border-border",
           "shadow-[inset_0_1px_1px_0_rgba(255,255,255,0.1),0_1px_40px_0_rgba(154,170,255,0.05),0_0_16px_-7px_rgba(154,170,255,0.05),0_2px_40px_10px_rgba(154,170,255,0.05)]",
         ],
         glass: [
-          "bg-white/[0.03] backdrop-blur-2xl border border-white/[0.08]",
+          "bg-bg-subtle backdrop-blur-2xl border border-border",
           "shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08)]",
         ],
         elevated: [
-          "bg-grey-700 border border-white/[0.08]",
+          "bg-grey-700 border border-border",
           "shadow-elevated",
         ],
       },
@@ -117,10 +117,10 @@ const CardHeader = forwardRef<HTMLDivElement, CardHeaderProps>(
       {(title || description) && (
         <div className="min-w-0">
           {title && (
-            <h3 className="text-white font-semibold text-base">{title}</h3>
+            <h3 className="text-text-loud font-semibold text-base">{title}</h3>
           )}
           {description && (
-            <p className="text-white/70 text-sm">{description}</p>
+            <p className="text-fg-200 text-sm">{description}</p>
           )}
         </div>
       )}
@@ -146,7 +146,7 @@ const CardFooter = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
     <div
       ref={ref}
       data-slot="card-footer"
-      className={cn("pt-4 border-t border-white/[0.06]", className)}
+      className={cn("pt-4 border-t border-border", className)}
       {...props}
     />
   )

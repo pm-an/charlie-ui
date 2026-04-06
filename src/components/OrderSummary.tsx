@@ -88,21 +88,21 @@ const OrderSummary = forwardRef<HTMLDivElement, OrderSummaryProps>(
         ref={ref}
         data-slot="order-summary"
         className={cn(
-          "overflow-hidden rounded-xl border border-white/[0.06] bg-card-gradient",
+          "overflow-hidden rounded-xl border border-border bg-card-gradient",
           className
         )}
         {...props}
       >
         {/* Header */}
-        <div className="border-b border-white/[0.06] px-6 py-4">
+        <div className="border-b border-border px-6 py-4">
           <div className="flex items-center gap-2">
             <StatusIcon className={cn("h-5 w-5", colorClass)} />
-            <h2 className="text-lg font-semibold text-white">{statusLabel}</h2>
+            <h2 className="text-lg font-semibold text-text-loud">{statusLabel}</h2>
           </div>
-          <p className="mt-1 text-sm text-white/70">
+          <p className="mt-1 text-sm text-fg-200">
             Order #{orderNumber}
           </p>
-          <p className="text-sm text-white/70">{date}</p>
+          <p className="text-sm text-fg-200">{date}</p>
         </div>
 
         {/* Items */}
@@ -112,7 +112,7 @@ const OrderSummary = forwardRef<HTMLDivElement, OrderSummaryProps>(
               key={item.name + index}
               className="flex items-center gap-3 py-2"
             >
-              <div className="h-12 w-12 shrink-0 overflow-hidden rounded-lg bg-white/[0.03]">
+              <div className="h-12 w-12 shrink-0 overflow-hidden rounded-lg bg-bg-subtle">
                 {item.image && (
                   <img
                     src={item.image}
@@ -122,12 +122,12 @@ const OrderSummary = forwardRef<HTMLDivElement, OrderSummaryProps>(
                 )}
               </div>
               <div className="min-w-0 flex-1">
-                <p className="text-sm font-medium text-white truncate">
+                <p className="text-sm font-medium text-text-loud truncate">
                   {item.name}
                 </p>
-                <p className="text-xs text-white/70">Qty: {item.quantity}</p>
+                <p className="text-xs text-fg-200">Qty: {item.quantity}</p>
               </div>
-              <span className="shrink-0 text-sm font-medium text-white">
+              <span className="shrink-0 text-sm font-medium text-text-loud">
                 {formatPrice(item.price * item.quantity)}
               </span>
             </div>
@@ -135,25 +135,25 @@ const OrderSummary = forwardRef<HTMLDivElement, OrderSummaryProps>(
         </div>
 
         {/* Totals */}
-        <div className="border-t border-white/[0.06] px-6 py-4">
+        <div className="border-t border-border px-6 py-4">
           <div className="flex justify-between text-sm">
-            <span className="text-white/70">Subtotal</span>
-            <span className="text-white">{formatPrice(subtotal)}</span>
+            <span className="text-fg-200">Subtotal</span>
+            <span className="text-text-loud">{formatPrice(subtotal)}</span>
           </div>
           <div className="mt-2 flex justify-between text-sm">
-            <span className="text-white/70">Shipping</span>
-            <span className="text-white">
+            <span className="text-fg-200">Shipping</span>
+            <span className="text-text-loud">
               {shipping === 0 ? "Free" : formatPrice(shipping)}
             </span>
           </div>
           <div className="mt-2 flex justify-between text-sm">
-            <span className="text-white/70">Tax</span>
-            <span className="text-white">{formatPrice(tax)}</span>
+            <span className="text-fg-200">Tax</span>
+            <span className="text-text-loud">{formatPrice(tax)}</span>
           </div>
-          <div className="my-3 border-t border-white/[0.06]" />
+          <div className="my-3 border-t border-border" />
           <div className="flex justify-between">
-            <span className="text-lg font-semibold text-white">Total</span>
-            <span className="text-lg font-semibold text-white">
+            <span className="text-lg font-semibold text-text-loud">Total</span>
+            <span className="text-lg font-semibold text-text-loud">
               {formatPrice(total)}
             </span>
           </div>
@@ -161,14 +161,14 @@ const OrderSummary = forwardRef<HTMLDivElement, OrderSummaryProps>(
 
         {/* Shipping address */}
         {shippingAddress && (
-          <div className="border-t border-white/[0.06] px-6 py-4">
-            <h3 className="text-sm font-medium text-white/70 mb-2">
+          <div className="border-t border-border px-6 py-4">
+            <h3 className="text-sm font-medium text-fg-200 mb-2">
               Shipping Address
             </h3>
-            <div className="text-sm text-white">
+            <div className="text-sm text-text-loud">
               <p>{shippingAddress.name}</p>
-              <p className="text-white/70">{shippingAddress.address}</p>
-              <p className="text-white/70">
+              <p className="text-fg-200">{shippingAddress.address}</p>
+              <p className="text-fg-200">
                 {shippingAddress.city}, {shippingAddress.state}{" "}
                 {shippingAddress.zip}
               </p>

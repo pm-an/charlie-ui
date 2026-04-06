@@ -97,7 +97,7 @@ const DashboardSidebar = forwardRef<HTMLElement, DashboardSidebarProps>(
           transition={{ duration: 0.26, ease: "easeInOut" }}
           onKeyDown={handleKeyDown}
           className={cn(
-            "hidden md:flex flex-col border-r border-white/[0.06] bg-[#0a0a0b] overflow-hidden shrink-0",
+            "hidden md:flex flex-col border-r border-border bg-[#0a0a0b] overflow-hidden shrink-0",
             className
           )}
           {...(props as Record<string, unknown>)}
@@ -106,7 +106,7 @@ const DashboardSidebar = forwardRef<HTMLElement, DashboardSidebarProps>(
             <div
               data-slot="dashboard-sidebar-logo"
               className={cn(
-                "h-14 flex items-center border-b border-white/[0.06] px-4",
+                "h-14 flex items-center border-b border-border px-4",
                 sidebarCollapsed && "justify-center px-2"
               )}
             >
@@ -117,7 +117,7 @@ const DashboardSidebar = forwardRef<HTMLElement, DashboardSidebarProps>(
           {footer && (
             <div
               data-slot="dashboard-sidebar-footer"
-              className="border-t border-white/[0.06] p-4"
+              className="border-t border-border p-4"
             >
               {footer}
             </div>
@@ -134,7 +134,7 @@ const DashboardSidebar = forwardRef<HTMLElement, DashboardSidebarProps>(
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.26 }}
-                className="md:hidden fixed inset-0 bg-black/60 z-40"
+                className="md:hidden fixed inset-0 bg-overlay z-40"
                 onClick={onSidebarToggle}
               />
               <motion.aside
@@ -145,18 +145,18 @@ const DashboardSidebar = forwardRef<HTMLElement, DashboardSidebarProps>(
                 exit={{ x: -256 }}
                 transition={{ duration: 0.26, ease: "easeInOut" }}
                 className={cn(
-                  "md:hidden fixed inset-y-0 left-0 z-50 w-64 flex flex-col bg-[#0a0a0b] border-r border-white/[0.06]",
+                  "md:hidden fixed inset-y-0 left-0 z-50 w-64 flex flex-col bg-[#0a0a0b] border-r border-border",
                   className
                 )}
               >
                 {logo && (
-                  <div className="h-14 flex items-center border-b border-white/[0.06] px-4">
+                  <div className="h-14 flex items-center border-b border-border px-4">
                     {logo}
                   </div>
                 )}
                 <div className="flex-1 overflow-y-auto py-4">{children}</div>
                 {footer && (
-                  <div className="border-t border-white/[0.06] p-4">
+                  <div className="border-t border-border p-4">
                     {footer}
                   </div>
                 )}
@@ -181,7 +181,7 @@ const DashboardHeader = forwardRef<HTMLElement, DashboardHeaderProps>(
         ref={ref}
         data-slot="dashboard-header"
         className={cn(
-          "h-14 border-b border-white/[0.06] bg-[#0a0a0b] px-4 flex items-center shrink-0",
+          "h-14 border-b border-border bg-[#0a0a0b] px-4 flex items-center shrink-0",
           className
         )}
         {...props}

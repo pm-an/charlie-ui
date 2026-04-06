@@ -39,8 +39,8 @@ function SocialCard({
   const content = (
     <>
       <div className="w-8 h-8 mb-3">{icon}</div>
-      <h3 className="text-white font-semibold text-lg">{title}</h3>
-      <p className="text-white/70 text-sm mt-2">{description}</p>
+      <h3 className="text-text-loud font-semibold text-lg">{title}</h3>
+      <p className="text-fg-200 text-sm mt-2">{description}</p>
     </>
   );
 

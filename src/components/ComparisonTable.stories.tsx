@@ -8,7 +8,7 @@ const meta: Meta<typeof ComparisonTable> = {
   parameters: { layout: "fullscreen" },
   decorators: [
     (Story) => (
-      <div className="bg-[#0a0a0b] p-8 md:p-12 max-w-[1280px] mx-auto">
+      <div className="bg-bg p-8 md:p-12 max-w-[1280px] mx-auto">
         <Story />
       </div>
     ),

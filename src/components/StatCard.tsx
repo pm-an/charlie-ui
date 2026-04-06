@@ -49,18 +49,18 @@ const StatCard = forwardRef<HTMLDivElement, StatCardProps>(
         ref={ref}
         data-slot="stat-card"
         className={cn(
-          "rounded-lg border border-white/[0.06] bg-card-gradient p-6 shadow-card-inset",
+          "rounded-lg border border-border bg-card-gradient p-6 shadow-card-inset",
           className
         )}
         {...props}
       >
         {icon && (
-          <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-white/5 text-white/70">
+          <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-bg-subtle text-fg-200">
             {icon}
           </div>
         )}
 
-        <p className="mb-1 text-sm text-white/70">{label}</p>
+        <p className="mb-1 text-sm text-fg-200">{label}</p>
 
         {loading ? (
           <>
@@ -69,7 +69,7 @@ const StatCard = forwardRef<HTMLDivElement, StatCardProps>(
           </>
         ) : (
           <>
-            <p className="text-3xl font-semibold tracking-tight text-white">
+            <p className="text-3xl font-semibold tracking-tight text-text-loud">
               {formattedValue}
             </p>
 
@@ -80,7 +80,7 @@ const StatCard = forwardRef<HTMLDivElement, StatCardProps>(
                     "flex items-center gap-1 font-medium",
                     resolvedTrend === "up" && "text-green",
                     resolvedTrend === "down" && "text-red",
-                    resolvedTrend === "neutral" && "text-white/70"
+                    resolvedTrend === "neutral" && "text-fg-200"
                   )}
                 >
                   {resolvedTrend === "up" && (
@@ -93,7 +93,7 @@ const StatCard = forwardRef<HTMLDivElement, StatCardProps>(
                   {change}%
                 </span>
                 {changeLabel && (
-                  <span className="text-white/70">{changeLabel}</span>
+                  <span className="text-fg-200">{changeLabel}</span>
                 )}
               </div>
             )}

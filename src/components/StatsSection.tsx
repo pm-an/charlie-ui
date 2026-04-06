@@ -82,12 +82,12 @@ const StatsSection = forwardRef<HTMLElement, StatsSectionProps>(
                 </p>
               )}
               {title && (
-                <h2 className="text-white text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight">
+                <h2 className="text-text-loud text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight">
                   {title}
                 </h2>
               )}
               {description && (
-                <p className="text-white/70 text-base md:text-lg mt-3 md:mt-4 max-w-2xl mx-auto">
+                <p className="text-fg-200 text-base md:text-lg mt-3 md:mt-4 max-w-2xl mx-auto">
                   {description}
                 </p>
               )}
@@ -111,12 +111,12 @@ const StatsSection = forwardRef<HTMLElement, StatsSectionProps>(
                   key={stat.label}
                   className="flex flex-col items-center text-center py-6"
                 >
-                  <p className="text-3xl md:text-4xl font-semibold tracking-tight text-white">
+                  <p className="text-3xl md:text-4xl font-semibold tracking-tight text-text-loud">
                     {stat.prefix ?? ""}
                     {stat.value}
                     {stat.suffix ?? ""}
                   </p>
-                  <p className="mt-2 text-sm text-white/70">{stat.label}</p>
+                  <p className="mt-2 text-sm text-fg-200">{stat.label}</p>
                 </div>
               )
             )}

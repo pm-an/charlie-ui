@@ -43,7 +43,7 @@ function Navbar({ logo, links = [], actions, className, currentPath }: NavbarPro
       data-slot="navbar"
       aria-label="Main navigation"
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 h-[58px] bg-black/60 backdrop-blur-2xl border-b border-white/[0.04] shadow-[inset_0_-0.5px_0_0_rgba(255,255,255,0.06)]",
+        "fixed top-0 left-0 right-0 z-50 h-[58px] bg-overlay backdrop-blur-2xl border-b border-border shadow-[inset_0_-0.5px_0_0_rgba(255,255,255,0.06)]",
         className
       )}
     >
@@ -58,7 +58,7 @@ function Navbar({ logo, links = [], actions, className, currentPath }: NavbarPro
               key={link.href}
               href={link.href}
               aria-current={currentPath === link.href ? "page" : undefined}
-              className="text-[13px] text-white/70 hover:text-white transition-colors font-medium"
+              className="text-[13px] text-fg-200 hover:text-text-loud transition-colors font-medium"
             >
               {link.label}
               {link.badge && (
@@ -78,7 +78,7 @@ function Navbar({ logo, links = [], actions, className, currentPath }: NavbarPro
           <button
             ref={hamburgerRef}
             type="button"
-            className="md:hidden text-white/70 hover:text-white transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center"
+            className="md:hidden text-fg-200 hover:text-text-loud transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center"
             onClick={() => setMobileOpen((prev) => !prev)}
             aria-expanded={mobileOpen}
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
@@ -97,7 +97,7 @@ function Navbar({ logo, links = [], actions, className, currentPath }: NavbarPro
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.26, ease: "easeInOut" }}
-            className="md:hidden bg-black/80 backdrop-blur-2xl border-b border-white/[0.04] shadow-elevated overflow-hidden"
+            className="md:hidden bg-overlay backdrop-blur-2xl border-b border-border shadow-elevated overflow-hidden"
             role="menu"
           >
             <div className="max-w-[1280px] mx-auto px-4 sm:px-6 py-4 flex flex-col gap-1">
@@ -107,7 +107,7 @@ function Navbar({ logo, links = [], actions, className, currentPath }: NavbarPro
                   href={link.href}
                   role="menuitem"
                   aria-current={currentPath === link.href ? "page" : undefined}
-                  className="text-[13px] text-white/70 hover:text-white transition-colors font-medium py-2.5 min-h-[44px] flex items-center"
+                  className="text-[13px] text-fg-200 hover:text-text-loud transition-colors font-medium py-2.5 min-h-[44px] flex items-center"
                   onClick={() => setMobileOpen(false)}
                 >
                   {link.label}

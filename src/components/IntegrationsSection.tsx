@@ -65,7 +65,7 @@ const IntegrationsSection = forwardRef<HTMLElement, IntegrationsSectionProps>(
         return (
           <a
             href={integration.href}
-            className="bg-card-gradient rounded-xl border border-white/[0.06] p-4 hover:border-white/15 transition-colors duration-200 block"
+            className="bg-card-gradient rounded-xl border border-border p-4 hover:border-border-hover transition-colors duration-200 block"
             aria-label={integration.name}
           >
             {children}
@@ -73,7 +73,7 @@ const IntegrationsSection = forwardRef<HTMLElement, IntegrationsSectionProps>(
         );
       }
       return (
-        <div className="bg-card-gradient rounded-xl border border-white/[0.06] p-4 hover:border-white/15 transition-colors duration-200">
+        <div className="bg-card-gradient rounded-xl border border-border p-4 hover:border-border-hover transition-colors duration-200">
           {children}
         </div>
       );
@@ -95,12 +95,12 @@ const IntegrationsSection = forwardRef<HTMLElement, IntegrationsSectionProps>(
                 </p>
               )}
               {title && (
-                <h2 className="text-white text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight">
+                <h2 className="text-text-loud text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight">
                   {title}
                 </h2>
               )}
               {description && (
-                <p className="text-white/70 text-base md:text-lg mt-3 md:mt-4 max-w-2xl mx-auto">
+                <p className="text-fg-200 text-base md:text-lg mt-3 md:mt-4 max-w-2xl mx-auto">
                   {description}
                 </p>
               )}
@@ -120,8 +120,8 @@ const IntegrationsSection = forwardRef<HTMLElement, IntegrationsSectionProps>(
                     className={cn(
                       "px-3 py-1.5 rounded-full text-sm font-medium transition-colors duration-200",
                       activeCategory === category
-                        ? "bg-white/10 text-white"
-                        : "text-white/70 hover:text-white/70 hover:bg-white/5"
+                        ? "bg-bg-subtle-hover text-text-loud"
+                        : "text-fg-200 hover:text-fg-200 hover:bg-bg-subtle"
                     )}
                   >
                     {category}
@@ -133,14 +133,14 @@ const IntegrationsSection = forwardRef<HTMLElement, IntegrationsSectionProps>(
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
               {filteredIntegrations.map((integration) => (
                 <CardWrapper key={integration.name} integration={integration}>
-                  <div className="h-10 w-10 flex items-center justify-center text-white/70 mb-3">
+                  <div className="h-10 w-10 flex items-center justify-center text-fg-200 mb-3">
                     {integration.icon}
                   </div>
-                  <p className="text-sm font-medium text-white">
+                  <p className="text-sm font-medium text-text-loud">
                     {integration.name}
                   </p>
                   {integration.description && (
-                    <p className="mt-1 text-xs text-white/70">
+                    <p className="mt-1 text-xs text-fg-200">
                       {integration.description}
                     </p>
                   )}

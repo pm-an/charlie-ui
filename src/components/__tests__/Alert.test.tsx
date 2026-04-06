@@ -74,7 +74,7 @@ describe("Alert", () => {
 
     it("applies default variant classes", () => {
       const { container } = render(<Alert variant="default">Test</Alert>);
-      expect(container.firstChild).toHaveClass("border-white/10");
+      expect(container.firstChild).toHaveClass("border-border");
     });
   });
 

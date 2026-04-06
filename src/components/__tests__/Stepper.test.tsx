@@ -68,15 +68,15 @@ describe("Stepper", () => {
     it("highlights the active step circle with accent classes", () => {
       render(<Stepper steps={basicSteps} activeStep={1} />);
       const activeCircle = screen.getByTestId("step-circle-1");
-      expect(activeCircle).toHaveClass("bg-accent");
-      expect(activeCircle).toHaveClass("text-white");
+      expect(activeCircle).toHaveClass("bg-accent-dim");
+      expect(activeCircle).toHaveClass("text-fg-on-accent");
     });
 
     it("applies upcoming styles to steps after active", () => {
       render(<Stepper steps={basicSteps} activeStep={1} />);
       const upcomingCircle = screen.getByTestId("step-circle-2");
-      expect(upcomingCircle).toHaveClass("bg-white/5");
-      expect(upcomingCircle).toHaveClass("text-white/70");
+      expect(upcomingCircle).toHaveClass("bg-bg-subtle");
+      expect(upcomingCircle).toHaveClass("text-fg-200");
     });
   });
 
@@ -407,9 +407,9 @@ describe("Stepper", () => {
       );
       const connectors = container.querySelectorAll("[data-connector]");
       // step 1 right (active, not completed) → muted
-      expect(connectors[2]).toHaveClass("bg-white/10");
+      expect(connectors[2]).toHaveClass("bg-bg-subtle-hover");
       // step 2 left (prev is active, not completed) → muted
-      expect(connectors[3]).toHaveClass("bg-white/10");
+      expect(connectors[3]).toHaveClass("bg-bg-subtle-hover");
     });
 
     it("all connectors are green when all steps completed", () => {

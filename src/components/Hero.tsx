@@ -55,10 +55,10 @@ function Hero({
                 {eyebrow}
               </p>
             )}
-            <h1 className="text-white text-3xl md:text-5xl lg:text-7xl font-bold tracking-tight leading-[1.05]">
+            <h1 className="text-text-loud text-3xl md:text-5xl lg:text-7xl font-bold tracking-tight leading-[1.05]">
               {title}
             </h1>
-            <p className="text-white/60 text-base md:text-lg lg:text-xl max-w-2xl mx-auto mt-4 md:mt-6 leading-relaxed">
+            <p className="text-fg-300 text-base md:text-lg lg:text-xl max-w-2xl mx-auto mt-4 md:mt-6 leading-relaxed">
               {description}
             </p>
             {actions && (
@@ -74,10 +74,10 @@ function Hero({
                   {eyebrow}
                 </p>
               )}
-              <h1 className="text-white text-3xl md:text-5xl lg:text-7xl font-bold tracking-tight leading-[1.05]">
+              <h1 className="text-text-loud text-3xl md:text-5xl lg:text-7xl font-bold tracking-tight leading-[1.05]">
                 {title}
               </h1>
-              <p className="text-white/60 text-base md:text-lg lg:text-xl mt-4 md:mt-6 leading-relaxed">
+              <p className="text-fg-300 text-base md:text-lg lg:text-xl mt-4 md:mt-6 leading-relaxed">
                 {description}
               </p>
               {actions && (

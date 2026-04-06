@@ -57,20 +57,20 @@ describe("FeatureCard", () => {
 
   it("defaults icon alignment to left", () => {
     const { container } = render(<FeatureCard {...defaultProps} />);
-    const iconBox = container.querySelector(".bg-white\\/5");
+    const iconBox = container.querySelector(".bg-bg-subtle");
     expect(iconBox).not.toHaveClass("mx-auto");
     expect(iconBox).not.toHaveClass("ml-auto");
   });
 
   it("centers icon when iconAlign is center", () => {
     const { container } = render(<FeatureCard {...defaultProps} iconAlign="center" />);
-    const iconBox = container.querySelector(".bg-white\\/5");
+    const iconBox = container.querySelector(".bg-bg-subtle");
     expect(iconBox).toHaveClass("mx-auto");
   });
 
   it("right-aligns icon when iconAlign is right", () => {
     const { container } = render(<FeatureCard {...defaultProps} iconAlign="right" />);
-    const iconBox = container.querySelector(".bg-white\\/5");
+    const iconBox = container.querySelector(".bg-bg-subtle");
     expect(iconBox).toHaveClass("ml-auto");
   });
 
@@ -86,7 +86,7 @@ describe("FeatureCard", () => {
     const contentDiv = container.querySelector("h3")?.parentElement;
     expect(contentDiv).toHaveClass("text-center");
     // icon should still be left-aligned
-    const iconBox = container.querySelector(".bg-white\\/5");
+    const iconBox = container.querySelector(".bg-bg-subtle");
     expect(iconBox).not.toHaveClass("mx-auto");
   });
 
@@ -94,13 +94,13 @@ describe("FeatureCard", () => {
     const { container } = render(<FeatureCard {...defaultProps} textAlign="right" />);
     const contentDiv = container.querySelector("h3")?.parentElement;
     expect(contentDiv).toHaveClass("text-right");
-    const iconBox = container.querySelector(".bg-white\\/5");
+    const iconBox = container.querySelector(".bg-bg-subtle");
     expect(iconBox).not.toHaveClass("ml-auto");
   });
 
   it("allows different icon and text alignment", () => {
     const { container } = render(<FeatureCard {...defaultProps} iconAlign="center" textAlign="left" />);
-    const iconBox = container.querySelector(".bg-white\\/5");
+    const iconBox = container.querySelector(".bg-bg-subtle");
     expect(iconBox).toHaveClass("mx-auto");
     const contentDiv = container.querySelector("h3")?.parentElement;
     expect(contentDiv).not.toHaveClass("text-center");

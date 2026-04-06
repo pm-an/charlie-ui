@@ -16,17 +16,29 @@ export { useScrollLock } from "./hooks/useScrollLock";
 export {
   ThemeProvider,
   useTheme,
+  useColorMode,
   type CharlieTheme,
   type ThemeProviderProps,
+  type ColorMode,
+  type ResolvedColorMode,
 } from "./components/ThemeProvider";
 export {
   defaultTheme,
+  lightTheme,
+  lightThemeBase,
+  lightAccentMuted,
   indigoTheme,
+  indigoLightTheme,
   oceanTheme,
+  oceanLightTheme,
   emeraldTheme,
+  emeraldLightTheme,
   amberTheme,
+  amberLightTheme,
   roseTheme,
+  roseLightTheme,
   violetTheme,
+  violetLightTheme,
   createTheme,
 } from "./themes/presets";
 
@@ -49,6 +61,7 @@ export { Alert, alertVariants, type AlertProps } from "./components/Alert";
 export { Progress, progressVariants, type ProgressProps } from "./components/Progress";
 export { Spinner, sizeMap as spinnerSizeMap, type SpinnerProps, type SpinnerType, type SpinnerSize } from "./components/Spinner";
 export { SpinnerOverlay, type SpinnerOverlayProps } from "./components/SpinnerOverlay";
+export { ScrollToTop, type ScrollToTopProps } from "./components/ScrollToTop";
 export { Select, selectTriggerVariants, type SelectProps, type SelectOption } from "./components/Select";
 export { Field, type FieldProps, type FieldLabelProps, type FieldDescriptionProps, type FieldErrorProps } from "./components/Field";
 export { useFieldContext } from "./components/field-context";

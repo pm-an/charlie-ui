@@ -92,7 +92,7 @@ const OnboardingWizard = forwardRef<HTMLDivElement, OnboardingWizardProps>(
         ref={ref}
         data-slot="onboarding-wizard"
         className={cn(
-          "w-full max-w-2xl mx-auto bg-card-gradient rounded-xl border border-white/[0.06] overflow-hidden",
+          "w-full max-w-2xl mx-auto bg-card-gradient rounded-xl border border-border overflow-hidden",
           className
         )}
         {...props}
@@ -114,10 +114,10 @@ const OnboardingWizard = forwardRef<HTMLDivElement, OnboardingWizardProps>(
                   className={cn(
                     "flex items-center justify-center rounded-full transition-all duration-200",
                     isCompleted
-                      ? "h-6 w-6 bg-green text-white"
+                      ? "h-6 w-6 bg-green text-fg-on-accent"
                       : isActive
-                        ? "h-6 w-6 bg-white/20 ring-2 ring-white/20"
-                        : "h-6 w-6 bg-white/5"
+                        ? "h-6 w-6 bg-bg-subtle-hover ring-2 ring-border-hover"
+                        : "h-6 w-6 bg-bg-subtle"
                   )}
                 >
                   {isCompleted ? (
@@ -126,7 +126,7 @@ const OnboardingWizard = forwardRef<HTMLDivElement, OnboardingWizardProps>(
                     <span
                       className={cn(
                         "text-xs font-medium",
-                        isActive ? "text-white" : "text-white/70"
+                        isActive ? "text-text-loud" : "text-fg-200"
                       )}
                     >
                       {index + 1}
@@ -142,14 +142,14 @@ const OnboardingWizard = forwardRef<HTMLDivElement, OnboardingWizardProps>(
         <div data-slot="onboarding-step-header" className="px-6 pt-6 text-center">
           {step.icon && (
             <div className="flex justify-center mb-3">
-              <span className="h-10 w-10 flex items-center justify-center rounded-lg bg-white/5 text-white/70">
+              <span className="h-10 w-10 flex items-center justify-center rounded-lg bg-bg-subtle text-fg-200">
                 {step.icon}
               </span>
             </div>
           )}
-          <h2 className="text-lg font-semibold text-white">{step.title}</h2>
+          <h2 className="text-lg font-semibold text-text-loud">{step.title}</h2>
           {step.description && (
-            <p className="mt-1 text-sm text-white/70">{step.description}</p>
+            <p className="mt-1 text-sm text-fg-200">{step.description}</p>
           )}
         </div>
 
@@ -179,7 +179,7 @@ const OnboardingWizard = forwardRef<HTMLDivElement, OnboardingWizardProps>(
                 type="button"
                 data-slot="onboarding-back-button"
                 onClick={handleBack}
-                className="px-4 py-2 text-sm font-medium text-white/70 hover:text-white border border-white/10 hover:border-white/20 rounded-md transition-colors"
+                className="px-4 py-2 text-sm font-medium text-fg-200 hover:text-text-loud border border-border-strong hover:border-border-hover rounded-md transition-colors"
               >
                 {backLabel}
               </button>

@@ -122,12 +122,12 @@ const PieChart = forwardRef<HTMLDivElement, PieChartProps>(
         {variant === "donut" && (label || labelValue) && (
           <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
             {labelValue && (
-              <span className="text-2xl font-semibold text-white">
+              <span className="text-2xl font-semibold text-text-loud">
                 {labelValue}
               </span>
             )}
             {label && (
-              <span className="text-sm text-white/70">{label}</span>
+              <span className="text-sm text-fg-200">{label}</span>
             )}
           </div>
         )}

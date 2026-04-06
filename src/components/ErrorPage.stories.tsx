@@ -9,7 +9,7 @@ const meta: Meta<typeof ErrorPage> = {
   parameters: { layout: "fullscreen" },
   decorators: [
     (Story) => (
-      <div className="bg-[#0a0a0b]">
+      <div className="bg-bg">
         <Story />
       </div>
     ),

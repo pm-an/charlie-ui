@@ -33,9 +33,9 @@ export type CheckoutFormProps = Omit<
 };
 
 const inputClasses =
-  "w-full bg-white/5 border border-white/[0.06] rounded-lg px-3 py-2 text-sm text-white placeholder:text-white/70 focus:border-white/15 focus:outline-none focus:ring-1 focus:ring-white/15 transition-colors";
+  "w-full bg-bg-subtle border border-border rounded-lg px-3 py-2 text-sm text-text-loud placeholder:text-fg-200 focus:border-border-hover focus:outline-none focus:ring-1 focus:ring-border-hover transition-colors";
 
-const labelClasses = "block text-sm font-medium text-white/80 mb-1.5";
+const labelClasses = "block text-sm font-medium text-fg-200 mb-1.5";
 
 const CheckoutForm = forwardRef<HTMLDivElement, CheckoutFormProps>(
   (
@@ -106,10 +106,10 @@ const CheckoutForm = forwardRef<HTMLDivElement, CheckoutFormProps>(
                   className={cn(
                     "flex h-8 w-8 items-center justify-center rounded-full text-sm font-medium transition-all",
                     index < currentStep
-                      ? "bg-green text-white"
+                      ? "bg-green text-fg-on-accent"
                       : index === currentStep
-                        ? "bg-white/20 text-white ring-2 ring-white/30"
-                        : "bg-white/5 text-white/70"
+                        ? "bg-bg-subtle-hover text-text-loud ring-2 ring-border-hover"
+                        : "bg-bg-subtle text-fg-200"
                   )}
                   aria-current={index === currentStep ? "step" : undefined}
                 >
@@ -122,7 +122,7 @@ const CheckoutForm = forwardRef<HTMLDivElement, CheckoutFormProps>(
                 <span
                   className={cn(
                     "mt-1.5 text-xs",
-                    index <= currentStep ? "text-white/80" : "text-white/70"
+                    index <= currentStep ? "text-fg-200" : "text-fg-200"
                   )}
                 >
                   {step}
@@ -132,7 +132,7 @@ const CheckoutForm = forwardRef<HTMLDivElement, CheckoutFormProps>(
                 <div
                   className={cn(
                     "mx-3 mb-5 h-px w-12 sm:w-16",
-                    index < currentStep ? "bg-green" : "bg-white/10"
+                    index < currentStep ? "bg-green" : "bg-border-strong"
                   )}
                 />
               )}
@@ -141,10 +141,10 @@ const CheckoutForm = forwardRef<HTMLDivElement, CheckoutFormProps>(
         </div>
 
         {/* Step content */}
-        <div className="rounded-xl border border-white/[0.06] bg-card-gradient p-6">
+        <div className="rounded-xl border border-border bg-card-gradient p-6">
           {currentStep === 0 && (
             <div className="space-y-4">
-              <h3 className="text-lg font-semibold text-white">
+              <h3 className="text-lg font-semibold text-text-loud">
                 Shipping Information
               </h3>
 
@@ -255,7 +255,7 @@ const CheckoutForm = forwardRef<HTMLDivElement, CheckoutFormProps>(
 
           {currentStep === 1 && (
             <div className="space-y-4">
-              <h3 className="text-lg font-semibold text-white">
+              <h3 className="text-lg font-semibold text-text-loud">
                 Payment Details
               </h3>
 
@@ -310,21 +310,21 @@ const CheckoutForm = forwardRef<HTMLDivElement, CheckoutFormProps>(
 
           {currentStep === 2 && (
             <div className="space-y-6">
-              <h3 className="text-lg font-semibold text-white">
+              <h3 className="text-lg font-semibold text-text-loud">
                 Review Order
               </h3>
 
               <div>
-                <h4 className="text-sm font-medium text-white/70 mb-2">
+                <h4 className="text-sm font-medium text-fg-200 mb-2">
                   Shipping Address
                 </h4>
-                <div className="rounded-lg bg-white/[0.03] p-3 text-sm text-white">
+                <div className="rounded-lg bg-bg-subtle p-3 text-sm text-text-loud">
                   <p>
                     {shipping.firstName} {shipping.lastName}
                   </p>
-                  <p className="text-white/70">{shipping.email}</p>
-                  <p className="mt-1 text-white/70">{shipping.address}</p>
-                  <p className="text-white/70">
+                  <p className="text-fg-200">{shipping.email}</p>
+                  <p className="mt-1 text-fg-200">{shipping.address}</p>
+                  <p className="text-fg-200">
                     {shipping.city}
                     {shipping.state && `, ${shipping.state}`} {shipping.zip}
                   </p>
@@ -332,15 +332,15 @@ const CheckoutForm = forwardRef<HTMLDivElement, CheckoutFormProps>(
               </div>
 
               <div>
-                <h4 className="text-sm font-medium text-white/70 mb-2">
+                <h4 className="text-sm font-medium text-fg-200 mb-2">
                   Payment Method
                 </h4>
-                <div className="rounded-lg bg-white/[0.03] p-3 text-sm text-white">
+                <div className="rounded-lg bg-bg-subtle p-3 text-sm text-text-loud">
                   <p>
                     Card ending in{" "}
                     {payment.cardNumber.slice(-4) || "****"}
                   </p>
-                  <p className="text-white/70">
+                  <p className="text-fg-200">
                     Expires {payment.expiry || "MM/YY"}
                   </p>
                 </div>
@@ -354,7 +354,7 @@ const CheckoutForm = forwardRef<HTMLDivElement, CheckoutFormProps>(
               <button
                 type="button"
                 onClick={handleBack}
-                className="rounded-md border border-white/10 bg-transparent px-4 py-2 text-sm font-medium text-white transition-all duration-200 hover:border-white/15 active:scale-[0.98]"
+                className="rounded-md border border-border-strong bg-transparent px-4 py-2 text-sm font-medium text-text-loud transition-all duration-200 hover:border-border-hover active:scale-[0.98]"
               >
                 Back
               </button>

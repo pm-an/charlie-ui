@@ -17,7 +17,7 @@ function Label({
     <label
       data-slot="label"
       className={cn(
-        "text-sm font-medium text-white/80",
+        "text-sm font-medium text-text-loud",
         disabled && "opacity-65 cursor-not-allowed",
         className
       )}

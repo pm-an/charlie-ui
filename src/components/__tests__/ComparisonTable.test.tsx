@@ -200,7 +200,7 @@ describe("ComparisonTable", () => {
       );
       const thElements = container.querySelectorAll("th");
       // Second plan (index 2, because first th is empty) is highlighted
-      expect(thElements[2]).toHaveClass("bg-white/[0.02]");
+      expect(thElements[2]).toHaveClass("bg-bg-subtle");
     });
   });
 

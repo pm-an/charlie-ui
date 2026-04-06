@@ -66,7 +66,7 @@ const ContactSection = forwardRef<HTMLElement, ContactSectionProps>(
     const formElement = (
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="flex flex-col gap-1.5">
-          <label htmlFor="contact-name" className="text-sm font-medium text-white/80">
+          <label htmlFor="contact-name" className="text-sm font-medium text-fg-200">
             Name
           </label>
           <input
@@ -75,12 +75,12 @@ const ContactSection = forwardRef<HTMLElement, ContactSectionProps>(
             placeholder="Your name"
             value={formData.name}
             onChange={(e) => handleChange("name", e.target.value)}
-            className="w-full bg-white/5 border border-white/6 rounded-md h-10 px-3 text-sm text-white placeholder:text-white/70 outline-none transition-all duration-200 focus:ring-1 focus:ring-white/15 focus:border-white/15"
+            className="w-full bg-bg-subtle border border-border rounded-md h-10 px-3 text-sm text-text-loud placeholder:text-fg-200 outline-none transition-all duration-200 focus:ring-1 focus:ring-border-hover focus:border-border-hover"
           />
         </div>
 
         <div className="flex flex-col gap-1.5">
-          <label htmlFor="contact-email" className="text-sm font-medium text-white/80">
+          <label htmlFor="contact-email" className="text-sm font-medium text-fg-200">
             Email
           </label>
           <input
@@ -89,12 +89,12 @@ const ContactSection = forwardRef<HTMLElement, ContactSectionProps>(
             placeholder="you@example.com"
             value={formData.email}
             onChange={(e) => handleChange("email", e.target.value)}
-            className="w-full bg-white/5 border border-white/6 rounded-md h-10 px-3 text-sm text-white placeholder:text-white/70 outline-none transition-all duration-200 focus:ring-1 focus:ring-white/15 focus:border-white/15"
+            className="w-full bg-bg-subtle border border-border rounded-md h-10 px-3 text-sm text-text-loud placeholder:text-fg-200 outline-none transition-all duration-200 focus:ring-1 focus:ring-border-hover focus:border-border-hover"
           />
         </div>
 
         <div className="flex flex-col gap-1.5">
-          <label htmlFor="contact-message" className="text-sm font-medium text-white/80">
+          <label htmlFor="contact-message" className="text-sm font-medium text-fg-200">
             Message
           </label>
           <textarea
@@ -103,7 +103,7 @@ const ContactSection = forwardRef<HTMLElement, ContactSectionProps>(
             rows={4}
             value={formData.message}
             onChange={(e) => handleChange("message", e.target.value)}
-            className="w-full bg-white/5 border border-white/6 rounded-md px-3 py-2 text-sm text-white placeholder:text-white/70 outline-none transition-all duration-200 focus:ring-1 focus:ring-white/15 focus:border-white/15 min-h-[80px] resize-vertical"
+            className="w-full bg-bg-subtle border border-border rounded-md px-3 py-2 text-sm text-text-loud placeholder:text-fg-200 outline-none transition-all duration-200 focus:ring-1 focus:ring-border-hover focus:border-border-hover min-h-[80px] resize-vertical"
           />
         </div>
 
@@ -132,14 +132,14 @@ const ContactSection = forwardRef<HTMLElement, ContactSectionProps>(
                 </p>
               )}
               {title && (
-                <h2 className="text-white text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight">
+                <h2 className="text-text-loud text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight">
                   {title}
                 </h2>
               )}
               {description && (
                 <p
                   className={cn(
-                    "text-white/70 text-base md:text-lg mt-3 md:mt-4 max-w-2xl",
+                    "text-fg-200 text-base md:text-lg mt-3 md:mt-4 max-w-2xl",
                     variant === "simple" && "mx-auto"
                   )}
                 >
@@ -158,22 +158,22 @@ const ContactSection = forwardRef<HTMLElement, ContactSectionProps>(
                   <div className="space-y-6">
                     {info.map((item) => (
                       <div key={item.label} className="flex items-start gap-4">
-                        <div className="flex-shrink-0 h-10 w-10 rounded-lg bg-white/5 border border-white/[0.06] flex items-center justify-center text-white/70">
+                        <div className="flex-shrink-0 h-10 w-10 rounded-lg bg-bg-subtle border border-border flex items-center justify-center text-fg-200">
                           {item.icon}
                         </div>
                         <div>
-                          <p className="text-sm font-medium text-white/70">
+                          <p className="text-sm font-medium text-fg-200">
                             {item.label}
                           </p>
                           {item.href ? (
                             <a
                               href={item.href}
-                              className="text-white hover:text-white/80 transition-colors duration-200"
+                              className="text-text-loud hover:text-fg-200 transition-colors duration-200"
                             >
                               {item.value}
                             </a>
                           ) : (
-                            <p className="text-white">{item.value}</p>
+                            <p className="text-text-loud">{item.value}</p>
                           )}
                         </div>
                       </div>

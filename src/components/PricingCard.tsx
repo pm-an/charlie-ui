@@ -39,33 +39,33 @@ const PricingCard = forwardRef<HTMLDivElement, PricingCardProps>(
       className={cn(
         "bg-card-gradient rounded-xl border p-6 flex flex-col transform-gpu transition-all duration-300 hover:-translate-y-0.5",
         highlighted
-          ? "border-white/15 shadow-card-elevated"
-          : "border-white/[0.06]",
+          ? "border-border-hover shadow-card-elevated"
+          : "border-border",
         className
       )}
       {...props}
     >
       {/* Tier + Badge */}
       <div className="flex items-center gap-2">
-        <h3 className="text-lg font-semibold text-white">{tier}</h3>
+        <h3 className="text-lg font-semibold text-text-loud">{tier}</h3>
         {badge && (
-          <span className="inline-flex items-center rounded-md bg-white/5 px-2 py-0.5 text-xs font-medium text-white/70">
+          <span className="inline-flex items-center rounded-md bg-bg-subtle px-2 py-0.5 text-xs font-medium text-fg-200">
             {badge}
           </span>
         )}
       </div>
 
       {/* Description */}
-      <p className="mt-2 text-sm text-white/70">{description}</p>
+      <p className="mt-2 text-sm text-fg-200">{description}</p>
 
       {/* Price */}
       <div className="mt-4 flex items-baseline gap-1">
-        <span className="text-3xl md:text-4xl font-bold text-white">{price}</span>
-        <span className="text-sm text-white/70">/ {period}</span>
+        <span className="text-3xl md:text-4xl font-bold text-text-loud">{price}</span>
+        <span className="text-sm text-fg-200">/ {period}</span>
       </div>
 
       {annualPrice && (
-        <p className="mt-1 text-sm text-white/70 line-through">
+        <p className="mt-1 text-sm text-fg-200 line-through">
           {annualPrice}
         </p>
       )}
@@ -73,7 +73,7 @@ const PricingCard = forwardRef<HTMLDivElement, PricingCardProps>(
       {/* Features */}
       <ul className="mt-6 flex-1 space-y-3">
         {features.map((feature) => (
-          <li key={feature} className="flex items-start gap-2 text-sm text-white/80">
+          <li key={feature} className="flex items-start gap-2 text-sm text-fg-200">
             <Check className="mt-0.5 h-4 w-4 shrink-0 text-green" aria-hidden="true" />
             <span>{feature}</span>
           </li>
@@ -88,7 +88,7 @@ const PricingCard = forwardRef<HTMLDivElement, PricingCardProps>(
           "mt-6 w-full rounded-md px-4 py-2.5 min-h-[44px] text-sm font-medium transition-all duration-200 active:scale-[0.98]",
           highlighted
             ? "bg-white/80 hover:bg-white text-[#18191a]"
-            : "border border-white/10 hover:border-white/15 bg-transparent text-white"
+            : "border border-border-strong hover:border-border-hover bg-transparent text-text-loud"
         )}
       >
         {cta}

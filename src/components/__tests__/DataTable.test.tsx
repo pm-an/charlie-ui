@@ -378,13 +378,13 @@ describe("DataTable", () => {
 
       const tbody = screen.getByRole("table").querySelector("tbody");
       const rows = within(tbody!).getAllByRole("row");
-      // Split into class tokens to avoid false positives from hover:bg-white/[0.02]
+      // Split into class tokens to avoid false positives from hover:bg-bg-subtle
       const getClasses = (el: Element) => el.className.split(/\s+/);
-      // Odd-indexed rows (index 1, 3) should have bg-white/[0.02] as a direct class
-      expect(getClasses(rows[1])).toContain("bg-white/[0.02]");
-      expect(getClasses(rows[3])).toContain("bg-white/[0.02]");
+      // Odd-indexed rows (index 1, 3) should have bg-bg-subtle as a direct class
+      expect(getClasses(rows[1])).toContain("bg-bg-subtle");
+      expect(getClasses(rows[3])).toContain("bg-bg-subtle");
       // Even rows should NOT have it as a direct class (only hover: prefixed)
-      expect(getClasses(rows[0])).not.toContain("bg-white/[0.02]");
+      expect(getClasses(rows[0])).not.toContain("bg-bg-subtle");
     });
 
     it("applies minimal variant without borders", () => {

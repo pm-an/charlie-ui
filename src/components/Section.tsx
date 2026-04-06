@@ -55,14 +55,14 @@ const Section = forwardRef<HTMLElement, SectionProps>(function Section(
               </p>
             )}
             {title && (
-              <h2 className="text-white text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight leading-[1.1]">
+              <h2 className="text-text-loud text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight leading-[1.1]">
                 {title}
               </h2>
             )}
             {description && (
               <p
                 className={cn(
-                  "text-white/60 text-base md:text-lg mt-3 md:mt-4 max-w-2xl",
+                  "text-fg-300 text-base md:text-lg mt-3 md:mt-4 max-w-2xl",
                   isCentered && "mx-auto"
                 )}
               >

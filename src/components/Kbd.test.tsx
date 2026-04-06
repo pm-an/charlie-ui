@@ -105,7 +105,7 @@ describe("Kbd", () => {
 
     it("does not render separator before first key", () => {
       const { container } = render(<Kbd keys={["cmd", "K"]} separator="+" />);
-      const separators = container.querySelectorAll(".text-\\[10px\\].text-white\\/70");
+      const separators = container.querySelectorAll(".text-\\[10px\\].text-fg-200");
       expect(separators).toHaveLength(1); // only between, not before first
     });
   });

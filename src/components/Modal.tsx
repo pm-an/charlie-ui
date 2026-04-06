@@ -22,7 +22,7 @@ import { useScrollLock } from "../hooks/useScrollLock";
 const modalVariants = cva(
   [
     "relative w-[calc(100%-32px)] md:w-full overflow-hidden rounded-xl",
-    "border border-white/[0.06] bg-grey-700 shadow-float backdrop-blur-xl",
+    "border border-border bg-grey-700 shadow-float backdrop-blur-xl",
   ],
   {
     variants: {
@@ -124,7 +124,7 @@ function ModalRoot({
             className={
               fullscreen
                 ? cn(
-                    "absolute inset-4 md:inset-6 flex flex-col overflow-hidden rounded-2xl border border-white/[0.06] bg-grey-700 shadow-float backdrop-blur-xl",
+                    "absolute inset-4 md:inset-6 flex flex-col overflow-hidden rounded-2xl border border-border bg-grey-700 shadow-float backdrop-blur-xl",
                     className
                   )
                 : cn(modalVariants({ size }), className)
@@ -157,7 +157,7 @@ function ModalRoot({
             {(title || canShowClose) && (
               <div
                 className={cn(
-                  "flex justify-between border-b border-white/[0.06] px-6 py-4",
+                  "flex justify-between border-b border-border px-6 py-4",
                   fullscreen
                     ? "sticky top-0 z-10 items-center bg-grey-700"
                     : "items-start gap-4"
@@ -168,7 +168,7 @@ function ModalRoot({
                     <h2
                       id={titleId}
                       className={cn(
-                        "font-semibold text-white",
+                        "font-semibold text-text-loud",
                         fullscreen ? "text-lg" : "text-base"
                       )}
                     >
@@ -176,7 +176,7 @@ function ModalRoot({
                     </h2>
                   )}
                   {description && (
-                    <p id={descriptionId} className="mt-1 text-sm text-white/70">{description}</p>
+                    <p id={descriptionId} className="mt-1 text-sm text-fg-200">{description}</p>
                   )}
                 </div>
 
@@ -186,8 +186,8 @@ function ModalRoot({
                     className={cn(
                       "shrink-0 rounded-md transition-colors",
                       fullscreen
-                        ? "flex h-8 w-8 items-center justify-center text-white/70 hover:bg-white/5 hover:text-white"
-                        : "p-1 text-white/70 hover:bg-white/5 hover:text-white"
+                        ? "flex h-8 w-8 items-center justify-center text-fg-200 hover:bg-bg-subtle hover:text-text-loud"
+                        : "p-1 text-fg-200 hover:bg-bg-subtle hover:text-text-loud"
                     )}
                     onClick={() => onOpenChange(false)}
                     aria-label="Close"
@@ -221,7 +221,7 @@ const ModalHeader = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
       ref={ref}
       data-slot="modal-header"
       className={cn(
-        "border-b border-white/[0.06] px-6 py-4",
+        "border-b border-border px-6 py-4",
         className
       )}
       {...props}
@@ -253,7 +253,7 @@ const ModalFooter = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
       ref={ref}
       data-slot="modal-footer"
       className={cn(
-        "flex items-center justify-end gap-3 border-t border-white/[0.06] px-6 py-4",
+        "flex items-center justify-end gap-3 border-t border-border px-6 py-4",
         className
       )}
       {...props}

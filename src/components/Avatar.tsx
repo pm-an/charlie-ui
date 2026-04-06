@@ -3,7 +3,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "../utils/cn";
 
 const avatarVariants = cva(
-  "relative inline-flex shrink-0 rounded-full overflow-hidden bg-white/10 items-center justify-center",
+  "relative inline-flex shrink-0 rounded-full overflow-hidden bg-bg-subtle-hover items-center justify-center",
   {
     variants: {
       size: {
@@ -20,7 +20,7 @@ const avatarVariants = cva(
   }
 );
 
-const fallbackTextVariants = cva("font-medium text-white/70 leading-none select-none", {
+const fallbackTextVariants = cva("font-medium text-fg-on-accent leading-none select-none", {
   variants: {
     size: {
       xs: "text-[10px]",

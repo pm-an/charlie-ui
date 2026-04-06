@@ -46,7 +46,7 @@ function ResizableHandle({
     <PanelResizeHandle
       className={cn(
         "relative flex items-center justify-center",
-        "bg-white/6 transition-colors",
+        "bg-bg-subtle transition-colors",
         "hover:bg-accent/30",
         "data-[resize-handle-active]:bg-accent/50",
         "data-[panel-group-direction=horizontal]:w-px",
@@ -59,9 +59,9 @@ function ResizableHandle({
       {...props}
     >
       {withHandle && (
-        <div className="z-10 flex items-center justify-center rounded-sm border border-white/10 bg-bg-200">
-          <GripVertical aria-hidden="true" className="h-3 w-3 text-white/70 data-[panel-group-direction=vertical]:hidden" />
-          <GripHorizontal aria-hidden="true" className="h-3 w-3 text-white/70 hidden data-[panel-group-direction=vertical]:block" />
+        <div className="z-10 flex items-center justify-center rounded-sm border border-border-strong bg-bg-200">
+          <GripVertical aria-hidden="true" className="h-3 w-3 text-fg-200 data-[panel-group-direction=vertical]:hidden" />
+          <GripHorizontal aria-hidden="true" className="h-3 w-3 text-fg-200 hidden data-[panel-group-direction=vertical]:block" />
         </div>
       )}
     </PanelResizeHandle>

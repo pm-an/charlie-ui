@@ -128,8 +128,8 @@ describe("Timeline", () => {
       </Timeline>
     );
     const title = screen.getByText("Active event");
-    expect(title).toHaveClass("text-white");
-    expect(title).toHaveClass("font-medium");
+    expect(title).toHaveClass("text-text-loud");
+    expect(title).toHaveClass("font-semibold");
   });
 
   it("applies ring to active dot", () => {

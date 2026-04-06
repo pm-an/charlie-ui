@@ -5,8 +5,8 @@ import { cn } from "../utils/cn";
 const dividerVariants = cva("w-full", {
   variants: {
     variant: {
-      solid: "h-px bg-white/6",
-      dotted: "h-0 border-t border-dotted border-white/10",
+      solid: "h-px bg-border",
+      dotted: "h-0 border-t border-dotted border-border-strong",
     },
   },
   defaultVariants: {
@@ -29,7 +29,7 @@ function Divider({ className, variant, label, ...props }: DividerProps) {
         {...props}
       >
         <div className={cn(dividerVariants({ variant }), "flex-1")} />
-        <span className="text-xs text-white/70 shrink-0">{label}</span>
+        <span className="text-xs text-fg-200 shrink-0">{label}</span>
         <div className={cn(dividerVariants({ variant }), "flex-1")} />
       </div>
     );

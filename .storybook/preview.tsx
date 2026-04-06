@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import type { Preview } from "@storybook/react-vite";
 import { create } from "storybook/theming";
 import { ThemeProvider } from "../src/components/ThemeProvider";
+import type { CharlieTheme, ColorMode } from "../src/components/ThemeProvider";
 import {
   defaultTheme,
   indigoTheme,
@@ -10,8 +11,14 @@ import {
   amberTheme,
   roseTheme,
   violetTheme,
+  lightThemeBase,
+  indigoLightTheme,
+  oceanLightTheme,
+  emeraldLightTheme,
+  amberLightTheme,
+  roseLightTheme,
+  violetLightTheme,
 } from "../src/themes/presets";
-import type { CharlieTheme } from "../src/components/ThemeProvider";
 import "../src/styles/globals.css";
 
 /* ── Theme map (keyed by toolbar value) ── */
@@ -25,9 +32,20 @@ const themeMap: Record<string, CharlieTheme> = {
   violet: violetTheme,
 };
 
+/** Light-mode accent overrides per theme preset */
+const lightThemeMap: Record<string, CharlieTheme> = {
+  default: {},
+  indigo: indigoLightTheme,
+  ocean: oceanLightTheme,
+  emerald: emeraldLightTheme,
+  amber: amberLightTheme,
+  rose: roseLightTheme,
+  violet: violetLightTheme,
+};
+
 /**
  * Map a CharlieTheme to --charlie-* CSS custom property entries.
- * Mirrors the mapping in ThemeProvider's themeToCSS.
+ * Mirrors the mapping in ThemeProvider's themeToCSS — keep in sync!
  */
 const charlieVarMap: Record<keyof CharlieTheme, string> = {
   accent: "--charlie-accent",
@@ -48,6 +66,9 @@ const charlieVarMap: Record<keyof CharlieTheme, string> = {
   textDefault: "--charlie-text-default",
   textMuted: "--charlie-text-muted",
   textFaint: "--charlie-text-faint",
+  red: "--charlie-red",
+  redMuted: "--charlie-red-muted",
+  redDim: "--charlie-red-dim",
   blue: "--charlie-blue",
   green: "--charlie-green",
   yellow: "--charlie-yellow",
@@ -71,16 +92,37 @@ const charlieVarMap: Record<keyof CharlieTheme, string> = {
   fontSans: "--charlie-font-sans",
   fontDisplay: "--charlie-font-display",
   fontMono: "--charlie-font-mono",
+  textXs: "--charlie-text-xs",
+  textSm: "--charlie-text-sm",
+  textBase: "--charlie-text-base",
+  textLg: "--charlie-text-lg",
+  textXl: "--charlie-text-xl",
+  text2xl: "--charlie-text-2xl",
+  text3xl: "--charlie-text-3xl",
   durationFast: "--charlie-duration-fast",
   durationNormal: "--charlie-duration-normal",
   durationModerate: "--charlie-duration-moderate",
   durationSlow: "--charlie-duration-slow",
+  bgSubtle: "--charlie-bg-subtle",
+  bgSubtleHover: "--charlie-bg-subtle-hover",
+  fgOnAccent: "--charlie-fg-on-accent",
+  overlay: "--charlie-overlay",
+  shadowXs: "--charlie-shadow-xs",
+  shadowSoft: "--charlie-shadow-soft",
+  shadowCard: "--charlie-shadow-card",
+  shadowCardHover: "--charlie-shadow-card-hover",
+  shadowElevated: "--charlie-shadow-elevated",
+  shadowFloat: "--charlie-shadow-float",
+  shadowButton: "--charlie-shadow-button",
+  shadowButtonHover: "--charlie-shadow-button-hover",
+  shadowInput: "--charlie-shadow-input",
+  shadowInputFocus: "--charlie-shadow-input-focus",
 };
 
 const charlieDocsTheme = create({
   base: "dark",
-  colorPrimary: "#dc2626",
-  colorSecondary: "#dc2626",
+  colorPrimary: "#ef4444",
+  colorSecondary: "#ef4444",
   appBg: "#07080a",
   appContentBg: "#0c0d0f",
   appBorderColor: "rgba(255,255,255,0.06)",
@@ -92,16 +134,16 @@ const charlieDocsTheme = create({
  * Decorator that applies --charlie-* CSS vars on :root so they are picked up
  * by the @theme token declarations (e.g. --color-accent: var(--charlie-accent, …)).
  *
- * Setting them on :root (document.documentElement) rather than a wrapper div
- * is required because the @theme block resolves var() on :root at computed-value
- * time — a child-element override of --charlie-accent does not retroactively
- * change the already-inherited --color-accent value.
+ * Also sets `data-charlie-mode` on the root element for CSS utility overrides
+ * (glass, glow, shadow, gradient utilities in globals.css).
  */
 function ThemeDecorator({
   theme,
+  mode,
   children,
 }: {
   theme: CharlieTheme;
+  mode: "dark" | "light";
   children: React.ReactNode;
 }) {
   useEffect(() => {
@@ -114,17 +156,31 @@ function ThemeDecorator({
         root.style.setProperty(cssVar, value);
         applied.push(cssVar);
       } else {
-        // Remove vars not in this theme so fallbacks kick in
         root.style.removeProperty(cssVar);
       }
     }
 
+    // Set data-charlie-mode on the root element so CSS utility overrides
+    // in globals.css (e.g. [data-charlie-mode="light"] .glass) take effect.
+    root.setAttribute("data-charlie-mode", mode);
+
     return () => {
       applied.forEach((v) => root.style.removeProperty(v));
+      root.removeAttribute("data-charlie-mode");
     };
-  }, [theme]);
+  }, [theme, mode]);
 
   return <>{children}</>;
+}
+
+/** Resolve the effective theme by merging accent preset + light base + light accent overrides */
+function resolveTheme(themeKey: string, mode: "dark" | "light"): CharlieTheme {
+  const accentTheme = themeMap[themeKey] || defaultTheme;
+  if (mode === "light") {
+    const lightAccent = lightThemeMap[themeKey] || {};
+    return { ...accentTheme, ...lightThemeBase, ...lightAccent };
+  }
+  return accentTheme;
 }
 
 const preview: Preview = {
@@ -146,9 +202,22 @@ const preview: Preview = {
         dynamicTitle: true,
       },
     },
+    charlieMode: {
+      description: "Charlie UI color mode",
+      toolbar: {
+        title: "Mode",
+        icon: "mirror",
+        items: [
+          { value: "dark", title: "Dark", icon: "moon" },
+          { value: "light", title: "Light", icon: "sun" },
+        ],
+        dynamicTitle: true,
+      },
+    },
   },
   initialGlobals: {
     charlieTheme: "default",
+    charlieMode: "dark",
   },
   parameters: {
     controls: {
@@ -166,6 +235,12 @@ const preview: Preview = {
     },
     a11y: {
       test: "error",
+    },
+    chromatic: {
+      modes: {
+        dark: { globals: { charlieMode: "dark" } },
+        light: { globals: { charlieMode: "light" } },
+      },
     },
     options: {
       storySort: {
@@ -187,10 +262,11 @@ const preview: Preview = {
   decorators: [
     (Story, context) => {
       const themeKey = context.globals.charlieTheme || "default";
-      const theme = themeMap[themeKey] || defaultTheme;
+      const mode = (context.globals.charlieMode || "dark") as "dark" | "light";
+      const theme = resolveTheme(themeKey, mode);
       return (
-        <ThemeDecorator theme={theme}>
-          <ThemeProvider theme={theme}>
+        <ThemeDecorator theme={theme} mode={mode}>
+          <ThemeProvider theme={theme} mode={mode as ColorMode}>
             <div style={{ background: theme.bg || "#07080a" }}>
               <Story />
             </div>

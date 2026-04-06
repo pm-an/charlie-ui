@@ -29,7 +29,7 @@ const FieldLabel = forwardRef<HTMLLabelElement, FieldLabelProps>(
       <label
         ref={ref}
         data-slot="field-label"
-        className={cn("text-sm font-medium text-white/80", className)}
+        className={cn("text-sm font-medium text-fg-200", className)}
         htmlFor={resolvedHtmlFor}
         {...props}
       >
@@ -54,7 +54,7 @@ const FieldDescription = forwardRef<HTMLParagraphElement, FieldDescriptionProps>
         ref={ref}
         id={resolvedId}
         data-slot="field-description"
-        className={cn("text-xs text-white/70", className)}
+        className={cn("text-xs text-fg-200", className)}
         {...props}
       >
         {children}
@@ -195,7 +195,7 @@ const FieldRoot = forwardRef<HTMLDivElement, FieldProps>(
                   htmlFor={id}
                   id={labelId}
                   className={cn(
-                    "text-sm font-medium text-white/80",
+                    "text-sm font-medium text-fg-200",
                     disabled && "opacity-65",
                     required &&
                       "after:content-['*'] after:ml-0.5 after:text-red"
@@ -208,7 +208,7 @@ const FieldRoot = forwardRef<HTMLDivElement, FieldProps>(
               {resolvedDescription && (
                 <p
                   id={descriptionId}
-                  className="text-xs text-white/70 -mt-0.5"
+                  className="text-xs text-fg-200 -mt-0.5"
                 >
                   {resolvedDescription}
                 </p>
