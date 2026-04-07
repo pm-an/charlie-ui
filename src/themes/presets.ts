@@ -1,22 +1,10 @@
 import type { CharlieTheme } from "../components/ThemeProvider";
 
-/** Default Charlie UI theme */
-export const defaultTheme: CharlieTheme = {
-  accent: "#ef4444",
-  accentMuted: "#2c1617",
-  accentDim: "#dc2626",
-  bg: "#07080a",
-  surface: "#1b1c1e",
-  surfaceElevated: "#111214",
-  fg: "#f4f4f5",
-  textLoud: "#ffffff",
-  textDefault: "#9c9c9d",
-  textMuted: "#6a6b6c",
-  bgSubtle: "rgba(255, 255, 255, 0.05)",
-  bgSubtleHover: "rgba(255, 255, 255, 0.08)",
-  fgOnAccent: "#ffffff",
-  overlay: "rgba(0, 0, 0, 0.6)",
-};
+/**
+ * @deprecated Dark base tokens now live in theme.css @theme block.
+ * Pass only custom overrides (accent, brand) to ThemeProvider.
+ */
+export const defaultTheme: CharlieTheme = {};
 
 /** Indigo accent theme */
 export const indigoTheme: CharlieTheme = {
@@ -63,79 +51,13 @@ export const violetTheme: CharlieTheme = {
 };
 
 /**
- * Light mode base tokens.
- * Used internally by ThemeProvider when mode="light".
- * Can also be used directly: createTheme({ ...lightThemeBase, accent: "#6366f1" })
+ * @deprecated Light base tokens now live in theme.css [data-charlie-mode="light"] block.
+ * Use <ThemeProvider mode="light"> instead.
  */
-export const lightThemeBase: CharlieTheme = {
-  // Backgrounds
-  bg: "#ffffff",
-  bg100: "#f9fafb",
-  bg200: "#f3f4f6",
-  bg300: "#e5e7eb",
-  bg400: "#d1d5db",
-  surface: "#f9fafb",
-  surfaceElevated: "#ffffff",
+export const lightThemeBase: CharlieTheme = {};
 
-  // Foreground / text
-  fg: "#111827",
-  fg200: "#374151",
-  fg300: "#6b7280",
-  fg400: "#9ca3af",
-  textLoud: "#030712",
-  textDefault: "#4b5563",
-  textMuted: "#9ca3af",
-  textFaint: "#d1d5db",
-
-  // Accent (same hue, adjusted muted/dim for light bg)
-  accent: "#ef4444",
-  accentMuted: "#fef2f2",
-  accentDim: "#dc2626",
-
-  // Semantic colors (darker for contrast on white)
-  red: "#dc2626",
-  redMuted: "rgba(220, 38, 38, 0.08)",
-  redDim: "#991b1b",
-  blue: "#2563eb",
-  green: "#16a34a",
-  yellow: "#ca8a04",
-  orange: "#ea580c",
-  purple: "#7c3aed",
-
-  // New semantic tokens
-  bgSubtle: "rgba(0, 0, 0, 0.04)",
-  bgSubtleHover: "rgba(0, 0, 0, 0.06)",
-  fgOnAccent: "#ffffff",
-  overlay: "rgba(0, 0, 0, 0.3)",
-
-  // UI surface
-  buttonBg: "#111827",
-  buttonBgHover: "#030712",
-  buttonFg: "#ffffff",
-  controlBg: "rgba(0, 0, 0, 0.06)",
-  separator: "rgba(0, 0, 0, 0.08)",
-  border: "rgba(0, 0, 0, 0.08)",
-  borderStrong: "rgba(0, 0, 0, 0.12)",
-  borderHover: "rgba(0, 0, 0, 0.2)",
-
-  // Shadows (no inset white highlights, softer black)
-  shadowXs: "0 1px 2px 0 rgba(0, 0, 0, 0.05)",
-  shadowSoft: "0 1px 3px 0 rgba(0, 0, 0, 0.08), 0 2px 6px 0 rgba(0, 0, 0, 0.04)",
-  shadowCard: "0 1px 3px 0 rgba(0, 0, 0, 0.06), 0 4px 8px 0 rgba(0, 0, 0, 0.04), 0 8px 16px 0 rgba(0, 0, 0, 0.02)",
-  shadowCardHover: "0 2px 4px 0 rgba(0, 0, 0, 0.08), 0 8px 20px 0 rgba(0, 0, 0, 0.06)",
-  shadowElevated: "0 4px 16px 0 rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.06)",
-  shadowFloat: "0 8px 40px 8px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(0, 0, 0, 0.08)",
-  shadowButton: "0 1px 2px 0 rgba(0, 0, 0, 0.06), 0 1px 3px 0 rgba(0, 0, 0, 0.04)",
-  shadowButtonHover: "0 2px 4px 0 rgba(0, 0, 0, 0.08), 0 4px 8px 0 rgba(0, 0, 0, 0.04)",
-  shadowInput: "inset 0 1px 2px 0 rgba(0, 0, 0, 0.06), 0 0 0 1px rgba(0, 0, 0, 0.08)",
-  shadowInputFocus: "inset 0 1px 2px 0 rgba(0, 0, 0, 0.04), 0 0 0 2px rgba(37, 99, 235, 0.2)",
-};
-
-/** Complete light theme preset (default theme structure + light colors) */
-export const lightTheme: CharlieTheme = {
-  ...defaultTheme,
-  ...lightThemeBase,
-};
+/** @deprecated Use <ThemeProvider mode="light"> with accent overrides */
+export const lightTheme: CharlieTheme = {};
 
 /** Light-mode accentMuted values for each accent preset */
 export const lightAccentMuted: Record<string, string> = {
@@ -184,16 +106,13 @@ export const violetLightTheme: CharlieTheme = {
 };
 
 /**
- * Helper to create a custom theme by overriding the default.
+ * Create a custom theme with accent/brand overrides.
+ * Dark/light base tokens come from CSS — only pass what you want to customize.
  *
- * Usage:
  * ```ts
- * const myTheme = createTheme({
- *   accent: "#ff6347",
- *   bg: "#0a0a0a",
- * });
+ * const myTheme = createTheme({ accent: "#208C7F", accentMuted: "#E6F4F2" });
  * ```
  */
 export function createTheme(overrides: CharlieTheme): CharlieTheme {
-  return { ...defaultTheme, ...overrides };
+  return overrides;
 }

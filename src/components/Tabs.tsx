@@ -212,7 +212,7 @@ function TabsRoot({
                 )}
                 <span className="relative z-10">{item.label}</span>
                 {item.badge && (
-                  <span className="relative z-10 ml-2 inline-flex items-center rounded-md bg-surface px-1.5 py-0.5 text-[10px] text-fg-200">
+                  <span className="relative z-10 ml-2 inline-flex items-center rounded-md bg-surface px-1.5 py-0.5 text-xs text-fg-200">
                     {item.badge}
                   </span>
                 )}

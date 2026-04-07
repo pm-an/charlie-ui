@@ -27,10 +27,7 @@ function ThemeDisplay() {
   return (
     <div>
       <span data-testid="mode">{mode}</span>
-      <span data-testid="bg">{theme.bg}</span>
       <span data-testid="accent">{theme.accent}</span>
-      <span data-testid="text-loud">{theme.textLoud}</span>
-      <span data-testid="bg-subtle">{theme.bgSubtle}</span>
     </div>
   );
 }
@@ -58,14 +55,14 @@ describe("ThemeProvider", () => {
     expect(screen.getByTestId("accent")).toHaveTextContent("#6366f1");
   });
 
-  it("sets CSS custom properties as inline styles", () => {
+  it("sets --color-* CSS custom properties as inline styles", () => {
     const { container } = render(
       <ThemeProvider theme={{ accent: "#6366f1" }}>
         <div>test</div>
       </ThemeProvider>
     );
     const wrapper = container.querySelector("[data-charlie-mode]") as HTMLElement;
-    expect(wrapper.style.getPropertyValue("--charlie-accent")).toBe("#6366f1");
+    expect(wrapper.style.getPropertyValue("--color-accent")).toBe("#6366f1");
   });
 
   it("merges nested ThemeProviders", () => {
@@ -77,91 +74,51 @@ describe("ThemeProvider", () => {
       </ThemeProvider>
     );
     expect(screen.getByTestId("accent")).toHaveTextContent("#6366f1");
-    expect(screen.getByTestId("bg")).toHaveTextContent("#000");
   });
 });
 
 describe("ThemeProvider mode='light'", () => {
-  it("applies light theme base tokens", () => {
-    render(
+  it("sets data-charlie-mode to light", () => {
+    const { container } = render(
       <ThemeProvider mode="light">
         <ThemeDisplay />
       </ThemeProvider>
     );
     expect(screen.getByTestId("mode")).toHaveTextContent("light");
-    expect(screen.getByTestId("bg")).toHaveTextContent("#ffffff");
-    expect(screen.getByTestId("text-loud")).toHaveTextContent("#030712");
-  });
-
-  it("sets data-charlie-mode to light", () => {
-    const { container } = render(
-      <ThemeProvider mode="light">
-        <div>test</div>
-      </ThemeProvider>
-    );
     expect(container.querySelector("[data-charlie-mode]")).toHaveAttribute(
       "data-charlie-mode",
       "light"
     );
   });
 
-  it("user theme overrides win over lightThemeBase", () => {
+  it("user theme overrides are applied in light mode", () => {
     render(
       <ThemeProvider mode="light" theme={{ accent: "#10b981" }}>
         <ThemeDisplay />
       </ThemeProvider>
     );
-    // accent overridden by user
     expect(screen.getByTestId("accent")).toHaveTextContent("#10b981");
-    // bg still comes from lightThemeBase
-    expect(screen.getByTestId("bg")).toHaveTextContent("#ffffff");
-  });
-
-  it("sets light shadow CSS vars", () => {
-    const { container } = render(
-      <ThemeProvider mode="light">
-        <div>test</div>
-      </ThemeProvider>
-    );
-    const wrapper = container.querySelector("[data-charlie-mode]") as HTMLElement;
-    const shadowCard = wrapper.style.getPropertyValue("--charlie-shadow-card");
-    expect(shadowCard).toBeTruthy();
-    // Light shadows don't have inset white highlights
-    expect(shadowCard).not.toContain("rgba(255, 255, 255");
-  });
-
-  it("sets new semantic token CSS vars", () => {
-    const { container } = render(
-      <ThemeProvider mode="light">
-        <div>test</div>
-      </ThemeProvider>
-    );
-    const wrapper = container.querySelector("[data-charlie-mode]") as HTMLElement;
-    expect(wrapper.style.getPropertyValue("--charlie-bg-subtle")).toBe(
-      "rgba(0, 0, 0, 0.04)"
-    );
-    expect(wrapper.style.getPropertyValue("--charlie-overlay")).toBe(
-      "rgba(0, 0, 0, 0.3)"
-    );
   });
 });
 
 describe("ThemeProvider mode='dark'", () => {
-  it("does not apply lightThemeBase", () => {
-    render(
+  it("sets data-charlie-mode to dark", () => {
+    const { container } = render(
       <ThemeProvider mode="dark">
         <ThemeDisplay />
       </ThemeProvider>
     );
     expect(screen.getByTestId("mode")).toHaveTextContent("dark");
-    // bg should NOT be the light value
-    expect(screen.getByTestId("bg")).not.toHaveTextContent("#ffffff");
+    expect(container.querySelector("[data-charlie-mode]")).toHaveAttribute(
+      "data-charlie-mode",
+      "dark"
+    );
   });
 });
 
 describe("ThemeProvider nested modes", () => {
   it("inner light mode overrides outer dark mode", () => {
-    render(
+    const { container } = render(
       <ThemeProvider mode="dark" theme={{ accent: "#dc2626" }}>
         <ThemeProvider mode="light">
           <ThemeDisplay />
@@ -169,11 +126,13 @@ describe("ThemeProvider nested modes", () => {
       </ThemeProvider>
     );
     expect(screen.getByTestId("mode")).toHaveTextContent("light");
-    expect(screen.getByTestId("bg")).toHaveTextContent("#ffffff");
+    // Inner provider sets data-charlie-mode="light"
+    const innerWrapper = container.querySelectorAll("[data-charlie-mode]")[1];
+    expect(innerWrapper).toHaveAttribute("data-charlie-mode", "light");
   });
 
   it("inner dark mode overrides outer light mode", () => {
-    render(
+    const { container } = render(
       <ThemeProvider mode="light">
         <ThemeProvider mode="dark" theme={{ bg: "#07080a" }}>
           <ThemeDisplay />
@@ -181,7 +140,8 @@ describe("ThemeProvider nested modes", () => {
       </ThemeProvider>
     );
     expect(screen.getByTestId("mode")).toHaveTextContent("dark");
-    expect(screen.getByTestId("bg")).toHaveTextContent("#07080a");
+    const innerWrapper = container.querySelectorAll("[data-charlie-mode]")[1];
+    expect(innerWrapper).toHaveAttribute("data-charlie-mode", "dark");
   });
 });
 
@@ -217,23 +177,30 @@ describe("ThemeProvider mode='system'", () => {
 
   it("resolves to dark when system prefers dark", () => {
     matchesDark = true;
-    render(
+    const { container } = render(
       <ThemeProvider mode="system">
         <ThemeDisplay />
       </ThemeProvider>
     );
     expect(screen.getByTestId("mode")).toHaveTextContent("dark");
+    expect(container.querySelector("[data-charlie-mode]")).toHaveAttribute(
+      "data-charlie-mode",
+      "dark"
+    );
   });
 
   it("resolves to light when system prefers light", () => {
     matchesDark = false;
-    render(
+    const { container } = render(
       <ThemeProvider mode="system">
         <ThemeDisplay />
       </ThemeProvider>
     );
     expect(screen.getByTestId("mode")).toHaveTextContent("light");
-    expect(screen.getByTestId("bg")).toHaveTextContent("#ffffff");
+    expect(container.querySelector("[data-charlie-mode]")).toHaveAttribute(
+      "data-charlie-mode",
+      "light"
+    );
   });
 
   it("reacts to system color scheme changes", () => {

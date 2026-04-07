@@ -2,11 +2,12 @@
  * Charlie UI — Theme Tokens for Consuming Apps
  *
  * Import AFTER @import "tailwindcss" to register all design tokens.
- * Override via --charlie-* CSS variables on :root.
+ * Mode switching is CSS-only via [data-charlie-mode] selectors.
+ * Custom overrides (accent, brand) are applied via ThemeProvider's inline styles.
  */
 
 @theme {
-  /* --- Grey Scale --- */
+  /* --- Grey Scale (mode-independent) --- */
   --color-grey-50: #e6e6e6;
   --color-grey-100: #cdcece;
   --color-grey-200: #9c9c9d;
@@ -18,96 +19,208 @@
   --color-grey-800: #0c0d0f;
   --color-grey-900: #07080a;
 
-  /* --- Semantic Backgrounds --- */
-  --color-bg: var(--charlie-bg, #07080a);
-  --color-bg-100: var(--charlie-bg-100, #101111);
-  --color-bg-200: var(--charlie-bg-200, #18191a);
-  --color-bg-300: var(--charlie-bg-300, #313133);
-  --color-bg-400: var(--charlie-bg-400, #494b4d);
-  --color-surface: var(--charlie-surface, #1b1c1e);
-  --color-surface-elevated: var(--charlie-surface-elevated, #111214);
+  /* --- Semantic Backgrounds (dark defaults) --- */
+  --color-bg: #07080a;
+  --color-bg-100: #101111;
+  --color-bg-200: #18191a;
+  --color-bg-300: #313133;
+  --color-bg-400: #494b4d;
+  --color-surface: #1b1c1e;
+  --color-surface-elevated: #111214;
 
-  /* --- Semantic Foreground --- */
-  --color-fg: var(--charlie-fg, #f4f4f5);
-  --color-fg-200: var(--charlie-fg-200, #c2c7ca);
-  --color-fg-300: var(--charlie-fg-300, #78787c);
-  --color-fg-400: var(--charlie-fg-400, #5e6366);
-  --color-text-loud: var(--charlie-text-loud, #ffffff);
-  --color-text-default: var(--charlie-text-default, #9c9c9d);
-  --color-text-muted: var(--charlie-text-muted, #6a6b6c);
-  --color-text-faint: var(--charlie-text-faint, #434345);
+  /* --- Semantic Foreground (dark defaults) --- */
+  --color-fg: #f4f4f5;
+  --color-fg-200: #c2c7ca;
+  --color-fg-300: #78787c;
+  --color-fg-400: #5e6366;
+  --color-text-loud: #ffffff;
+  --color-text-default: #9c9c9d;
+  --color-text-muted: #6a6b6c;
+  --color-text-faint: #434345;
 
-  /* --- Brand / Accent --- */
-  --color-accent: var(--charlie-accent, #dc2626);
-  --color-accent-muted: var(--charlie-accent-muted, #2c1617);
-  --color-accent-dim: var(--charlie-accent-dim, #833637);
-  --color-red: var(--charlie-red, #f87171);
-  --color-red-muted: var(--charlie-red-muted, rgba(248, 113, 113, 0.12));
-  --color-red-dim: var(--charlie-red-dim, #b91c1c);
-  --color-blue: var(--charlie-blue, #56c2ff);
-  --color-blue-muted: var(--charlie-blue-muted, rgba(86, 194, 255, 0.15));
-  --color-green: var(--charlie-green, #59d499);
-  --color-green-muted: var(--charlie-green-muted, rgba(89, 212, 153, 0.15));
-  --color-yellow: var(--charlie-yellow, #ffa500);
-  --color-yellow-muted: var(--charlie-yellow-muted, rgba(255, 165, 0, 0.15));
-  --color-orange: var(--charlie-orange, #ff9217);
-  --color-purple: var(--charlie-purple, #9b4dff);
+  /* --- Brand / Accent (dark defaults) --- */
+  --color-accent: #dc2626;
+  --color-accent-muted: #2c1617;
+  --color-accent-dim: #833637;
+  --color-red: #f87171;
+  --color-red-muted: rgba(248, 113, 113, 0.12);
+  --color-red-dim: #b91c1c;
+  --color-blue: #56c2ff;
+  --color-blue-muted: rgba(86, 194, 255, 0.15);
+  --color-green: #59d499;
+  --color-green-muted: rgba(89, 212, 153, 0.15);
+  --color-yellow: #ffa500;
+  --color-yellow-muted: rgba(255, 165, 0, 0.15);
+  --color-orange: #ff9217;
+  --color-purple: #9b4dff;
 
-  /* --- UI Surface --- */
-  --color-button-bg: var(--charlie-button-bg, hsla(0, 0%, 100%, 0.815));
-  --color-button-bg-hover: var(--charlie-button-bg-hover, hsl(0, 0%, 100%));
-  --color-button-fg: var(--charlie-button-fg, #18191a);
-  --color-control-bg: var(--charlie-control-bg, rgba(255, 255, 255, 0.1));
-  --color-separator: var(--charlie-separator, rgba(255, 255, 255, 0.1));
-  --color-border: var(--charlie-border, rgba(255, 255, 255, 0.06));
-  --color-border-strong: var(--charlie-border-strong, rgba(255, 255, 255, 0.1));
-  --color-border-hover: var(--charlie-border-hover, rgba(255, 255, 255, 0.15));
+  /* --- UI Surface (dark defaults) --- */
+  --color-button-bg: hsla(0, 0%, 100%, 0.815);
+  --color-button-bg-hover: hsl(0, 0%, 100%);
+  --color-button-fg: #18191a;
+  --color-control-bg: rgba(255, 255, 255, 0.1);
+  --color-separator: rgba(255, 255, 255, 0.1);
+  --color-border: rgba(255, 255, 255, 0.06);
+  --color-border-strong: rgba(255, 255, 255, 0.1);
+  --color-border-hover: rgba(255, 255, 255, 0.15);
 
-  /* --- Additional Semantic Colors --- */
-  --color-bg-subtle: var(--charlie-bg-subtle, rgba(255, 255, 255, 0.05));
-  --color-bg-subtle-hover: var(--charlie-bg-subtle-hover, rgba(255, 255, 255, 0.08));
-  --color-fg-on-accent: var(--charlie-fg-on-accent, #ffffff);
-  --color-overlay: var(--charlie-overlay, rgba(0, 0, 0, 0.6));
+  /* --- Additional Semantic Colors (dark defaults) --- */
+  --color-bg-subtle: rgba(255, 255, 255, 0.05);
+  --color-bg-subtle-hover: rgba(255, 255, 255, 0.08);
+  --color-fg-on-accent: #ffffff;
+  --color-overlay: rgba(0, 0, 0, 0.6);
 
-  /* --- Border Radius --- */
-  --radius-xs: var(--charlie-radius-xs, 4px);
-  --radius-sm: var(--charlie-radius-sm, 6px);
-  --radius-md: var(--charlie-radius-md, 8px);
-  --radius-lg: var(--charlie-radius-lg, 12px);
-  --radius-xl: var(--charlie-radius-xl, 16px);
-  --radius-2xl: var(--charlie-radius-2xl, 20px);
-  --radius-3xl: var(--charlie-radius-3xl, 24px);
+  /* --- Border Radius (mode-independent) --- */
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-2xl: 20px;
+  --radius-3xl: 24px;
   --radius-pill: 9999px;
   --radius-full: 9999px;
 
-  /* --- Shadows (Raycast-inspired multi-layer depth, overridable via --charlie-shadow-*) --- */
-  --shadow-xs: var(--charlie-shadow-xs, 0 1px 2px 0 rgba(0, 0, 0, 0.25));
-  --shadow-soft: var(--charlie-shadow-soft, inset 0 0.5px 0 0 rgba(255, 255, 255, 0.06), 0 1px 3px 0 rgba(0, 0, 0, 0.15), 0 2px 6px 0 rgba(0, 0, 0, 0.1));
-  --shadow-card: var(--charlie-shadow-card, inset 0 1px 0 0 rgba(255, 255, 255, 0.06), 0 1px 2px 0 rgba(0, 0, 0, 0.12), 0 4px 8px 0 rgba(0, 0, 0, 0.08), 0 8px 16px 0 rgba(0, 0, 0, 0.04));
-  --shadow-card-hover: var(--charlie-shadow-card-hover, inset 0 1px 1px 0 rgba(255, 255, 255, 0.1), 0 2px 4px 0 rgba(0, 0, 0, 0.15), 0 8px 20px 0 rgba(0, 0, 0, 0.12), 0 2px 40px 10px rgba(154, 170, 255, 0.04));
-  --shadow-elevated: var(--charlie-shadow-elevated, inset 0 0.5px 0 0 rgba(255, 255, 255, 0.1), 0 4px 16px 0 rgba(0, 0, 0, 0.32), 0 0 0 0.5px rgba(0, 0, 0, 0.6));
-  --shadow-float: var(--charlie-shadow-float, inset 0 0.5px 0 0 rgba(255, 255, 255, 0.12), 0 8px 40px 8px rgba(0, 0, 0, 0.4), 0 0 0 0.5px rgba(0, 0, 0, 0.8));
-  --shadow-button: var(--charlie-shadow-button, inset 0 0.5px 0 0 rgba(255, 255, 255, 0.1), 0 1px 1px 0 rgba(0, 0, 0, 0.12), 0 2px 4px 0 rgba(0, 0, 0, 0.08));
-  --shadow-button-hover: var(--charlie-shadow-button-hover, inset 0 0.5px 0 0 rgba(255, 255, 255, 0.15), 0 2px 3px 0 rgba(0, 0, 0, 0.16), 0 4px 8px 0 rgba(0, 0, 0, 0.1));
-  --shadow-input: var(--charlie-shadow-input, inset 0 1px 2px 0 rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(255, 255, 255, 0.04));
-  --shadow-input-focus: var(--charlie-shadow-input-focus, inset 0 1px 2px 0 rgba(0, 0, 0, 0.1), 0 0 0 2px rgba(255, 255, 255, 0.12));
+  /* --- Shadows (dark defaults) --- */
+  --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.25);
+  --shadow-soft: inset 0 0.5px 0 0 rgba(255, 255, 255, 0.06), 0 1px 3px 0 rgba(0, 0, 0, 0.15), 0 2px 6px 0 rgba(0, 0, 0, 0.1);
+  --shadow-card: inset 0 1px 0 0 rgba(255, 255, 255, 0.06), 0 1px 2px 0 rgba(0, 0, 0, 0.12), 0 4px 8px 0 rgba(0, 0, 0, 0.08), 0 8px 16px 0 rgba(0, 0, 0, 0.04);
+  --shadow-card-hover: inset 0 1px 1px 0 rgba(255, 255, 255, 0.1), 0 2px 4px 0 rgba(0, 0, 0, 0.15), 0 8px 20px 0 rgba(0, 0, 0, 0.12), 0 2px 40px 10px rgba(154, 170, 255, 0.04);
+  --shadow-elevated: inset 0 0.5px 0 0 rgba(255, 255, 255, 0.1), 0 4px 16px 0 rgba(0, 0, 0, 0.32), 0 0 0 0.5px rgba(0, 0, 0, 0.6);
+  --shadow-float: inset 0 0.5px 0 0 rgba(255, 255, 255, 0.12), 0 8px 40px 8px rgba(0, 0, 0, 0.4), 0 0 0 0.5px rgba(0, 0, 0, 0.8);
+  --shadow-button: inset 0 0.5px 0 0 rgba(255, 255, 255, 0.1), 0 1px 1px 0 rgba(0, 0, 0, 0.12), 0 2px 4px 0 rgba(0, 0, 0, 0.08);
+  --shadow-button-hover: inset 0 0.5px 0 0 rgba(255, 255, 255, 0.15), 0 2px 3px 0 rgba(0, 0, 0, 0.16), 0 4px 8px 0 rgba(0, 0, 0, 0.1);
+  --shadow-input: inset 0 1px 2px 0 rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(255, 255, 255, 0.04);
+  --shadow-input-focus: inset 0 1px 2px 0 rgba(0, 0, 0, 0.1), 0 0 0 2px rgba(255, 255, 255, 0.12);
 
-  /* --- Typography --- */
-  --font-sans: var(--charlie-font-sans, "Inter", ui-sans-serif, system-ui, sans-serif);
-  --font-display: var(--charlie-font-display, "Inter", ui-sans-serif, system-ui, sans-serif);
-  --font-mono: var(--charlie-font-mono, "JetBrains Mono", "Geist Mono", "SF Mono", Monaco, monospace);
+  /* --- Typography (mode-independent) --- */
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", "Geist Mono", "SF Mono", Monaco, monospace;
 
-  /* --- Typography Scale --- */
-  --text-xs: var(--charlie-text-xs, 12px);
-  --text-sm: var(--charlie-text-sm, 14px);
-  --text-base: var(--charlie-text-base, 16px);
-  --text-lg: var(--charlie-text-lg, 18px);
-  --text-xl: var(--charlie-text-xl, 20px);
-  --text-2xl: var(--charlie-text-2xl, 24px);
-  --text-3xl: var(--charlie-text-3xl, 36px);
-  --text-4xl: var(--charlie-text-4xl, 40px);
-  --text-5xl: var(--charlie-text-5xl, 48px);
-  --text-6xl: var(--charlie-text-6xl, 56px);
-  --text-7xl: var(--charlie-text-7xl, 64px);
-  --text-8xl: var(--charlie-text-8xl, 72px);
+  /* --- Typography Scale (mode-independent) --- */
+  --text-xs: 13px;
+  --text-sm: 15px;
+  --text-base: 16px;
+  --text-lg: 18px;
+  --text-xl: 20px;
+  --text-2xl: 24px;
+  --text-3xl: 36px;
+  --text-4xl: 40px;
+  --text-5xl: 48px;
+  --text-6xl: 56px;
+  --text-7xl: 64px;
+  --text-8xl: 72px;
+}
+
+/* ─── Dark Mode (explicit, for nested dark-inside-light) ─── */
+
+[data-charlie-mode="dark"] {
+  --color-bg: #07080a;
+  --color-bg-100: #101111;
+  --color-bg-200: #18191a;
+  --color-bg-300: #313133;
+  --color-bg-400: #494b4d;
+  --color-surface: #1b1c1e;
+  --color-surface-elevated: #111214;
+  --color-fg: #f4f4f5;
+  --color-fg-200: #c2c7ca;
+  --color-fg-300: #78787c;
+  --color-fg-400: #5e6366;
+  --color-text-loud: #ffffff;
+  --color-text-default: #9c9c9d;
+  --color-text-muted: #6a6b6c;
+  --color-text-faint: #434345;
+  --color-accent: #dc2626;
+  --color-accent-muted: #2c1617;
+  --color-accent-dim: #833637;
+  --color-red: #f87171;
+  --color-red-muted: rgba(248, 113, 113, 0.12);
+  --color-red-dim: #b91c1c;
+  --color-blue: #56c2ff;
+  --color-blue-muted: rgba(86, 194, 255, 0.15);
+  --color-green: #59d499;
+  --color-green-muted: rgba(89, 212, 153, 0.15);
+  --color-yellow: #ffa500;
+  --color-yellow-muted: rgba(255, 165, 0, 0.15);
+  --color-orange: #ff9217;
+  --color-purple: #9b4dff;
+  --color-button-bg: hsla(0, 0%, 100%, 0.815);
+  --color-button-bg-hover: hsl(0, 0%, 100%);
+  --color-button-fg: #18191a;
+  --color-control-bg: rgba(255, 255, 255, 0.1);
+  --color-separator: rgba(255, 255, 255, 0.1);
+  --color-border: rgba(255, 255, 255, 0.06);
+  --color-border-strong: rgba(255, 255, 255, 0.1);
+  --color-border-hover: rgba(255, 255, 255, 0.15);
+  --color-bg-subtle: rgba(255, 255, 255, 0.05);
+  --color-bg-subtle-hover: rgba(255, 255, 255, 0.08);
+  --color-fg-on-accent: #ffffff;
+  --color-overlay: rgba(0, 0, 0, 0.6);
+  --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.25);
+  --shadow-soft: inset 0 0.5px 0 0 rgba(255, 255, 255, 0.06), 0 1px 3px 0 rgba(0, 0, 0, 0.15), 0 2px 6px 0 rgba(0, 0, 0, 0.1);
+  --shadow-card: inset 0 1px 0 0 rgba(255, 255, 255, 0.06), 0 1px 2px 0 rgba(0, 0, 0, 0.12), 0 4px 8px 0 rgba(0, 0, 0, 0.08), 0 8px 16px 0 rgba(0, 0, 0, 0.04);
+  --shadow-card-hover: inset 0 1px 1px 0 rgba(255, 255, 255, 0.1), 0 2px 4px 0 rgba(0, 0, 0, 0.15), 0 8px 20px 0 rgba(0, 0, 0, 0.12), 0 2px 40px 10px rgba(154, 170, 255, 0.04);
+  --shadow-elevated: inset 0 0.5px 0 0 rgba(255, 255, 255, 0.1), 0 4px 16px 0 rgba(0, 0, 0, 0.32), 0 0 0 0.5px rgba(0, 0, 0, 0.6);
+  --shadow-float: inset 0 0.5px 0 0 rgba(255, 255, 255, 0.12), 0 8px 40px 8px rgba(0, 0, 0, 0.4), 0 0 0 0.5px rgba(0, 0, 0, 0.8);
+  --shadow-button: inset 0 0.5px 0 0 rgba(255, 255, 255, 0.1), 0 1px 1px 0 rgba(0, 0, 0, 0.12), 0 2px 4px 0 rgba(0, 0, 0, 0.08);
+  --shadow-button-hover: inset 0 0.5px 0 0 rgba(255, 255, 255, 0.15), 0 2px 3px 0 rgba(0, 0, 0, 0.16), 0 4px 8px 0 rgba(0, 0, 0, 0.1);
+  --shadow-input: inset 0 1px 2px 0 rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(255, 255, 255, 0.04);
+  --shadow-input-focus: inset 0 1px 2px 0 rgba(0, 0, 0, 0.1), 0 0 0 2px rgba(255, 255, 255, 0.12);
+}
+
+/* ─── Light Mode ─── */
+
+[data-charlie-mode="light"] {
+  --color-bg: #ffffff;
+  --color-bg-100: #f9fafb;
+  --color-bg-200: #f3f4f6;
+  --color-bg-300: #e5e7eb;
+  --color-bg-400: #d1d5db;
+  --color-surface: #f9fafb;
+  --color-surface-elevated: #ffffff;
+  --color-fg: #111827;
+  --color-fg-200: #374151;
+  --color-fg-300: #6b7280;
+  --color-fg-400: #9ca3af;
+  --color-text-loud: #030712;
+  --color-text-default: #4b5563;
+  --color-text-muted: #9ca3af;
+  --color-text-faint: #d1d5db;
+  --color-accent: #ef4444;
+  --color-accent-muted: #fef2f2;
+  --color-accent-dim: #dc2626;
+  --color-red: #dc2626;
+  --color-red-muted: rgba(220, 38, 38, 0.08);
+  --color-red-dim: #991b1b;
+  --color-blue: #2563eb;
+  --color-blue-muted: rgba(37, 99, 235, 0.1);
+  --color-green: #16a34a;
+  --color-green-muted: rgba(22, 163, 74, 0.1);
+  --color-yellow: #ca8a04;
+  --color-yellow-muted: rgba(202, 138, 4, 0.1);
+  --color-orange: #ea580c;
+  --color-purple: #7c3aed;
+  --color-button-bg: #111827;
+  --color-button-bg-hover: #030712;
+  --color-button-fg: #ffffff;
+  --color-control-bg: rgba(0, 0, 0, 0.06);
+  --color-separator: rgba(0, 0, 0, 0.08);
+  --color-border: rgba(0, 0, 0, 0.08);
+  --color-border-strong: rgba(0, 0, 0, 0.12);
+  --color-border-hover: rgba(0, 0, 0, 0.2);
+  --color-bg-subtle: rgba(0, 0, 0, 0.04);
+  --color-bg-subtle-hover: rgba(0, 0, 0, 0.06);
+  --color-fg-on-accent: #ffffff;
+  --color-overlay: rgba(0, 0, 0, 0.3);
+  --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-soft: 0 1px 3px 0 rgba(0, 0, 0, 0.08), 0 2px 6px 0 rgba(0, 0, 0, 0.04);
+  --shadow-card: 0 1px 3px 0 rgba(0, 0, 0, 0.06), 0 4px 8px 0 rgba(0, 0, 0, 0.04), 0 8px 16px 0 rgba(0, 0, 0, 0.02);
+  --shadow-card-hover: 0 2px 4px 0 rgba(0, 0, 0, 0.08), 0 8px 20px 0 rgba(0, 0, 0, 0.06);
+  --shadow-elevated: 0 4px 16px 0 rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.06);
+  --shadow-float: 0 8px 40px 8px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(0, 0, 0, 0.08);
+  --shadow-button: 0 1px 2px 0 rgba(0, 0, 0, 0.06), 0 1px 3px 0 rgba(0, 0, 0, 0.04);
+  --shadow-button-hover: 0 2px 4px 0 rgba(0, 0, 0, 0.08), 0 4px 8px 0 rgba(0, 0, 0, 0.04);
+  --shadow-input: inset 0 1px 2px 0 rgba(0, 0, 0, 0.06), 0 0 0 1px rgba(0, 0, 0, 0.08);
+  --shadow-input-focus: inset 0 1px 2px 0 rgba(0, 0, 0, 0.04), 0 0 0 2px rgba(37, 99, 235, 0.2);
 }

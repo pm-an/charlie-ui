@@ -2,12 +2,11 @@
 
 import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
 import { cn } from "../utils/cn";
-import { lightThemeBase } from "../themes/presets";
 
 /**
  * Charlie UI theme configuration.
  * Override any token to customize the look of all components.
- * All values map to --charlie-* CSS custom properties.
+ * All values map to --color-* CSS custom properties (Tailwind @theme tokens).
  */
 export interface CharlieTheme {
   /** Primary accent color (default: #ff6363) */
@@ -136,78 +135,82 @@ function useSystemColorScheme(): ResolvedColorMode {
   return isDark ? "dark" : "light";
 }
 
-/** Map a CharlieTheme object to CSS custom property declarations */
+/**
+ * Maps CharlieTheme keys to their corresponding CSS custom property names.
+ * Only emits --color-* vars for tokens the consumer explicitly overrides.
+ * Dark/light base tokens are handled by CSS selectors in theme.css, not inline styles.
+ */
 function themeToCSS(theme: CharlieTheme): Record<string, string> {
   const map: Record<keyof CharlieTheme, string> = {
-    accent: "--charlie-accent",
-    accentMuted: "--charlie-accent-muted",
-    accentDim: "--charlie-accent-dim",
-    bg: "--charlie-bg",
-    bg100: "--charlie-bg-100",
-    bg200: "--charlie-bg-200",
-    bg300: "--charlie-bg-300",
-    bg400: "--charlie-bg-400",
-    surface: "--charlie-surface",
-    surfaceElevated: "--charlie-surface-elevated",
-    fg: "--charlie-fg",
-    fg200: "--charlie-fg-200",
-    fg300: "--charlie-fg-300",
-    fg400: "--charlie-fg-400",
-    textLoud: "--charlie-text-loud",
-    textDefault: "--charlie-text-default",
-    textMuted: "--charlie-text-muted",
-    textFaint: "--charlie-text-faint",
-    red: "--charlie-red",
-    redMuted: "--charlie-red-muted",
-    redDim: "--charlie-red-dim",
-    blue: "--charlie-blue",
-    green: "--charlie-green",
-    yellow: "--charlie-yellow",
-    orange: "--charlie-orange",
-    purple: "--charlie-purple",
-    buttonBg: "--charlie-button-bg",
-    buttonBgHover: "--charlie-button-bg-hover",
-    buttonFg: "--charlie-button-fg",
-    controlBg: "--charlie-control-bg",
-    separator: "--charlie-separator",
-    border: "--charlie-border",
-    borderStrong: "--charlie-border-strong",
-    borderHover: "--charlie-border-hover",
-    radiusXs: "--charlie-radius-xs",
-    radiusSm: "--charlie-radius-sm",
-    radiusMd: "--charlie-radius-md",
-    radiusLg: "--charlie-radius-lg",
-    radiusXl: "--charlie-radius-xl",
-    radius2xl: "--charlie-radius-2xl",
-    radius3xl: "--charlie-radius-3xl",
-    fontSans: "--charlie-font-sans",
-    fontDisplay: "--charlie-font-display",
-    fontMono: "--charlie-font-mono",
-    textXs: "--charlie-text-xs",
-    textSm: "--charlie-text-sm",
-    textBase: "--charlie-text-base",
-    textLg: "--charlie-text-lg",
-    textXl: "--charlie-text-xl",
-    text2xl: "--charlie-text-2xl",
-    text3xl: "--charlie-text-3xl",
-    durationFast: "--charlie-duration-fast",
-    durationNormal: "--charlie-duration-normal",
+    accent:           "--color-accent",
+    accentMuted:      "--color-accent-muted",
+    accentDim:        "--color-accent-dim",
+    bg:               "--color-bg",
+    bg100:            "--color-bg-100",
+    bg200:            "--color-bg-200",
+    bg300:            "--color-bg-300",
+    bg400:            "--color-bg-400",
+    surface:          "--color-surface",
+    surfaceElevated:  "--color-surface-elevated",
+    fg:               "--color-fg",
+    fg200:            "--color-fg-200",
+    fg300:            "--color-fg-300",
+    fg400:            "--color-fg-400",
+    textLoud:         "--color-text-loud",
+    textDefault:      "--color-text-default",
+    textMuted:        "--color-text-muted",
+    textFaint:        "--color-text-faint",
+    red:              "--color-red",
+    redMuted:         "--color-red-muted",
+    redDim:           "--color-red-dim",
+    blue:             "--color-blue",
+    green:            "--color-green",
+    yellow:           "--color-yellow",
+    orange:           "--color-orange",
+    purple:           "--color-purple",
+    buttonBg:         "--color-button-bg",
+    buttonBgHover:    "--color-button-bg-hover",
+    buttonFg:         "--color-button-fg",
+    controlBg:        "--color-control-bg",
+    separator:        "--color-separator",
+    border:           "--color-border",
+    borderStrong:     "--color-border-strong",
+    borderHover:      "--color-border-hover",
+    radiusXs:         "--radius-xs",
+    radiusSm:         "--radius-sm",
+    radiusMd:         "--radius-md",
+    radiusLg:         "--radius-lg",
+    radiusXl:         "--radius-xl",
+    radius2xl:        "--radius-2xl",
+    radius3xl:        "--radius-3xl",
+    fontSans:         "--font-sans",
+    fontDisplay:      "--font-display",
+    fontMono:         "--font-mono",
+    textXs:           "--text-xs",
+    textSm:           "--text-sm",
+    textBase:         "--text-base",
+    textLg:           "--text-lg",
+    textXl:           "--text-xl",
+    text2xl:          "--text-2xl",
+    text3xl:          "--text-3xl",
+    durationFast:     "--charlie-duration-fast",
+    durationNormal:   "--charlie-duration-normal",
     durationModerate: "--charlie-duration-moderate",
-    durationSlow: "--charlie-duration-slow",
-    bgSubtle: "--charlie-bg-subtle",
-    bgSubtleHover: "--charlie-bg-subtle-hover",
-    fgOnAccent: "--charlie-fg-on-accent",
-    overlay: "--charlie-overlay",
-    shadowXs: "--charlie-shadow-xs",
-    shadowSoft: "--charlie-shadow-soft",
-    shadowCard: "--charlie-shadow-card",
-    shadowCardHover: "--charlie-shadow-card-hover",
-    shadowElevated: "--charlie-shadow-elevated",
-    shadowFloat: "--charlie-shadow-float",
-    shadowButton: "--charlie-shadow-button",
-    shadowButtonHover: "--charlie-shadow-button-hover",
-    shadowInput: "--charlie-shadow-input",
-    shadowInputFocus: "--charlie-shadow-input-focus",
+    durationSlow:     "--charlie-duration-slow",
+    bgSubtle:         "--color-bg-subtle",
+    bgSubtleHover:    "--color-bg-subtle-hover",
+    fgOnAccent:       "--color-fg-on-accent",
+    overlay:          "--color-overlay",
+    shadowXs:         "--shadow-xs",
+    shadowSoft:       "--shadow-soft",
+    shadowCard:       "--shadow-card",
+    shadowCardHover:  "--shadow-card-hover",
+    shadowElevated:   "--shadow-elevated",
+    shadowFloat:      "--shadow-float",
+    shadowButton:     "--shadow-button",
+    shadowButtonHover:"--shadow-button-hover",
+    shadowInput:      "--shadow-input",
+    shadowInputFocus: "--shadow-input-focus",
   };
 
   const styles: Record<string, string> = {};
@@ -221,34 +224,27 @@ function themeToCSS(theme: CharlieTheme): Record<string, string> {
 }
 
 export interface ThemeProviderProps {
-  /** Theme overrides */
+  /** Custom theme overrides (accent, brand colors, fonts). Dark/light base tokens are CSS-only. */
   theme?: CharlieTheme;
   /** Color mode: "dark" (default), "light", or "system" (auto-detect) */
   mode?: ColorMode;
-  /** Scoped to this provider's children only (uses a wrapper div) */
   children: ReactNode;
-  /** Additional className for the wrapper div */
   className?: string;
 }
 
 /**
  * Provides a Charlie UI theme to all descendant components.
  *
- * Usage:
+ * Dark/light mode switching is handled entirely by CSS via `[data-charlie-mode]`
+ * selectors in theme.css. The theme prop is for custom overrides only (accent, brand).
+ *
  * ```tsx
- * <ThemeProvider theme={{ accent: "#6366f1" }}>
+ * <ThemeProvider mode="dark" theme={{ accent: "#6366f1" }}>
  *   <App />
  * </ThemeProvider>
  * ```
  *
- * Light mode:
- * ```tsx
- * <ThemeProvider mode="light">
- *   <App />
- * </ThemeProvider>
- * ```
- *
- * You can also nest ThemeProviders for scoped theming:
+ * Nested providers work for scoped theming:
  * ```tsx
  * <ThemeProvider theme={{ accent: "#ff6363" }}>
  *   <Sidebar />
@@ -267,12 +263,10 @@ export function ThemeProvider({ theme = {}, mode = "dark", children, className }
     return mode;
   }, [mode, systemMode]);
 
+  // No lightThemeBase merge — CSS handles dark/light base tokens
   const mergedTheme = useMemo(() => {
-    if (resolvedMode === "light") {
-      return { ...parentTheme, ...lightThemeBase, ...theme };
-    }
     return { ...parentTheme, ...theme };
-  }, [parentTheme, theme, resolvedMode]);
+  }, [parentTheme, theme]);
 
   const cssVars = useMemo(() => themeToCSS(mergedTheme), [mergedTheme]);
 
