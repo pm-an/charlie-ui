@@ -9,7 +9,7 @@ import reactRefresh from 'eslint-plugin-react-refresh'
 import tseslint from 'typescript-eslint'
 import { defineConfig, globalIgnores } from 'eslint/config'
 
-export default defineConfig([globalIgnores(['dist', 'storybook-static', 'test-results']), {
+export default defineConfig([globalIgnores(['dist', 'storybook-static', 'test-results', '.claude/worktrees']), {
   files: ['**/*.{ts,tsx}'],
   extends: [
     js.configs.recommended,

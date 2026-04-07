@@ -1,5 +1,5 @@
 import { render, screen, act } from "@testing-library/react";
-import { describe, it, expect, vi, beforeAll, afterAll, beforeEach, afterEach } from "vitest";
+import { describe, it, expect, vi, beforeAll, beforeEach, afterEach } from "vitest";
 import { ThemeProvider, useTheme, useColorMode } from "../ThemeProvider";
 
 // matchMedia is not available in jsdom — provide a default mock
