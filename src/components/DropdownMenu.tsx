@@ -251,7 +251,7 @@ const DropdownMenuContent = ({ children, className, align = "start" }: DropdownM
           exit={{ opacity: 0, scale: 0.95 }}
           transition={{ duration: 0.2, ease: "easeOut" }}
           className={cn(
-            "absolute top-full mt-1 z-50 min-w-[180px] rounded-lg border border-border-strong bg-grey-700/95 p-1 shadow-elevated backdrop-blur-xl",
+            "absolute top-full mt-1 z-50 min-w-[180px] rounded-lg border border-border-strong bg-surface-elevated/95 p-1 shadow-elevated backdrop-blur-xl",
             alignClass,
             className
           )}

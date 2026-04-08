@@ -43,7 +43,7 @@ const NotificationPanel = forwardRef<HTMLDivElement, NotificationPanelProps>(
         ref={ref}
         data-slot="notification-panel"
         className={cn(
-          "rounded-xl border border-border overflow-hidden max-h-[500px] bg-[#0a0a0b] flex flex-col",
+          "rounded-xl border border-border overflow-hidden max-h-[500px] bg-bg flex flex-col",
           className
         )}
         {...props}

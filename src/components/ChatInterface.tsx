@@ -48,7 +48,7 @@ const ChatInterface = forwardRef<HTMLDivElement, ChatInterfaceProps>(
         ref={ref}
         data-slot="chat-interface"
         className={cn(
-          "rounded-xl border border-border overflow-hidden flex flex-col h-[500px] bg-[#0a0a0b]",
+          "rounded-xl border border-border overflow-hidden flex flex-col h-[500px] bg-bg",
           className
         )}
         {...props}

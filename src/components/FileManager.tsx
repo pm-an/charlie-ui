@@ -53,7 +53,7 @@ const FileManager = forwardRef<HTMLDivElement, FileManagerProps>(
         ref={ref}
         data-slot="file-manager"
         className={cn(
-          "rounded-xl border border-border overflow-hidden bg-[#0a0a0b]",
+          "rounded-xl border border-border overflow-hidden bg-bg",
           className
         )}
         {...props}

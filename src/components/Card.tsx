@@ -28,7 +28,7 @@ const cardVariants = cva(
           "shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08)]",
         ],
         elevated: [
-          "bg-grey-700 border border-border",
+          "bg-surface-elevated border border-border",
           "shadow-elevated",
         ],
       },

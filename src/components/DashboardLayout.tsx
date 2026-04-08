@@ -50,7 +50,7 @@ const DashboardLayoutRoot = forwardRef<HTMLDivElement, DashboardLayoutProps>(
         <div
           ref={ref}
           data-slot="dashboard-layout"
-          className={cn("flex min-h-screen", className)}
+          className={cn("flex min-h-screen bg-bg", className)}
           {...props}
         >
           {children}
@@ -97,7 +97,7 @@ const DashboardSidebar = forwardRef<HTMLElement, DashboardSidebarProps>(
           transition={{ duration: 0.26, ease: "easeInOut" }}
           onKeyDown={handleKeyDown}
           className={cn(
-            "hidden md:flex flex-col border-r border-border bg-[#0a0a0b] overflow-hidden shrink-0",
+            "hidden md:flex flex-col border-r border-border bg-sidebar-bg overflow-hidden shrink-0",
             className
           )}
           {...(props as Record<string, unknown>)}
@@ -145,7 +145,7 @@ const DashboardSidebar = forwardRef<HTMLElement, DashboardSidebarProps>(
                 exit={{ x: -256 }}
                 transition={{ duration: 0.26, ease: "easeInOut" }}
                 className={cn(
-                  "md:hidden fixed inset-y-0 left-0 z-50 w-64 flex flex-col bg-[#0a0a0b] border-r border-border",
+                  "md:hidden fixed inset-y-0 left-0 z-50 w-64 flex flex-col bg-sidebar-bg border-r border-border",
                   className
                 )}
               >
@@ -181,7 +181,7 @@ const DashboardHeader = forwardRef<HTMLElement, DashboardHeaderProps>(
         ref={ref}
         data-slot="dashboard-header"
         className={cn(
-          "h-14 border-b border-border bg-[#0a0a0b] px-4 flex items-center shrink-0",
+          "h-14 border-b border-border bg-sidebar-bg px-4 flex items-center shrink-0",
           className
         )}
         {...props}

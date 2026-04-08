@@ -22,7 +22,7 @@ import { useScrollLock } from "../hooks/useScrollLock";
 const modalVariants = cva(
   [
     "relative w-[calc(100%-32px)] md:w-full overflow-hidden rounded-xl",
-    "border border-border bg-grey-700 shadow-float backdrop-blur-xl",
+    "border border-border bg-surface-elevated shadow-float backdrop-blur-xl",
   ],
   {
     variants: {
@@ -124,7 +124,7 @@ function ModalRoot({
             className={
               fullscreen
                 ? cn(
-                    "absolute inset-4 md:inset-6 flex flex-col overflow-hidden rounded-2xl border border-border bg-grey-700 shadow-float backdrop-blur-xl",
+                    "absolute inset-4 md:inset-6 flex flex-col overflow-hidden rounded-2xl border border-border bg-surface-elevated shadow-float backdrop-blur-xl",
                     className
                   )
                 : cn(modalVariants({ size }), className)
@@ -159,7 +159,7 @@ function ModalRoot({
                 className={cn(
                   "flex justify-between border-b border-border px-6 py-4",
                   fullscreen
-                    ? "sticky top-0 z-10 items-center bg-grey-700"
+                    ? "sticky top-0 z-10 items-center bg-surface-elevated"
                     : "items-start gap-4"
                 )}
               >

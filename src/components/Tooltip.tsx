@@ -93,7 +93,7 @@ function Tooltip({
             role="tooltip"
             className={cn(
               "absolute z-50 whitespace-nowrap",
-              "bg-grey-700/95 border border-border rounded-md px-3 py-1.5 backdrop-blur-lg",
+              "bg-surface-elevated/95 border border-border rounded-md px-3 py-1.5 backdrop-blur-lg",
               "text-xs tracking-wide text-text-loud shadow-elevated",
               className
             )}

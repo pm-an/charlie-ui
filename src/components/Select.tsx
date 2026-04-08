@@ -476,7 +476,7 @@ function Select({
         <motion.div
           className={cn(
             "absolute z-50 left-0 right-0 top-full mt-1",
-            "bg-grey-700 border border-border rounded-lg shadow-elevated backdrop-blur-xl overflow-hidden"
+            "bg-surface-elevated border border-border rounded-lg shadow-elevated backdrop-blur-xl overflow-hidden"
           )}
           initial={{ opacity: 1, y: -4 }}
           animate={{ opacity: 1, y: 0 }}

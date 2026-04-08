@@ -166,7 +166,7 @@ function CommandPalette({
             {/* Dialog */}
             <motion.div
               data-slot="command-palette"
-              className="relative w-[calc(100%-32px)] md:w-full max-w-[640px] overflow-hidden rounded-xl border border-border bg-grey-700 shadow-window"
+              className="relative w-[calc(100%-32px)] md:w-full max-w-[640px] overflow-hidden rounded-xl border border-border bg-surface-elevated shadow-window"
               data-state={open ? "open" : "closed"}
               initial={{ opacity: 1, scale: 0.96, y: -8 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}

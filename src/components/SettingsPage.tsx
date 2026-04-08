@@ -58,7 +58,7 @@ const SettingsPageRoot = forwardRef<HTMLDivElement, SettingsPageProps>(
         <div
           ref={ref}
           data-slot="settings-page"
-          className={cn("min-h-screen bg-[#0a0a0b]", className)}
+          className={cn("min-h-screen bg-bg", className)}
           {...props}
         >
           {/* Page header */}

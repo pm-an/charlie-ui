@@ -88,6 +88,9 @@ export interface CharlieTheme {
   fgOnAccent?: string;
   overlay?: string;
 
+  /** Layout surfaces */
+  sidebarBg?: string;
+
   /** Shadow overrides */
   shadowXs?: string;
   shadowSoft?: string;
@@ -201,6 +204,7 @@ function themeToCSS(theme: CharlieTheme): Record<string, string> {
     bgSubtleHover:    "--color-bg-subtle-hover",
     fgOnAccent:       "--color-fg-on-accent",
     overlay:          "--color-overlay",
+    sidebarBg:        "--color-sidebar-bg",
     shadowXs:         "--shadow-xs",
     shadowSoft:       "--shadow-soft",
     shadowCard:       "--shadow-card",

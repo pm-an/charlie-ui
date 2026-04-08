@@ -40,7 +40,7 @@ const FullscreenModalFooter = forwardRef<HTMLDivElement, FullscreenModalFooterPr
     <div
       ref={ref}
       className={cn(
-        "sticky bottom-0 border-t border-border bg-grey-700 px-6 py-4 flex items-center justify-end gap-3",
+        "sticky bottom-0 border-t border-border bg-surface-elevated px-6 py-4 flex items-center justify-end gap-3",
         className
       )}
       {...props}
