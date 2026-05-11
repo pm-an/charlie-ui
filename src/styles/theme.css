@@ -39,7 +39,7 @@
   --color-text-faint: #434345;
 
   /* --- Brand / Accent (dark defaults) --- */
-  --color-accent: #dc2626;
+  --color-accent: #f87171;
   --color-accent-muted: #2c1617;
   --color-accent-dim: #833637;
   --color-red: #f87171;
@@ -119,6 +119,9 @@
 /* ─── Dark Mode (explicit, for nested dark-inside-light) ─── */
 
 [data-charlie-mode="dark"] {
+  /* Re-establish color so children re-inherit from this scope's --color-fg
+     rather than the body's computed color. */
+  color: var(--color-fg);
   --color-bg: #07080a;
   --color-bg-100: #101111;
   --color-bg-200: #18191a;
@@ -134,7 +137,7 @@
   --color-text-default: #9c9c9d;
   --color-text-muted: #6a6b6c;
   --color-text-faint: #434345;
-  --color-accent: #dc2626;
+  --color-accent: #f87171;
   --color-accent-muted: #2c1617;
   --color-accent-dim: #833637;
   --color-red: #f87171;
@@ -176,6 +179,7 @@
 /* ─── Light Mode ─── */
 
 [data-charlie-mode="light"] {
+  color: var(--color-fg);
   --color-bg: #ffffff;
   --color-bg-100: #f9fafb;
   --color-bg-200: #f3f4f6;
@@ -191,20 +195,20 @@
   --color-text-default: #4b5563;
   --color-text-muted: #9ca3af;
   --color-text-faint: #d1d5db;
-  --color-accent: #ef4444;
+  --color-accent: #b91c1c;
   --color-accent-muted: #fef2f2;
   --color-accent-dim: #dc2626;
-  --color-red: #dc2626;
+  --color-red: #b91c1c;
   --color-red-muted: rgba(220, 38, 38, 0.08);
   --color-red-dim: #991b1b;
-  --color-blue: #2563eb;
+  --color-blue: #1d4ed8;
   --color-blue-muted: rgba(37, 99, 235, 0.1);
-  --color-green: #16a34a;
+  --color-green: #166534;
   --color-green-muted: rgba(22, 163, 74, 0.1);
-  --color-yellow: #ca8a04;
+  --color-yellow: #854d0e;
   --color-yellow-muted: rgba(202, 138, 4, 0.1);
-  --color-orange: #ea580c;
-  --color-purple: #7c3aed;
+  --color-orange: #9a3412;
+  --color-purple: #6d28d9;
   --color-button-bg: #111827;
   --color-button-bg-hover: #030712;
   --color-button-fg: #ffffff;

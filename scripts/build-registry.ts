@@ -9,7 +9,7 @@
  */
 
 import { readFileSync, writeFileSync, mkdirSync, existsSync, rmSync } from "node:fs";
-import { resolve, extname } from "node:path";
+import { resolve, extname, dirname } from "node:path";
 import { registryMetadata, type ItemMeta } from "./registry-metadata";
 
 const ROOT = resolve(import.meta.dirname, "..");
@@ -38,6 +38,26 @@ function resolveVersion(pkg: string): string | undefined {
 /** Read a source file relative to project root */
 function readSource(relPath: string): string {
   return readFileSync(resolve(ROOT, relPath), "utf-8");
+}
+
+/**
+ * Recursively inline relative @import statements in CSS so the registry
+ * ships a self-contained stylesheet. Bare imports like `tailwindcss` are
+ * left intact for the consumer's PostCSS pipeline.
+ */
+function inlineCssImports(content: string, sourceFile: string): string {
+  const importRegex = /@import\s+['"]([^'"]+)['"]\s*;?/g;
+  return content.replace(importRegex, (full, importPath) => {
+    if (!importPath.startsWith("./") && !importPath.startsWith("../")) {
+      return full;
+    }
+    const resolvedPath = resolve(dirname(resolve(ROOT, sourceFile)), importPath);
+    const relPath = resolvedPath.startsWith(ROOT)
+      ? resolvedPath.slice(ROOT.length + 1)
+      : resolvedPath;
+    const importedContent = readFileSync(resolvedPath, "utf-8");
+    return inlineCssImports(importedContent, relPath);
+  });
 }
 
 // ─── Import Path Mapping ─────────────────────────────────────────────
@@ -240,17 +260,24 @@ function buildItem(name: string, meta: ItemMeta): RegistryItem {
 
   // Process main source file
   const mainContent = readSource(meta.source);
-  const mainParsed = parseImports(mainContent, meta.source);
-
-  for (const dep of mainParsed.npmDeps) allNpmDeps.add(dep);
-  for (const dep of mainParsed.registryDeps) allRegDeps.add(dep);
-
   const ext = extname(meta.source);
   const fileType = resolveFileType(meta.type, ext);
 
+  let mainOutput: string;
+  if (ext === ".css") {
+    // CSS files: inline relative @imports so the registry is self-contained;
+    // skip JS-style import parsing (CSS @import is not a registry dep).
+    mainOutput = inlineCssImports(mainContent, meta.source);
+  } else {
+    const mainParsed = parseImports(mainContent, meta.source);
+    for (const dep of mainParsed.npmDeps) allNpmDeps.add(dep);
+    for (const dep of mainParsed.registryDeps) allRegDeps.add(dep);
+    mainOutput = mainParsed.rewrittenContent;
+  }
+
   files.push({
     path: meta.target,
-    content: mainParsed.rewrittenContent,
+    content: mainOutput,
     type: fileType,
   });
 

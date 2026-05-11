@@ -8,7 +8,7 @@ export const defaultTheme: CharlieTheme = {};
 
 /** Indigo accent theme */
 export const indigoTheme: CharlieTheme = {
-  accent: "#6366f1",
+  accent: "#a5b4fc",
   accentMuted: "#1e1b4b",
   accentDim: "#4338ca",
 };
@@ -23,9 +23,9 @@ export const oceanTheme: CharlieTheme = {
 
 /** Emerald accent theme */
 export const emeraldTheme: CharlieTheme = {
-  accent: "#10b981",
+  accent: "#34d399",
   accentMuted: "#0d3b2e",
-  accentDim: "#059669",
+  accentDim: "#047857",
 };
 
 /** Amber accent theme */
