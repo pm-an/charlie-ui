@@ -90,6 +90,11 @@ export const EnterExit: Story = {
       </div>
     );
   },
+  play: async () => {
+    // Wait for the stagger entry animation (4 badges × 0.08s + ~300ms tween)
+    // to fully settle before the a11y addon evaluates contrast.
+    await new Promise((resolve) => setTimeout(resolve, 800));
+  },
 };
 
 export const ViewportTriggered: Story = {
