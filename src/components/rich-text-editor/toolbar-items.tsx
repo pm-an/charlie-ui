@@ -272,15 +272,44 @@ export const TOOLBAR_GROUPS: Record<ToolbarGroup, ToolbarItemDef[]> = {
   ],
 };
 
+/**
+ * Map of default extension name → toolbar item keys whose action depends on
+ * that extension being registered. When a consumer disables an extension via
+ * `extensionConfig.disableDefaults`, the matching toolbar items are filtered
+ * out so the toolbar stays in sync with the active extension set.
+ *
+ * NOTE: `link` is intentionally NOT mapped here. Tiptap v3 StarterKit already
+ * ships the Link extension, so consumers who disable charlie-ui's separate
+ * Link registration (to silence the duplicate-extension warning) still have
+ * a working link mark and therefore should still see the link toolbar buttons.
+ */
+const EXTENSION_TO_ITEM_KEYS: Record<string, readonly string[]> = {
+  underline: ["underline"],
+  textAlign: ["alignLeft", "alignCenter", "alignRight", "alignJustify"],
+  highlight: ["highlight"],
+  taskList: ["taskList"],
+};
+
 /** Build a flat list of toolbar items from the group config */
 export function resolveToolbarItems(
   groups: ToolbarGroup[] = DEFAULT_TOOLBAR_GROUPS,
-  customItems: CustomToolbarItem[] = []
+  customItems: CustomToolbarItem[] = [],
+  disabledExtensions: readonly string[] = []
 ): { group: ToolbarGroup | "custom"; items: ToolbarItemDef[] }[] {
+  const disabledKeys = new Set<string>();
+  for (const ext of disabledExtensions) {
+    const keys = EXTENSION_TO_ITEM_KEYS[ext];
+    if (keys) {
+      for (const k of keys) disabledKeys.add(k);
+    }
+  }
+
   const result: { group: ToolbarGroup | "custom"; items: ToolbarItemDef[] }[] = [];
 
   for (const group of groups) {
-    const builtinItems = TOOLBAR_GROUPS[group] ?? [];
+    const builtinItems = (TOOLBAR_GROUPS[group] ?? []).filter(
+      (item) => !disabledKeys.has(item.key)
+    );
     const custom = customItems
       .filter((c) => c.group === group)
       .map(({ key, icon, label, action, isActive }) => ({

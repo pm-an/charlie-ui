@@ -59,6 +59,13 @@ type RichTextEditorContextValue = {
   editor: Editor | null;
   ariaDescribedBy?: string;
   ariaInvalid?: boolean;
+  /**
+   * Names of default extensions disabled via `extensionConfig.disableDefaults`.
+   * The toolbar and bubble menu use this to hide buttons whose backing
+   * extension is not loaded — keeping the surfaced UI in sync with what the
+   * editor can actually do.
+   */
+  disabledExtensions?: readonly string[];
 };
 
 const RichTextEditorContext = createContext<RichTextEditorContextValue | null>(null);
@@ -171,12 +178,13 @@ function ToolbarButton({
 
 const RichTextEditorToolbar = forwardRef<HTMLDivElement, RichTextEditorToolbarProps>(
   ({ className, groups, customItems, ...props }, ref) => {
-    const { editor } = useRichTextEditor();
+    const { editor, disabledExtensions } = useRichTextEditor();
     if (!editor) return null;
 
     const resolvedGroups = resolveToolbarItems(
       groups ?? DEFAULT_TOOLBAR_GROUPS,
-      customItems
+      customItems,
+      disabledExtensions
     );
 
     return (
@@ -236,11 +244,13 @@ RichTextEditorContent.displayName = "RichTextEditor.Content";
 
 const RichTextEditorBubbleMenu = forwardRef<HTMLDivElement, RichTextEditorBubbleMenuProps>(
   ({ className, groups, ...props }, ref) => {
-    const { editor } = useRichTextEditor();
+    const { editor, disabledExtensions } = useRichTextEditor();
     if (!editor) return null;
 
     const resolvedGroups = resolveToolbarItems(
-      groups ?? ["textFormatting", "links"]
+      groups ?? ["textFormatting", "links"],
+      [],
+      disabledExtensions
     );
 
     return (
@@ -368,7 +378,14 @@ const RichTextEditorRoot = forwardRef<HTMLDivElement, RichTextEditorProps>(
     const hasChildren = children !== undefined && children !== null;
 
     return (
-      <RichTextEditorContext.Provider value={{ editor, ariaDescribedBy, ariaInvalid }}>
+      <RichTextEditorContext.Provider
+        value={{
+          editor,
+          ariaDescribedBy,
+          ariaInvalid,
+          disabledExtensions: extensionConfig?.disableDefaults,
+        }}
+      >
         <div
           ref={ref}
           className={cn(
