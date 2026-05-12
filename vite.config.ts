@@ -16,6 +16,11 @@ export default defineConfig({
     tsconfigPath: resolve(dirname, "tsconfig.build.json")
   })],
   build: {
+    // Ship readable source for the library. Consumer bundlers minify in
+    // their own app builds; minifying here trips Socket.dev's
+    // "minified/obfuscated code" supply-chain alerts on the published
+    // package and inlines `process.env.NODE_ENV` (env-var-access alert).
+    minify: false,
     lib: {
       entry: [
         resolve(dirname, "src/index.ts"),
@@ -32,13 +37,27 @@ export default defineConfig({
       // format-specific extensions while preserving the source tree.
     },
     rollupOptions: {
+      // Externalize every runtime dependency. Bundling pre-minified vendor
+      // code into our published artifact is what trips Socket.dev's
+      // "minified code" detector on the published package.
       external: [
-        "react", "react-dom", "react/jsx-runtime", "framer-motion", "lucide-react",
+        "react", "react-dom", "react/jsx-runtime",
+        "framer-motion",
+        "lucide-react",
         /^@tiptap\//,
         "react-hook-form",
         "@hookform/resolvers",
         /^@hookform\//,
         "zod",
+        /^@tanstack\//,
+        "class-variance-authority",
+        "clsx",
+        "date-fns",
+        /^date-fns\//,
+        "react-day-picker",
+        "react-resizable-panels",
+        "recharts",
+        "tailwind-merge",
       ],
       // With preserveModules: true, lib.fileName gets applied to every
       // preserved module, collapsing the whole tree into dist/indexN.{mjs,cjs}
@@ -54,6 +73,11 @@ export default defineConfig({
           entryFileNames: "[name].mjs",
           chunkFileNames: "[name].mjs",
           banner: '"use client";\n',
+          // Keep readable identifiers in the published bundle so Socket.dev
+          // doesn't flag the package as obfuscated/minified.
+          minifyInternalExports: false,
+          compact: false,
+          generatedCode: { symbols: true },
           globals: {
             react: "React",
             "react-dom": "ReactDOM",
@@ -67,6 +91,9 @@ export default defineConfig({
           entryFileNames: "[name].cjs",
           chunkFileNames: "[name].cjs",
           exports: "named",
+          minifyInternalExports: false,
+          compact: false,
+          generatedCode: { symbols: true },
           globals: {
             react: "React",
             "react-dom": "ReactDOM",

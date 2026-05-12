@@ -6,6 +6,34 @@ and the project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.1.5] - 2026-05-12
+
+### Security
+
+- Cleared all Socket.dev package-level supply-chain alerts on the published
+  artifact (Obfuscated code, Minified code, Environment variable access,
+  URL strings). Root cause: Vite was minifying the library bundle and
+  vendoring pre-minified runtime dependencies into `dist/`, which tripped
+  Socket's heuristics on every release.
+
+### Changed
+
+- **Library bundle is no longer minified.** Set `build.minify: false`,
+  `output.minifyInternalExports: false`, `output.compact: false`, and
+  `output.generatedCode.symbols: true` in `vite.config.ts` so the
+  published `.mjs` / `.cjs` files keep readable identifiers
+  (`buttonVariants` instead of `c`, `forwardRef` instead of `v`).
+  Consumer bundlers minify in their own app builds; libraries should
+  ship readable source.
+- **Externalized all runtime dependencies.** `@tanstack/*`,
+  `class-variance-authority`, `clsx`, `date-fns`, `react-day-picker`,
+  `react-resizable-panels`, `recharts`, and `tailwind-merge` are no
+  longer bundled into `dist/`. They were already declared in
+  `dependencies`, so consumers install them as transitives
+  automatically. Removes ~600kB of vendored pre-minified code from
+  the published tarball and eliminates the last source of "minified
+  code" alerts on the package.
+
 ## [0.1.4] - 2026-05-12
 
 ### Security
@@ -65,7 +93,8 @@ and the project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.
 - Initial public preview. 110+ React components, Tailwind CSS v4 theming,
   seven preset themes, Storybook docs.
 
-[Unreleased]: https://github.com/pm-an/charlie-ui/compare/v0.1.4...HEAD
+[Unreleased]: https://github.com/pm-an/charlie-ui/compare/v0.1.5...HEAD
+[0.1.5]: https://github.com/pm-an/charlie-ui/compare/v0.1.4...v0.1.5
 [0.1.4]: https://github.com/pm-an/charlie-ui/compare/v0.1.3...v0.1.4
 [0.1.3]: https://github.com/pm-an/charlie-ui/compare/v0.1.2...v0.1.3
 [0.1.2]: https://github.com/pm-an/charlie-ui/compare/v0.1.1...v0.1.2
