@@ -20,10 +20,16 @@ export default defineConfig({
       entry: [
         resolve(dirname, "src/index.ts"),
         resolve(dirname, "src/form.ts"),
+        // Force emission of components Rollup would otherwise inline because
+        // they're side-effect-free pure re-exports from index.ts. Without
+        // these entries the matching package.json subpath exports
+        // (./toggle, ./form-field) point at files that don't exist.
+        resolve(dirname, "src/components/Toggle.tsx"),
+        resolve(dirname, "src/components/FormField.tsx"),
       ],
       name: "CharlieUI",
-      formats: ["es", "cjs"],
-      fileName: format => `index.${format === "es" ? "mjs" : "cjs"}`
+      // formats handled via rollupOptions.output[] below so we get
+      // format-specific extensions while preserving the source tree.
     },
     rollupOptions: {
       external: [
@@ -34,21 +40,40 @@ export default defineConfig({
         /^@hookform\//,
         "zod",
       ],
-      output: {
-        globals: {
-          react: "React",
-          "react-dom": "ReactDOM",
-          "react/jsx-runtime": "jsxRuntime"
+      // With preserveModules: true, lib.fileName gets applied to every
+      // preserved module, collapsing the whole tree into dist/indexN.{mjs,cjs}
+      // and breaking the subpath exports map. Define one output per format
+      // explicitly so each module keeps its source path (e.g.
+      // dist/components/Button.mjs), which is what package.json `exports`
+      // points at.
+      output: [
+        {
+          format: "es",
+          preserveModules: true,
+          preserveModulesRoot: "src",
+          entryFileNames: "[name].mjs",
+          chunkFileNames: "[name].mjs",
+          banner: '"use client";\n',
+          globals: {
+            react: "React",
+            "react-dom": "ReactDOM",
+            "react/jsx-runtime": "jsxRuntime",
+          },
         },
-        preserveModules: true,
-        preserveModulesRoot: "src",
-        banner: (chunk) => {
-          if (chunk.isEntry || chunk.fileName.endsWith('.mjs')) {
-            return '"use client";\n';
-          }
-          return '';
+        {
+          format: "cjs",
+          preserveModules: true,
+          preserveModulesRoot: "src",
+          entryFileNames: "[name].cjs",
+          chunkFileNames: "[name].cjs",
+          exports: "named",
+          globals: {
+            react: "React",
+            "react-dom": "ReactDOM",
+            "react/jsx-runtime": "jsxRuntime",
+          },
         },
-      }
+      ],
     },
     cssCodeSplit: false
   },
